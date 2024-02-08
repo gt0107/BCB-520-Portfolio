@@ -1,0 +1,17 @@
+project:
+  type: website
+
+website:
+  title: "BCB 520 Portfolio"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+    left:
+      - href: ../index.qmd
+        text: HOME
+      - text: "RESEARCH"
+     
