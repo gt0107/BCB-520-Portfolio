@@ -12,15 +12,16 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "4,15",
-        "scrollLine": "0"
+        "cursorPosition": "31,50",
+        "scrollLine": "0",
+        "ignored_words": "Biomolecular,Puerto\n"
     },
     "folds": "",
-    "lastKnownWriteTime": 1707432404,
+    "lastKnownWriteTime": 1707776986,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1707432402797,
+    "last_content_update": 1707776984356,
     "read_only": false,
     "read_only_alternatives": []
 }

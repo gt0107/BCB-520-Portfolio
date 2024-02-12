@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "Index.html",
+    "href": "Index.html",
+    "title": "BCB 520 - Project File",
+    "section": "",
+    "text": "The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012."
+  },
+  {
+    "objectID": "Index.html#video-games-sales-1983---2012",
+    "href": "Index.html#video-games-sales-1983---2012",
+    "title": "BCB 520 - Project File",
+    "section": "",
+    "text": "The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012."
+  },
+  {
+    "objectID": "Index.html#data-collection",
+    "href": "Index.html#data-collection",
+    "title": "BCB 520 - Project File",
+    "section": "DATA COLLECTION",
+    "text": "DATA COLLECTION\nThe following data was gathered through an internet search, where the data is open to the public. The data contains the rank of overall sales, game title, platform of the video game release, year of game release, genre of the game, publisher of game, and sales in the millions for US, Europe, Japan, rest of world wide and total global sales."
+  },
+  {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
     "title": "Welcome To My Blog",
@@ -18,6 +39,20 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Welcome to this world of gaming"
+    "text": "My name is Geraline Trossi-Torres, I’m a PhD student in Microbiology, Molecular Biology and Biochemistry at the University of Idaho. When not doing research I enjoy playing Battlefield 2042 on my XBOX s or reading a good fantasy and/or Sci-fi books."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About",
+    "section": "Education",
+    "text": "Education\nBoise State University, Boise | Boise, ID MS in Biomolecular Sciences | Fall 2020 - Fall 2022\nPontifical Catholic University of Puerto Rico, Ponce | Ponce, PR MS in Biotechnology | Fall 2016 - Spring 2018\nUniversity of Puerto Rico - Ponce, Ponce | Ponce, PR B.S in Biotechnology | Fall 2011 - Spring 2016"
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "About",
+    "section": "Experience",
+    "text": "Experience\nWengo Analytics | Head Data Scientist | April 2018 - present\nGeoScynce | Chief Analyst | Spet 2012 - April 2018"
   }
 ]
