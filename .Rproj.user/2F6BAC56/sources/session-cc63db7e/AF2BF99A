@@ -3,7 +3,7 @@
     "path": "E:/University of Idaho/Spring 2024/BCB 520/BCB-520-Portfolio/about.qmd",
     "project_path": "about.qmd",
     "type": "quarto_markdown",
-    "hash": "520939289",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1707432349578.0,
@@ -12,16 +12,16 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "28,0",
+        "cursorPosition": "31,80",
         "scrollLine": "6",
         "ignored_words": "Biomolecular,Puerto\n"
     },
     "folds": "",
-    "lastKnownWriteTime": 1707777424,
+    "lastKnownWriteTime": 1707777522,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1707777423450,
+    "last_content_update": 1707777521811,
     "read_only": false,
     "read_only_alternatives": []
 }
