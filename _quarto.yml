@@ -8,11 +8,10 @@ website:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/gt0107/BCB-520-Portfolio
+        href: https://github.com
       - icon: twitter
         href: https://twitter.com
     left:
       - href: ../index.qmd
         text: HOME
-      - text: "RESEARCH"
      
