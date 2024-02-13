@@ -1,7 +1,0 @@
-[1,"==> quarto preview Asig4.qmd --to default --no-watch-inputs --no-browse\n\n"]
-[1,"\r\n\r\nprocessing file: Asig4.qmd\r\n"]
-[1,"\r  |                                                          \r  |                                                    |   0%\r  |                                                          \r  |..........................                          |  50%                  "]
-[1,"\r  |                                                          \r  |....................................................| 100% [unnamed-chunk-1]"]
-[1,"\r                                                                                                            \r\noutput file: Asig4.knit.md\r\n\r\n"]
-[1,"pandoc \n  to: html\n  output-file: Asig4.html\n  standalone: true\n  title-prefix: BCB 520 Portfolio\n  section-divs: true\n  html-math-method: mathjax\n  wrap: none\n  default-image-extension: png\n  \nmetadata\n  document-css: false\n  link-citations: true\n  date-format: long\n  lang: en\n  title-block-banner: true\n  title: ASSIGNMENT 4\n  subtitle: Marks And Channel\n  author: Geraline Trossi-Torres\n  Date: '2024-02-23'\n  categories:\n    - Assignment\n    - DataViz\n  cold-fold: true\n  \n"]
-[1,"Output created: ..\\..\\docs\\posts\\MarksChannels\\Asig4.html\n\nWatching files for changes\nBrowse at http://localhost:3599/posts/MarksChannels/Asig4.html\n"]

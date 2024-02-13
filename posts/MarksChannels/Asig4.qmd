@@ -4,12 +4,13 @@ subtitle: Marks And Channel
 author: Geraline Trossi-Torres
 Date: 2024-02-23
 categories: [Assignment, DataViz]
+image: Profile_2.jpg
 cold-fold: true
 code-tools: true
+description: Here's a representation of Video Gaming Sales from 1983-2012
 ---
 
 ```{r}
-#| output: true
 library(readxl)
 my_df <- read_excel("Video Games Sales.xlsx")
 knitr::kable(head(my_df,10))
