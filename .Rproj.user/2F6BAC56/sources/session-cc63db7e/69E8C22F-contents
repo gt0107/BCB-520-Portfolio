@@ -8,3 +8,10 @@ cold-fold: true
 code-tools: true
 ---
 
+```{r}
+#| output: true
+library(readxl)
+my_df <- read_excel("Video Games Sales.xlsx")
+knitr::kable(head(my_df,10))
+library(tidyverse)
+```
