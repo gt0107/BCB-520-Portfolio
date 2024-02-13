@@ -88,6 +88,24 @@ ggplot(data = title_sales_Japan, aes(x = Genre, y = Japan, fill = Genre)) +
 
 ```
 
+```{r}
+library(ggplot2)
 
+title_sales_Europe <- my_df %>%
+  select(Genre, Europe) %>%
+  group_by(Genre)
 
+ggplot(data = title_sales_Europe, aes(x = Genre, y = Europe, fill = Genre)) +
+  geom_col(color = "black", width = 0.7) +
+  ggtitle("Europe Sales") +
+  xlab("Genre") +
+  ylab("Europe Sales") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
 
+```{r}
+
+```
