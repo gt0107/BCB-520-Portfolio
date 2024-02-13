@@ -43,7 +43,7 @@ library(tidyverse)
 
 ## TASK ABSTRACTION
 
-### Bar Graph
+### Histogram Graph
 
 This first graph shows the distribution of game genre across the 100,000 game titles from 1983-2012. We have approximately 300 game titles in the sports. In close second is action and third shooter.
 
@@ -55,8 +55,20 @@ title_genre<-my_df%>%
   group_by(Genre) %>%
   summarise(TotalCount = sum(count))
 
+  
+ggplot(title_genre, aes(x = Genre, y=TotalCount,fill = Genre)) +
+  geom_col(color = "black", width = 0.7) +
+  ggtitle("Genre Distribution") +
+  xlab("Genre") +
+  ylab("Game Titles") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+
 library(ggplot2)
 
+# Assuming title_genre is your data frame
 title_genre$Genre <- reorder(title_genre$Genre, title_genre$TotalCount)
 
 ggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +
@@ -68,6 +80,15 @@ ggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +
   theme(plot.title = element_text(hjust = 0.5),
         axis.text.x = element_text(angle = 45, hjust = 1))
 
+
+ggplot(my_df, aes(x = Genre, fill = Genre)) +
+  geom_bar(color = "black", width = 0.7) +
+  ggtitle("Genre Distribution") +
+  xlab("Genre") +
+  ylab("Game Titles") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 This second graph shows the platform (game console) distribution across the 100,000 game titles from 1983-2012. We have approximately more than 300 games titles for the PS2 console, in second is PS, and third XBOX 360.

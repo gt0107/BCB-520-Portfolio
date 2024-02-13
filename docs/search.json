@@ -21,6 +21,97 @@
     "text": "DATA COLLECTION\nThe following data was gathered through an internet search, where the data is open to the public. The data contains the rank of overall sales, game title, platform of the video game release, year of game release, genre of the game, publisher of game, and sales in the millions for US, Europe, Japan, rest of world wide and total global sales."
   },
   {
+    "objectID": "posts/Asigmnent 2/Asig2_2.html",
+    "href": "posts/Asigmnent 2/Asig2_2.html",
+    "title": "BCB 520 - Project File",
+    "section": "",
+    "text": "The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012."
+  },
+  {
+    "objectID": "posts/Asigmnent 2/Asig2_2.html#video-games-sales-1983---2012",
+    "href": "posts/Asigmnent 2/Asig2_2.html#video-games-sales-1983---2012",
+    "title": "BCB 520 - Project File",
+    "section": "",
+    "text": "The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012."
+  },
+  {
+    "objectID": "posts/Asigmnent 2/Asig2_2.html#data-collection",
+    "href": "posts/Asigmnent 2/Asig2_2.html#data-collection",
+    "title": "BCB 520 - Project File",
+    "section": "DATA COLLECTION",
+    "text": "DATA COLLECTION\nThe following data was gathered through an internet search, where the data is open to the public. The data contains the rank of overall sales, game title, platform of the video game release, year of game release, genre of the game, publisher of game, and sales in the millions for US, Europe, Japan, rest of world wide and total global sales.\n\nData Set Type\n\nFlat Table - Video Games Sales\nWe have a Flat Table, the items are the rows, wherein each row is the different types of games that has been released from 1983 - 2012. Each item (games) is described by attributes, which are put in columns. Those attributes represent: index, rank, game title, platform, year, genre, publisher, US, Europe, Japan, Rest of the Word, Global (total of sales), and reviews. For each column of the different countries represent the total sales from each one in terms of millions in sales.\n\n\nCode\nlibrary(readxl)\nmy_df &lt;- read_excel(\"Video Games Sales.xlsx\")\nknitr::kable(head(my_df,10))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nindex\nRank\nGame Title\nPlatform\nYear\nGenre\nPublisher\nNorth America\nEurope\nJapan\nRest of World\nGlobal\nReview\n\n\n\n\n0\n1\nWii Sports\nWii\n2006\nSports\nNintendo\n40.43\n28.39\n3.77\n8.54\n81.12\n76.28\n\n\n1\n2\nSuper Mario Bros.\nNES\n1985\nPlatform\nNintendo\n29.08\n3.58\n6.81\n0.77\n40.24\n91.00\n\n\n2\n3\nMario Kart Wii\nWii\n2008\nRacing\nNintendo\n14.50\n12.22\n3.63\n3.21\n33.55\n82.07\n\n\n3\n4\nWii Sports Resort\nWii\n2009\nSports\nNintendo\n14.82\n10.51\n3.18\n3.01\n31.52\n82.65\n\n\n4\n5\nTetris\nGB\n1989\nPuzzle\nNintendo\n23.20\n2.26\n4.22\n0.58\n30.26\n88.00\n\n\n5\n6\nNew Super Mario Bros.\nDS\n2006\nPlatform\nNintendo\n10.85\n8.87\n6.48\n2.88\n29.08\n90.00\n\n\n6\n7\nWii Play\nWii\n2006\nMisc\nNintendo\n13.83\n9.11\n2.93\n2.84\n28.71\n61.64\n\n\n7\n8\nDuck Hunt\nNES\n1984\nShooter\nNintendo\n26.93\n0.63\n0.28\n0.47\n28.31\n84.00\n\n\n8\n9\nNew Super Mario Bros. Wii\nWii\n2009\nPlatform\nNintendo\n13.35\n6.48\n4.66\n2.25\n26.75\n88.18\n\n\n9\n10\nNintendogs\nDS\n2005\nSimulation\nNintendo\n9.02\n10.81\n1.93\n2.73\n24.50\n85.00\n\n\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
+  },
+  {
+    "objectID": "posts/Asigmnent 2/Asig2_2.html#attribute-types",
+    "href": "posts/Asigmnent 2/Asig2_2.html#attribute-types",
+    "title": "BCB 520 - Project File",
+    "section": "ATTRIBUTE TYPES",
+    "text": "ATTRIBUTE TYPES\n\nCategorical: game title, platform, year, genre, publisher\nOrdinal: Index, ranking\nQuantitative: US (sales in millions), Europe (sales in millions), Japan (sales in millions), rest of the word (sales in millions), global (sales in millions), reviews in the sales"
+  },
+  {
+    "objectID": "posts/Asigmnent 2/Asig2_2.html#what-do-i-want-from-this-data",
+    "href": "posts/Asigmnent 2/Asig2_2.html#what-do-i-want-from-this-data",
+    "title": "BCB 520 - Project File",
+    "section": "WHAT DO I WANT FROM THIS DATA?",
+    "text": "WHAT DO I WANT FROM THIS DATA?\n\nWhat was the highest video game sale from each country?\nWhat was the most popular console (platform) for each country?\nWhich of the genres are most or/and less popular for each region?"
+  },
+  {
+    "objectID": "posts/Asigmnent 2/Asig2_2.html#task-abstraction",
+    "href": "posts/Asigmnent 2/Asig2_2.html#task-abstraction",
+    "title": "BCB 520 - Project File",
+    "section": "TASK ABSTRACTION",
+    "text": "TASK ABSTRACTION\n\nBar Graph\nThis first graph shows the distribution of game genre across the 100,000 game titles from 1983-2012. We have approximately 300 game titles in the sports. In close second is action and third shooter.\n\n\nCode\ntitle_genre&lt;-my_df%&gt;%\n  select(Genre,`Game Title`)%&gt;%\n  group_by(Genre, `Game Title`)%&gt;%\n  summarise(count=n_distinct('Game Title'))%&gt;%\n  group_by(Genre) %&gt;%\n  summarise(TotalCount = sum(count))\n\n\n`summarise()` has grouped output by 'Genre'. You can override using the\n`.groups` argument.\n\n\nCode\nlibrary(ggplot2)\n\ntitle_genre$Genre &lt;- reorder(title_genre$Genre, title_genre$TotalCount)\n\nggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +\n  geom_col(color = \"black\", width = 0.7) +\n  ggtitle(\"Genre Distribution\") +\n  xlab(\"Genre\") +\n  ylab(\"Game Titles\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\nThis second graph shows the platform (game console) distribution across the 100,000 game titles from 1983-2012. We have approximately more than 300 games titles for the PS2 console, in second is PS, and third XBOX 360.\n\n\nCode\nggplot(my_df, aes(x = Platform, fill = Platform)) +\n  geom_bar(color = \"black\", width = 0.7) +\n  ggtitle(\"Platform Distribution\") +\n  xlab(\"Platform\") +\n  ylab(\"Game Titles\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\n\n\nScatter Plot\n\n\nCode\nggplot(my_df, aes(x = Platform, y = 'North America')) +\n  geom_point(color = \"darkblue\") +\n  ggtitle(\"Scatter Plot: Platform vs. North America\") +\n  xlab(\"Platform\") +\n  ylab(\"North America\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1),\n        axis.title.x = element_text(margin = margin(t = 10)))  \n\n\n\n\n\n\n\nCode\nggplot(my_df, aes(x = Platform, y = Japan)) +\n  geom_point(color = \"orange\") +\n  ggtitle(\"Scatter Plot: Platform vs. Japan\") +\n  xlab(\"Platform\") +\n  ylab(\"Japan\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1),\n        axis.title.x = element_text(margin = margin(t = 10)))  \n\n\n\n\n\n\n\nCode\nggplot(my_df, aes(x = Platform, y = Europe)) +\n  geom_point(color = \"purple\") +\n  ggtitle(\"Scatter Plot: Platform vs. Europe\") +\n  xlab(\"Platform\") +\n  ylab(\"Europe\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1),\n        axis.title.x = element_text(margin = margin(t = 10)))"
+  },
+  {
+    "objectID": "posts/MarksChannels/Asig4.html",
+    "href": "posts/MarksChannels/Asig4.html",
+    "title": "ASSIGNMENT 4",
+    "section": "",
+    "text": "The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012\n\n\nCode\nlibrary(readxl)\nmy_df &lt;- read_excel(\"Video Games Sales.xlsx\")\nknitr::kable(head(my_df,10))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nindex\nRank\nGame Title\nPlatform\nYear\nGenre\nPublisher\nNorth America\nEurope\nJapan\nRest of World\nGlobal\nReview\n\n\n\n\n0\n1\nWii Sports\nWii\n2006\nSports\nNintendo\n40.43\n28.39\n3.77\n8.54\n81.12\n76.28\n\n\n1\n2\nSuper Mario Bros.\nNES\n1985\nPlatform\nNintendo\n29.08\n3.58\n6.81\n0.77\n40.24\n91.00\n\n\n2\n3\nMario Kart Wii\nWii\n2008\nRacing\nNintendo\n14.50\n12.22\n3.63\n3.21\n33.55\n82.07\n\n\n3\n4\nWii Sports Resort\nWii\n2009\nSports\nNintendo\n14.82\n10.51\n3.18\n3.01\n31.52\n82.65\n\n\n4\n5\nTetris\nGB\n1989\nPuzzle\nNintendo\n23.20\n2.26\n4.22\n0.58\n30.26\n88.00\n\n\n5\n6\nNew Super Mario Bros.\nDS\n2006\nPlatform\nNintendo\n10.85\n8.87\n6.48\n2.88\n29.08\n90.00\n\n\n6\n7\nWii Play\nWii\n2006\nMisc\nNintendo\n13.83\n9.11\n2.93\n2.84\n28.71\n61.64\n\n\n7\n8\nDuck Hunt\nNES\n1984\nShooter\nNintendo\n26.93\n0.63\n0.28\n0.47\n28.31\n84.00\n\n\n8\n9\nNew Super Mario Bros. Wii\nWii\n2009\nPlatform\nNintendo\n13.35\n6.48\n4.66\n2.25\n26.75\n88.18\n\n\n9\n10\nNintendogs\nDS\n2005\nSimulation\nNintendo\n9.02\n10.81\n1.93\n2.73\n24.50\n85.00\n\n\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
+  },
+  {
+    "objectID": "posts/MarksChannels/Asig4.html#video-games-sales-1983---2012",
+    "href": "posts/MarksChannels/Asig4.html#video-games-sales-1983---2012",
+    "title": "ASSIGNMENT 4",
+    "section": "",
+    "text": "The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012\n\n\nCode\nlibrary(readxl)\nmy_df &lt;- read_excel(\"Video Games Sales.xlsx\")\nknitr::kable(head(my_df,10))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nindex\nRank\nGame Title\nPlatform\nYear\nGenre\nPublisher\nNorth America\nEurope\nJapan\nRest of World\nGlobal\nReview\n\n\n\n\n0\n1\nWii Sports\nWii\n2006\nSports\nNintendo\n40.43\n28.39\n3.77\n8.54\n81.12\n76.28\n\n\n1\n2\nSuper Mario Bros.\nNES\n1985\nPlatform\nNintendo\n29.08\n3.58\n6.81\n0.77\n40.24\n91.00\n\n\n2\n3\nMario Kart Wii\nWii\n2008\nRacing\nNintendo\n14.50\n12.22\n3.63\n3.21\n33.55\n82.07\n\n\n3\n4\nWii Sports Resort\nWii\n2009\nSports\nNintendo\n14.82\n10.51\n3.18\n3.01\n31.52\n82.65\n\n\n4\n5\nTetris\nGB\n1989\nPuzzle\nNintendo\n23.20\n2.26\n4.22\n0.58\n30.26\n88.00\n\n\n5\n6\nNew Super Mario Bros.\nDS\n2006\nPlatform\nNintendo\n10.85\n8.87\n6.48\n2.88\n29.08\n90.00\n\n\n6\n7\nWii Play\nWii\n2006\nMisc\nNintendo\n13.83\n9.11\n2.93\n2.84\n28.71\n61.64\n\n\n7\n8\nDuck Hunt\nNES\n1984\nShooter\nNintendo\n26.93\n0.63\n0.28\n0.47\n28.31\n84.00\n\n\n8\n9\nNew Super Mario Bros. Wii\nWii\n2009\nPlatform\nNintendo\n13.35\n6.48\n4.66\n2.25\n26.75\n88.18\n\n\n9\n10\nNintendogs\nDS\n2005\nSimulation\nNintendo\n9.02\n10.81\n1.93\n2.73\n24.50\n85.00\n\n\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
+  },
+  {
+    "objectID": "posts/MarksChannels/Asig4.html#data-collection",
+    "href": "posts/MarksChannels/Asig4.html#data-collection",
+    "title": "ASSIGNMENT 4",
+    "section": "DATA COLLECTION",
+    "text": "DATA COLLECTION\nThe following data was gathered through an internet search, where the data is open to the public. The data contains the rank of overall sales, game title, platform of the video game release, year of game release, genre of the game, publisher of game, and sales in the millions for US, Europe, Japan, rest of world wide and total global sales."
+  },
+  {
+    "objectID": "posts/MarksChannels/Asig4.html#attribute-types",
+    "href": "posts/MarksChannels/Asig4.html#attribute-types",
+    "title": "ASSIGNMENT 4",
+    "section": "ATTRIBUTE TYPES",
+    "text": "ATTRIBUTE TYPES\n\nCategorical: game title, platform, year, genre, publisher\nOrdinal: Index, ranking\nQuantitative: US (sales in millions), Europe (sales in millions), Japan (sales in millions), rest of the word (sales in millions), global (sales in millions), reviews in the sales"
+  },
+  {
+    "objectID": "posts/MarksChannels/Asig4.html#task-abstraction",
+    "href": "posts/MarksChannels/Asig4.html#task-abstraction",
+    "title": "ASSIGNMENT 4",
+    "section": "TASK ABSTRACTION",
+    "text": "TASK ABSTRACTION\n\nBar Graph\nThis first graph shows the distribution of game genre across the 100,000 game titles from 1983-2012. We have approximately 300 game titles in the sports. In close second is action and third shooter.\n\n\nCode\ntitle_genre&lt;-my_df%&gt;%\n  select(Genre,`Game Title`)%&gt;%\n  group_by(Genre, `Game Title`)%&gt;%\n  summarise(count=n_distinct('Game Title'))%&gt;%\n  group_by(Genre) %&gt;%\n  summarise(TotalCount = sum(count))\n\n\n`summarise()` has grouped output by 'Genre'. You can override using the\n`.groups` argument.\n\n\nCode\nsuppressMessages({itle_genre&lt;-my_df%&gt;%\n  select(Genre,`Game Title`)%&gt;%\n  group_by(Genre, `Game Title`)%&gt;%\n  summarise(count=n_distinct('Game Title'))%&gt;%\n  group_by(Genre) %&gt;%\n  summarise(TotalCount = sum(count))})\n\n\n\nlibrary(ggplot2)\n\ntitle_genre$Genre &lt;- reorder(title_genre$Genre, title_genre$TotalCount)\n\nggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +\n  geom_col(color = \"black\", width = 0.7) +\n  ggtitle(\"Genre Distribution\") +\n  xlab(\"Genre\") +\n  ylab(\"Game Titles\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\nThis second graph shows the platform (game console) distribution across the 100,000 game titles from 1983-2012. We have approximately more than 300 games titles for the PS2 console, in second is PS, and third XBOX 360.\n\n\nCode\nlibrary(ggplot2)\n\nmy_df$Platform &lt;- reorder(my_df$Platform, -table(my_df$Platform))\n\n\nWarning in split.default(X, group): data length is not a multiple of split\nvariable\n\n\nCode\nggplot(data = my_df, aes(x = Platform, fill = Platform)) +\n  geom_bar(color = \"black\", width = 0.7) +\n  ggtitle(\"Platform Distribution\") +\n  xlab(\"Platform\") +\n  ylab(\"Game Titles\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\n\n\nScatter Plot"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "Hey welcome to Quarto Blog!! Lets get into the Gaming World"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
     "objectID": "posts/Asigmnent 2/Asig2.html",
     "href": "posts/Asigmnent 2/Asig2.html",
     "title": "BCB 520 - Project File",
@@ -63,41 +154,6 @@
     "text": "TASK ABSTRACTION\n\nHistogram Graph\nThis first graph shows the distribution of game genre across the 100,000 game titles from 1983-2012. We have approximately 300 game titles in the sports. In close second is action and third shooter.\n\n\nCode\ntitle_genre&lt;-my_df%&gt;%\n  select(Genre,`Game Title`)%&gt;%\n  group_by(Genre, `Game Title`)%&gt;%\n  summarise(count=n_distinct('Game Title'))%&gt;%\n  group_by(Genre) %&gt;%\n  summarise(TotalCount = sum(count))\n\n\n`summarise()` has grouped output by 'Genre'. You can override using the\n`.groups` argument.\n\n\nCode\nggplot(title_genre, aes(x = Genre, y=TotalCount,fill = Genre)) +\n  geom_col(color = \"black\", width = 0.7) +\n  ggtitle(\"Genre Distribution\") +\n  xlab(\"Genre\") +\n  ylab(\"Game Titles\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\nCode\nlibrary(ggplot2)\n\n# Assuming title_genre is your data frame\ntitle_genre$Genre &lt;- reorder(title_genre$Genre, title_genre$TotalCount)\n\nggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +\n  geom_col(color = \"black\", width = 0.7) +\n  ggtitle(\"Genre Distribution\") +\n  xlab(\"Genre\") +\n  ylab(\"Game Titles\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\nCode\nggplot(my_df, aes(x = Genre, fill = Genre)) +\n  geom_bar(color = \"black\", width = 0.7) +\n  ggtitle(\"Genre Distribution\") +\n  xlab(\"Genre\") +\n  ylab(\"Game Titles\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\nThis second graph shows the platform (game console) distribution across the 100,000 game titles from 1983-2012. We have approximately more than 300 games titles for the PS2 console, in second is PS, and third XBOX 360.\n\n\nCode\nggplot(my_df, aes(x = Platform, fill = Platform)) +\n  geom_bar(color = \"black\", width = 0.7) +\n  ggtitle(\"Platform Distribution\") +\n  xlab(\"Platform\") +\n  ylab(\"Game Titles\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\n\n\nScatter Plot\n\n\nCode\nggplot(my_df, aes(x = Platform, y = 'North America')) +\n  geom_point(color = \"darkblue\") +\n  ggtitle(\"Scatter Plot: Platform vs. North America\") +\n  xlab(\"Platform\") +\n  ylab(\"North America\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1),\n        axis.title.x = element_text(margin = margin(t = 10)))  \n\n\n\n\n\n\n\nCode\nggplot(my_df, aes(x = Platform, y = Japan)) +\n  geom_point(color = \"orange\") +\n  ggtitle(\"Scatter Plot: Platform vs. Japan\") +\n  xlab(\"Platform\") +\n  ylab(\"Japan\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1),\n        axis.title.x = element_text(margin = margin(t = 10)))  \n\n\n\n\n\n\n\nCode\nggplot(my_df, aes(x = Platform, y = Europe)) +\n  geom_point(color = \"purple\") +\n  ggtitle(\"Scatter Plot: Platform vs. Europe\") +\n  xlab(\"Platform\") +\n  ylab(\"Europe\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1),\n        axis.title.x = element_text(margin = margin(t = 10)))"
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "Hey welcome to Quarto Blog!! Lets get into the Gaming World"
-  },
-  {
-    "objectID": "posts/MarksChannels/Asig4.html",
-    "href": "posts/MarksChannels/Asig4.html",
-    "title": "ASSIGNMENT 4",
-    "section": "",
-    "text": "The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012\n\n\nCode\nlibrary(readxl)\nmy_df &lt;- read_excel(\"Video Games Sales.xlsx\")\nknitr::kable(head(my_df,10))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nindex\nRank\nGame Title\nPlatform\nYear\nGenre\nPublisher\nNorth America\nEurope\nJapan\nRest of World\nGlobal\nReview\n\n\n\n\n0\n1\nWii Sports\nWii\n2006\nSports\nNintendo\n40.43\n28.39\n3.77\n8.54\n81.12\n76.28\n\n\n1\n2\nSuper Mario Bros.\nNES\n1985\nPlatform\nNintendo\n29.08\n3.58\n6.81\n0.77\n40.24\n91.00\n\n\n2\n3\nMario Kart Wii\nWii\n2008\nRacing\nNintendo\n14.50\n12.22\n3.63\n3.21\n33.55\n82.07\n\n\n3\n4\nWii Sports Resort\nWii\n2009\nSports\nNintendo\n14.82\n10.51\n3.18\n3.01\n31.52\n82.65\n\n\n4\n5\nTetris\nGB\n1989\nPuzzle\nNintendo\n23.20\n2.26\n4.22\n0.58\n30.26\n88.00\n\n\n5\n6\nNew Super Mario Bros.\nDS\n2006\nPlatform\nNintendo\n10.85\n8.87\n6.48\n2.88\n29.08\n90.00\n\n\n6\n7\nWii Play\nWii\n2006\nMisc\nNintendo\n13.83\n9.11\n2.93\n2.84\n28.71\n61.64\n\n\n7\n8\nDuck Hunt\nNES\n1984\nShooter\nNintendo\n26.93\n0.63\n0.28\n0.47\n28.31\n84.00\n\n\n8\n9\nNew Super Mario Bros. Wii\nWii\n2009\nPlatform\nNintendo\n13.35\n6.48\n4.66\n2.25\n26.75\n88.18\n\n\n9\n10\nNintendogs\nDS\n2005\nSimulation\nNintendo\n9.02\n10.81\n1.93\n2.73\n24.50\n85.00\n\n\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
-  },
-  {
-    "objectID": "posts/MarksChannels/Asig4.html#video-games-sales-1983---2012",
-    "href": "posts/MarksChannels/Asig4.html#video-games-sales-1983---2012",
-    "title": "ASSIGNMENT 4",
-    "section": "",
-    "text": "The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012\n\n\nCode\nlibrary(readxl)\nmy_df &lt;- read_excel(\"Video Games Sales.xlsx\")\nknitr::kable(head(my_df,10))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nindex\nRank\nGame Title\nPlatform\nYear\nGenre\nPublisher\nNorth America\nEurope\nJapan\nRest of World\nGlobal\nReview\n\n\n\n\n0\n1\nWii Sports\nWii\n2006\nSports\nNintendo\n40.43\n28.39\n3.77\n8.54\n81.12\n76.28\n\n\n1\n2\nSuper Mario Bros.\nNES\n1985\nPlatform\nNintendo\n29.08\n3.58\n6.81\n0.77\n40.24\n91.00\n\n\n2\n3\nMario Kart Wii\nWii\n2008\nRacing\nNintendo\n14.50\n12.22\n3.63\n3.21\n33.55\n82.07\n\n\n3\n4\nWii Sports Resort\nWii\n2009\nSports\nNintendo\n14.82\n10.51\n3.18\n3.01\n31.52\n82.65\n\n\n4\n5\nTetris\nGB\n1989\nPuzzle\nNintendo\n23.20\n2.26\n4.22\n0.58\n30.26\n88.00\n\n\n5\n6\nNew Super Mario Bros.\nDS\n2006\nPlatform\nNintendo\n10.85\n8.87\n6.48\n2.88\n29.08\n90.00\n\n\n6\n7\nWii Play\nWii\n2006\nMisc\nNintendo\n13.83\n9.11\n2.93\n2.84\n28.71\n61.64\n\n\n7\n8\nDuck Hunt\nNES\n1984\nShooter\nNintendo\n26.93\n0.63\n0.28\n0.47\n28.31\n84.00\n\n\n8\n9\nNew Super Mario Bros. Wii\nWii\n2009\nPlatform\nNintendo\n13.35\n6.48\n4.66\n2.25\n26.75\n88.18\n\n\n9\n10\nNintendogs\nDS\n2005\nSimulation\nNintendo\n9.02\n10.81\n1.93\n2.73\n24.50\n85.00\n\n\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
-  },
-  {
-    "objectID": "posts/MarksChannels/Asig4.html#data-collection",
-    "href": "posts/MarksChannels/Asig4.html#data-collection",
-    "title": "ASSIGNMENT 4",
-    "section": "DATA COLLECTION",
-    "text": "DATA COLLECTION\nThe following data was gathered through an internet search, where the data is open to the public. The data contains the rank of overall sales, game title, platform of the video game release, year of game release, genre of the game, publisher of game, and sales in the millions for US, Europe, Japan, rest of world wide and total global sales."
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -117,19 +173,5 @@
     "title": "About",
     "section": "Experience",
     "text": "Experience\nBoise State University | Research Technician | January 2023 - June 2023\nBoise State University | Research Assistant | August 2022 - December 2022\nUPR-PRISE Program (NIH-NIGMS RISE) | Program Coordinator | August 2019 - June 2020\nUPR-PRISE Program (NIH-NIGMS RISE) | Research Coordinator | July 2018 - July 2019"
-  },
-  {
-    "objectID": "posts/MarksChannels/Asig4.html#attribute-types",
-    "href": "posts/MarksChannels/Asig4.html#attribute-types",
-    "title": "ASSIGNMENT 4",
-    "section": "ATTRIBUTE TYPES",
-    "text": "ATTRIBUTE TYPES\n\nCategorical: game title, platform, year, genre, publisher\nOrdinal: Index, ranking\nQuantitative: US (sales in millions), Europe (sales in millions), Japan (sales in millions), rest of the word (sales in millions), global (sales in millions), reviews in the sales"
-  },
-  {
-    "objectID": "posts/MarksChannels/Asig4.html#task-abstraction",
-    "href": "posts/MarksChannels/Asig4.html#task-abstraction",
-    "title": "ASSIGNMENT 4",
-    "section": "TASK ABSTRACTION",
-    "text": "TASK ABSTRACTION\n\nBar Graph\nThis first graph shows the distribution of game genre across the 100,000 game titles from 1983-2012. We have approximately 300 game titles in the sports. In close second is action and third shooter.\n\n\nCode\ntitle_genre&lt;-my_df%&gt;%\n  select(Genre,`Game Title`)%&gt;%\n  group_by(Genre, `Game Title`)%&gt;%\n  summarise(count=n_distinct('Game Title'))%&gt;%\n  group_by(Genre) %&gt;%\n  summarise(TotalCount = sum(count))\n\n\n`summarise()` has grouped output by 'Genre'. You can override using the\n`.groups` argument.\n\n\nCode\nsuppressMessages({itle_genre&lt;-my_df%&gt;%\n  select(Genre,`Game Title`)%&gt;%\n  group_by(Genre, `Game Title`)%&gt;%\n  summarise(count=n_distinct('Game Title'))%&gt;%\n  group_by(Genre) %&gt;%\n  summarise(TotalCount = sum(count))})\n\n\n\nlibrary(ggplot2)\n\ntitle_genre$Genre &lt;- reorder(title_genre$Genre, title_genre$TotalCount)\n\nggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +\n  geom_col(color = \"black\", width = 0.7) +\n  ggtitle(\"Genre Distribution\") +\n  xlab(\"Genre\") +\n  ylab(\"Game Titles\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))"
   }
 ]

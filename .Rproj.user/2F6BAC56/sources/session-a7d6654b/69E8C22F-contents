@@ -69,6 +69,23 @@ ggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +
         axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
+This second graph shows the platform (game console) distribution across the 100,000 game titles from 1983-2012. We have approximately more than 300 games titles for the PS2 console, in second is PS, and third XBOX 360.
+
+```{r}
+library(ggplot2)
+
+my_df$Platform <- reorder(my_df$Platform, -table(my_df$Platform))
+
+ggplot(data = my_df, aes(x = Platform, fill = Platform)) +
+  geom_bar(color = "black", width = 0.7) +
+  ggtitle("Platform Distribution") +
+  xlab("Platform") +
+  ylab("Game Titles") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
 
 
+### Scatter Plot
 
