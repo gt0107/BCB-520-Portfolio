@@ -1,7 +1,7 @@
 ---
 title: "About"
 about:
-  template: jolla
+  template: broadside
   image: profile.jpg
   links:
     - icon: twitter
@@ -16,13 +16,16 @@ My name is Geraline Trossi-Torres, I'm a PhD student in Microbiology, Molecular 
 
 ## Education
 
-Boise State University, Boise | Boise, ID |
+**Boise State University** | Boise, ID 
+
 MS in Biomolecular Sciences | Fall 2020 - Fall 2022
 
-Pontifical Catholic University of Puerto Rico, Ponce | Ponce, PR |
+**Pontifical Catholic University of Puerto Rico**| Ponce, PR 
+
 MS in Biotechnology | Fall 2016 - Spring 2018
 
-University of Puerto Rico - Ponce, Ponce | Ponce, PR |
+**University of Puerto Rico - Ponce** | Ponce, PR 
+
 B.S in Biotechnology | Fall 2011 - Spring 2016
 
 ## Experience
