@@ -10,9 +10,23 @@ code-tools: true
 description: Here's a representation of Video Gaming Sales from 1983-2012
 ---
 
+## Video Games Sales 1983 - 2012
+
+The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012
+
 ```{r}
 library(readxl)
 my_df <- read_excel("Video Games Sales.xlsx")
 knitr::kable(head(my_df,10))
 library(tidyverse)
 ```
+
+## DATA COLLECTION
+
+The following data was gathered through an internet search, where the data is open to the public. The data contains the rank of overall sales, game title, platform of the video game release, year of game release, genre of the game, publisher of game, and sales in the millions for US, Europe, Japan, rest of world wide and total global sales. 
+
+
+
+
+
+
