@@ -1,0 +1,123 @@
+---
+title: "BCB 520 - Project File"
+author: "Geraline Trossi-Torres"
+format: 
+  html: 
+    embed-resources: true
+code-fold: true
+---
+
+## Video Games Sales 1983 - 2012
+
+The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012.
+
+## DATA COLLECTION
+
+The following data was gathered through an internet search, where the data is open to the public. The data contains the rank of overall sales, game title, platform of the video game release, year of game release, genre of the game, publisher of game, and sales in the millions for US, Europe, Japan, rest of world wide and total global sales.  
+
+### Data Set Type
+
+#### **Flat Table - Video Games Sales** 
+
+We have a **Flat Table**, the **items** are the rows, wherein each row is the different types of games that has been released from 1983 - 2012. Each item (games) is described by attributes, which are put in columns. Those **attributes** represent: index, rank, game title, platform, year, genre, publisher, US, Europe, Japan, Rest of the Word, Global (total of sales), and reviews. For each column of the different countries represent the total sales from each one in terms of millions in sales.
+
+```{r}
+#| output: true
+library(readxl)
+my_df <- read_excel("Video Games Sales.xlsx")
+knitr::kable(head(my_df,10))
+library(tidyverse)
+```
+
+## ATTRIBUTE TYPES
+
+* **Categorical:** game title, platform, year, genre, publisher
+* **Ordinal:** Index, ranking
+* **Quantitative:** US (sales in millions), Europe (sales in millions), Japan (sales in millions), rest of the word (sales in millions), global  (sales in millions), reviews in the sales
+
+## WHAT DO I WANT FROM THIS DATA?
+
+1. What was the highest video game sale from each country?
+2. What was the most popular console (platform) for each country?
+3. Which of the genres are most or/and less popular for each region?
+
+## TASK ABSTRACTION
+
+### Histogram Graph
+
+This first graph shows the distribution of game genre across the 100,000 game titles from 1983-2012. We have approximately 300 game titles in the sports. In close second is action and third shooter.
+
+```{r}
+title_genre<-my_df%>%
+  select(Genre,`Game Title`)%>%
+  group_by(Genre, `Game Title`)%>%
+  summarise(count=n_distinct('Game Title'))%>%
+  group_by(Genre) %>%
+  summarise(TotalCount = sum(count))
+
+library(ggplot2)
+
+# Assuming title_genre is your data frame
+title_genre$Genre <- reorder(title_genre$Genre, title_genre$TotalCount)
+
+ggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +
+  geom_col(color = "black", width = 0.7) +
+  ggtitle("Genre Distribution") +
+  xlab("Genre") +
+  ylab("Game Titles") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+This second graph shows the platform (game console) distribution across the 100,000 game titles from 1983-2012. We have approximately more than 300 games titles for the PS2 console, in second is PS, and third XBOX 360.
+
+```{r}
+ggplot(my_df, aes(x = Platform, fill = Platform)) +
+  geom_bar(color = "black", width = 0.7) +
+  ggtitle("Platform Distribution") +
+  xlab("Platform") +
+  ylab("Game Titles") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### Scatter Plot
+
+```{r}
+ggplot(my_df, aes(x = Platform, y = 'North America')) +
+  geom_point(color = "darkblue") +
+  ggtitle("Scatter Plot: Platform vs. North America") +
+  xlab("Platform") +
+  ylab("North America") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.title.x = element_text(margin = margin(t = 10)))  
+```
+
+```{r}
+ggplot(my_df, aes(x = Platform, y = Japan)) +
+  geom_point(color = "orange") +
+  ggtitle("Scatter Plot: Platform vs. Japan") +
+  xlab("Platform") +
+  ylab("Japan") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.title.x = element_text(margin = margin(t = 10)))  
+```
+
+```{r}
+ggplot(my_df, aes(x = Platform, y = Europe)) +
+  geom_point(color = "purple") +
+  ggtitle("Scatter Plot: Platform vs. Europe") +
+  xlab("Platform") +
+  ylab("Europe") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.title.x = element_text(margin = margin(t = 10)))  
+```
