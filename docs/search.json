@@ -4,7 +4,7 @@
     "href": "Index.html",
     "title": "BCB-520-BLOG-Portfolio",
     "section": "",
-    "text": "ASSIGNMENT 4\n\n\nMarks And Channel\n\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n\nLets Learn abour Marks and Channels\n\n\n\n\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\n  \n\n\n\n\nASSIGNMENT 4\n\n\nMarks And Channel\n\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n\nLets Learn abour Marks and Channels\n\n\n\n\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\n  \n\n\n\n\nBCB 520 - Project File\n\n\n\n\n\n\n\n\n\n\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nFeb 8, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nFeb 5, 2024\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\nNo matching items"
+    "text": "ASSIGNMENT 4\n\n\nMarks And Channel\n\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n\nLets Learn abour Marks and Channels\n\n\n\n\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\n  \n\n\n\n\nASSIGNMENT 4\n\n\nMarks And Channel\n\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n\nLets Learn about Marks and Channels\n\n\n\n\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\n  \n\n\n\n\nBCB 520 - Project File\n\n\n\n\n\n\n\n\n\n\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nFeb 8, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nFeb 5, 2024\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/Asigmnent 2/Asig2_2.html",
@@ -137,7 +137,7 @@
     "href": "posts/MarksChannels/Asig4_2.html#popout",
     "title": "ASSIGNMENT 4",
     "section": "Popout",
-    "text": "Popout\nFigure 7: Figure 8:"
+    "text": "Popout\nFigure 7:\n\n\nCode\nlibrary(ggplot2)\nlibrary(reshape2)\n\n\n\nAttaching package: 'reshape2'\n\n\nThe following object is masked from 'package:tidyr':\n\n    smiths\n\n\nCode\ntitle_sales &lt;- my_df %&gt;%\n  select(Genre,NA_Sales, EU_Sales, JP_Sales) %&gt;%\n  group_by(Genre)\n\ntitle_sales &lt;- melt(title_sales, id.vars = \"Genre\", measure.vars = c(\"NA_Sales\",\"EU_Sales\",\"JP_Sales\"))\n\nggplot(data = title_sales, aes(x = Genre, y = value, fill = variable)) +\n  geom_col(position = \"dodge\", color = \"black\", width = 0.7) +\n  ggtitle(\"Sales by Genre\") +\n  xlab(\"Genre\") +\n  ylab(\"Sales (per million)\") +\n  scale_fill_manual(values = c( \"NA_Sales\"=\"magenta\",\"EU_Sales\" = \"purple\", \"JP_Sales\" = \"lightpink\")) +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5),\n        axis.text.x = element_text(angle = 45, hjust = 1))\n\n\n\n\n\nFigure 8:"
   },
   {
     "objectID": "about.html",

@@ -2,12 +2,12 @@
 title: ASSIGNMENT 4
 subtitle: Marks And Channel
 author: Geraline Trossi-Torres
-Date: 2024-02-23
+Date: 2024-02-14
 categories: [Assignment, DataViz]
 image: Profile_2.jpg
 code-fold: true
 code-tools: true
-description: Lets Learn abour Marks and Channels
+description: Lets Learn about Marks and Channels
 ---
 
 ## Video Games Sales 1983 - 2012
@@ -93,5 +93,32 @@ ggplot(data = title_platform, aes(x = Platform, y = TotalCount, fill = Platform)
 
 ## Popout
 
+
+
+
+
 **Figure 7:** 
+
+
+```{r}
+library(ggplot2)
+library(reshape2)
+
+title_sales <- my_df %>%
+  select(Genre,NA_Sales, EU_Sales, JP_Sales) %>%
+  group_by(Genre)
+
+title_sales <- melt(title_sales, id.vars = "Genre", measure.vars = c("NA_Sales","EU_Sales","JP_Sales"))
+
+ggplot(data = title_sales, aes(x = Genre, y = value, fill = variable)) +
+  geom_col(position = "dodge", color = "black", width = 0.7) +
+  ggtitle("Sales by Genre") +
+  xlab("Genre") +
+  ylab("Sales (per million)") +
+  scale_fill_manual(values = c( "NA_Sales"="magenta","EU_Sales" = "purple", "JP_Sales" = "lightpink")) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
 **Figure 8:**
