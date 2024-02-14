@@ -28,7 +28,7 @@ knitr::kable(head(my_df,10))
 library(tidyverse)
 ```
 
-## ATTRIBUTE TYPES
+### ATTRIBUTE TYPES
 
 * **Categorical:** game title, platform, year, genre, publisher
 * **Ordinal:** Index, ranking
