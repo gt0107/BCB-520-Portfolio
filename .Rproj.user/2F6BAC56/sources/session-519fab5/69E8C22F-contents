@@ -124,6 +124,57 @@ ggplot(data = title_platform, aes(x = Platform, y = TotalCount, fill = Platform)
 
 ## Seperability
 
+```{r}
+title_plubisher<-my_df%>%
+  select(Publisher,Name)%>%
+  group_by(Publisher, Name)%>%
+  summarise(count=n_distinct(Name))%>%
+  group_by(Publisher) %>%
+  summarise(TotalCount = sum(count))
+
+library(ggplot2)
+
+# Assuming title_publisher is the result from the previous aggregation
+title_publisher <- my_df %>%
+  select(Publisher, Name) %>%
+  distinct(Publisher, Name) %>%
+  count(Publisher, name = "TotalTitles")
+
+# Create a basic bar plot
+ggplot(title_publisher, aes(x = reorder(Publisher, TotalTitles), y = TotalTitles, fill = Publisher)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(x = "Publisher", y = "Total Number of Distinct Titles", title = "Distinct Titles per Publisher") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  guides(fill=FALSE) # Remove the legend if it's redundant
+
+```
+
+```{r}
+df <- data.frame(
+  Genre = c("Action", "Action", "Adventure", "Adventure", "Sports", "Sports"),
+  Region = c("NA", "EU", "NA", "EU", "NA", "EU"),
+  Sales = c(300, 150, 80, 40, 200, 100)
+)
+
+library(ggplot2)
+
+ggplot(df, aes(x = Genre, y = Sales, fill = Region)) +
+  geom_bar(stat = "identity", position = "stack") +
+  ggtitle("Sales by Genre and Region") +
+  xlab("Genre") + ylab("Sales")
+
+ggplot(df, aes(x = Genre, y = Sales, fill = Region)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_brewer(palette = "Pastel1") + # Custom color scheme
+  ggtitle("Sales by Genre and Region") +
+  xlab("Genre") + ylab("Sales") +
+  theme_minimal() + # Minimalist theme
+  theme(legend.title = element_blank()) # Remove legend title
+
+
+```
+
 **Figure 5:** 
 **Figure 6:** 
 
