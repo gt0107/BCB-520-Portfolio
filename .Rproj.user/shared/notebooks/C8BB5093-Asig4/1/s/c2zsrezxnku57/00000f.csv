@@ -1,8 +1,0 @@
-"0","title_genre<-my_df%>%
-  select(Genre,`Game Title`)%>%
-  group_by(Genre, `Game Title`)%>%
-  summarise(count=n_distinct('Game Title'))%>%
-  group_by(Genre) %>%
-  summarise(TotalCount = sum(count))
-"
-"2","`summarise()` has grouped output by 'Genre'. You can override using the `.groups` argument."

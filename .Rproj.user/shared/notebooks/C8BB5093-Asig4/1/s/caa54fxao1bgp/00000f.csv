@@ -1,0 +1,8 @@
+"0","title_platform<-my_df%>%
+  select(Platform,Name)%>%
+  group_by(Platform, Name)%>%
+  summarise(count=n_distinct(Name))%>%
+  group_by(Platform) %>%
+  summarise(TotalCount = sum(count))
+"
+"2","`summarise()` has grouped output by 'Platform'. You can override using the `.groups` argument."

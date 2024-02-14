@@ -22,7 +22,8 @@ We have a **Flat Table**, the **items** are the rows, wherein each row is the di
 
 ```{r}
 library(readxl)
-my_df <- read_excel("Video Games Sales.xlsx")
+my_df <- read_excel("VIdeo_Game_sales.xlsx")
+
 knitr::kable(head(my_df,10))
 library(tidyverse)
 ```
@@ -33,8 +34,67 @@ library(tidyverse)
 * **Ordinal:** Index, ranking
 * **Quantitative:** US (sales in millions), Europe (sales in millions), Japan (sales in millions), rest of the word (sales in millions), global  (sales in millions), reviews in the sales
 
+## Expressiveness and Effectiveness
 
-## TASK ABSTRACTION
+**Figure 1:** 
+**Figure 2:** 
+
+## Discriminability
+
+```{r}
+ggplot(my_df, aes(x = Platform, fill = Platform)) +
+  geom_bar(color = "black", width = 0.7) +
+  ggtitle("Platform Distribution") +
+  xlab("Platform") +
+  ylab("Game Titles") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+**Figure 3:** 
+
+```{r}
+title_platform<-my_df%>%
+  select(Platform,Name)%>%
+  group_by(Platform, Name)%>%
+  summarise(count=n_distinct(Name))%>%
+  group_by(Platform) %>%
+  summarise(TotalCount = sum(count))
+
+suppressMessages({title_platform<-my_df%>%
+  select(Platform,Name)%>%
+  group_by(Platform,Name)%>%
+  summarise(count=n_distinct(Name))%>%
+  group_by(Platform) %>%
+  summarise(TotalCount = sum(count))})
+
+library(ggplot2)
+
+title_platform$Platform <- reorder(title_platform$Platform, title_platform$TotalCount)
+
+ggplot(data = title_platform, aes(x = Platform, y = TotalCount, fill = Platform)) +
+  geom_col(color = "black", width = 0.7) +
+  ggtitle("Platform Distribution") +
+  xlab("Platform") +
+  ylab("Game Titles") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+**Figure 4:** 
+
+## Seperability
+
+**Figure 5:** 
+**Figure 6:** 
+
+## Popout
+
+**Figure 7:** 
+**Figure 8:**
 
 ### Bar Graph
 
@@ -42,16 +102,16 @@ This first graph shows the distribution of game genre across the 100,000 game ti
 
 ```{r}
 title_genre<-my_df%>%
-  select(Genre,`Game Title`)%>%
-  group_by(Genre, `Game Title`)%>%
-  summarise(count=n_distinct('Game Title'))%>%
+  select(Genre,Name)%>%
+  group_by(Genre, Name)%>%
+  summarise(count=n_distinct(Name))%>%
   group_by(Genre) %>%
   summarise(TotalCount = sum(count))
 
-suppressMessages({itle_genre<-my_df%>%
-  select(Genre,`Game Title`)%>%
-  group_by(Genre, `Game Title`)%>%
-  summarise(count=n_distinct('Game Title'))%>%
+suppressMessages({title_genre<-my_df%>%
+  select(Genre,Name)%>%
+  group_by(Genre,Name)%>%
+  summarise(count=n_distinct(Name))%>%
   group_by(Genre) %>%
   summarise(TotalCount = sum(count))})
 
