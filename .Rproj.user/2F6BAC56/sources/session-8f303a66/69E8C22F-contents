@@ -7,12 +7,18 @@ categories: [Assignment, DataViz]
 image: Profile_2.jpg
 code-fold: true
 code-tools: true
-description: Here's a representation of Video Gaming Sales from 1983-2012
+description: Lets Learn abour Marks and Channels
 ---
 
 ## Video Games Sales 1983 - 2012
 
-The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012
+The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012. It is a public data set that it can be obtain by the following website [Kaggle - Video Game Sales](https://www.kaggle.com/datasets/gregorut/videogamesales?resource=download)
+
+The data contains the rank of overall sales, game title, platform of the video game release, year of game release, genre of the game, publisher of game, and sales in the millions for US, Europe, Japan, rest of world wide and total global sales. 
+
+### Flat Table - Video Games Sales
+
+We have a **Flat Table**, the **items** are the rows, wherein each row is the different types of games that has been released from 1983 - 2012. Each item (games) is described by attributes, which are put in columns. Those **attributes** represent: index, rank, game title, platform, year, genre, publisher, US, Europe, Japan, Rest of the Word, Global (total of sales), and reviews. For each column of the different countries represent the total sales from each one in terms of millions in sales.
 
 ```{r}
 library(readxl)
@@ -20,10 +26,6 @@ my_df <- read_excel("Video Games Sales.xlsx")
 knitr::kable(head(my_df,10))
 library(tidyverse)
 ```
-
-## DATA COLLECTION
-
-The following data was gathered through an internet search, where the data is open to the public. The data contains the rank of overall sales, game title, platform of the video game release, year of game release, genre of the game, publisher of game, and sales in the millions for US, Europe, Japan, rest of world wide and total global sales. 
 
 ## ATTRIBUTE TYPES
 
