@@ -40,7 +40,7 @@ library(tidyverse)
 library(tidyr)
 library(ggplot2)
 
-long_df <- pivot_longer(my_df, cols = c(NA_Sales, JP_Sales), names_to = "Sales_Type", values_to = "Sales")
+long_df <- pivot_longer(my_df, cols = c(NA_Sales, JP_Sales, EU_Sales, Other_Sales, Global_Sales), names_to = "Sales_Type", values_to = "Sales")
 
 ggplot(long_df, aes(x=Genre, y=Sales, color=Sales_Type)) +
   geom_boxplot(alpha=0.5) +
