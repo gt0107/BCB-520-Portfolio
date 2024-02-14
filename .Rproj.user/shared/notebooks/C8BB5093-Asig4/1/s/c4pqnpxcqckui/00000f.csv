@@ -1,14 +1,6 @@
 "0","library(ggplot2)"
 "0","library(reshape2)"
-"2","
-Attaching package: ‘reshape2’
-
-"
-"2","The following object is masked from ‘package:tidyr’:
-
-    smiths
-
-"
+"0",""
 "0","title_sales <- my_df %>%"
 "0","  select(Genre, Europe, Japan) %>%"
 "0","  group_by(Genre)"
