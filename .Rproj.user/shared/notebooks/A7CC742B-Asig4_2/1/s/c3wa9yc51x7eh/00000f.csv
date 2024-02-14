@@ -1,4 +1,0 @@
-"0","title_NA_Sales <- my_df %>%"
-"0","  select(Genre, NA_Sales) %>%"
-"0","  group_by(Genre) %>%"
-"0","  summarise(Total_NA_Sales = sum(NA_Sales, na.rm = TRUE))"
