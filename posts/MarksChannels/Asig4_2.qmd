@@ -36,7 +36,46 @@ library(tidyverse)
 
 ## Expressiveness and Effectiveness
 
+```{r}
+library(tidyr)
+library(ggplot2)
+
+long_df <- pivot_longer(my_df, cols = c(NA_Sales, JP_Sales), names_to = "Sales_Type", values_to = "Sales")
+
+ggplot(long_df, aes(x=Genre, y=Sales, color=Sales_Type)) +
+  geom_boxplot(alpha=0.5) +
+  geom_jitter(width=0.2, height=0, size=1.5) +
+  theme_minimal() +
+  ggtitle("Sales By Genre") +
+  xlab("Genre") + ylab("Sales")
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 20))
+```
+
 **Figure 1:** 
+
+```{r}
+title_NA_Sales <- my_df %>%
+  select(Genre, NA_Sales) %>%
+  group_by(Genre) %>%
+  summarise(Total_NA_Sales = sum(NA_Sales, na.rm = TRUE))
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(my_df, aes(x = Genre)) +
+  geom_line(aes(y = NA_Sales* 40, color = "NA Sales")) +
+  geom_line(aes(y = JP_Sales * 20, color = "JP Sales")) +
+  scale_y_continuous(
+    name = "Primary Axis for NA Sales",
+    sec.axis = sec_axis(~./20, name = "Secondary Axis for JP Sales")
+  ) +
+  theme_minimal() +
+  scale_color_manual("", values = c("NA Sales" = "blue", "JP Sales" = "red"))
+
+```
+
+
 **Figure 2:** 
 
 ## Discriminability
