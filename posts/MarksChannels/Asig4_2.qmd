@@ -165,7 +165,7 @@ ggplot(title_year_games, aes(x = Year, y = n, fill = Genre)) +
 
 ```
 
-**Figure 5:** 
+**Figure 5:** The stacked Bar Chart represents the number of games per genre per year. For marks, I used "lines" to present my observations, and my channels are spatial position and color. Looking at the color range it's from dark blue to bright yellow, meaning that with a darker blue color, we have more number games per genre on per year. 
 
 ```{r}
 title_year_games <- my_df %>%
