@@ -1,0 +1,8 @@
+"0","ggplot(my_df, aes(x = Platform, fill = Platform)) +"
+"0","  geom_bar(color = ""black"", width = 0.7) +"
+"0","  ggtitle(""Platform Distribution"") +"
+"0","  xlab(""Platform"") +"
+"0","  ylab(""Game Titles"") +"
+"0","  theme_minimal() +"
+"0","  theme(plot.title = element_text(hjust = 0.5),"
+"0","        axis.text.x = element_text(angle = 45, hjust = 1))"

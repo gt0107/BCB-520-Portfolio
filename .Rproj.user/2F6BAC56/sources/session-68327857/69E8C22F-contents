@@ -81,19 +81,6 @@ ggplot(long_df, aes(x=Genre, y=Sales, color=Sales_Type, shape=Sales_Type)) +
 ## Discriminability
 
 ```{r}
-ggplot(my_df, aes(x = Platform, fill = Platform)) +
-  geom_bar(color = "black", width = 0.7) +
-  ggtitle("Platform Distribution") +
-  xlab("Platform") +
-  ylab("Game Titles") +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-**Figure 3:** 
-
-```{r}
 title_platform<-my_df%>%
   select(Platform,Name)%>%
   group_by(Platform, Name)%>%
@@ -112,18 +99,38 @@ library(ggplot2)
 
 title_platform$Platform <- reorder(title_platform$Platform, title_platform$TotalCount)
 
+library(ggplot2)
+
+library(ggplot2)
+
 ggplot(data = title_platform, aes(x = Platform, y = TotalCount, fill = Platform)) +
   geom_col(color = "black", width = 0.7) +
+  ggtitle("Comparative Distribution of Game Titles Across Platforms") +
+  xlab("Platform") + ylab("Game Titles") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(size = 14),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none"
+  )
+```
+
+**Figure 3:** It's a Bar plot that represents the distribution of game title counts across from different platforms. For marks, I used "lines" to present my observations, and my channels are spatial position and color. The game title counts are ordered from lowest to highest according to their platform. It helps us to perceive how many games there are for each platform. Looking at the color range it's from dark blue to bright yellow, meaning that with a brighter color, we have more game titles for that specific platform. 
+
+```{r}
+ggplot(my_df, aes(x = Platform, fill = Platform)) +
+  geom_bar(color = "black", width = 0.7) +
   ggtitle("Platform Distribution") +
   xlab("Platform") +
   ylab("Game Titles") +
-  scale_fill_viridis_d() +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
         axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-**Figure 4:** 
+**Figure 4:** This second Bar plot is the same representation for the distribution of game title counts across from different platforms. I used the same marks and channels from the previous figure. The difference from the previous figure is that there's no order between game title counts regarding to platform. The color scheme has no meaning that helps as a guide to perceive the highest and lowest count, which just makes it difficult to perceive at first glance.  
 
 ## Seperability
 
