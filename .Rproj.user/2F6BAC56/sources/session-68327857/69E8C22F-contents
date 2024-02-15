@@ -135,6 +135,33 @@ ggplot(my_df, aes(x = Platform, fill = Platform)) +
 ## Seperability
 
 ```{r}
+title_year_games <- my_df %>%
+  select(Year, Genre) %>%
+  count(Year, Genre)
+
+
+library(ggplot2)
+library(viridis)  # Load the viridis package for its color palettes
+
+# Enhanced ggplot with the viridis color palette
+ggplot(title_year_games, aes(x = Year, y = n, fill = Genre)) +
+  geom_bar(stat = "identity", position = "stack", color = "grey80", size = 0.1) +  # Adding subtle borders
+  scale_fill_viridis_d() +  # Use the viridis discrete color palette
+  theme_minimal(base_size = 12) +  # Adjusting base font size for overall consistency
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10, color = "grey20"),  # Enhancing x-axis labels
+    axis.text.y = element_text(size = 10, color = "grey20"),  # Enhancing y-axis labels
+    axis.title.x = element_text(size = 12, face = "bold", margin = margin(t = 10)),  # Styling x-axis title
+    axis.title.y = element_text(size = 12, face = "bold", margin = margin(r = 10)),  # Styling y-axis title
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),  # Centering and emphasizing the plot title
+    legend.position = "right",  # Adjusting legend position for better layout
+    legend.title = element_text(size = 12),  # Styling the legend title for clarity
+    legend.text = element_text(size = 10)  # Adjusting legend text size for readability
+  ) +
+  ggtitle("Number of Games per Genre per Year") +
+  xlab("Year") +
+  ylab("Number of Games") +
+  scale_x_discrete(breaks = function(x) x[seq(1, length(x), by = 2)])
 
 ```
 
@@ -147,6 +174,7 @@ title_year_games <- my_df %>%
 
 library(ggplot2)
 
+# Example using title_year_games data frame
 ggplot(title_year_games, aes(x = Year, y = n, fill = Genre)) +
   geom_bar(stat = "identity", position = "stack") +
   theme_minimal() +
@@ -158,7 +186,6 @@ ggplot(title_year_games, aes(x = Year, y = n, fill = Genre)) +
   ggtitle("Number of Games per Genre per Year") +
   xlab("Year") +
   ylab("Number of Games")
-
 ```
 
 **Figure 6:** The stacked Bar Chart represents the number of games per genre per year. For marks, I used "lines" to present my observations, and my channels are spatial position and color. Looking at this chart it's difficult to distinguish the number of games per genre for some of the years. 

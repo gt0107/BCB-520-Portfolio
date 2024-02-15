@@ -4,6 +4,7 @@
 "0",""
 "0","library(ggplot2)"
 "0",""
+"0","# Example using title_year_games data frame"
 "0","ggplot(title_year_games, aes(x = Year, y = n, fill = Genre)) +"
 "0","  geom_bar(stat = ""identity"", position = ""stack"") +"
 "0","  theme_minimal() +"
@@ -15,4 +16,3 @@
 "0","  ggtitle(""Number of Games per Genre per Year"") +"
 "0","  xlab(""Year"") +"
 "0","  ylab(""Number of Games"")"
-"0",""
