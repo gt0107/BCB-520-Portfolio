@@ -10,7 +10,7 @@ code-tools: true
 description: Lets Learn about Marks and Channels
 ---
 
-## Video Games Sales 1983 - 2012
+## Video Games Sales 1980 - 2020
 
 The data set contains a list of more that 100,000 copies of video games, from the time period of 1983 - 2012. It is a public data set that it can be obtain by the following website [Kaggle - Video Game Sales](https://www.kaggle.com/datasets/gregorut/videogamesales?resource=download)
 
@@ -135,64 +135,35 @@ ggplot(my_df, aes(x = Platform, fill = Platform)) +
 ## Seperability
 
 ```{r}
-title_plubisher<-my_df%>%
-  select(Publisher,Name)%>%
-  group_by(Publisher, Name)%>%
-  summarise(count=n_distinct(Name))%>%
-  group_by(Publisher) %>%
-  summarise(TotalCount = sum(count))
-
-library(ggplot2)
-
-# Assuming title_publisher is the result from the previous aggregation
-title_publisher <- my_df %>%
-  select(Publisher, Name) %>%
-  distinct(Publisher, Name) %>%
-  count(Publisher, name = "TotalTitles")
-
-# Create a basic bar plot
-ggplot(title_publisher, aes(x = reorder(Publisher, TotalTitles), y = TotalTitles, fill = Publisher)) +
-  geom_bar(stat = "identity") +
-  theme_minimal() +
-  labs(x = "Publisher", y = "Total Number of Distinct Titles", title = "Distinct Titles per Publisher") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  guides(fill=FALSE) # Remove the legend if it's redundant
-
-```
-
-```{r}
-df <- data.frame(
-  Genre = c("Action", "Action", "Adventure", "Adventure", "Sports", "Sports"),
-  Region = c("NA", "EU", "NA", "EU", "NA", "EU"),
-  Sales = c(300, 150, 80, 40, 200, 100)
-)
-
-library(ggplot2)
-
-ggplot(df, aes(x = Genre, y = Sales, fill = Region)) +
-  geom_bar(stat = "identity", position = "stack") +
-  ggtitle("Sales by Genre and Region") +
-  xlab("Genre") + ylab("Sales")
-
-ggplot(df, aes(x = Genre, y = Sales, fill = Region)) +
-  geom_bar(stat = "identity", position = "stack") +
-  scale_fill_brewer(palette = "Pastel1") + # Custom color scheme
-  ggtitle("Sales by Genre and Region") +
-  xlab("Genre") + ylab("Sales") +
-  theme_minimal() + # Minimalist theme
-  theme(legend.title = element_blank()) # Remove legend title
-
 
 ```
 
 **Figure 5:** 
-**Figure 6:** 
+
+```{r}
+title_year_games <- my_df %>%
+  select(Year, Genre) %>%
+  count(Year, Genre)
+
+library(ggplot2)
+
+ggplot(title_year_games, aes(x = Year, y = n, fill = Genre)) +
+  geom_bar(stat = "identity", position = "stack") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 10), # Rotate and adjust size of x-axis labels
+    axis.title.x = element_text(size = 12),
+    axis.title.y = element_text(size = 12)
+  ) +
+  ggtitle("Number of Games per Genre per Year") +
+  xlab("Year") +
+  ylab("Number of Games")
+
+```
+
+**Figure 6:** The stacked Bar Chart represents the number of games per genre per year. For marks, I used "lines" to present my observations, and my channels are spatial position and color. Looking at this chart it's difficult to distinguish the number of games per genre for some of the years. 
 
 ## Popout
-
-
-
-
 
 **Figure 7:** 
 

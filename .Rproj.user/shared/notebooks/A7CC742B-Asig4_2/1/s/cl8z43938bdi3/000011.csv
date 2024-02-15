@@ -1,8 +1,0 @@
-"0",""
-"0","ggplot(df, aes(x = Genre, y = Sales, fill = Region)) +"
-"0","  geom_bar(stat = ""identity"", position = ""stack"") +"
-"0","  scale_fill_brewer(palette = ""Pastel1"") + # Custom color scheme"
-"0","  ggtitle(""Sales by Genre and Region"") +"
-"0","  xlab(""Genre"") + ylab(""Sales"") +"
-"0","  theme_minimal() + # Minimalist theme"
-"0","  theme(legend.title = element_blank()) # Remove legend title"
