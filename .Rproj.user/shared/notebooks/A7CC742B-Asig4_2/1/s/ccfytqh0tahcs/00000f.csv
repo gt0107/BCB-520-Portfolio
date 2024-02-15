@@ -6,7 +6,10 @@
 "0","  summarise(TotalCount = sum(count))"
 "2","`summarise()` has grouped output by 'Genre'. You can override using the `.groups` argument."
 "0","library(ggplot2)"
-"0","library(viridis)  # For appealing color palettes, ensure it's installed with install.packages(""viridis"")"
+"0","library(viridis)"
+"2","Loading required package: viridisLite
+"
+"0","title_genre$Genre <- reorder(title_genre$Genre, title_genre$TotalCount)"
 "0",""
 "0","ggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +"
 "0","  geom_col(color = ""black"", width = 0.7) +"
@@ -22,3 +25,4 @@
 "0","    axis.text.y = element_text(size = 12, color = ""grey20""),  # Y-axis labels with adjusted size and color"
 "0","    legend.position = ""none""  # Removing the legend since the fill color is directly linked to the x-axis labels"
 "0","  )"
+"0",""
