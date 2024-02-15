@@ -192,25 +192,47 @@ ggplot(title_year_games, aes(x = Year, y = n, fill = Genre)) +
 
 ## Popout
 
+```{r}
+title_genre<-my_df%>%
+  select(Genre,Name)%>%
+  group_by(Genre, Name)%>%
+  summarise(count=n_distinct(Name))%>%
+  group_by(Genre) %>%
+  summarise(TotalCount = sum(count))
+
+library(ggplot2)
+library(viridis)  # For appealing color palettes, ensure it's installed with install.packages("viridis")
+
+ggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +
+  geom_col(color = "black", width = 0.7) +
+  scale_fill_viridis_d(option = "plasma", begin = 0.1, end = 0.9) +  # Applying a vibrant color palette with good contrast
+  ggtitle("Genre Distribution") +
+  xlab("Genre") +
+  ylab("Game Titles") +
+  theme_minimal(base_size = 12) +  # Using a minimal theme with a base font size for better readability
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold", color = "grey20"),  # Centered and bold title with adjusted color
+    axis.title = element_text(size = 14, face = "bold", color = "grey20"),  # Bold and slightly larger axis titles for clarity
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 12, color = "grey20", vjust = 1),  # Adjusted x-axis labels for better legibility
+    axis.text.y = element_text(size = 12, color = "grey20"),  # Y-axis labels with adjusted size and color
+    legend.position = "none"  # Removing the legend since the fill color is directly linked to the x-axis labels
+  )
+
+# Note: The 'plasma' option from the viridis package offers a striking range of colors to distinguish the genres.
+# The 'begin' and 'end' parameters in scale_fill_viridis_d help in selecting a subset of the color range for even better aesthetics.
+
+
+```
+
 **Figure 7:** 
 
 
 ```{r}
-library(ggplot2)
-library(reshape2)
-
-title_sales <- my_df %>%
-  select(Genre,NA_Sales, EU_Sales, JP_Sales) %>%
-  group_by(Genre)
-
-title_sales <- melt(title_sales, id.vars = "Genre", measure.vars = c("NA_Sales","EU_Sales","JP_Sales"))
-
-ggplot(data = title_sales, aes(x = Genre, y = value, fill = variable)) +
-  geom_col(position = "dodge", color = "black", width = 0.7) +
-  ggtitle("Sales by Genre") +
+ggplot(data = title_genre, aes(x = Genre, y = TotalCount, fill = Genre)) +
+  geom_col(color = "black", width = 0.7) +
+  ggtitle("Genre Distribution") +
   xlab("Genre") +
-  ylab("Sales (per million)") +
-  scale_fill_manual(values = c( "NA_Sales"="magenta","EU_Sales" = "purple", "JP_Sales" = "lightpink")) +
+  ylab("Game Titles") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
         axis.text.x = element_text(angle = 45, hjust = 1))
