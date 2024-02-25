@@ -1,5 +1,5 @@
 ---
-title: ASSIGNMENT 5
+title: Hockey Analytics
 subtitle: Visaulization for Tabular Data
 author: Geraline Trossi-Torres
 Date: 2024-02-25
@@ -9,3 +9,13 @@ code-fold: true
 code-tools: true
 description: 2024 NHL Draft Picks
 ---
+
+## DATA SET FOR NHL DRAFT PICKS
+```{r}
+library(readxl)
+NHL_Drafts <- read_excel("NHLDraftsPicks.xlsx")
+
+knitr::kable(head(NHL_Drafts,10))
+library(tidyverse)
+
+```
