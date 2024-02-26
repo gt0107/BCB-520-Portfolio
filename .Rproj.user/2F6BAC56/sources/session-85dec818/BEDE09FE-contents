@@ -41,7 +41,22 @@ Things wrong with this Data Visualization:
   2.**Labelling:** Can we create a solid figure caption and better axis labels for this figure? In        your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well       as the marks, channels, and key-value pairs used.
   
   3.**Key-Value pairs:** Looks like we are using “round” as a continuous variable. Can we change          this to an ordered factor?
- 
+
+
+```{r}
+library(ggplot2)
+
+ggplot(Draft_2022, aes(x = round, y = NHLgames)) +
+  geom_point() +
+  theme_minimal(base_size = 14) +
+  ggtitle("NHL 2022 Draft Players") +
+  xlab("Round Players Drafted") + 
+  ylab("NHL Games Played") +
+  theme(plot.title = element_text(hjust = 0.5))
+  
+
+```
+
 
 **Figure 2:**
 
