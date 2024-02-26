@@ -17,7 +17,6 @@ NHL_Drafts <- read_excel("NHLDraftsPicks.xlsx")
 
 knitr::kable(head(NHL_Drafts,10))
 library(tidyverse)
-
 ```
 
 ```{r}
@@ -45,16 +44,15 @@ Things wrong with this Data Visualization:
 
 ```{r}
 library(ggplot2)
+library(ggridges)
 
-ggplot(Draft_2022, aes(x = round, y = NHLgames)) +
-  geom_point() +
-  theme_minimal(base_size = 14) +
-  ggtitle("NHL 2022 Draft Players") +
-  xlab("Round Players Drafted") + 
-  ylab("NHL Games Played") +
+ggplot(Draft_2022, aes(x = NHLgames, y = factor(round))) +
+  geom_density_ridges(aes(height = ..density..), jittered_points = TRUE, scale = 3) +  
+  theme_minimal() +
+  ggtitle("NHL 2022 Draft Players Density, Amplified") +
+  xlab("NHL Games Played") + 
+  ylab("Draft Round")+
   theme(plot.title = element_text(hjust = 0.5))
-  
-
 ```
 
 
