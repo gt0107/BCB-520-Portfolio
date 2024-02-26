@@ -56,7 +56,7 @@ ggplot(Draft_2022, aes(x = NHLgames, y = factor(round))) +
 ```
 
 
-**Figure 2:**
+**Figure 2:**specify the task(s) the visualizaiton is intended to facilitate, as well       as the marks, channels, and key-value pairs used
 
 ```{r}
 Draft_2021 <- NHL_Drafts %>%
