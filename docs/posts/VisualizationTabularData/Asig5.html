@@ -462,13 +462,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Draft_2022, <span class="fu">aes</span>(<span class="at">x =</span> NHLgames, <span class="at">y =</span> <span class="fu">factor</span>(round))) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="fu">aes</span>(<span class="at">height =</span> ..density..), <span class="at">jittered_points =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"NHL 2022 Draft Players Density, Amplified"</span>) <span class="sc">+</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"NHL Games Played"</span>) <span class="sc">+</span> </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Draft Round"</span>)<span class="sc">+</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>Draft_2022<span class="sc">$</span>round <span class="ot">&lt;-</span> <span class="fu">factor</span>(Draft_2022<span class="sc">$</span>round, <span class="at">levels =</span> <span class="fu">sort</span>(<span class="fu">unique</span>(Draft_2022<span class="sc">$</span>round)), <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Draft_2022, <span class="fu">aes</span>(<span class="at">x =</span> NHLgames, <span class="at">y =</span> round)) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="fu">aes</span>(<span class="at">height =</span> ..density..), <span class="at">jittered_points =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"NHL 2022 Draft Players Density"</span>) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"NHL Games Played"</span>) <span class="sc">+</span> </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Draft Round"</span>)<span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
@@ -835,27 +837,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
 <span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Draft_2022, <span class="fu">aes</span>(<span class="at">x =</span> NHLgames, <span class="at">y =</span> <span class="fu">factor</span>(round))) <span class="sc">+</span></span>
-<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="fu">aes</span>(<span class="at">height =</span> ..density..), <span class="at">jittered_points =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
-<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"NHL 2022 Draft Players Density, Amplified"</span>) <span class="sc">+</span></span>
-<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"NHL Games Played"</span>) <span class="sc">+</span> </span>
-<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Draft Round"</span>)<span class="sc">+</span></span>
-<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
-<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>**Figure 2:**specify the task(s) the visualizaiton is intended to facilitate, as well       as the marks, channels, and key-value pairs used</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>Draft_2022<span class="sc">$</span>round <span class="ot">&lt;-</span> <span class="fu">factor</span>(Draft_2022<span class="sc">$</span>round, <span class="at">levels =</span> <span class="fu">sort</span>(<span class="fu">unique</span>(Draft_2022<span class="sc">$</span>round)), <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Draft_2022, <span class="fu">aes</span>(<span class="at">x =</span> NHLgames, <span class="at">y =</span> round)) <span class="sc">+</span></span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="fu">aes</span>(<span class="at">height =</span> ..density..), <span class="at">jittered_points =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"NHL 2022 Draft Players Density"</span>) <span class="sc">+</span></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"NHL Games Played"</span>) <span class="sc">+</span> </span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Draft Round"</span>)<span class="sc">+</span></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>Draft_2021 <span class="ot">&lt;-</span> NHL_Drafts <span class="sc">%&gt;%</span></span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(draftyear<span class="sc">==</span><span class="dv">2021</span>)</span>
-<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>Draft_2020 <span class="ot">&lt;-</span> NHL_Drafts <span class="sc">%&gt;%</span></span>
-<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(draftyear<span class="sc">==</span><span class="dv">2020</span>)</span>
-<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>**Figure 2:**specify the task(s) the visualizaiton is intended to facilitate, as well       as the marks, channels, and key-value pairs used</span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>Draft_2021 <span class="ot">&lt;-</span> NHL_Drafts <span class="sc">%&gt;%</span></span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(draftyear<span class="sc">==</span><span class="dv">2021</span>)</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>Draft_2020 <span class="ot">&lt;-</span> NHL_Drafts <span class="sc">%&gt;%</span></span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(draftyear<span class="sc">==</span><span class="dv">2020</span>)</span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

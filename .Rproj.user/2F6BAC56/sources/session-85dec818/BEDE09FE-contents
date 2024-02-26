@@ -46,10 +46,12 @@ Things wrong with this Data Visualization:
 library(ggplot2)
 library(ggridges)
 
-ggplot(Draft_2022, aes(x = NHLgames, y = factor(round))) +
-  geom_density_ridges(aes(height = ..density..), jittered_points = TRUE, scale = 3) +  
+Draft_2022$round <- factor(Draft_2022$round, levels = sort(unique(Draft_2022$round)), ordered = TRUE)
+
+ggplot(Draft_2022, aes(x = NHLgames, y = round)) +
+  geom_density_ridges(aes(height = ..density..), jittered_points = TRUE, scale = 3) +
   theme_minimal() +
-  ggtitle("NHL 2022 Draft Players Density, Amplified") +
+  ggtitle("NHL 2022 Draft Players Density") +
   xlab("NHL Games Played") + 
   ylab("Draft Round")+
   theme(plot.title = element_text(hjust = 0.5))
