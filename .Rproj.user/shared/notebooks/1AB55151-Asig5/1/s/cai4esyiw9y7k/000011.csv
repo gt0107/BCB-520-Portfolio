@@ -1,4 +1,0 @@
-"0","library(ggplot2)"
-"0",""
-"0","ggplot(Draft_2022, aes(x = round, y = NHLgames)) +"
-"0","  geom_point()"
