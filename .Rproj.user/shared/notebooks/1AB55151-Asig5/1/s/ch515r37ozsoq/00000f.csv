@@ -1,0 +1,6 @@
+"0","SummaryDraft2018 <- Draft_2018 %>%"
+"0","  group_by(playerId, round, overall, position, name) %>%"
+"0","  summarise(totgames=sum(NHLgames))"
+"2","`summarise()` has grouped output by 'playerId', 'round', 'overall', 'position'. You can override using the `.groups` argument."
+"0","ggplot(SummaryDraft2018, aes(x=round, y=totgames))+"
+"0","  geom_point()"
