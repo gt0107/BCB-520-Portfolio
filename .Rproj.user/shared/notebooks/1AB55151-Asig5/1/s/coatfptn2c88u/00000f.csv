@@ -1,0 +1,5 @@
+"0","GettingTotalDrafts <-NHL_Drafts%>%
+  group_by(playerId, round, overall, position, name)%>%
+  summarise(totgames=sum(NHLgames))
+"
+"2","`summarise()` has grouped output by 'playerId', 'round', 'overall', 'position'. You can override using the `.groups` argument."
