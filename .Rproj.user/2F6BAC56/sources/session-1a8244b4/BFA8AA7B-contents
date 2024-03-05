@@ -170,9 +170,44 @@ ggplot(comparison_data, aes(x = name, y = NHLgames, fill = category)) +
   ggtitle("Elias Lindholm vs. 2013 Draft Average NHL Games Played") +
   xlab("Category") +
   ylab("NHL Games Played") +
-  scale_fill_manual(values = c("Individual" = "blue", "Average" = "red")) +
+  scale_fill_manual(values = c("Average" = "red", "Individual" = "blue")) +
   theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_blank())
 ```
+
+**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+
+
+```{r}
+forwards_2013 <- players_stats_2013 %>%
+  filter(draftyear == 2013, position == "Forward") %>%
+  select(name, position, NHLgames) 
+
+library(dplyr)
+
+# Mark Elias Lindholm and other players
+players_stats_2013 <- players_stats_2013 %>%
+  mutate(Category = ifelse(name == "Elias Lindholm", "Elias Lindholm", "Other Players"))
+
+# Calculate average NHL games for Elias and other players
+avg_games_comparison <- players_stats_2013 %>%
+  group_by(Category) %>%
+  summarise(AverageNHLGames = mean(NHLgames, na.rm = TRUE))
+
+# Plot
+ggplot(avg_games_comparison, aes(x = Category, y = AverageNHLGames, fill = Category)) +
+  geom_col() +
+  theme_minimal() +
+  ggtitle("Average NHL Games: Elias Lindholm vs Other Forwards (2013 Draft)") +
+  xlab("") +  # Remove x-axis label as Category is self-explanatory
+  ylab("Average NHL Games Played") +
+  scale_fill_manual(values = c("Elias Lindholm" = "blue", "Other Players" = "red"))
+```
+
+**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+
+
+
+
 
 
 
