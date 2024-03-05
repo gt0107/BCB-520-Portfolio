@@ -115,7 +115,6 @@ ggplot(Elias_stats, aes(x=postdraft, y=NHLgames)) +
 
 **Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
 
-
 ```{r}
 library(dplyr)
 
@@ -136,7 +135,44 @@ ggplot(players_stats_2013_2, aes(x=postdraft, y=NHLgames, color=as.factor(round)
 
 **Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
 
+```{r}
+players_stats_2013 <- NHLdraftstats %>%
+  filter(draftyear == 2013)
 
+library(dplyr)
+library(ggplot2)
+
+# Calculate the average NHL games played by players other than Elias Lindholm
+average_games <- players_stats_2013 %>%
+  filter(name != "Elias Lindholm") %>%
+  summarise(average_NHL_games = mean(NHLgames, na.rm = TRUE))
+
+# Calculate Elias Lindholm's average NHL games
+elias_avg_games <- players_stats_2013 %>%
+  filter(name == "Elias Lindholm") %>%
+  summarise(NHLgames = mean(NHLgames, na.rm = TRUE)) %>%
+  mutate(name = "Elias Lindholm", category = "Individual")
+
+# Create a data frame for the draft average
+average_df <- data.frame(
+  name = "2013 Draft Average",
+  NHLgames = average_games$average_NHL_games,
+  category = "Average"
+)
+
+# Ensure both data frames have the same structure and combine them
+comparison_data <- rbind(elias_avg_games, average_df)
+
+# Create the bar graph comparing Elias Lindholm's NHL games played to the 2013 draft average
+ggplot(comparison_data, aes(x = name, y = NHLgames, fill = category)) +
+  geom_col() +
+  theme_minimal() +
+  ggtitle("Elias Lindholm vs. 2013 Draft Average NHL Games Played") +
+  xlab("Category") +
+  ylab("NHL Games Played") +
+  scale_fill_manual(values = c("Individual" = "blue", "Average" = "red")) +
+  theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_blank())
+```
 
 
 
