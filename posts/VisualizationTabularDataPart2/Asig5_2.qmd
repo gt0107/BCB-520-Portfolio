@@ -114,7 +114,10 @@ ggplot(players_stats_2013_2, aes(x=postdraft, y=NHLgames, color=as.factor(round)
   scale_color_brewer(palette="Set1", name="Draft Round")
 ```
 
-**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+**Figure 1:** Representation of the overall players that were drafted in 2013. By looking at this we can determine that the players drafted in Round 1 
+
+
+visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
 
 
 ```{r}
