@@ -95,6 +95,56 @@ In the GitHub repository there is a file called `NHLdraftstats.csv`. What's in t
 ## ANALYTICS REGARDING IF THE TRADE WAS WORTH IT
 
 ```{r}
+
+NHLdraftstats <- read.csv("NHLdraftstats.csv")
+
+library(dplyr)
+
+players_stats_2013_2 <- NHLdraftstats %>%
+  filter(draftyear == 2013) %>%
+  filter(name != "Elias Lindholm")
+
+ggplot(players_stats_2013_2, aes(x=postdraft, y=NHLgames, color=as.factor(round))) +
+  geom_smooth(se=FALSE) +
+  theme_minimal() +
+  ggtitle("Overall Players in 2013 by Draft Round") +
+  xlab("Post Draft Position") +  
+  ylab("NHL Games Played") + 
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_color_brewer(palette="Set1", name="Draft Round")
+```
+
+**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+
+
+```{r}
+
+players_stats_2013 <- NHLdraftstats %>%
+  filter(draftyear == 2013)
+
+library(dplyr)
+
+
+agg_data <- players_stats_2013 %>%
+  group_by(round, position) %>%
+  summarise(AvgNHLGames = mean(NHLgames, na.rm = TRUE), .groups = 'drop')
+
+
+ggplot(agg_data, aes(x = factor(round), y = AvgNHLGames, fill = factor(round))) +
+  geom_col() +
+  facet_wrap(~position, scales = "free_y") +
+  theme_minimal() +
+  ggtitle("Average NHL Games Played by Draft Round and Position (2013)") +
+  xlab("Draft Round") +
+  ylab("Average NHL Games Played") +
+  scale_fill_brewer(palette = "Set1", name = "Draft Round") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))
+```
+
+**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+
+```{r}
 library(dplyr)
 library(ggplot2)
 
@@ -115,25 +165,6 @@ ggplot(Elias_stats, aes(x=postdraft, y=NHLgames)) +
 
 **Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
 
-```{r}
-library(dplyr)
-
-players_stats_2013_2 <- NHLdraftstats %>%
-  filter(draftyear == 2013) %>%
-  filter(name != "Elias Lindholm")
-
-ggplot(players_stats_2013_2, aes(x=postdraft, y=NHLgames, color=as.factor(round))) +
-  geom_smooth(se=FALSE) +
-  theme_minimal() +
-  ggtitle("Overall Players in 2013 by Draft Round") +
-  xlab("Post Draft Position") +  
-  ylab("NHL Games Played") + 
-  theme(plot.title = element_text(hjust = 0.5)) +
-  scale_color_brewer(palette="Set1", name="Draft Round")
-
-```
-
-**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
 
 ```{r}
 players_stats_2013 <- NHLdraftstats %>%
@@ -173,31 +204,7 @@ ggplot(comparison_data, aes(x = name, y = NHLgames, fill = category)) +
   scale_fill_manual(values = c("Average" = "red", "Individual" = "blue")) +
   theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_blank())
 ```
-
-
-
-```{r}
-library(dplyr)
-
-agg_data <- players_stats_2013 %>%
-  group_by(round, position) %>%
-  summarise(AvgNHLGames = mean(NHLgames, na.rm = TRUE), .groups = 'drop')
-
-
-ggplot(agg_data, aes(x = factor(round), y = AvgNHLGames, fill = factor(round))) +
-  geom_col() +
-  facet_wrap(~position, scales = "free_y") +
-  theme_minimal() +
-  ggtitle("Average NHL Games Played by Draft Round and Position (2013)") +
-  xlab("Draft Round") +
-  ylab("Average NHL Games Played") +
-  scale_fill_brewer(palette = "Set1", name = "Draft Round") +
-  theme(plot.title = element_text(hjust = 0.5),
-        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))
-
-```
 **Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
-
 
 ```{r}
 forwards_2013 <- players_stats_2013 %>%
@@ -268,17 +275,9 @@ ggplot(comparison_data, aes(x = Name, y = Metric, fill = Name)) +
 **Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
 
 
-1.  Do these visualizations change as a function of player position?
-2.  Is the number of NHL games played really the best metric to use?
-What might picks in the range of pick 31 conceivably yield? How often do picks in that range yield players of Elias Lindholm's value?
-
-I guess we'd better figure out what Elias Lindholm brings to the table.
-
-Can you find him in our existing data? Can you think of a way to highlight him in the context of number of games played? What other kinds of data might we need to fairly evaluate Lindholm and pick 31?
-
 ## CONCLUSION
 
-Based on your visualizations, what would you advise regarding this trade proposal? Why?
+Based on my visualizations, I think the Vancouver Canucks got a good trade with Elias Lindholm. He's a solid forward based on the comparison data of other players in the same position in the same draft year; Elias Lindholm is a player in another league. Maybe, the reason that the Canucks made the trade with the Calgary Flames; is that they needed a player that could bring them the win of the Stanley Cup. The Canucks are thinking about their current gaming plan; and not too much about the future. Maybe the Calgary Flames wanted new players to improve their gaming strategies, and have a solid team for the future NHL games.
 
 
 
