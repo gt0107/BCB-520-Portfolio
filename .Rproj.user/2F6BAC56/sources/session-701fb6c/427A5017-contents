@@ -201,7 +201,6 @@ ggplot(avg_games_comparison, aes(x = Category, y = AverageNHLGames, fill = Categ
   xlab("") +  # Remove x-axis label as Category is self-explanatory
   ylab("Average NHL Games Played") +
   scale_fill_manual(values = c("Elias Lindholm" = "blue", "Other Players" = "red"))
-  theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_blank())
 ```
 
 **Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
