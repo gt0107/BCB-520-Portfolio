@@ -480,10 +480,11 @@ HINT
 <p><img src="Asig5_2_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 4:</strong></p>
+<p><strong>Figure 4:</strong> In this bar graph is comparison between the performance of Elias Lindholm vs the drafted players of 2013. I took the average of the NHL games played of the drafted players (is the one label as average and the blue bar) and also the average for Elias’s performance (is the one label as individual and the red bar). By looking at this graph we can say that Elias’s performance is alot higher than the overall average of the players that were drafted at the same year as Elias.</p>
 </section>
 <section id="elias-lindholm-vs-forward-players-drafted-in-2013" class="level3">
 <h3 class="anchored" data-anchor-id="elias-lindholm-vs-forward-players-drafted-in-2013">Elias Lindholm vs Forward Players (Drafted in 2013)</h3>
+<p>We now that Elias Lindholm has a good performance after being drafted compared to other players that were drafted on the same year. Now, I wanted to compare the performance with players that have the same position as Elias. This also, will give more insight the decision of the trade.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -515,7 +516,11 @@ HINT
 <p><img src="Asig5_2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Labelling.</strong> Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.</p>
+<p><strong>Figure 4:</strong> In this bar graph is comparison between the performance of Elias Lindholm vs the players on the same position as forward. I took the average of the NHL games played of the drafted players (is the one label as Other Players) and also the average for Elias’s performance (Blue bar). By looking at this graph we can say that Elias’s performance is alot higher than the overall average of the players that were drafted at the same year as Elias in the postion as forward.</p>
+</section>
+<section id="elias-lindholm-vs.-forwards-drafted-in-2018" class="level3">
+<h3 class="anchored" data-anchor-id="elias-lindholm-vs.-forwards-drafted-in-2018">Elias Lindholm vs.&nbsp;Forwards (Drafted in 2018)</h3>
+<p>We now that Elias Lindholm has a good performance, now I wanted to compare its performance with forward players that were drafted in 2018. It is clear that Elias has more experience and has alot of exposure in playing alot of NHL games. I just wanted to see and compare their performances between the two variables. Like having an experience player is better than acquiring new players.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -557,7 +562,8 @@ HINT
 <p><img src="Asig5_2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Labelling.</strong> Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.</p>
+<p><strong>Figure 5:</strong></p>
+<p><strong>Figure 4:</strong> In this bar graph is comparison between the performance of Elias Lindholm vs the players on the same position as forward. I took the average of the NHL games played of the drafted players (is the one label as Other Players) and also the average for Elias’s performance (Blue bar). By looking at this graph we can say that Elias’s performance is alot higher than the overall average of the players that were drafted at the same year as Elias in the postion as forward.</p>
 </section>
 </section>
 <section id="conclusion" class="level2">
@@ -1072,86 +1078,94 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Average"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Individual"</span> <span class="ot">=</span> <span class="st">"blue"</span>)) <span class="sc">+</span></span>
 <span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>), <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>())</span>
 <span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>**Figure 4:** </span>
+<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>**Figure 4:** In this bar graph is comparison between the performance of Elias Lindholm vs the drafted players of 2013. I took the average of the NHL games played of the drafted players (is the one label as average and the blue bar) and also the average for Elias's performance (is the one label as individual and the red bar). By looking at this graph we can say that Elias's performance is alot higher than the overall average of the players that were drafted at the same year as Elias.</span>
 <span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a><span class="fu">### Elias Lindholm vs Forward Players (Drafted in 2013)</span></span>
 <span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>forwards_2013 <span class="ot">&lt;-</span> players_stats_2013 <span class="sc">%&gt;%</span></span>
-<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(draftyear <span class="sc">==</span> <span class="dv">2013</span>, position <span class="sc">==</span> <span class="st">"Forward"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, position, NHLgames) </span>
-<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a>We now that Elias Lindholm has a good performance after being drafted compared to other players that were drafted on the same year. Now, I wanted to compare the performance with players that have the same position as Elias. This also, will give more insight the decision of the trade. </span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>forwards_2013 <span class="ot">&lt;-</span> players_stats_2013 <span class="sc">%&gt;%</span></span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(draftyear <span class="sc">==</span> <span class="dv">2013</span>, position <span class="sc">==</span> <span class="st">"Forward"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, position, NHLgames) </span>
 <span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a><span class="co"># Mark Elias Lindholm and other players</span></span>
-<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a>players_stats_2013 <span class="ot">&lt;-</span> players_stats_2013 <span class="sc">%&gt;%</span></span>
-<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Category =</span> <span class="fu">ifelse</span>(name <span class="sc">==</span> <span class="st">"Elias Lindholm"</span>, <span class="st">"Elias Lindholm"</span>, <span class="st">"Other Players"</span>))</span>
-<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate average NHL games for Elias and other players</span></span>
-<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a>avg_games_comparison <span class="ot">&lt;-</span> players_stats_2013 <span class="sc">%&gt;%</span></span>
-<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Category) <span class="sc">%&gt;%</span></span>
-<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">AverageNHLGames =</span> <span class="fu">mean</span>(NHLgames, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(avg_games_comparison, <span class="fu">aes</span>(<span class="at">x =</span> Category, <span class="at">y =</span> AverageNHLGames, <span class="at">fill =</span> Category)) <span class="sc">+</span></span>
-<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Average NHL Games: Elias Lindholm vs Other Forwards (2013 Draft)"</span>) <span class="sc">+</span></span>
-<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Average NHL Games Played"</span>) <span class="sc">+</span></span>
-<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Elias Lindholm"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Other Players"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span>
-<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a>**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.</span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a><span class="co"># Mark Elias Lindholm and other players</span></span>
+<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a>players_stats_2013 <span class="ot">&lt;-</span> players_stats_2013 <span class="sc">%&gt;%</span></span>
+<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Category =</span> <span class="fu">ifelse</span>(name <span class="sc">==</span> <span class="st">"Elias Lindholm"</span>, <span class="st">"Elias Lindholm"</span>, <span class="st">"Other Players"</span>))</span>
+<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate average NHL games for Elias and other players</span></span>
+<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a>avg_games_comparison <span class="ot">&lt;-</span> players_stats_2013 <span class="sc">%&gt;%</span></span>
+<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Category) <span class="sc">%&gt;%</span></span>
+<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">AverageNHLGames =</span> <span class="fu">mean</span>(NHLgames, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(avg_games_comparison, <span class="fu">aes</span>(<span class="at">x =</span> Category, <span class="at">y =</span> AverageNHLGames, <span class="at">fill =</span> Category)) <span class="sc">+</span></span>
+<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Average NHL Games: Elias Lindholm vs Other Forwards (2013 Draft)"</span>) <span class="sc">+</span></span>
+<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Average NHL Games Played"</span>) <span class="sc">+</span></span>
+<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Elias Lindholm"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Other Players"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span>
+<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a>players_stats_2018 <span class="ot">&lt;-</span> NHLdraftstats <span class="sc">%&gt;%</span></span>
-<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(draftyear <span class="sc">==</span> <span class="dv">2018</span>, position <span class="sc">==</span> <span class="st">"Forward"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, position, NHLgames) </span>
-<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a>**Figure 4:** In this bar graph is comparison between the performance of Elias Lindholm vs the players on the same position as forward. I took the average of the NHL games played of the drafted players (is the one label as Other Players) and also the average for Elias's performance (Blue bar). By looking at this graph we can say that Elias's performance is alot higher than the overall average of the players that were drafted at the same year as Elias in the postion as forward.</span>
+<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a><span class="fu">### Elias Lindholm vs. Forwards (Drafted in 2018)</span></span>
+<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a>We now that Elias Lindholm has a good performance, now I wanted to compare its performance with forward players that were drafted in 2018. It is clear that Elias has more experience and has alot of exposure in playing alot of NHL games. I just wanted to see and compare their performances between the two variables. Like having an experience player is better than acquiring new players. </span>
+<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming Elias Lindholm is also a forward and you want his stats</span></span>
-<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a>elias_metric <span class="ot">&lt;-</span> NHLdraftstats <span class="sc">%&gt;%</span></span>
-<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">"Elias Lindholm"</span>, position <span class="sc">==</span> <span class="st">"Forward"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">AverageNHLGames =</span> <span class="fu">mean</span>(NHLgames, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average NHL games for forwards drafted in 2018</span></span>
-<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a>avg_2018_metric <span class="ot">&lt;-</span> players_stats_2018 <span class="sc">%&gt;%</span></span>
-<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(position <span class="sc">==</span> <span class="st">"Forward"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">AverageNHLGames =</span> <span class="fu">mean</span>(NHLgames, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data for comparison</span></span>
-<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a>comparison_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="st">"Elias Lindholm"</span>, <span class="at">Metric =</span> elias_metric<span class="sc">$</span>AverageNHLGames),</span>
-<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="st">"2018 Forwards"</span>, <span class="at">Metric =</span> avg_2018_metric<span class="sc">$</span>AverageNHLGames)</span>
-<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a>players_stats_2018 <span class="ot">&lt;-</span> NHLdraftstats <span class="sc">%&gt;%</span></span>
+<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(draftyear <span class="sc">==</span> <span class="dv">2018</span>, position <span class="sc">==</span> <span class="st">"Forward"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, position, NHLgames) </span>
+<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming Elias Lindholm is also a forward and you want his stats</span></span>
+<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>elias_metric <span class="ot">&lt;-</span> NHLdraftstats <span class="sc">%&gt;%</span></span>
+<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(name <span class="sc">==</span> <span class="st">"Elias Lindholm"</span>, position <span class="sc">==</span> <span class="st">"Forward"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">AverageNHLGames =</span> <span class="fu">mean</span>(NHLgames, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average NHL games for forwards drafted in 2018</span></span>
+<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>avg_2018_metric <span class="ot">&lt;-</span> players_stats_2018 <span class="sc">%&gt;%</span></span>
+<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(position <span class="sc">==</span> <span class="st">"Forward"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">AverageNHLGames =</span> <span class="fu">mean</span>(NHLgames, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the comparison</span></span>
-<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comparison_data, <span class="fu">aes</span>(<span class="at">x =</span> Name, <span class="at">y =</span> Metric, <span class="at">fill =</span> Name)) <span class="sc">+</span></span>
-<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Comparison: Elias Lindholm vs. 2018 Forwards"</span>) <span class="sc">+</span></span>
-<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Average NHL Games Played"</span>) <span class="sc">+</span></span>
-<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Elias Lindholm"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"2018 Forwards"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span>
-<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a>**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.</span>
-<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONCLUSION</span></span>
-<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a>Based on my visualizations, I think the Vancouver Canucks got a good trade with Elias Lindholm. He's a solid forward based on the comparison data of other players in the same position in the same draft year; Elias Lindholm is a player in another league. Maybe, the reason that the Canucks made the trade with the Calgary Flames; is that they needed a player that could bring them the win of the Stanley Cup. The Canucks are thinking about their current gaming plan; and not too much about the future. Maybe the Calgary Flames wanted new players to improve their gaming strategies, and have a solid team for the future NHL games.</span>
-<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the data for comparison</span></span>
+<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a>comparison_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="st">"Elias Lindholm"</span>, <span class="at">Metric =</span> elias_metric<span class="sc">$</span>AverageNHLGames),</span>
+<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="st">"2018 Forwards"</span>, <span class="at">Metric =</span> avg_2018_metric<span class="sc">$</span>AverageNHLGames)</span>
+<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the comparison</span></span>
+<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(comparison_data, <span class="fu">aes</span>(<span class="at">x =</span> Name, <span class="at">y =</span> Metric, <span class="at">fill =</span> Name)) <span class="sc">+</span></span>
+<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Comparison: Elias Lindholm vs. 2018 Forwards"</span>) <span class="sc">+</span></span>
+<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Average NHL Games Played"</span>) <span class="sc">+</span></span>
+<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Elias Lindholm"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"2018 Forwards"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span>
+<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a>**Figure 5:** </span>
 <span id="cb10-311"><a href="#cb10-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a>**Figure 4:** In this bar graph is comparison between the performance of Elias Lindholm vs the players on the same position as forward. I took the average of the NHL games played of the drafted players (is the one label as Other Players) and also the average for Elias's performance (Blue bar). By looking at this graph we can say that Elias's performance is alot higher than the overall average of the players that were drafted at the same year as Elias in the postion as forward.</span>
+<span id="cb10-313"><a href="#cb10-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-314"><a href="#cb10-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-315"><a href="#cb10-315" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONCLUSION</span></span>
+<span id="cb10-316"><a href="#cb10-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-317"><a href="#cb10-317" aria-hidden="true" tabindex="-1"></a>Based on my visualizations, I think the Vancouver Canucks got a good trade with Elias Lindholm. He's a solid forward based on the comparison data of other players in the same position in the same draft year; Elias Lindholm is a player in another league. Maybe, the reason that the Canucks made the trade with the Calgary Flames; is that they needed a player that could bring them the win of the Stanley Cup. The Canucks are thinking about their current gaming plan; and not too much about the future. Maybe the Calgary Flames wanted new players to improve their gaming strategies, and have a solid team for the future NHL games.</span>
+<span id="cb10-318"><a href="#cb10-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-319"><a href="#cb10-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-320"><a href="#cb10-320" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

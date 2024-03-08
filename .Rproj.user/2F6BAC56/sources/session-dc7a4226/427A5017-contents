@@ -219,10 +219,12 @@ ggplot(comparison_data, aes(x = name, y = NHLgames, fill = category)) +
   scale_fill_manual(values = c("Average" = "red", "Individual" = "blue")) +
   theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_blank())
 ```
-**Figure 4:** 
+**Figure 4:** In this bar graph is comparison between the performance of Elias Lindholm vs the drafted players of 2013. I took the average of the NHL games played of the drafted players (is the one label as average and the blue bar) and also the average for Elias's performance (is the one label as individual and the red bar). By looking at this graph we can say that Elias's performance is alot higher than the overall average of the players that were drafted at the same year as Elias.
 
 
 ### Elias Lindholm vs Forward Players (Drafted in 2013)
+
+We now that Elias Lindholm has a good performance after being drafted compared to other players that were drafted on the same year. Now, I wanted to compare the performance with players that have the same position as Elias. This also, will give more insight the decision of the trade. 
 
 ```{r}
 forwards_2013 <- players_stats_2013 %>%
@@ -250,8 +252,12 @@ ggplot(avg_games_comparison, aes(x = Category, y = AverageNHLGames, fill = Categ
   scale_fill_manual(values = c("Elias Lindholm" = "blue", "Other Players" = "red"))
 ```
 
-**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+**Figure 4:** In this bar graph is comparison between the performance of Elias Lindholm vs the players on the same position as forward. I took the average of the NHL games played of the drafted players (is the one label as Other Players) and also the average for Elias's performance (Blue bar). By looking at this graph we can say that Elias's performance is alot higher than the overall average of the players that were drafted at the same year as Elias in the postion as forward.
 
+
+### Elias Lindholm vs. Forwards (Drafted in 2018)
+
+We now that Elias Lindholm has a good performance, now I wanted to compare its performance with forward players that were drafted in 2018. It is clear that Elias has more experience and has alot of exposure in playing alot of NHL games. I just wanted to see and compare their performances between the two variables. Like having an experience player is better than acquiring new players. 
 
 ```{r}
 library(dplyr)
@@ -290,7 +296,9 @@ ggplot(comparison_data, aes(x = Name, y = Metric, fill = Name)) +
 
 ```
 
-**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+**Figure 5:** 
+
+**Figure 4:** In this bar graph is comparison between the performance of Elias Lindholm vs the players on the same position as forward. I took the average of the NHL games played of the drafted players (is the one label as Other Players) and also the average for Elias's performance (Blue bar). By looking at this graph we can say that Elias's performance is alot higher than the overall average of the players that were drafted at the same year as Elias in the postion as forward.
 
 
 ## CONCLUSION
