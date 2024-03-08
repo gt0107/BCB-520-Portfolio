@@ -1,4 +1,8 @@
+"0",""
+"0","NHLdraftstats <- read.csv(""NHLdraftstats.csv"")"
+"0",""
 "0","library(dplyr)"
+"0","library(ggplot2)"
 "0",""
 "0","players_stats_2013_2 <- NHLdraftstats %>%"
 "0","  filter(draftyear == 2013) %>%"

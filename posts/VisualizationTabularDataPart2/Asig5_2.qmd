@@ -94,6 +94,8 @@ In the GitHub repository there is a file called `NHLdraftstats.csv`. What's in t
 
 ## ANALYTICS REGARDING IF THE TRADE WAS WORTH IT
 
+### 2013 Draft Picks
+
 ```{r}
 
 NHLdraftstats <- read.csv("NHLdraftstats.csv")
@@ -114,11 +116,37 @@ ggplot(players_stats_2013_2, aes(x=postdraft, y=NHLgames, color=as.factor(round)
   scale_color_brewer(palette="Set1", name="Draft Round")
 ```
 
-**Figure 1:** Representation of the overall players that were drafted in 2013. By looking at this we can determine that the players drafted in Round 1 
+**Figure 1:** Representation of the overall players that were drafted in 2013. By looking at this line graph we can determine that the players drafted in Round 1 played the most NHL games compared from the other draft rounds. This indicates that players selected in the first round draft, are valuable players that can bring a lot winnings to the team. The NHL player Elias Lindholm was drafted in this year 2013 in the first round pick. 
+
+### Elias Performance
+
+Since, we looked at the overall pick of players that were drafted in 2013, I wanted to look were Elias Lindholm performance lies post draft.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+NHLdraftstats <- read.csv("NHLdraftstats.csv")
 
 
-visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+Elias_stats <- NHLdraftstats %>%
+  filter(name == "Elias Lindholm")
 
+ggplot(Elias_stats, aes(x=postdraft, y=NHLgames)) +
+  geom_smooth() +  
+  theme_minimal() +
+  ggtitle("Elias Lindholm Performance") +
+  xlab("Post Draft Position") +  
+  ylab("NHL Games Played") + 
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+**Figure 2:** This line graph represent Elias Lindholm post draft, and we can see that at the beginning of being drafted has played a lot of NHL games, meaning that he is an outstanding player.
+
+
+### 2013 Draft Pick by Positions
+
+Elias Lindholm is in the forward position, I wanted to see how many players got drafted from the same position in contrast to the other positions.
 
 ```{r}
 
@@ -145,28 +173,7 @@ ggplot(agg_data, aes(x = factor(round), y = AvgNHLGames, fill = factor(round))) 
         axis.text.x = element_text(angle = 45, hjust = 1, size = 12))
 ```
 
-**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
-
-```{r}
-library(dplyr)
-library(ggplot2)
-
-NHLdraftstats <- read.csv("NHLdraftstats.csv")
-
-
-Elias_stats <- NHLdraftstats %>%
-  filter(name == "Elias Lindholm")
-
-ggplot(Elias_stats, aes(x=postdraft, y=NHLgames)) +
-  geom_smooth() +  
-  theme_minimal() +
-  ggtitle("Elias Lindholm Performance") +
-  xlab("Post Draft Position") +  
-  ylab("NHL Games Played") + 
-  theme(plot.title = element_text(hjust = 0.5))
-```
-
-**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+**Figure3:**
 
 
 ```{r}
