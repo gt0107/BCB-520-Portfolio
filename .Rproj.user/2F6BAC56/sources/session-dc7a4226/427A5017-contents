@@ -296,9 +296,7 @@ ggplot(comparison_data, aes(x = Name, y = Metric, fill = Name)) +
 
 ```
 
-**Figure 5:** 
-
-**Figure 4:** In this bar graph is comparison between the performance of Elias Lindholm vs the players on the same position as forward. I took the average of the NHL games played of the drafted players (is the one label as Other Players) and also the average for Elias's performance (Blue bar). By looking at this graph we can say that Elias's performance is alot higher than the overall average of the players that were drafted at the same year as Elias in the postion as forward.
+**Figure 5:** In this bar graph is comparison between the performance of Elias Lindholm vs forward players drafted in 2018. I took the average of the NHL games played of the 2018 Forwards (Red Bar) and also the average for Elias's performance (Blue bar). By looking at this graph we can say that Elias's performance is alot higher than the overall average of the Forward players that were drafted in 2018. But, this is also due that Elias has alot more experience than the players drafted in 2018.
 
 
 ## CONCLUSION
