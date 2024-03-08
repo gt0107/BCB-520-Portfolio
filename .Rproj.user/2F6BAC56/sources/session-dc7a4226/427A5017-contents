@@ -118,7 +118,8 @@ ggplot(players_stats_2013_2, aes(x=postdraft, y=NHLgames, color=as.factor(round)
 
 **Figure 1:** Representation of the overall players that were drafted in 2013. By looking at this line graph we can determine that the players drafted in Round 1 played the most NHL games compared from the other draft rounds. This indicates that players selected in the first round draft, are valuable players that can bring a lot winnings to the team. The NHL player Elias Lindholm was drafted in this year 2013 in the first round pick. 
 
-### Elias Performance
+
+### Elias Lindholm Performance
 
 Since, we looked at the overall pick of players that were drafted in 2013, I wanted to look were Elias Lindholm performance lies post draft.
 
@@ -173,8 +174,12 @@ ggplot(agg_data, aes(x = factor(round), y = AvgNHLGames, fill = factor(round))) 
         axis.text.x = element_text(angle = 45, hjust = 1, size = 12))
 ```
 
-**Figure3:**
+**Figure3:** The following bar graphs are divided by position, by round and the average of NHL played games from the players that were drafted in 2013. By looking at this graphs we can say that the positions for forward and defense are highly drafted in the first round and are the ones that played the most in NHL games. The Goal Tender there's no overall pick in this 2013 draft pick. Meaning that these two positions for defense and forward are the most highly looked for selecting players.
 
+
+### Elias Lindholm vs Drafted Players 2013 Performance
+
+We now that Elias Lindholm has a good performance after being drafted. I wanted to compare with the other players that were also drafted on 2013. This will help me have a perspective why Calgary did the trade with Vancouver for him. 
 
 ```{r}
 players_stats_2013 <- NHLdraftstats %>%
@@ -214,7 +219,10 @@ ggplot(comparison_data, aes(x = name, y = NHLgames, fill = category)) +
   scale_fill_manual(values = c("Average" = "red", "Individual" = "blue")) +
   theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_blank())
 ```
-**Labelling.** Can we create a solid figure caption and better axis labels for this figure? In your caption, please specify the task(s) the visualizaiton is intended to facilitate, as well as the marks, channels, and key-value pairs used.
+**Figure 4:** 
+
+
+### Elias Lindholm vs Forward Players (Drafted in 2013)
 
 ```{r}
 forwards_2013 <- players_stats_2013 %>%
