@@ -20,3 +20,26 @@ description: "In Progress"
 ### National Institutes of Health (NIH)
 
 ### National Science Foundation (NSF)
+
+
+## QUESTION 1
+
+Provide a visualization that shows our active awards from each sponsor. I need to see their start date and end date, the amount of the award, and the name of the Principal Investigator. I’m really interested in seeing how far into the future our current portfolio will exist. Are there a bunch of awards about to expire? Are there a bunch that just got funded and will be active for a while? Does this vary across sponsors?
+
+## QUESTION 2
+
+What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
+
+## QUESTION 3
+
+How is UI performing with these sponsors when compared to the following peer institutions?
+
+1. Boise State University
+2. Idaho State University
+3. Montana State University
+4. University of Montana
+5. Washington State University
+
+
+Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.
+
