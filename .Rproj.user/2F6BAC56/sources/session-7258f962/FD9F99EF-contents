@@ -14,3 +14,7 @@ website:
     left:
       - href: index.html
         text: HOME
+        
+format:
+  html:
+    css: customstyles.css
