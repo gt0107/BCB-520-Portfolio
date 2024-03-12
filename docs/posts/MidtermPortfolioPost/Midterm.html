@@ -355,11 +355,556 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>How is UI performing with these sponsors when compared to the following peer institutions?</p>
 <ol type="1">
 <li>Boise State University</li>
+</ol>
+<p><strong>Department of Energy</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>DOEawardsBSU <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `` -&gt; `...27`</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>DOEBSU_General <span class="ot">&lt;-</span> DOEawardsBSU <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Boise State University'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>DOEBSU_New_Awards <span class="ot">&lt;-</span> DOEBSU_General <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEBSU_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 46%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 10%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Title</th>
+<th style="text-align: left;">Institution</th>
+<th style="text-align: left;">PI</th>
+<th style="text-align: left;">Status</th>
+<th style="text-align: left;">Action Type</th>
+<th style="text-align: left;">Program Office</th>
+<th style="text-align: left;">Start Date</th>
+<th style="text-align: left;">End Date</th>
+<th style="text-align: left;">Most Recent Award Date</th>
+<th style="text-align: right;">Amount Awarded to Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Emerging Properties through Controlled Phase Transformations for High Energy Sodium Ion Batteries</td>
+<td style="text-align: left;">Boise State University</td>
+<td style="text-align: left;">Xiong, Hui (Claire)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">08/15/2023</td>
+<td style="text-align: left;">08/14/2026</td>
+<td style="text-align: left;">09/23/2023</td>
+<td style="text-align: right;">599992</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Uptake mechanisms of REE in sedimentary phosphorite mineral Sponsor: Department of Energy</td>
+<td style="text-align: left;">Boise State University</td>
+<td style="text-align: left;">Kohn, Matthew</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">09/01/2023</td>
+<td style="text-align: left;">08/31/2026</td>
+<td style="text-align: left;">09/14/2023</td>
+<td style="text-align: right;">888250</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DNA-Controlled Dye Aggregation ¿ A Path to Create Quantum Entanglement</td>
+<td style="text-align: left;">Boise State University</td>
+<td style="text-align: left;">Knowlton, William</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Renewal</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">08/15/2023</td>
+<td style="text-align: left;">08/14/2025</td>
+<td style="text-align: left;">08/31/2023</td>
+<td style="text-align: right;">12500000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Neuromorphic Systems for Power Grid Cyber-Resilience</td>
+<td style="text-align: left;">Boise State University</td>
+<td style="text-align: left;">Cantley, Kurtis</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">09/01/2022</td>
+<td style="text-align: left;">08/31/2025</td>
+<td style="text-align: left;">08/07/2023</td>
+<td style="text-align: right;">708985</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Understanding Interfacial Chemistry and Cation Order-Disorder in Mixed-Phased Complex Sodium Metal Oxide Cathodes for Sodium Ion Batteries</td>
+<td style="text-align: left;">Boise State University</td>
+<td style="text-align: left;">Xiong, Hui (Claire)</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Renewal</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">09/15/2022</td>
+<td style="text-align: left;">09/14/2025</td>
+<td style="text-align: left;">07/25/2023</td>
+<td style="text-align: right;">1349813</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Realizing the constraining power of galaxy clusters on cosmic acceleration: from DES to LSST</td>
+<td style="text-align: left;">Boise State University</td>
+<td style="text-align: left;">Wu, Hao-Yi</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of High Energy Physics</td>
+<td style="text-align: left;">08/01/2021</td>
+<td style="text-align: left;">07/31/2026</td>
+<td style="text-align: left;">06/30/2023</td>
+<td style="text-align: right;">750000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="2" type="1">
 <li>Idaho State University</li>
+</ol>
+<p><strong>Department of Energy</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>DOEaward <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `` -&gt; `...27`</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>DOEIDAHOSATTE_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Idaho State University'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>DOEDAHOSATTE_New_Awards <span class="ot">&lt;-</span> DOEIDAHOSATTE_General <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEDAHOSATTE_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Title</th>
+<th style="text-align: left;">Institution</th>
+<th style="text-align: left;">PI</th>
+<th style="text-align: left;">Status</th>
+<th style="text-align: left;">Action Type</th>
+<th style="text-align: left;">Program Office</th>
+<th style="text-align: left;">Start Date</th>
+<th style="text-align: left;">End Date</th>
+<th style="text-align: left;">Most Recent Award Date</th>
+<th style="text-align: right;">Amount Awarded to Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Precision Electroweak Probe of BSM Physics</td>
+<td style="text-align: left;">Idaho State University</td>
+<td style="text-align: left;">McNulty, Dustin</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Renewal</td>
+<td style="text-align: left;">Office of Nuclear Physics</td>
+<td style="text-align: left;">09/01/2023</td>
+<td style="text-align: left;">08/31/2026</td>
+<td style="text-align: left;">08/31/2023</td>
+<td style="text-align: right;">1195000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mechanistic and Kinetic Analysis of Polymer Deconstruction and Modification by Irradiation for Polymer Upcycling</td>
+<td style="text-align: left;">Idaho State University</td>
+<td style="text-align: left;">Jenkins, Courtney</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">09/01/2022</td>
+<td style="text-align: left;">08/31/2025</td>
+<td style="text-align: left;">07/24/2023</td>
+<td style="text-align: right;">583930</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="3" type="1">
 <li>Montana State University</li>
+</ol>
+<p><strong>Department of Energy</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>DOEMONTANA_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Montana State University'</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>DOEMONTANA_New_Awards <span class="ot">&lt;-</span> DOEMONTANA_General <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEMONTANA_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 15%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Title</th>
+<th style="text-align: left;">Institution</th>
+<th style="text-align: left;">PI</th>
+<th style="text-align: left;">Status</th>
+<th style="text-align: left;">Action Type</th>
+<th style="text-align: left;">Program Office</th>
+<th style="text-align: left;">Start Date</th>
+<th style="text-align: left;">End Date</th>
+<th style="text-align: left;">Most Recent Award Date</th>
+<th style="text-align: right;">Amount Awarded to Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Nitrite-dependent methane oxidation: an overlooked nitrogen sink in riparian zones</td>
+<td style="text-align: left;">Montana State University</td>
+<td style="text-align: left;">Bertagnolli, Anthony</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Biological &amp; Environmental Research</td>
+<td style="text-align: left;">09/01/2023</td>
+<td style="text-align: left;">08/31/2026</td>
+<td style="text-align: left;">08/17/2023</td>
+<td style="text-align: right;">998671</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ECON: Enhancing Camelina Oilseed Production with Minimum Nitrogen Fertilization in Sustainable Cropping Systems</td>
+<td style="text-align: left;">Montana State University</td>
+<td style="text-align: left;">Lu, Chaofu</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Biological &amp; Environmental Research</td>
+<td style="text-align: left;">09/15/2020</td>
+<td style="text-align: left;">09/14/2025</td>
+<td style="text-align: left;">07/26/2023</td>
+<td style="text-align: right;">5984310</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pathways and Mechanisms in [FeFe]-Hydrogenase Maturation</td>
+<td style="text-align: left;">Montana State University</td>
+<td style="text-align: left;">Broderick, Joan</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Renewal</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">09/15/2022</td>
+<td style="text-align: left;">09/14/2025</td>
+<td style="text-align: left;">07/26/2023</td>
+<td style="text-align: right;">3112238</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Investigating Material Properties of Subfurface Rock Formations Modified by Engineering Mineral Precipitation</td>
+<td style="text-align: left;">Montana State University</td>
+<td style="text-align: left;">Kirkland, Catherine</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">09/01/2020</td>
+<td style="text-align: left;">08/31/2024</td>
+<td style="text-align: left;">06/01/2023</td>
+<td style="text-align: right;">599047</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Probing novel pathways of iron sulfide acquisition and trafficking from minerals in model biocatalytic systems</td>
+<td style="text-align: left;">Montana State University</td>
+<td style="text-align: left;">Boyd, Eric</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Renewal</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">08/15/2021</td>
+<td style="text-align: left;">08/14/2024</td>
+<td style="text-align: left;">03/09/2023</td>
+<td style="text-align: right;">5361000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="4" type="1">
 <li>University of Montana</li>
+</ol>
+<p><strong>Department of Energy</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>DOEUNIMONTANA_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'University of Montana'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>DOEUNIMONTANA_New_Awards <span class="ot">&lt;-</span> DOEUNIMONTANA_General <span class="sc">%&gt;%</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEUNIMONTANA_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 15%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Title</th>
+<th style="text-align: left;">Institution</th>
+<th style="text-align: left;">PI</th>
+<th style="text-align: left;">Status</th>
+<th style="text-align: left;">Action Type</th>
+<th style="text-align: left;">Program Office</th>
+<th style="text-align: left;">Start Date</th>
+<th style="text-align: left;">End Date</th>
+<th style="text-align: left;">Most Recent Award Date</th>
+<th style="text-align: right;">Amount Awarded to Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Magnetohydrodynamic Optimization of Stellarator Fusion Energy Systems</td>
+<td style="text-align: left;">University of Montana</td>
+<td style="text-align: left;">Ware, Andrew</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">08/01/2022</td>
+<td style="text-align: left;">07/31/2025</td>
+<td style="text-align: left;">08/15/2023</td>
+<td style="text-align: right;">749953</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Investigating Subsurface Flow in Mountainous Catchments</td>
+<td style="text-align: left;">University of Montana</td>
+<td style="text-align: left;">Gardner, William</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">09/01/2020</td>
+<td style="text-align: left;">08/31/2024</td>
+<td style="text-align: left;">05/04/2023</td>
+<td style="text-align: right;">749849</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Plant Carbohydrate Depletion, Mycorrhizal Networks, and Vulnerability to Drought: An Experimental Test in the Field</td>
+<td style="text-align: left;">University of Montana</td>
+<td style="text-align: left;">Sala, Anna</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Biological &amp; Environmental Research</td>
+<td style="text-align: left;">08/15/2021</td>
+<td style="text-align: left;">08/14/2024</td>
+<td style="text-align: left;">03/08/2023</td>
+<td style="text-align: right;">326520</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="5" type="1">
 <li>Washington State University</li>
 </ol>
+<p><strong>Department of Energy</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>DOEWSU_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Washington State University'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>DOEWSU_New_Awards <span class="ot">&lt;-</span> DOEWSU_General <span class="sc">%&gt;%</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEWSU_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 14%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Title</th>
+<th style="text-align: left;">Institution</th>
+<th style="text-align: left;">PI</th>
+<th style="text-align: left;">Status</th>
+<th style="text-align: left;">Action Type</th>
+<th style="text-align: left;">Program Office</th>
+<th style="text-align: left;">Start Date</th>
+<th style="text-align: left;">End Date</th>
+<th style="text-align: left;">Most Recent Award Date</th>
+<th style="text-align: right;">Amount Awarded to Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Building Inclusive Capacity and Partnerships to Tackle Soil-Water- Microbe-Root Feedbacks in Forest Regeneration after Wildfires</td>
+<td style="text-align: left;">Washington State University</td>
+<td style="text-align: left;">Cheeke, Tanya</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Biological &amp; Environmental Research</td>
+<td style="text-align: left;">09/01/2022</td>
+<td style="text-align: left;">05/31/2025</td>
+<td style="text-align: left;">02/15/2024</td>
+<td style="text-align: right;">149995</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Understanding Selectivity in Terpene Synthases ¿ Unique Mechanisms to Generate Precursors for Biocrude and Specialty Chemicals</td>
+<td style="text-align: left;">Washington State University</td>
+<td style="text-align: left;">Lange, Bernd</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Renewal</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">08/15/2023</td>
+<td style="text-align: left;">08/14/2026</td>
+<td style="text-align: left;">09/25/2023</td>
+<td style="text-align: right;">2995804</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Photosynthetic Reduction of Carbon Dioxide: Kinetic Trade-offs for Rubisco and Phosphoenolpyruvate Carboxylase</td>
+<td style="text-align: left;">Washington State University</td>
+<td style="text-align: left;">Cousins, Asaph</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Renewal</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">02/15/2022</td>
+<td style="text-align: left;">08/14/2024</td>
+<td style="text-align: left;">08/17/2023</td>
+<td style="text-align: right;">2349996</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lateral Distribution Dynamics of Cytochrome B6F Complexes in Thylakoid Membranes and Its Consequences for Photosynthetic Electron Transport</td>
+<td style="text-align: left;">Washington State University</td>
+<td style="text-align: left;">Kirchhoff, Helmut</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Renewal</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">09/15/2021</td>
+<td style="text-align: left;">09/14/2024</td>
+<td style="text-align: left;">08/07/2023</td>
+<td style="text-align: right;">1500974</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Integrated Direct Air Capture and H2-Free CO2 Valorization</td>
+<td style="text-align: left;">Washington State University</td>
+<td style="text-align: left;">Lin, Hongfei</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">New</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">09/01/2021</td>
+<td style="text-align: left;">08/31/2024</td>
+<td style="text-align: left;">07/12/2023</td>
+<td style="text-align: right;">1140000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Developing Multi-Scale Models for the Effective Design of Bimetallic Catalysts for the Targeted Refinement of Bio-oil to Usable Biofuels</td>
+<td style="text-align: left;">Washington State University</td>
+<td style="text-align: left;">McEwen, Jean-Sabin</td>
+<td style="text-align: left;">Active</td>
+<td style="text-align: left;">Renewal</td>
+<td style="text-align: left;">Office of Basic Energy Sciences</td>
+<td style="text-align: left;">08/15/2021</td>
+<td style="text-align: left;">08/14/2024</td>
+<td style="text-align: left;">07/05/2023</td>
+<td style="text-align: right;">1725000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p>Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.</p>
 </section>
 <section id="conlusionssummary" class="level2">
@@ -655,94 +1200,173 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "BCB 520 - Midterm Portfolio Post"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "In Progress"</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Geraline Trossi-Torres"</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-03-11"</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [Midterm, DataViz, Visualization]</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> Profile4.jpg</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> true</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "In Progress"</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## THE DATA</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Agriculture (NIFA)</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Energy (DOE)</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="fu">#### University of Idaho</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE}</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(readxl))</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, warning=FALSE}</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>, <span class="at">.name_repair =</span> <span class="st">"minimal"</span>)</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>DOEUI_General <span class="ot">&lt;-</span> DOEawardsUI <span class="sc">%&gt;%</span> </span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Regents of the University of Idaho'</span>)</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>DOEUI_New_Awards <span class="ot">&lt;-</span> DOEUI_General <span class="sc">%&gt;%</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEUI_New_Awards))</span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>))</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="fu">### National Institutes of Health (NIH)</span></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### National Science Foundation (NSF)</span></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 1</span></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>Provide a visualization that shows our active awards from each sponsor. I need to see their start date and end date, the amount of the award, and the name of the Principal Investigator. I’m really interested in seeing how far into the future our current portfolio will exist. Are there a bunch of awards about to expire? Are there a bunch that just got funded and will be active for a while? Does this vary across sponsors?</span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 2</span></span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?</span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Energy (DOE)</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 3</span></span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>How is UI performing with these sponsors when compared to the following peer institutions?</span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Boise State University</span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Idaho State University</span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Montana State University</span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>University of Montana</span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Washington State University</span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.</span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONLUSIONS/SUMMARY</span></span>
+<div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "BCB 520 - Midterm Portfolio Post"</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "In Progress"</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Geraline Trossi-Torres"</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2024-03-11"</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [Midterm, DataViz, Visualization]</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> Profile4.jpg</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> true</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "In Progress"</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## THE DATA</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Agriculture (NIFA)</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Energy (DOE)</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a><span class="fu">#### University of Idaho</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE}</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(readxl))</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, warning=FALSE}</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>, <span class="at">.name_repair =</span> <span class="st">"minimal"</span>)</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>DOEUI_General <span class="ot">&lt;-</span> DOEawardsUI <span class="sc">%&gt;%</span> </span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Regents of the University of Idaho'</span>)</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>DOEUI_New_Awards <span class="ot">&lt;-</span> DOEUI_General <span class="sc">%&gt;%</span></span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEUI_New_Awards))</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>))</span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a><span class="fu">### National Institutes of Health (NIH)</span></span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### National Science Foundation (NSF)</span></span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 1</span></span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>Provide a visualization that shows our active awards from each sponsor. I need to see their start date and end date, the amount of the award, and the name of the Principal Investigator. I’m really interested in seeing how far into the future our current portfolio will exist. Are there a bunch of awards about to expire? Are there a bunch that just got funded and will be active for a while? Does this vary across sponsors?</span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 2</span></span>
+<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a>What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?</span>
+<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Energy (DOE)</span></span>
+<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 3</span></span>
+<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a>How is UI performing with these sponsors when compared to the following peer institutions?</span>
+<span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Boise State University</span>
+<span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
+<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-86"><a href="#cb21-86" aria-hidden="true" tabindex="-1"></a>DOEawardsBSU <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
+<span id="cb21-87"><a href="#cb21-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-88"><a href="#cb21-88" aria-hidden="true" tabindex="-1"></a>DOEBSU_General <span class="ot">&lt;-</span> DOEawardsBSU <span class="sc">%&gt;%</span> </span>
+<span id="cb21-89"><a href="#cb21-89" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Boise State University'</span>)</span>
+<span id="cb21-90"><a href="#cb21-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-91"><a href="#cb21-91" aria-hidden="true" tabindex="-1"></a>DOEBSU_New_Awards <span class="ot">&lt;-</span> DOEBSU_General <span class="sc">%&gt;%</span></span>
+<span id="cb21-92"><a href="#cb21-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb21-93"><a href="#cb21-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-94"><a href="#cb21-94" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEBSU_New_Awards))</span>
+<span id="cb21-95"><a href="#cb21-95" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-96"><a href="#cb21-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-97"><a href="#cb21-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-99"><a href="#cb21-99" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Idaho State University</span>
+<span id="cb21-100"><a href="#cb21-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-101"><a href="#cb21-101" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
+<span id="cb21-104"><a href="#cb21-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-105"><a href="#cb21-105" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb21-106"><a href="#cb21-106" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-107"><a href="#cb21-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-108"><a href="#cb21-108" aria-hidden="true" tabindex="-1"></a>DOEaward <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
+<span id="cb21-109"><a href="#cb21-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-110"><a href="#cb21-110" aria-hidden="true" tabindex="-1"></a>DOEIDAHOSATTE_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb21-111"><a href="#cb21-111" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Idaho State University'</span>)</span>
+<span id="cb21-112"><a href="#cb21-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-113"><a href="#cb21-113" aria-hidden="true" tabindex="-1"></a>DOEDAHOSATTE_New_Awards <span class="ot">&lt;-</span> DOEIDAHOSATTE_General <span class="sc">%&gt;%</span></span>
+<span id="cb21-114"><a href="#cb21-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-116"><a href="#cb21-116" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEDAHOSATTE_New_Awards))</span>
+<span id="cb21-117"><a href="#cb21-117" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-119"><a href="#cb21-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-120"><a href="#cb21-120" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Montana State University</span>
+<span id="cb21-121"><a href="#cb21-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-122"><a href="#cb21-122" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
+<span id="cb21-125"><a href="#cb21-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-126"><a href="#cb21-126" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-127"><a href="#cb21-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-128"><a href="#cb21-128" aria-hidden="true" tabindex="-1"></a>DOEMONTANA_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb21-129"><a href="#cb21-129" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Montana State University'</span>)</span>
+<span id="cb21-130"><a href="#cb21-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-131"><a href="#cb21-131" aria-hidden="true" tabindex="-1"></a>DOEMONTANA_New_Awards <span class="ot">&lt;-</span> DOEMONTANA_General <span class="sc">%&gt;%</span></span>
+<span id="cb21-132"><a href="#cb21-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb21-133"><a href="#cb21-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-134"><a href="#cb21-134" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEMONTANA_New_Awards))</span>
+<span id="cb21-135"><a href="#cb21-135" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-136"><a href="#cb21-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-137"><a href="#cb21-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-138"><a href="#cb21-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-139"><a href="#cb21-139" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>University of Montana</span>
+<span id="cb21-140"><a href="#cb21-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-141"><a href="#cb21-141" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
+<span id="cb21-144"><a href="#cb21-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-145"><a href="#cb21-145" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-146"><a href="#cb21-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-147"><a href="#cb21-147" aria-hidden="true" tabindex="-1"></a>DOEUNIMONTANA_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb21-148"><a href="#cb21-148" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'University of Montana'</span>)</span>
+<span id="cb21-149"><a href="#cb21-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-150"><a href="#cb21-150" aria-hidden="true" tabindex="-1"></a>DOEUNIMONTANA_New_Awards <span class="ot">&lt;-</span> DOEUNIMONTANA_General <span class="sc">%&gt;%</span></span>
+<span id="cb21-151"><a href="#cb21-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb21-152"><a href="#cb21-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-153"><a href="#cb21-153" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEUNIMONTANA_New_Awards))</span>
+<span id="cb21-154"><a href="#cb21-154" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-155"><a href="#cb21-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-156"><a href="#cb21-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-157"><a href="#cb21-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-158"><a href="#cb21-158" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Washington State University</span>
+<span id="cb21-159"><a href="#cb21-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-160"><a href="#cb21-160" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
+<span id="cb21-163"><a href="#cb21-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-164"><a href="#cb21-164" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-165"><a href="#cb21-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-166"><a href="#cb21-166" aria-hidden="true" tabindex="-1"></a>DOEWSU_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb21-167"><a href="#cb21-167" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Washington State University'</span>)</span>
+<span id="cb21-168"><a href="#cb21-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-169"><a href="#cb21-169" aria-hidden="true" tabindex="-1"></a>DOEWSU_New_Awards <span class="ot">&lt;-</span> DOEWSU_General <span class="sc">%&gt;%</span></span>
+<span id="cb21-170"><a href="#cb21-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb21-171"><a href="#cb21-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-172"><a href="#cb21-172" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEWSU_New_Awards))</span>
+<span id="cb21-173"><a href="#cb21-173" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-174"><a href="#cb21-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-175"><a href="#cb21-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-176"><a href="#cb21-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-177"><a href="#cb21-177" aria-hidden="true" tabindex="-1"></a>Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.</span>
+<span id="cb21-178"><a href="#cb21-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-179"><a href="#cb21-179" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONLUSIONS/SUMMARY</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -52,10 +52,6 @@ library(readr)
 DOEawardsUI <- suppressMessages(read_xlsx("DOEawards.xlsx"))
 ```
 
-
-
-
-
 ### National Institutes of Health (NIH)
 
 ### National Science Foundation (NSF)
@@ -77,10 +73,93 @@ What is the proportional representation of new awards to the UI from these vario
 How is UI performing with these sponsors when compared to the following peer institutions?
 
 1. Boise State University
+
+**Department of Energy**
+```{r}
+library(readxl)
+library(dplyr)
+
+DOEawardsBSU <- read_xlsx("DOEawards.xlsx")
+
+DOEBSU_General <- DOEawardsBSU %>% 
+  dplyr::filter(Institution == 'Boise State University')
+
+DOEBSU_New_Awards <- DOEBSU_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEBSU_New_Awards))
+library(tidyverse)
+```
+
+
 2. Idaho State University
+
+**Department of Energy**
+```{r}
+library(readxl)
+library(dplyr)
+
+DOEaward <- read_xlsx("DOEawards.xlsx")
+
+DOEIDAHOSATTE_General <- DOEaward %>% 
+  dplyr::filter(Institution == 'Idaho State University')
+
+DOEDAHOSATTE_New_Awards <- DOEIDAHOSATTE_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEDAHOSATTE_New_Awards))
+library(tidyverse)
+```
+
 3. Montana State University
+
+**Department of Energy**
+```{r}
+library(dplyr)
+
+DOEMONTANA_General <- DOEaward %>% 
+  dplyr::filter(Institution == 'Montana State University')
+
+DOEMONTANA_New_Awards <- DOEMONTANA_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEMONTANA_New_Awards))
+library(tidyverse)
+```
+
+
 4. University of Montana
+
+**Department of Energy**
+```{r}
+library(dplyr)
+
+DOEUNIMONTANA_General <- DOEaward %>% 
+  dplyr::filter(Institution == 'University of Montana')
+
+DOEUNIMONTANA_New_Awards <- DOEUNIMONTANA_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEUNIMONTANA_New_Awards))
+library(tidyverse)
+```
+
+
 5. Washington State University
+
+**Department of Energy**
+```{r}
+library(dplyr)
+
+DOEWSU_General <- DOEaward %>% 
+  dplyr::filter(Institution == 'Washington State University')
+
+DOEWSU_New_Awards <- DOEWSU_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEWSU_New_Awards))
+library(tidyverse)
+```
 
 
 Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.
