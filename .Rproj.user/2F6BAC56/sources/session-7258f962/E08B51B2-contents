@@ -13,9 +13,48 @@ description: "In Progress"
 
 ## THE DATA
 
+Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.
+
 ### Department of Agriculture (NIFA)
 
 ### Department of Energy (DOE)
+
+
+#### University of Idaho
+
+```{r, message=FALSE}
+suppressPackageStartupMessages(library(readxl))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(readxl)
+DOEawardsUI <- read_xlsx("DOEawards.xlsx", .name_repair = "minimal")
+```
+
+```{r}
+library(readxl)
+library(dplyr)
+
+DOEawardsUI <- read_xlsx("DOEawards.xlsx")
+
+DOEUI_General <- DOEawardsUI %>% 
+  dplyr::filter(Institution == 'Regents of the University of Idaho')
+
+DOEUI_New_Awards <- DOEUI_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEUI_New_Awards))
+library(tidyverse)
+
+library(readr)
+DOEawardsUI <- suppressMessages(read_xlsx("DOEawards.xlsx"))
+```
+
+
+
+
 
 ### National Institutes of Health (NIH)
 
@@ -30,6 +69,9 @@ Provide a visualization that shows our active awards from each sponsor. I need t
 
 What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
 
+### Department of Energy (DOE)
+
+
 ## QUESTION 3
 
 How is UI performing with these sponsors when compared to the following peer institutions?
@@ -42,4 +84,6 @@ How is UI performing with these sponsors when compared to the following peer ins
 
 
 Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.
+
+## CONLUSIONS/SUMMARY
 

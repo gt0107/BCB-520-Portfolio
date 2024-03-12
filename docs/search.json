@@ -7,6 +7,20 @@
     "text": "ASSIGNMENT 4\n\n\nMarks And Channel\n\n\n\n\nAssignment\n\n\nDataViz\n\n\n\n\nLets Learn about Marks and Channels\n\n\n\n\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\n  \n\n\n\n\nBCB 520 - Midterm Portfolio Post\n\n\nIn Progress\n\n\n\n\nMidterm\n\n\nDataViz\n\n\nVisualization\n\n\n\n\nIn Progress\n\n\n\n\n\n\nMar 11, 2024\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\n  \n\n\n\n\nHockey Analytics\n\n\nVisualizations for Tabular Data\n\n\n\n\nAssignment\n\n\nDataViz\n\n\nVisualization\n\n\n\n\nLets learn about hockey draft analytics\n\n\n\n\n\n\nFeb 29, 2024\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nFeb 5, 2024\n\n\nGeraline Trossi-Torres\n\n\n\n\n\n\nNo matching items"
   },
   {
+    "objectID": "posts/MidtermPortfolioPost/Midterm.html",
+    "href": "posts/MidtermPortfolioPost/Midterm.html",
+    "title": "BCB 520 - Midterm Portfolio Post",
+    "section": "",
+    "text": "Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.\n\n\n\n\n\n\n\n\n\nCode\nsuppressPackageStartupMessages(library(readxl))\nsuppressPackageStartupMessages(library(dplyr))\nsuppressPackageStartupMessages(library(tidyverse))\n\n\n\n\nCode\nlibrary(readxl)\nDOEawardsUI &lt;- read_xlsx(\"DOEawards.xlsx\", .name_repair = \"minimal\")\n\n\n\n\nCode\nlibrary(readxl)\nlibrary(dplyr)\n\nDOEawardsUI &lt;- read_xlsx(\"DOEawards.xlsx\")\n\n\nNew names:\n• `` -&gt; `...27`\n\n\nCode\nDOEUI_General &lt;- DOEawardsUI %&gt;% \n  dplyr::filter(Institution == 'Regents of the University of Idaho')\n\nDOEUI_New_Awards &lt;- DOEUI_General %&gt;%\n  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)\n\nknitr::kable(head(DOEUI_New_Awards))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nInstitution\nPI\nStatus\nAction Type\nProgram Office\nStart Date\nEnd Date\nMost Recent Award Date\nAmount Awarded to Date\n\n\n\n\nNuclear Theory at the University of Idaho\nRegents of the University of Idaho\nSammarruca, Francesca\nActive\nRenewal\nOffice of Nuclear Physics\n12/01/2021\n11/30/2024\n12/29/2023\n1812000\n\n\nConverting methoxy groups on lignin-derived aromatics from a toxic hurdle to a useful resource: a systems-driven approach\nRegents of the University of Idaho\nMarx, Christopher\nActive\nNew\nOffice of Biological & Environmental Research\n09/01/2021\n08/31/2024\n08/02/2023\n1404162\n\n\nIntegrative Imaging of Plant Roots during Symbiosis with Mycorrhizal Fungi\nRegents of the University of Idaho\nVasdekis, Andreas\nActive\nNew\nOffice of Biological & Environmental Research\n08/15/2021\n08/14/2024\n06/26/2023\n1519359\n\n\nNutrient and Fine Sediment Transport Driven by Perturbations in River Bed Movement\nRegents of the University of Idaho\nYager, Elowyn\nActive\nNew\nOffice of Biological & Environmental Research\n09/01/2020\n08/31/2024\n04/12/2023\n603903\n\n\n\n\n\nCode\nlibrary(tidyverse)\n\nlibrary(readr)\nDOEawardsUI &lt;- suppressMessages(read_xlsx(\"DOEawards.xlsx\"))"
+  },
+  {
+    "objectID": "posts/MidtermPortfolioPost/Midterm.html#the-data",
+    "href": "posts/MidtermPortfolioPost/Midterm.html#the-data",
+    "title": "BCB 520 - Midterm Portfolio Post",
+    "section": "",
+    "text": "Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.\n\n\n\n\n\n\n\n\n\nCode\nsuppressPackageStartupMessages(library(readxl))\nsuppressPackageStartupMessages(library(dplyr))\nsuppressPackageStartupMessages(library(tidyverse))\n\n\n\n\nCode\nlibrary(readxl)\nDOEawardsUI &lt;- read_xlsx(\"DOEawards.xlsx\", .name_repair = \"minimal\")\n\n\n\n\nCode\nlibrary(readxl)\nlibrary(dplyr)\n\nDOEawardsUI &lt;- read_xlsx(\"DOEawards.xlsx\")\n\n\nNew names:\n• `` -&gt; `...27`\n\n\nCode\nDOEUI_General &lt;- DOEawardsUI %&gt;% \n  dplyr::filter(Institution == 'Regents of the University of Idaho')\n\nDOEUI_New_Awards &lt;- DOEUI_General %&gt;%\n  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)\n\nknitr::kable(head(DOEUI_New_Awards))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nInstitution\nPI\nStatus\nAction Type\nProgram Office\nStart Date\nEnd Date\nMost Recent Award Date\nAmount Awarded to Date\n\n\n\n\nNuclear Theory at the University of Idaho\nRegents of the University of Idaho\nSammarruca, Francesca\nActive\nRenewal\nOffice of Nuclear Physics\n12/01/2021\n11/30/2024\n12/29/2023\n1812000\n\n\nConverting methoxy groups on lignin-derived aromatics from a toxic hurdle to a useful resource: a systems-driven approach\nRegents of the University of Idaho\nMarx, Christopher\nActive\nNew\nOffice of Biological & Environmental Research\n09/01/2021\n08/31/2024\n08/02/2023\n1404162\n\n\nIntegrative Imaging of Plant Roots during Symbiosis with Mycorrhizal Fungi\nRegents of the University of Idaho\nVasdekis, Andreas\nActive\nNew\nOffice of Biological & Environmental Research\n08/15/2021\n08/14/2024\n06/26/2023\n1519359\n\n\nNutrient and Fine Sediment Transport Driven by Perturbations in River Bed Movement\nRegents of the University of Idaho\nYager, Elowyn\nActive\nNew\nOffice of Biological & Environmental Research\n09/01/2020\n08/31/2024\n04/12/2023\n603903\n\n\n\n\n\nCode\nlibrary(tidyverse)\n\nlibrary(readr)\nDOEawardsUI &lt;- suppressMessages(read_xlsx(\"DOEawards.xlsx\"))"
+  },
+  {
     "objectID": "posts/MidtermPortfolioPost/Midterm.html#question-1",
     "href": "posts/MidtermPortfolioPost/Midterm.html#question-1",
     "title": "BCB 520 - Midterm Portfolio Post",
@@ -18,7 +32,7 @@
     "href": "posts/MidtermPortfolioPost/Midterm.html#question-2",
     "title": "BCB 520 - Midterm Portfolio Post",
     "section": "QUESTION 2",
-    "text": "QUESTION 2\nWhat is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?"
+    "text": "QUESTION 2\nWhat is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?\n\nDepartment of Energy (DOE)"
   },
   {
     "objectID": "posts/MidtermPortfolioPost/Midterm.html#question-3",
@@ -26,6 +40,13 @@
     "title": "BCB 520 - Midterm Portfolio Post",
     "section": "QUESTION 3",
     "text": "QUESTION 3\nHow is UI performing with these sponsors when compared to the following peer institutions?\n\nBoise State University\nIdaho State University\nMontana State University\nUniversity of Montana\nWashington State University\n\nNote that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them."
+  },
+  {
+    "objectID": "posts/MidtermPortfolioPost/Midterm.html#conlusionssummary",
+    "href": "posts/MidtermPortfolioPost/Midterm.html#conlusionssummary",
+    "title": "BCB 520 - Midterm Portfolio Post",
+    "section": "CONLUSIONS/SUMMARY",
+    "text": "CONLUSIONS/SUMMARY"
   },
   {
     "objectID": "posts/MarksChannels/Asig4_2.html",
