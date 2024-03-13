@@ -110,6 +110,17 @@ knitr::kable(head(DOEBSU_New_Awards))
 library(tidyverse)
 ```
 
+**Department of Agriculture (NIFA)**
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(knitr)
+
+BSUUSDA  <- read.csv("USDABSU.csv")
+knitr::kable(head(BSUUSDA))
+```
+
 
 2. Idaho State University
 
@@ -129,6 +140,18 @@ DOEDAHOSATTE_New_Awards <- DOEIDAHOSATTE_General %>%
 knitr::kable(head(DOEDAHOSATTE_New_Awards))
 library(tidyverse)
 ```
+
+**Department of Agriculture (NIFA)**
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(knitr)
+
+ISUUSDA  <- read.csv("USDAISU.csv")
+knitr::kable(head(ISUUSDA))
+```
+
 
 3. Montana State University
 

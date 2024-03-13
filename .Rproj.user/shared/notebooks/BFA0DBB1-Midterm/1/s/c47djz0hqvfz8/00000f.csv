@@ -1,0 +1,6 @@
+"0","library(tidyverse)"
+"0","library(readxl)"
+"0","library(knitr)"
+"0",""
+"0","ISUUSDA  <- read.csv(""USDAISU.csv"")"
+"0","knitr::kable(head(ISUUSDA))"
