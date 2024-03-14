@@ -207,4 +207,3 @@ library(tidyverse)
 Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.
 
 ## CONLUSIONS/SUMMARY
-
