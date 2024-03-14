@@ -195,13 +195,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="the-data" class="level2">
-<h2 class="anchored" data-anchor-id="the-data">THE DATA</h2>
+<section id="the-data---university-of-idaho" class="level2">
+<h2 class="anchored" data-anchor-id="the-data---university-of-idaho">THE DATA - UNIVERSITY OF IDAHO</h2>
 <p>Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.</p>
 <section id="department-of-agriculture-nifa" class="level3">
 <h3 class="anchored" data-anchor-id="department-of-agriculture-nifa">Department of Agriculture (NIFA)</h3>
-<section id="university-of-idaho" class="level4">
-<h4 class="anchored" data-anchor-id="university-of-idaho">University of Idaho</h4>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -318,11 +316,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-</section>
 <section id="department-of-energy-doe" class="level3">
 <h3 class="anchored" data-anchor-id="department-of-energy-doe">Department of Energy (DOE)</h3>
-<section id="university-of-idaho-1" class="level4">
-<h4 class="anchored" data-anchor-id="university-of-idaho-1">University of Idaho</h4>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -449,12 +444,261 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-</section>
 <section id="national-institutes-of-health-nih" class="level3">
 <h3 class="anchored" data-anchor-id="national-institutes-of-health-nih">National Institutes of Health (NIH)</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>NIHUIAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIHUI_2.xlsx"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>NIHUI_New_Awards_Specific <span class="ot">&lt;-</span> NIHUIAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Project Title'</span>, <span class="st">'Administering IC'</span>, <span class="st">'Award Notice Date'</span>, <span class="st">`</span><span class="at">Opportunity Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget End Date</span><span class="st">`</span>, <span class="st">'Total Cost'</span>, <span class="st">'Total Cost (Sub Projects)'</span>, <span class="st">'Funding IC(s)'</span>, <span class="st">'Direct Cost IC'</span>, <span class="st">'InDirect Cost IC'</span>, <span class="st">'Total Cost IC'</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NIHUI_New_Awards_Specific))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Project Title</th>
+<th style="text-align: left;">Administering IC</th>
+<th style="text-align: left;">Award Notice Date</th>
+<th style="text-align: left;">Opportunity Number</th>
+<th style="text-align: left;">Project Number</th>
+<th style="text-align: left;">Project Start Date</th>
+<th style="text-align: left;">Project End Date</th>
+<th style="text-align: left;">Budget Start Date</th>
+<th style="text-align: left;">Budget End Date</th>
+<th style="text-align: right;">Total Cost</th>
+<th style="text-align: right;">Total Cost (Sub Projects)</th>
+<th style="text-align: left;">Funding IC(s)</th>
+<th style="text-align: right;">Direct Cost IC</th>
+<th style="text-align: right;">InDirect Cost IC</th>
+<th style="text-align: right;">Total Cost IC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Idaho INBRE Administrative Core</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">9/18/2023</td>
+<td style="text-align: left;">PA-20-272</td>
+<td style="text-align: left;">3P20GM103408-23S4</td>
+<td style="text-align: left;">9/30/2001</td>
+<td style="text-align: left;">4/30/2024</td>
+<td style="text-align: left;">5/1/2023</td>
+<td style="text-align: left;">4/30/2024</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">848625</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">610878</td>
+<td style="text-align: right;">237747</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Center for Modeling Complex Interactions</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">9/12/2023</td>
+<td style="text-align: left;">PA-20-272</td>
+<td style="text-align: left;">3P20GM104420-09S1</td>
+<td style="text-align: left;">3/15/2015</td>
+<td style="text-align: left;">6/30/2025</td>
+<td style="text-align: left;">7/1/2023</td>
+<td style="text-align: left;">6/30/2024</td>
+<td style="text-align: right;">266181</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: right;">375566</td>
+<td style="text-align: right;">181166</td>
+<td style="text-align: right;">266181</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Idaho INBRE Program</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">9/18/2023</td>
+<td style="text-align: left;">PA-20-272</td>
+<td style="text-align: left;">3P20GM103408-23S4</td>
+<td style="text-align: left;">9/30/2001</td>
+<td style="text-align: left;">4/30/2024</td>
+<td style="text-align: left;">5/1/2023</td>
+<td style="text-align: left;">4/30/2024</td>
+<td style="text-align: right;">848625</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: right;">610878</td>
+<td style="text-align: right;">237747</td>
+<td style="text-align: right;">848625</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Identifying phage-bacteria interactions using a multispecies model</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">8/17/2023</td>
+<td style="text-align: left;">PAR-19-312</td>
+<td style="text-align: left;">5P20GM104420-09</td>
+<td style="text-align: left;">3/15/2015</td>
+<td style="text-align: left;">6/30/2025</td>
+<td style="text-align: left;">7/1/2023</td>
+<td style="text-align: left;">6/30/2024</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">152932</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">106362</td>
+<td style="text-align: right;">46570</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sequence-structure-function relationships in human visual photopigments</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">8/17/2023</td>
+<td style="text-align: left;">PAR-19-312</td>
+<td style="text-align: left;">5P20GM104420-09</td>
+<td style="text-align: left;">3/15/2015</td>
+<td style="text-align: left;">6/30/2025</td>
+<td style="text-align: left;">7/1/2023</td>
+<td style="text-align: left;">6/30/2024</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">156572</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">109348</td>
+<td style="text-align: right;">47224</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Idaho INBRE Administrative Core</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">5/8/2023</td>
+<td style="text-align: left;">PA-20-272</td>
+<td style="text-align: left;">3P20GM103408-23S1</td>
+<td style="text-align: left;">9/30/2001</td>
+<td style="text-align: left;">4/30/2024</td>
+<td style="text-align: left;">5/1/2023</td>
+<td style="text-align: left;">4/30/2024</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">190515</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">165515</td>
+<td style="text-align: right;">25000</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </section>
 <section id="national-science-foundation-nsf" class="level3">
 <h3 class="anchored" data-anchor-id="national-science-foundation-nsf">National Science Foundation (NSF)</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># Ensure knitr is explicitly loaded for kable()</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the dataset from an Excel file</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>NSFUIAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NSFUI_2.xlsx"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting specific columns, ensure there are no leading or trailing spaces in column names</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>NSFUI_New_Awards_Specific <span class="ot">&lt;-</span> NSFUIAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the first few rows in a table format</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NSFUI_New_Awards_Specific))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 70%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Title</th>
+<th style="text-align: left;">NSFOrganization</th>
+<th style="text-align: left;">StartDate</th>
+<th style="text-align: left;">LastAmendmentDate</th>
+<th style="text-align: left;">EndDate</th>
+<th style="text-align: left;">AwardedAmountToDate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">RII Track-1: Idaho Community-engaged Resilience for Energy-Water Systems (I-CREWS)</td>
+<td style="text-align: left;">OIA</td>
+<td style="text-align: left;">08/01/2023</td>
+<td style="text-align: left;">09/11/2023</td>
+<td style="text-align: left;">07/31/2028</td>
+<td style="text-align: left;">$2,099,031.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RII Track-1: Linking Genome to Phenome to Predict Adaptive Responses of Organisms to Changing Landscapes</td>
+<td style="text-align: left;">OIA</td>
+<td style="text-align: left;">10/01/2018</td>
+<td style="text-align: left;">09/07/2022</td>
+<td style="text-align: left;">03/31/2024</td>
+<td style="text-align: left;">$20,000,000.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RII Track-2 FEC: Developing a Circular Bio-Based Framework For Architecture, Engineering and Construction Through Additive Manufacturing</td>
+<td style="text-align: left;">OIA</td>
+<td style="text-align: left;">10/01/2021</td>
+<td style="text-align: left;">08/23/2023</td>
+<td style="text-align: left;">09/30/2025</td>
+<td style="text-align: left;">$2,999,475.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Phase III IUCRC at University of Idaho: Center for Advanced Forestry Systems</td>
+<td style="text-align: left;">EEC</td>
+<td style="text-align: left;">12/15/2019</td>
+<td style="text-align: left;">03/11/2024</td>
+<td style="text-align: left;">11/30/2024</td>
+<td style="text-align: left;">$693,814.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Conference: NSF EPSCoR Workshop: Intelligent Manufacturing for Extreme Environments</td>
+<td style="text-align: left;">OIA</td>
+<td style="text-align: left;">09/01/2023</td>
+<td style="text-align: left;">08/17/2023</td>
+<td style="text-align: left;">08/31/2024</td>
+<td style="text-align: left;">$99,445.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Collaborative Research: As above so below: Quantifying the role of simultaneous LLSVPs and continents on Earth’s cooling history using numerical simulations of mantle convection</td>
+<td style="text-align: left;">EAR</td>
+<td style="text-align: left;">07/01/2023</td>
+<td style="text-align: left;">06/08/2023</td>
+<td style="text-align: left;">06/30/2026</td>
+<td style="text-align: left;">$120,952.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </section>
 </section>
 <section id="question-1" class="level2">
@@ -478,10 +722,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>DOEawardsBSU <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>DOEawardsBSU <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
@@ -489,13 +733,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>DOEBSU_General <span class="ot">&lt;-</span> DOEawardsBSU <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Boise State University'</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>DOEBSU_New_Awards <span class="ot">&lt;-</span> DOEBSU_General <span class="sc">%&gt;%</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEBSU_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>DOEBSU_General <span class="ot">&lt;-</span> DOEawardsBSU <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Boise State University'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>DOEBSU_New_Awards <span class="ot">&lt;-</span> DOEBSU_General <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEBSU_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -603,19 +847,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><strong>Department of Agriculture (NIFA)</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>BSUUSDA  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDABSU.csv"</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(BSUUSDA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>BSUUSDA  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDABSU.csv"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(BSUUSDA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -714,6 +958,258 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
+<p><strong>National Institutes of Health (NIH)</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>NIHBSUAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIHBSU_2.xlsx"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>NIHBSU_New_Awards_Specific <span class="ot">&lt;-</span> NIHBSUAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Project Title'</span>, <span class="st">'Administering IC'</span>, <span class="st">'Award Notice Date'</span>, <span class="st">`</span><span class="at">Opportunity Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget End Date</span><span class="st">`</span>, <span class="st">'Total Cost'</span>, <span class="st">'Total Cost (Sub Projects)'</span>, <span class="st">'Funding IC(s)'</span>, <span class="st">'Direct Cost IC'</span>, <span class="st">'InDirect Cost IC'</span>, <span class="st">'Total Cost IC'</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NIHBSU_New_Awards_Specific))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Project Title</th>
+<th style="text-align: left;">Administering IC</th>
+<th style="text-align: left;">Award Notice Date</th>
+<th style="text-align: left;">Opportunity Number</th>
+<th style="text-align: left;">Project Number</th>
+<th style="text-align: left;">Project Start Date</th>
+<th style="text-align: left;">Project End Date</th>
+<th style="text-align: left;">Budget Start Date</th>
+<th style="text-align: left;">Budget End Date</th>
+<th style="text-align: right;">Total Cost</th>
+<th style="text-align: right;">Total Cost (Sub Projects)</th>
+<th style="text-align: left;">Funding IC(s)</th>
+<th style="text-align: right;">Direct Cost IC</th>
+<th style="text-align: right;">InDirect Cost IC</th>
+<th style="text-align: right;">Total Cost IC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Administrative Core</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">8/24/2023</td>
+<td style="text-align: left;">PA-20-272</td>
+<td style="text-align: left;">3P20GM109095-10S1</td>
+<td style="text-align: left;">8/1/2014</td>
+<td style="text-align: left;">5/31/2024</td>
+<td style="text-align: left;">6/1/2023</td>
+<td style="text-align: left;">5/31/2024</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">723429</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">517798</td>
+<td style="text-align: right;">205631</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Center of Biomedical Research Excellence in Matrix Biology Phase II</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">8/24/2023</td>
+<td style="text-align: left;">PA-20-272</td>
+<td style="text-align: left;">3P20GM109095-10S1</td>
+<td style="text-align: left;">8/1/2014</td>
+<td style="text-align: left;">5/31/2024</td>
+<td style="text-align: left;">6/1/2023</td>
+<td style="text-align: left;">5/31/2024</td>
+<td style="text-align: right;">723429</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: right;">517798</td>
+<td style="text-align: right;">205631</td>
+<td style="text-align: right;">723429</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Role of LINC-mediated Mechanosignaling in MSC Aging</td>
+<td style="text-align: left;">NIA</td>
+<td style="text-align: left;">1/29/2024</td>
+<td style="text-align: left;">PA-16-442</td>
+<td style="text-align: left;">5R01AG059923-05</td>
+<td style="text-align: left;">3/1/2020</td>
+<td style="text-align: left;">1/31/2025</td>
+<td style="text-align: left;">2/1/2024</td>
+<td style="text-align: left;">1/31/2025</td>
+<td style="text-align: right;">252208</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NIA</td>
+<td style="text-align: right;">184500</td>
+<td style="text-align: right;">67708</td>
+<td style="text-align: right;">252208</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Equipment for Spatiotemporal Dynamics of the Genome by 3D Orbital Tracking</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">5/23/2023</td>
+<td style="text-align: left;">PA-20-272</td>
+<td style="text-align: left;">3R15GM123446-02A1S1</td>
+<td style="text-align: left;">5/17/2017</td>
+<td style="text-align: left;">7/31/2025</td>
+<td style="text-align: left;">8/1/2022</td>
+<td style="text-align: left;">7/31/2025</td>
+<td style="text-align: right;">97574</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: right;">97574</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">97574</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chemical probes to modulate acyl-homoserine lactone quorum signal synthesis</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">6/26/2023</td>
+<td style="text-align: left;">PA-20-272</td>
+<td style="text-align: left;">3R15GM148920-01S1</td>
+<td style="text-align: left;">9/20/2022</td>
+<td style="text-align: left;">8/31/2025</td>
+<td style="text-align: left;">9/20/2022</td>
+<td style="text-align: left;">8/31/2025</td>
+<td style="text-align: right;">94718</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: right;">94718</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">94718</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chemical tools to investigate chain-flipping in quorum signal synthases</td>
+<td style="text-align: left;">NIAID</td>
+<td style="text-align: left;">2/14/2024</td>
+<td style="text-align: left;">PA-20-195</td>
+<td style="text-align: left;">5R21AI175749-02</td>
+<td style="text-align: left;">1/23/2023</td>
+<td style="text-align: left;">12/31/2025</td>
+<td style="text-align: left;">1/1/2024</td>
+<td style="text-align: left;">12/31/2024</td>
+<td style="text-align: right;">12663</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NIAID</td>
+<td style="text-align: right;">9013</td>
+<td style="text-align: right;">3650</td>
+<td style="text-align: right;">12663</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>National Science Foundation (NSF)</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># Ensure knitr is explicitly loaded for kable()</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the dataset from an Excel file</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>NSFBSUAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NSFBSU_2.xlsx"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting specific columns, ensure there are no leading or trailing spaces in column names</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>NSFBSU_New_Awards_Specific <span class="ot">&lt;-</span> NSFBSUAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the first few rows in a table format</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NSFBSU_New_Awards_Specific))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 65%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Title</th>
+<th style="text-align: left;">NSFOrganization</th>
+<th style="text-align: left;">StartDate</th>
+<th style="text-align: left;">LastAmendmentDate</th>
+<th style="text-align: left;">EndDate</th>
+<th style="text-align: left;">AwardedAmountToDate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Planning: Track 1: Curriculum and Advancements in Recruitment, Education, and Engineering Retention (CAREER)</td>
+<td style="text-align: left;">EEC</td>
+<td style="text-align: left;">07/15/2022</td>
+<td style="text-align: left;">07/14/2022</td>
+<td style="text-align: left;">06/30/2024</td>
+<td style="text-align: left;">$99,808.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IUCRC Phase II Boise State University: Center for Atomically Thin Multifunctional Coatings (ATOMIC)</td>
+<td style="text-align: left;">EEC</td>
+<td style="text-align: left;">08/01/2021</td>
+<td style="text-align: left;">11/14/2023</td>
+<td style="text-align: left;">07/31/2026</td>
+<td style="text-align: left;">$582,631.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MRI: Acquisition of a 600 MHz NMR Console and Cryoprobe to Support Research and Education at Boise State University</td>
+<td style="text-align: left;">DBI</td>
+<td style="text-align: left;">10/01/2022</td>
+<td style="text-align: left;">08/10/2023</td>
+<td style="text-align: left;">09/30/2025</td>
+<td style="text-align: left;">$769,221.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MRI: Track 1: Acquisition of a Liquid Chromatography-High Resolution Mass Spectrometry System for Multidisciplinary Research and Training</td>
+<td style="text-align: left;">CHE</td>
+<td style="text-align: left;">09/01/2023</td>
+<td style="text-align: left;">08/22/2023</td>
+<td style="text-align: left;">08/31/2026</td>
+<td style="text-align: left;">$710,000.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ART: Translational Research Ambassadors Network for Strengthening Institutional Capacity and Fostering a Responsive and Open Mindset (TRANSFORM)</td>
+<td style="text-align: left;">ITE</td>
+<td style="text-align: left;">02/01/2024</td>
+<td style="text-align: left;">09/08/2023</td>
+<td style="text-align: left;">01/31/2028</td>
+<td style="text-align: left;">$5,499,567.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lattice dynamics and phase transitions in multifunctional oxide nanomaterials studied by ultraviolet Raman spectroscop</td>
+<td style="text-align: left;">DMR</td>
+<td style="text-align: left;">07/01/2021</td>
+<td style="text-align: left;">03/22/2023</td>
+<td style="text-align: left;">12/31/2024</td>
+<td style="text-align: left;">$486,000.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <ol start="2" type="1">
 <li>Idaho State University</li>
 </ol>
@@ -721,10 +1217,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>DOEaward <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>DOEaward <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
@@ -732,13 +1228,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>DOEIDAHOSATTE_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Idaho State University'</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>DOEDAHOSATTE_New_Awards <span class="ot">&lt;-</span> DOEIDAHOSATTE_General <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEDAHOSATTE_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>DOEIDAHOSATTE_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Idaho State University'</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>DOEDAHOSATTE_New_Awards <span class="ot">&lt;-</span> DOEIDAHOSATTE_General <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEDAHOSATTE_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -798,19 +1294,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><strong>Department of Agriculture (NIFA)</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ISUUSDA  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDAISU.csv"</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(ISUUSDA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ISUUSDA  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDAISU.csv"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(ISUUSDA))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -909,335 +1405,257 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
-<ol start="3" type="1">
-<li>Montana State University</li>
-</ol>
-<p><strong>Department of Energy</strong></p>
+<p><strong>National Institutes of Health (NIH)</strong></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>DOEMONTANA_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Montana State University'</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>DOEMONTANA_New_Awards <span class="ot">&lt;-</span> DOEMONTANA_General <span class="sc">%&gt;%</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEMONTANA_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>NIHISUAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIHISU_2.xlsx"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>NIHISU_New_Awards_Specific <span class="ot">&lt;-</span> NIHISUAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Project Title'</span>, <span class="st">'Administering IC'</span>, <span class="st">'Award Notice Date'</span>, <span class="st">`</span><span class="at">Opportunity Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget End Date</span><span class="st">`</span>, <span class="st">'Total Cost'</span>, <span class="st">'Total Cost (Sub Projects)'</span>, <span class="st">'Funding IC(s)'</span>, <span class="st">'Direct Cost IC'</span>, <span class="st">'InDirect Cost IC'</span>, <span class="st">'Total Cost IC'</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NIHISU_New_Awards_Specific))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <colgroup>
-<col style="width: 38%">
-<col style="width: 8%">
-<col style="width: 7%">
-<col style="width: 2%">
+<col style="width: 31%">
 <col style="width: 4%">
-<col style="width: 15%">
-<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 4%">
 <col style="width: 3%">
 <col style="width: 7%">
-<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Title</th>
-<th style="text-align: left;">Institution</th>
-<th style="text-align: left;">PI</th>
-<th style="text-align: left;">Status</th>
-<th style="text-align: left;">Action Type</th>
-<th style="text-align: left;">Program Office</th>
-<th style="text-align: left;">Start Date</th>
-<th style="text-align: left;">End Date</th>
-<th style="text-align: left;">Most Recent Award Date</th>
-<th style="text-align: right;">Amount Awarded to Date</th>
+<th style="text-align: left;">Project Title</th>
+<th style="text-align: left;">Administering IC</th>
+<th style="text-align: left;">Award Notice Date</th>
+<th style="text-align: left;">Opportunity Number</th>
+<th style="text-align: left;">Project Number</th>
+<th style="text-align: left;">Project Start Date</th>
+<th style="text-align: left;">Project End Date</th>
+<th style="text-align: left;">Budget Start Date</th>
+<th style="text-align: left;">Budget End Date</th>
+<th style="text-align: right;">Total Cost</th>
+<th style="text-align: left;">Total Cost (Sub Projects)</th>
+<th style="text-align: left;">Funding IC(s)</th>
+<th style="text-align: right;">Direct Cost IC</th>
+<th style="text-align: right;">InDirect Cost IC</th>
+<th style="text-align: right;">Total Cost IC</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Nitrite-dependent methane oxidation: an overlooked nitrogen sink in riparian zones</td>
-<td style="text-align: left;">Montana State University</td>
-<td style="text-align: left;">Bertagnolli, Anthony</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">New</td>
-<td style="text-align: left;">Office of Biological &amp; Environmental Research</td>
-<td style="text-align: left;">09/01/2023</td>
+<td style="text-align: left;">The Brain-Behavior Relationship: Age, Hearing, and Their Effects on Understanding Speech in Noise</td>
+<td style="text-align: left;">NIDCD</td>
+<td style="text-align: left;">1/12/2023</td>
+<td style="text-align: left;">PA-13-302</td>
+<td style="text-align: left;">7R01DC015240-06</td>
+<td style="text-align: left;">8/15/2016</td>
+<td style="text-align: left;">7/31/2024</td>
+<td style="text-align: left;">6/1/2022</td>
+<td style="text-align: left;">7/31/2024</td>
+<td style="text-align: right;">251216</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NIDCD</td>
+<td style="text-align: right;">200394</td>
+<td style="text-align: right;">50822</td>
+<td style="text-align: right;">251216</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MOLECULAR ANALYSIS OF MALARIA MITOCHONDRIAL GENE REGULATION</td>
+<td style="text-align: left;">NIAID</td>
+<td style="text-align: left;">12/18/2023</td>
+<td style="text-align: left;">PAR-20-259</td>
+<td style="text-align: left;">5DP2AI164244-03</td>
+<td style="text-align: left;">1/1/2022</td>
+<td style="text-align: left;">12/31/2026</td>
+<td style="text-align: left;">1/1/2024</td>
+<td style="text-align: left;">12/31/2024</td>
+<td style="text-align: right;">364371</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NIAID</td>
+<td style="text-align: right;">262096</td>
+<td style="text-align: right;">102275</td>
+<td style="text-align: right;">364371</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Timely Response to In-Hospital Deterioration Through Design of Actionable Augmented Intelligence</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: left;">6/20/2023</td>
+<td style="text-align: left;">PA-19-056</td>
+<td style="text-align: left;">5R01GM137083-04</td>
+<td style="text-align: left;">7/15/2020</td>
+<td style="text-align: left;">6/30/2024</td>
+<td style="text-align: left;">7/1/2023</td>
+<td style="text-align: left;">6/30/2024</td>
+<td style="text-align: right;">397867</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: right;">356308</td>
+<td style="text-align: right;">41559</td>
+<td style="text-align: right;">397867</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The role of metal ion homeostasis in regulating bacterial capsule production</td>
+<td style="text-align: left;">NIAID</td>
+<td style="text-align: left;">8/10/2022</td>
+<td style="text-align: left;">PAR-18-714</td>
+<td style="text-align: left;">1R15AI149725-01A1</td>
+<td style="text-align: left;">8/10/2022</td>
+<td style="text-align: left;">7/31/2025</td>
+<td style="text-align: left;">8/10/2022</td>
+<td style="text-align: left;">7/31/2025</td>
+<td style="text-align: right;">408497</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NIGMS</td>
+<td style="text-align: right;">235007</td>
+<td style="text-align: right;">84993</td>
+<td style="text-align: right;">320000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The role of metal ion homeostasis in regulating bacterial capsule production</td>
+<td style="text-align: left;">NIAID</td>
+<td style="text-align: left;">8/10/2022</td>
+<td style="text-align: left;">PAR-18-714</td>
+<td style="text-align: left;">1R15AI149725-01A1</td>
+<td style="text-align: left;">8/10/2022</td>
+<td style="text-align: left;">7/31/2025</td>
+<td style="text-align: left;">8/10/2022</td>
+<td style="text-align: left;">7/31/2025</td>
+<td style="text-align: right;">408497</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NIAID</td>
+<td style="text-align: right;">64992</td>
+<td style="text-align: right;">23505</td>
+<td style="text-align: right;">88497</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mechanisms of respiratory-related rhythmic motor activity and plasticity in the developing avian brain stem</td>
+<td style="text-align: left;">NINDS</td>
+<td style="text-align: left;">4/14/2020</td>
+<td style="text-align: left;">PAR-18-714</td>
+<td style="text-align: left;">2R15NS087521-02A1</td>
+<td style="text-align: left;">9/30/2014</td>
+<td style="text-align: left;">3/31/2024</td>
+<td style="text-align: left;">4/15/2020</td>
+<td style="text-align: left;">3/31/2024</td>
+<td style="text-align: right;">358752</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NINDS</td>
+<td style="text-align: right;">263720</td>
+<td style="text-align: right;">95032</td>
+<td style="text-align: right;">358752</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>National Science Foundation (NSF)</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># Ensure knitr is explicitly loaded for kable()</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the dataset from an Excel file</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>NSFISUAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NSFISU_2.xlsx"</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting specific columns, ensure there are no leading or trailing spaces in column names</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>NSFISU_New_Awards_Specific <span class="ot">&lt;-</span> NSFISUAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the first few rows in a table format</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NSFISU_New_Awards_Specific))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 67%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Title</th>
+<th style="text-align: left;">NSFOrganization</th>
+<th style="text-align: left;">StartDate</th>
+<th style="text-align: left;">LastAmendmentDate</th>
+<th style="text-align: left;">EndDate</th>
+<th style="text-align: left;">AwardedAmountToDate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CDS&amp;E: Immersive Virtual Reality for Discovering Hidden Chemical Information and Improving Multivariate Modeling and Predication</td>
+<td style="text-align: left;">CHE</td>
+<td style="text-align: left;">09/15/2023</td>
+<td style="text-align: left;">09/13/2023</td>
 <td style="text-align: left;">08/31/2026</td>
-<td style="text-align: left;">08/17/2023</td>
-<td style="text-align: right;">998671</td>
+<td style="text-align: left;">$449,994.00</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ECON: Enhancing Camelina Oilseed Production with Minimum Nitrogen Fertilization in Sustainable Cropping Systems</td>
-<td style="text-align: left;">Montana State University</td>
-<td style="text-align: left;">Lu, Chaofu</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">New</td>
-<td style="text-align: left;">Office of Biological &amp; Environmental Research</td>
-<td style="text-align: left;">09/15/2020</td>
-<td style="text-align: left;">09/14/2025</td>
-<td style="text-align: left;">07/26/2023</td>
-<td style="text-align: right;">5984310</td>
+<td style="text-align: left;">GP-IN: Pathways to tribal geosciences careers through cultural connections to iconic landscapes</td>
+<td style="text-align: left;">RISE</td>
+<td style="text-align: left;">01/01/2022</td>
+<td style="text-align: left;">08/16/2021</td>
+<td style="text-align: left;">12/31/2024</td>
+<td style="text-align: left;">$284,964.00</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Pathways and Mechanisms in [FeFe]-Hydrogenase Maturation</td>
-<td style="text-align: left;">Montana State University</td>
-<td style="text-align: left;">Broderick, Joan</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">Renewal</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">09/15/2022</td>
-<td style="text-align: left;">09/14/2025</td>
-<td style="text-align: left;">07/26/2023</td>
-<td style="text-align: right;">3112238</td>
+<td style="text-align: left;">Supporting Transfer Student Success Using a Multidisciplinary Approach</td>
+<td style="text-align: left;">DUE</td>
+<td style="text-align: left;">10/01/2022</td>
+<td style="text-align: left;">07/25/2022</td>
+<td style="text-align: left;">09/30/2028</td>
+<td style="text-align: left;">$1,499,956.00</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Investigating Material Properties of Subfurface Rock Formations Modified by Engineering Mineral Precipitation</td>
-<td style="text-align: left;">Montana State University</td>
-<td style="text-align: left;">Kirkland, Catherine</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">New</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">09/01/2020</td>
-<td style="text-align: left;">08/31/2024</td>
-<td style="text-align: left;">06/01/2023</td>
-<td style="text-align: right;">599047</td>
+<td style="text-align: left;">Reynolds Creek Carbon Critical Zone Observatory</td>
+<td style="text-align: left;">EAR</td>
+<td style="text-align: left;">12/01/2013</td>
+<td style="text-align: left;">07/24/2023</td>
+<td style="text-align: left;">05/31/2024</td>
+<td style="text-align: left;">$3,755,249.00</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Probing novel pathways of iron sulfide acquisition and trafficking from minerals in model biocatalytic systems</td>
-<td style="text-align: left;">Montana State University</td>
-<td style="text-align: left;">Boyd, Eric</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">Renewal</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">08/15/2021</td>
-<td style="text-align: left;">08/14/2024</td>
-<td style="text-align: left;">03/09/2023</td>
-<td style="text-align: right;">5361000</td>
+<td style="text-align: left;">MRI: Acquisition of a FACSMelody Flow Cytometer and Cell Sorter</td>
+<td style="text-align: left;">DBI</td>
+<td style="text-align: left;">10/01/2022</td>
+<td style="text-align: left;">09/07/2022</td>
+<td style="text-align: left;">09/30/2025</td>
+<td style="text-align: left;">$262,971.00</td>
 </tr>
-</tbody>
-</table>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<ol start="4" type="1">
-<li>University of Montana</li>
-</ol>
-<p><strong>Department of Energy</strong></p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>DOEUNIMONTANA_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'University of Montana'</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>DOEUNIMONTANA_New_Awards <span class="ot">&lt;-</span> DOEUNIMONTANA_General <span class="sc">%&gt;%</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEUNIMONTANA_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 40%">
-<col style="width: 7%">
-<col style="width: 5%">
-<col style="width: 2%">
-<col style="width: 4%">
-<col style="width: 15%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 7%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Title</th>
-<th style="text-align: left;">Institution</th>
-<th style="text-align: left;">PI</th>
-<th style="text-align: left;">Status</th>
-<th style="text-align: left;">Action Type</th>
-<th style="text-align: left;">Program Office</th>
-<th style="text-align: left;">Start Date</th>
-<th style="text-align: left;">End Date</th>
-<th style="text-align: left;">Most Recent Award Date</th>
-<th style="text-align: right;">Amount Awarded to Date</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Magnetohydrodynamic Optimization of Stellarator Fusion Energy Systems</td>
-<td style="text-align: left;">University of Montana</td>
-<td style="text-align: left;">Ware, Andrew</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">New</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">08/01/2022</td>
-<td style="text-align: left;">07/31/2025</td>
+<tr class="even">
+<td style="text-align: left;">MRI: Acquisition of a Laser Ablation - Inductively Coupled Plasma - Triple Quadrupole - Mass Spectrometer (LA-ICP-QQQ-MS) System For Research and Education</td>
+<td style="text-align: left;">BCS</td>
 <td style="text-align: left;">08/15/2023</td>
-<td style="text-align: right;">749953</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Investigating Subsurface Flow in Mountainous Catchments</td>
-<td style="text-align: left;">University of Montana</td>
-<td style="text-align: left;">Gardner, William</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">New</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">09/01/2020</td>
-<td style="text-align: left;">08/31/2024</td>
-<td style="text-align: left;">05/04/2023</td>
-<td style="text-align: right;">749849</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Plant Carbohydrate Depletion, Mycorrhizal Networks, and Vulnerability to Drought: An Experimental Test in the Field</td>
-<td style="text-align: left;">University of Montana</td>
-<td style="text-align: left;">Sala, Anna</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">New</td>
-<td style="text-align: left;">Office of Biological &amp; Environmental Research</td>
-<td style="text-align: left;">08/15/2021</td>
-<td style="text-align: left;">08/14/2024</td>
-<td style="text-align: left;">03/08/2023</td>
-<td style="text-align: right;">326520</td>
-</tr>
-</tbody>
-</table>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<ol start="5" type="1">
-<li>Washington State University</li>
-</ol>
-<p><strong>Department of Energy</strong></p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>DOEWSU_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Washington State University'</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>DOEWSU_New_Awards <span class="ot">&lt;-</span> DOEWSU_General <span class="sc">%&gt;%</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEWSU_New_Awards))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 43%">
-<col style="width: 8%">
-<col style="width: 5%">
-<col style="width: 2%">
-<col style="width: 3%">
-<col style="width: 14%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 7%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Title</th>
-<th style="text-align: left;">Institution</th>
-<th style="text-align: left;">PI</th>
-<th style="text-align: left;">Status</th>
-<th style="text-align: left;">Action Type</th>
-<th style="text-align: left;">Program Office</th>
-<th style="text-align: left;">Start Date</th>
-<th style="text-align: left;">End Date</th>
-<th style="text-align: left;">Most Recent Award Date</th>
-<th style="text-align: right;">Amount Awarded to Date</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Building Inclusive Capacity and Partnerships to Tackle Soil-Water- Microbe-Root Feedbacks in Forest Regeneration after Wildfires</td>
-<td style="text-align: left;">Washington State University</td>
-<td style="text-align: left;">Cheeke, Tanya</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">New</td>
-<td style="text-align: left;">Office of Biological &amp; Environmental Research</td>
-<td style="text-align: left;">09/01/2022</td>
-<td style="text-align: left;">05/31/2025</td>
-<td style="text-align: left;">02/15/2024</td>
-<td style="text-align: right;">149995</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Understanding Selectivity in Terpene Synthases ¿ Unique Mechanisms to Generate Precursors for Biocrude and Specialty Chemicals</td>
-<td style="text-align: left;">Washington State University</td>
-<td style="text-align: left;">Lange, Bernd</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">Renewal</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">08/15/2023</td>
-<td style="text-align: left;">08/14/2026</td>
-<td style="text-align: left;">09/25/2023</td>
-<td style="text-align: right;">2995804</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Photosynthetic Reduction of Carbon Dioxide: Kinetic Trade-offs for Rubisco and Phosphoenolpyruvate Carboxylase</td>
-<td style="text-align: left;">Washington State University</td>
-<td style="text-align: left;">Cousins, Asaph</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">Renewal</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">02/15/2022</td>
-<td style="text-align: left;">08/14/2024</td>
 <td style="text-align: left;">08/17/2023</td>
-<td style="text-align: right;">2349996</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Lateral Distribution Dynamics of Cytochrome B6F Complexes in Thylakoid Membranes and Its Consequences for Photosynthetic Electron Transport</td>
-<td style="text-align: left;">Washington State University</td>
-<td style="text-align: left;">Kirchhoff, Helmut</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">Renewal</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">09/15/2021</td>
-<td style="text-align: left;">09/14/2024</td>
-<td style="text-align: left;">08/07/2023</td>
-<td style="text-align: right;">1500974</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Integrated Direct Air Capture and H2-Free CO2 Valorization</td>
-<td style="text-align: left;">Washington State University</td>
-<td style="text-align: left;">Lin, Hongfei</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">New</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">09/01/2021</td>
-<td style="text-align: left;">08/31/2024</td>
-<td style="text-align: left;">07/12/2023</td>
-<td style="text-align: right;">1140000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Developing Multi-Scale Models for the Effective Design of Bimetallic Catalysts for the Targeted Refinement of Bio-oil to Usable Biofuels</td>
-<td style="text-align: left;">Washington State University</td>
-<td style="text-align: left;">McEwen, Jean-Sabin</td>
-<td style="text-align: left;">Active</td>
-<td style="text-align: left;">Renewal</td>
-<td style="text-align: left;">Office of Basic Energy Sciences</td>
-<td style="text-align: left;">08/15/2021</td>
-<td style="text-align: left;">08/14/2024</td>
-<td style="text-align: left;">07/05/2023</td>
-<td style="text-align: right;">1725000</td>
+<td style="text-align: left;">07/31/2026</td>
+<td style="text-align: left;">$744,396.00</td>
 </tr>
 </tbody>
 </table>
 </div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.</p>
 </section>
@@ -1547,202 +1965,250 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## THE DATA</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## THE DATA - UNIVERSITY OF IDAHO</span></span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.</span>
 <span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Agriculture (NIFA)</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Agriculture (NIFA)</span></span>
 <span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="fu">#### University of Idaho</span></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE}</span></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(readxl))</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>USDAUI  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDAtoUI.csv"</span>)</span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(USDAUI))</span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Energy (DOE)</span></span>
-<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a><span class="fu">#### University of Idaho</span></span>
-<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE}</span></span>
-<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(readxl))</span>
-<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
-<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
-<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, warning=FALSE}</span></span>
-<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>, <span class="at">.name_repair =</span> <span class="st">"minimal"</span>)</span>
-<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
-<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a>DOEUI_General <span class="ot">&lt;-</span> DOEawardsUI <span class="sc">%&gt;%</span> </span>
-<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Regents of the University of Idaho'</span>)</span>
-<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a>DOEUI_New_Awards <span class="ot">&lt;-</span> DOEUI_General <span class="sc">%&gt;%</span></span>
-<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEUI_New_Awards))</span>
-<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE}</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(readxl))</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>USDAUI  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDAtoUI.csv"</span>)</span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(USDAUI))</span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Energy (DOE)</span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE}</span></span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(readxl))</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, warning=FALSE}</span></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>, <span class="at">.name_repair =</span> <span class="st">"minimal"</span>)</span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a>DOEUI_General <span class="ot">&lt;-</span> DOEawardsUI <span class="sc">%&gt;%</span> </span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Regents of the University of Idaho'</span>)</span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a>DOEUI_New_Awards <span class="ot">&lt;-</span> DOEUI_General <span class="sc">%&gt;%</span></span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEUI_New_Awards))</span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>))</span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-72"><a href="#cb25-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a>DOEawardsUI <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>))</span>
-<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-76"><a href="#cb25-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-77"><a href="#cb25-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### National Institutes of Health (NIH)</span></span>
-<span id="cb25-79"><a href="#cb25-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-80"><a href="#cb25-80" aria-hidden="true" tabindex="-1"></a><span class="fu">### National Science Foundation (NSF)</span></span>
-<span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### National Institutes of Health (NIH)</span></span>
+<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{R}</span></span>
+<span id="cb25-79"><a href="#cb25-79" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-80"><a href="#cb25-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb25-82"><a href="#cb25-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-83"><a href="#cb25-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 1</span></span>
+<span id="cb25-83"><a href="#cb25-83" aria-hidden="true" tabindex="-1"></a>NIHUIAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIHUI_2.xlsx"</span>)</span>
 <span id="cb25-84"><a href="#cb25-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a>Provide a visualization that shows our active awards from each sponsor. I need to see their start date and end date, the amount of the award, and the name of the Principal Investigator. I’m really interested in seeing how far into the future our current portfolio will exist. Are there a bunch of awards about to expire? Are there a bunch that just got funded and will be active for a while? Does this vary across sponsors?</span>
-<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 2</span></span>
-<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a>What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?</span>
-<span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Energy (DOE)</span></span>
+<span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a>NIHUI_New_Awards_Specific <span class="ot">&lt;-</span> NIHUIAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Project Title'</span>, <span class="st">'Administering IC'</span>, <span class="st">'Award Notice Date'</span>, <span class="st">`</span><span class="at">Opportunity Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget End Date</span><span class="st">`</span>, <span class="st">'Total Cost'</span>, <span class="st">'Total Cost (Sub Projects)'</span>, <span class="st">'Funding IC(s)'</span>, <span class="st">'Direct Cost IC'</span>, <span class="st">'InDirect Cost IC'</span>, <span class="st">'Total Cost IC'</span>)</span>
+<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NIHUI_New_Awards_Specific))</span>
+<span id="cb25-89"><a href="#cb25-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-92"><a href="#cb25-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-93"><a href="#cb25-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-94"><a href="#cb25-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 3</span></span>
-<span id="cb25-95"><a href="#cb25-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-96"><a href="#cb25-96" aria-hidden="true" tabindex="-1"></a>How is UI performing with these sponsors when compared to the following peer institutions?</span>
-<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Boise State University</span>
-<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
-<span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a>DOEawardsBSU <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
-<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a>DOEBSU_General <span class="ot">&lt;-</span> DOEawardsBSU <span class="sc">%&gt;%</span> </span>
-<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Boise State University'</span>)</span>
-<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a>DOEBSU_New_Awards <span class="ot">&lt;-</span> DOEBSU_General <span class="sc">%&gt;%</span></span>
-<span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb25-93"><a href="#cb25-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### National Science Foundation (NSF)</span></span>
+<span id="cb25-94"><a href="#cb25-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{R}</span></span>
+<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># Ensure knitr is explicitly loaded for kable()</span></span>
+<span id="cb25-102"><a href="#cb25-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the dataset from an Excel file</span></span>
+<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a>NSFUIAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NSFUI_2.xlsx"</span>)</span>
+<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting specific columns, ensure there are no leading or trailing spaces in column names</span></span>
+<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a>NSFUI_New_Awards_Specific <span class="ot">&lt;-</span> NSFUIAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)</span>
+<span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the first few rows in a table format</span></span>
+<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NSFUI_New_Awards_Specific))</span>
+<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEBSU_New_Awards))</span>
-<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a>**Department of Agriculture (NIFA)**</span>
-<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-123"><a href="#cb25-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a>BSUUSDA  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDABSU.csv"</span>)</span>
-<span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(BSUUSDA))</span>
-<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 1</span></span>
+<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a>Provide a visualization that shows our active awards from each sponsor. I need to see their start date and end date, the amount of the award, and the name of the Principal Investigator. I’m really interested in seeing how far into the future our current portfolio will exist. Are there a bunch of awards about to expire? Are there a bunch that just got funded and will be active for a while? Does this vary across sponsors?</span>
+<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 2</span></span>
+<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-122"><a href="#cb25-122" aria-hidden="true" tabindex="-1"></a>What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?</span>
+<span id="cb25-123"><a href="#cb25-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a><span class="fu">### Department of Energy (DOE)</span></span>
+<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a><span class="fu">## QUESTION 3</span></span>
+<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a>How is UI performing with these sponsors when compared to the following peer institutions?</span>
+<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Boise State University</span>
 <span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Idaho State University</span>
-<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
-<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb25-140"><a href="#cb25-140" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
+<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-137"><a href="#cb25-137" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-140"><a href="#cb25-140" aria-hidden="true" tabindex="-1"></a>DOEawardsBSU <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
 <span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a>DOEaward <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
-<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a>DOEIDAHOSATTE_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
-<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Idaho State University'</span>)</span>
-<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a>DOEDAHOSATTE_New_Awards <span class="ot">&lt;-</span> DOEIDAHOSATTE_General <span class="sc">%&gt;%</span></span>
-<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEDAHOSATTE_New_Awards))</span>
-<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a>DOEBSU_General <span class="ot">&lt;-</span> DOEawardsBSU <span class="sc">%&gt;%</span> </span>
+<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Boise State University'</span>)</span>
+<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a>DOEBSU_New_Awards <span class="ot">&lt;-</span> DOEBSU_General <span class="sc">%&gt;%</span></span>
+<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEBSU_New_Awards))</span>
+<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a>**Department of Agriculture (NIFA)**</span>
 <span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a>**Department of Agriculture (NIFA)**</span>
-<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a>ISUUSDA  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDAISU.csv"</span>)</span>
-<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(ISUUSDA))</span>
-<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a>BSUUSDA  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDABSU.csv"</span>)</span>
+<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(BSUUSDA))</span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a>**National Institutes of Health (NIH)**</span>
 <span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Montana State University</span>
-<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
-<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{R}</span></span>
+<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a>NIHBSUAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIHBSU_2.xlsx"</span>)</span>
 <span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a>DOEMONTANA_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
-<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Montana State University'</span>)</span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a>NIHBSU_New_Awards_Specific <span class="ot">&lt;-</span> NIHBSUAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Project Title'</span>, <span class="st">'Administering IC'</span>, <span class="st">'Award Notice Date'</span>, <span class="st">`</span><span class="at">Opportunity Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget End Date</span><span class="st">`</span>, <span class="st">'Total Cost'</span>, <span class="st">'Total Cost (Sub Projects)'</span>, <span class="st">'Funding IC(s)'</span>, <span class="st">'Direct Cost IC'</span>, <span class="st">'InDirect Cost IC'</span>, <span class="st">'Total Cost IC'</span>)</span>
 <span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a>DOEMONTANA_New_Awards <span class="ot">&lt;-</span> DOEMONTANA_General <span class="sc">%&gt;%</span></span>
-<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEMONTANA_New_Awards))</span>
-<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>University of Montana</span>
-<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
-<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a>DOEUNIMONTANA_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
-<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'University of Montana'</span>)</span>
-<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a>DOEUNIMONTANA_New_Awards <span class="ot">&lt;-</span> DOEUNIMONTANA_General <span class="sc">%&gt;%</span></span>
-<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEUNIMONTANA_New_Awards))</span>
-<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NIHBSU_New_Awards_Specific))</span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a>**National Science Foundation (NSF)**</span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{R}</span></span>
+<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># Ensure knitr is explicitly loaded for kable()</span></span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the dataset from an Excel file</span></span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a>NSFBSUAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NSFBSU_2.xlsx"</span>)</span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting specific columns, ensure there are no leading or trailing spaces in column names</span></span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a>NSFBSU_New_Awards_Specific <span class="ot">&lt;-</span> NSFBSUAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)</span>
+<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the first few rows in a table format</span></span>
+<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NSFBSU_New_Awards_Specific))</span>
+<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Washington State University</span>
-<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
-<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Idaho State University</span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a>**Department of Energy**</span>
+<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a>DOEWSU_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
-<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Washington State University'</span>)</span>
-<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a>DOEWSU_New_Awards <span class="ot">&lt;-</span> DOEWSU_General <span class="sc">%&gt;%</span></span>
-<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
-<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEWSU_New_Awards))</span>
-<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a>Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.</span>
-<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONLUSIONS/SUMMARY</span></span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a>DOEaward <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards.xlsx"</span>)</span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a>DOEIDAHOSATTE_General <span class="ot">&lt;-</span> DOEaward <span class="sc">%&gt;%</span> </span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">'Idaho State University'</span>)</span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a>DOEDAHOSATTE_New_Awards <span class="ot">&lt;-</span> DOEIDAHOSATTE_General <span class="sc">%&gt;%</span></span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, Institution, PI, Status, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>, <span class="st">`</span><span class="at">Program Office</span><span class="st">`</span>, <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Most Recent Award Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Amount Awarded to Date</span><span class="st">`</span>)</span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(DOEDAHOSATTE_New_Awards))</span>
+<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a>**Department of Agriculture (NIFA)**</span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a>ISUUSDA  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"USDAISU.csv"</span>)</span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(ISUUSDA))</span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a>**National Institutes of Health (NIH)**</span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{R}</span></span>
+<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a>NIHISUAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIHISU_2.xlsx"</span>)</span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a>NIHISU_New_Awards_Specific <span class="ot">&lt;-</span> NIHISUAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Project Title'</span>, <span class="st">'Administering IC'</span>, <span class="st">'Award Notice Date'</span>, <span class="st">`</span><span class="at">Opportunity Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Number</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Project End Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget Start Date</span><span class="st">`</span>, <span class="st">`</span><span class="at">Budget End Date</span><span class="st">`</span>, <span class="st">'Total Cost'</span>, <span class="st">'Total Cost (Sub Projects)'</span>, <span class="st">'Funding IC(s)'</span>, <span class="st">'Direct Cost IC'</span>, <span class="st">'InDirect Cost IC'</span>, <span class="st">'Total Cost IC'</span>)</span>
+<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NIHISU_New_Awards_Specific))</span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a>**National Science Foundation (NSF)**</span>
+<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a><span class="in">```{R}</span></span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># Ensure knitr is explicitly loaded for kable()</span></span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading the dataset from an Excel file</span></span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a>NSFISUAwardsActive <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NSFISU_2.xlsx"</span>)</span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting specific columns, ensure there are no leading or trailing spaces in column names</span></span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a>NSFISU_New_Awards_Specific <span class="ot">&lt;-</span> NSFISUAwardsActive <span class="sc">%&gt;%</span></span>
+<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)</span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the first few rows in a table format</span></span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(NSFISU_New_Awards_Specific))</span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a>Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.</span>
+<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONLUSIONS/SUMMARY</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -11,14 +11,12 @@ description: "In Progress"
 ---
 
 
-## THE DATA
+## THE DATA - UNIVERSITY OF IDAHO
 
 Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.
 
+
 ### Department of Agriculture (NIFA)
-
-
-#### University of Idaho
 
 ```{r, message=FALSE}
 suppressPackageStartupMessages(library(readxl))
@@ -35,10 +33,8 @@ USDAUI  <- read.csv("USDAtoUI.csv")
 knitr::kable(head(USDAUI))
 ```
 
+
 ### Department of Energy (DOE)
-
-
-#### University of Idaho
 
 ```{r, message=FALSE}
 suppressPackageStartupMessages(library(readxl))
@@ -73,7 +69,40 @@ DOEawardsUI <- suppressMessages(read_xlsx("DOEawards.xlsx"))
 
 ### National Institutes of Health (NIH)
 
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+
+NIHUIAwardsActive <- read_xlsx("NIHUI_2.xlsx")
+
+NIHUI_New_Awards_Specific <- NIHUIAwardsActive %>%
+  select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
+
+knitr::kable(head(NIHUI_New_Awards_Specific))
+
+```
+
+
 ### National Science Foundation (NSF)
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+library(knitr) # Ensure knitr is explicitly loaded for kable()
+
+# Reading the dataset from an Excel file
+NSFUIAwardsActive <- read_xlsx("NSFUI_2.xlsx")
+
+# Selecting specific columns, ensure there are no leading or trailing spaces in column names
+NSFUI_New_Awards_Specific <- NSFUIAwardsActive %>%
+  select(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)
+
+# Displaying the first few rows in a table format
+knitr::kable(head(NSFUI_New_Awards_Specific))
+
+```
 
 
 ## QUESTION 1
@@ -121,6 +150,41 @@ BSUUSDA  <- read.csv("USDABSU.csv")
 knitr::kable(head(BSUUSDA))
 ```
 
+**National Institutes of Health (NIH)**
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+
+NIHBSUAwardsActive <- read_xlsx("NIHBSU_2.xlsx")
+
+NIHBSU_New_Awards_Specific <- NIHBSUAwardsActive %>%
+  select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
+
+knitr::kable(head(NIHBSU_New_Awards_Specific))
+
+```
+
+**National Science Foundation (NSF)**
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+library(knitr) # Ensure knitr is explicitly loaded for kable()
+
+# Reading the dataset from an Excel file
+NSFBSUAwardsActive <- read_xlsx("NSFBSU_2.xlsx")
+
+# Selecting specific columns, ensure there are no leading or trailing spaces in column names
+NSFBSU_New_Awards_Specific <- NSFBSUAwardsActive %>%
+  select(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)
+
+# Displaying the first few rows in a table format
+knitr::kable(head(NSFBSU_New_Awards_Specific))
+
+```
 
 2. Idaho State University
 
@@ -152,57 +216,41 @@ ISUUSDA  <- read.csv("USDAISU.csv")
 knitr::kable(head(ISUUSDA))
 ```
 
+**National Institutes of Health (NIH)**
 
-3. Montana State University
-
-**Department of Energy**
-```{r}
+```{R}
+library(readxl)
 library(dplyr)
-
-DOEMONTANA_General <- DOEaward %>% 
-  dplyr::filter(Institution == 'Montana State University')
-
-DOEMONTANA_New_Awards <- DOEMONTANA_General %>%
-  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
-
-knitr::kable(head(DOEMONTANA_New_Awards))
 library(tidyverse)
+
+NIHISUAwardsActive <- read_xlsx("NIHISU_2.xlsx")
+
+NIHISU_New_Awards_Specific <- NIHISUAwardsActive %>%
+  select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
+
+knitr::kable(head(NIHISU_New_Awards_Specific))
+
 ```
 
+**National Science Foundation (NSF)**
 
-4. University of Montana
-
-**Department of Energy**
-```{r}
+```{R}
+library(readxl)
 library(dplyr)
-
-DOEUNIMONTANA_General <- DOEaward %>% 
-  dplyr::filter(Institution == 'University of Montana')
-
-DOEUNIMONTANA_New_Awards <- DOEUNIMONTANA_General %>%
-  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
-
-knitr::kable(head(DOEUNIMONTANA_New_Awards))
 library(tidyverse)
+library(knitr) # Ensure knitr is explicitly loaded for kable()
+
+# Reading the dataset from an Excel file
+NSFISUAwardsActive <- read_xlsx("NSFISU_2.xlsx")
+
+# Selecting specific columns, ensure there are no leading or trailing spaces in column names
+NSFISU_New_Awards_Specific <- NSFISUAwardsActive %>%
+  select(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)
+
+# Displaying the first few rows in a table format
+knitr::kable(head(NSFISU_New_Awards_Specific))
+
 ```
-
-
-5. Washington State University
-
-**Department of Energy**
-```{r}
-library(dplyr)
-
-DOEWSU_General <- DOEaward %>% 
-  dplyr::filter(Institution == 'Washington State University')
-
-DOEWSU_New_Awards <- DOEWSU_General %>%
-  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
-
-knitr::kable(head(DOEWSU_New_Awards))
-library(tidyverse)
-```
-
 
 Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.
 
