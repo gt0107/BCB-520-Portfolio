@@ -274,4 +274,37 @@ knitr::kable(head(NSFISU_New_Awards_Specific))
 Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.
 
 
+
+```{R}
+# COMPARISON BETWEEEN USDA - AWARD MONEY
+
+library(readxl)
+
+USDA_Compare_Data <- read_xlsx("USDA_Combined_Data_Recent_Awards.xlsx")
+
+library(dplyr)
+library(ggplot2)
+
+library(dplyr)
+
+# Calculate total award money for each institution
+USDA_total_award_money <- USDA_Compare_Data %>%
+  group_by(Grantee_Name) %>%
+  summarise(USDA_total_award_money = sum(Award_Dollars))
+
+library(ggplot2)
+
+ggplot(USDA_total_award_money, aes(x = Grantee_Name, y = USDA_total_award_money)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  ggtitle("Total of Award Money from USDA Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text.y = element_text(size = 12),
+        plot.title = element_text(hjust = 0.5)) +  # Corrected position of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+
+```
+
 ## CONLUSIONS/SUMMARY
