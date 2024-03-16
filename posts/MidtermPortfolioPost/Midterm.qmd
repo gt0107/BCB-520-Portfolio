@@ -320,13 +320,6 @@ UIgrants_2024_grantsUSDA <- UIgrants_recent_grantsUSDA %>%
   filter(Award.Date >= start_date & Award.Date <= end_date) %>%
   summarise(UIgrants_2024_grantsUSDA = n())
 
-
-
-
-
-
-
-
 ```
 
 ## CONLUSIONS/SUMMARY
