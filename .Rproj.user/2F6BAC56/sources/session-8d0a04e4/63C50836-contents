@@ -455,4 +455,92 @@ ggplot(DOE_Grant_Action, aes(x = Institution, y = count, fill = `Action Type`)) 
         plot.title = element_text(hjust = 0.5, size = 14))
 ```
 
+```{r}
+# COMPARISON BETWEEEN NSF - Grant Duration
+
+library(readxl)
+
+NSF_Compare_Data <- read_xlsx("NSF_Combined_Data.xlsx")
+
+library(dplyr)
+
+# Filter the data for each institution
+UI_NSF_data <- NSF_Compare_Data %>%
+  filter(Organization == "Regents of the University of Idaho")
+
+BSU_NSF_data <- NSF_Compare_Data %>%
+  filter(Organization == "Boise State University")
+
+ISU_NSF_data <- NSF_Compare_Data %>%
+  filter(Organization == "Idaho State University")
+
+# Calculate the duration of grants for each institution
+# Convert "Start Date" and "End Date" columns to date objects
+#UI
+
+UI_NSF_data <- UI_NSF_data %>%
+  mutate(`Start Date` = as.Date(StartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(EndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+UI_NSF_data <- UI_NSF_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+UI_NSF_data <- UI_NSF_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# BSU
+BSU_NSF_data  <- BSU_NSF_data %>%
+  mutate(`Start Date` = as.Date(StartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(EndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+BSU_NSF_data  <- BSU_NSF_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+BSU_NSF_data  <- BSU_NSF_data  %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# ISU
+ISU_NSF_data<- ISU_NSF_data %>%
+  mutate(`Start Date` = as.Date(StartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(EndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+ISU_NSF_data <- ISU_NSF_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+ISU_NSF_data <- ISU_NSF_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# Visualization
+
+library(dplyr)
+
+# Assuming UI_data contains the grant duration information for one institution
+# and other_datasets contain the grant duration information for the other institutions
+
+# Combine datasets
+combined_data_NSF <- bind_rows(UI_NSF_data, BSU_NSF_data, ISU_NSF_data)
+
+# Colors
+
+my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
+
+# Plotting grant duration as a bar graph
+library(ggplot2)
+
+ggplot(combined_data_NSF, aes(x = Organization, y = grant_duration_years, fill = Organization)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Grant Duration by Organization") +
+  xlab("") +
+  ylab("Grant Duration (Years)") +
+  scale_fill_manual(values = my_colors) +  # Apply custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14))  # Adjust size of plot title
+```
+
 ## CONLUSIONS/SUMMARY
