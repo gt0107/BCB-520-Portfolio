@@ -33,7 +33,28 @@ USDAUI  <- read.csv("USDAtoUI.csv")
 knitr::kable(head(USDAUI))
 ```
 
+```{r}
+library(dplyr)
 
+# Assuming 'Date' is the column containing the grant date information
+start_date <- as.Date("2021-01-01")
+end_date <- as.Date("2024-03-15")
+
+UIgrants_recent_grantsUSDA <- USDAUI %>% 
+  filter(Award.Date >= start_date & Award.Date <= end_date) %>%
+  arrange(desc(Award.Date))
+```
+
+```{r}
+library(dplyr)
+
+start_date <- as.Date("2024-01-01")
+end_date <- as.Date("2024-12-31")
+
+UIgrants_2024_grantsUSDA <- UIgrants_recent_grantsUSDA %>% 
+  filter(Award.Date >= start_date & Award.Date <= end_date) %>%
+  summarise(UIgrants_2024_grantsUSDA = n())
+```
 ### Department of Energy (DOE)
 
 ```{r, message=FALSE}
@@ -122,6 +143,17 @@ How is UI performing with these sponsors when compared to the following peer ins
 
 1. Boise State University
 
+**Department of Agriculture (NIFA)**
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(knitr)
+
+BSUUSDA  <- read.csv("USDABSU.csv")
+knitr::kable(head(BSUUSDA))
+```
+
 **Department of Energy**
 ```{r}
 library(readxl)
@@ -137,17 +169,6 @@ DOEBSU_New_Awards <- DOEBSU_General %>%
 
 knitr::kable(head(DOEBSU_New_Awards))
 library(tidyverse)
-```
-
-**Department of Agriculture (NIFA)**
-
-```{r}
-library(tidyverse)
-library(readxl)
-library(knitr)
-
-BSUUSDA  <- read.csv("USDABSU.csv")
-knitr::kable(head(BSUUSDA))
 ```
 
 **National Institutes of Health (NIH)**
@@ -253,5 +274,59 @@ knitr::kable(head(NSFISU_New_Awards_Specific))
 ```
 
 Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.
+
+### Active Grants Across Regional Institutions
+
+**Organizing Data**
+```{r}
+
+# UNIVERSITY OF IDAHO - TOTAL ACCOUNT USDA
+
+library(dplyr)
+
+# Assuming 'Date' is the column containing the grant date information
+start_date <- as.Date("2021-01-01")
+end_date <- as.Date("2024-03-15")
+
+UIgrants_recent_grantsUSDA <- USDAUI %>% 
+  filter(Award.Date >= start_date & Award.Date <= end_date) %>%
+  arrange(desc(Award.Date))
+
+library(dplyr)
+
+start_date <- as.Date("2024-01-01")
+end_date <- as.Date("2024-12-31")
+
+UIgrants_2024_grantsUSDA <- UIgrants_recent_grantsUSDA %>% 
+  filter(Award.Date >= start_date & Award.Date <= end_date) %>%
+  summarise(UIgrants_2024_grantsUSDA = n())
+
+library(dplyr)
+
+# Assuming 'Date' is the column containing the grant date information
+start_date <- as.Date("2021-01-01")
+end_date <- as.Date("2024-03-15")
+
+UIgrants_recent_grantsUSDA <- USDAUI %>% 
+  filter(Award.Date >= start_date & Award.Date <= end_date) %>%
+  arrange(desc(Award.Date))
+
+library(dplyr)
+
+start_date <- as.Date("2024-01-01")
+end_date <- as.Date("2024-12-31")
+
+UIgrants_2024_grantsUSDA <- UIgrants_recent_grantsUSDA %>% 
+  filter(Award.Date >= start_date & Award.Date <= end_date) %>%
+  summarise(UIgrants_2024_grantsUSDA = n())
+
+
+
+
+
+
+
+
+```
 
 ## CONLUSIONS/SUMMARY
