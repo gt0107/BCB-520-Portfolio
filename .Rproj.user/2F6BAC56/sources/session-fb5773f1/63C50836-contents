@@ -547,7 +547,7 @@ ggplot(combined_data_NSF, aes(x = Organization, y = grant_duration_years, fill =
 ```
 
 ```{r}
-# COMPARISON BETWEEEN NSF - AWARD MONEY
+# COMPARISON BETWEEEN NSF - AWARD MONEY - NO APARECE LA DATA
 library(dplyr)
 library(ggplot2)
 
@@ -613,5 +613,96 @@ ggplot(NSF_Grant_Award_Instrument, aes(x = Organization, y = count, fill = Award
         plot.title = element_text(hjust = 0.5, size = 14)) +
   scale_fill_manual(values = my_colors_2)  # Apply custom colors
 ```
+
+**NIH**
+
+```{r}
+# COMPARISON BETWEEEN NSF - Grant Duration
+
+library(readxl)
+
+NIH_Compare_Data <- read_xlsx("NIH_Combined_Data.xlsx")
+
+library(dplyr)
+
+# Filter the data for each institution
+UI_NIH_data <- NIH_Compare_Data %>%
+  filter(OrganizationName == "UNIVERSITY OF IDAHO")
+
+BSU_NIH_data <- NIH_Compare_Data %>%
+  filter(OrganizationName == "BOISE STATE UNIVERSITY")
+
+ISU_NIH_data <- NIH_Compare_Data %>%
+  filter(OrganizationName == "IDAHO STATE UNIVERSITY")
+
+# Calculate the duration of grants for each institution
+# Convert "Start Date" and "End Date" columns to date objects
+#UI
+
+UI_NIH_data <- UI_NIH_data%>%
+  mutate(`Start Date` = as.Date(ProjectStartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(ProjectEndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+UI_NIH_data <- UI_NIH_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+UI_NIH_data <- UI_NIH_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# BSU - no quiere funcionar no tengo la menor idea pq
+BSU_NIH_data  <- BSU_NIH_data %>%
+  mutate(`Start Date` = as.Date(ProjectStartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(ProjectEndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+BSU_NIH_data  <- BSU_NIH_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+BSU_NIH_data  <- BSU_NIH_data  %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# ISU
+ISU_NIH_data<- ISU_NIH_data %>%
+  mutate(`Start Date` = as.Date(ProjectStartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(ProjectEndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+ISU_NIH_data <- ISU_NIH_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+ISU_NIH_data <- ISU_NIH_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# Visualization
+
+library(dplyr)
+
+# Assuming UI_data contains the grant duration information for one institution
+# and other_datasets contain the grant duration information for the other institutions
+
+# Combine datasets
+combined_data_NIH <- bind_rows(UI_NIH_data, BSU_NIH_data, ISU_NIH_data)
+
+# Colors
+
+my_colors_3 <- c("BOISE STATE UNIVERSITY" = "orange", "IDAHO STATE UNIVERSITY" = "black", "UNIVERSITY OF IDAHO" = "gold")
+
+# Plotting grant duration as a bar graph
+library(ggplot2)
+
+ggplot(combined_data_NIH, aes(x = OrganizationName, y = grant_duration_years, fill = OrganizationName)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Grant Duration by Organization") +
+  xlab("") +
+  ylab("Grant Duration (Years)") +
+  scale_fill_manual(values = my_colors_3) +  # Apply custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14))  # Adjust size of plot title
+```
+
 
 ## CONLUSIONS/SUMMARY
