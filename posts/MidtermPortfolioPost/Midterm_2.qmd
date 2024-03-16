@@ -436,7 +436,7 @@ library(ggplot2)
 # Calculate total grant action count for each institution
 DOE_Grant_Action <- DOE_Compare_Data %>%
   group_by(Institution, `Action Type`) %>%
-  summarise(count = n()) %>%
+  summarise(count = n(), .groups = "drop") %>%
   ungroup()
 
 library(ggplot2)
