@@ -400,7 +400,7 @@ ggplot(combined_data, aes(x = Institution, y = grant_duration_years, fill = Inst
 
 
 ```{r}
-# COMPARISON BETWEEEN USDA - AWARD MONEY
+# COMPARISON BETWEEEN DOE - AWARD MONEY
 library(dplyr)
 library(ggplot2)
 
@@ -425,6 +425,34 @@ ggplot(DOE_total_award_money, aes(x = Institution, y = DOE_total_award_money)) +
         legend.text = element_text(size = 12),  # Adjust size of legend text
         plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
+
+
+```{r}
+# COMPARISON BETWEEEN DOE - Grant Status
+library(dplyr)
+library(ggplot2)
+
+# Calculate total grant action count for each institution
+DOE_Grant_Action <- DOE_Compare_Data %>%
+  group_by(Institution, `Action Type`) %>%
+  summarise(count = n()) %>%
+  ungroup()
+
+library(ggplot2)
+
+# Assuming DOE_Grant_Action is your summarized data frame with counts of Action Type by Institution
+
+ggplot(DOE_Grant_Action, aes(x = Institution, y = count, fill = `Action Type`)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Number of Counts of Action Type by Institution") +
+  xlab("") +
+  ylab("Number of Active Grants") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14))
 ```
 
 ## CONLUSIONS/SUMMARY
