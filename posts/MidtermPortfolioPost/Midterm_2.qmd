@@ -308,7 +308,7 @@ ggplot(USDA_total_award_money, aes(x = Grantee_Name, y = USDA_total_award_money)
 ```
 
 ```{r}
-# COMPARISON BETWEEEN DOE - NUMBER OF ACTIVE GRANTS
+# COMPARISON BETWEEEN DOE - Grant Duration
 
 library(readxl)
 
@@ -381,6 +381,7 @@ combined_data <- bind_rows(UI_data, BSU_data, ISU_data)
 my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
 
 # Plotting grant duration as a bar graph
+# Plotting grant duration as a bar graph
 library(ggplot2)
 
 ggplot(combined_data, aes(x = Institution, y = grant_duration_years, fill = Institution)) +
@@ -390,11 +391,40 @@ ggplot(combined_data, aes(x = Institution, y = grant_duration_years, fill = Inst
   ylab("Grant Duration (Years)") +
   scale_fill_manual(values = my_colors) +  # Apply custom colors
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5))
-  
-
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14))  # Adjust size of plot title
 
 ```
 
+
+```{r}
+# COMPARISON BETWEEEN USDA - AWARD MONEY
+library(dplyr)
+library(ggplot2)
+
+# Calculate total award money for each institution
+DOE_total_award_money <- DOE_Compare_Data %>%
+  group_by(Institution) %>%
+  summarise(DOE_total_award_money = sum(`Amount Awarded to Date`))
+
+# Colors
+my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
+
+library(ggplot2)
+
+ggplot(DOE_total_award_money, aes(x = Institution, y = DOE_total_award_money)) +
+  geom_bar(stat = "identity", position = "dodge", fill = my_colors)  +
+  ggtitle("Total of Award Money from USDA Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
 
 ## CONLUSIONS/SUMMARY
