@@ -2025,8 +2025,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NIH - Award Notice - End date</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NSF - Grant Status</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total grant action count for each institution</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>NSF_Grant_Award_Instrument <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Organization, AwardInstrument) <span class="sc">%&gt;%</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check unique levels of AwardInstrument</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>unique_levels <span class="ot">&lt;-</span> <span class="fu">unique</span>(NSF_Grant_Award_Instrument<span class="sc">$</span>AwardInstrument)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust my_colors_4 to match the number of unique levels</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>my_colors_4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"navyblue"</span>, <span class="st">"darkgreen"</span>, <span class="st">"darkorange"</span>, <span class="st">"darkred"</span>)  <span class="co"># or any other color palette you prefer</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot with adjusted colors</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NSF_Grant_Award_Instrument, <span class="fu">aes</span>(<span class="at">x =</span> Organization, <span class="at">y =</span> count, <span class="at">fill =</span> AwardInstrument)) <span class="sc">+</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of Counts of Action Type by Institution"</span>) <span class="sc">+</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Active Grants"</span>) <span class="sc">+</span></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors_4) <span class="sc">+</span>  <span class="co"># Add this line to set custom colors</span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output-display">
+<p><img src="Midterm_2_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 <p><strong>NIH</strong></p>
 <div class="cell">
@@ -3037,131 +3067,159 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb39-623"><a href="#cb39-623" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb39-624"><a href="#cb39-624" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-627"><a href="#cb39-627" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-628"><a href="#cb39-628" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NIH - Award Notice - End date</span></span>
-<span id="cb39-629"><a href="#cb39-629" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-630"><a href="#cb39-630" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-628"><a href="#cb39-628" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NSF - Grant Status</span></span>
+<span id="cb39-629"><a href="#cb39-629" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb39-630"><a href="#cb39-630" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb39-631"><a href="#cb39-631" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-632"><a href="#cb39-632" aria-hidden="true" tabindex="-1"></a>**NIH**</span>
-<span id="cb39-633"><a href="#cb39-633" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-636"><a href="#cb39-636" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-637"><a href="#cb39-637" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NIH - Grant Duration</span></span>
-<span id="cb39-638"><a href="#cb39-638" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-639"><a href="#cb39-639" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb39-632"><a href="#cb39-632" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total grant action count for each institution</span></span>
+<span id="cb39-633"><a href="#cb39-633" aria-hidden="true" tabindex="-1"></a>NSF_Grant_Award_Instrument <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb39-634"><a href="#cb39-634" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Organization, AwardInstrument) <span class="sc">%&gt;%</span></span>
+<span id="cb39-635"><a href="#cb39-635" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb39-636"><a href="#cb39-636" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb39-637"><a href="#cb39-637" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-638"><a href="#cb39-638" aria-hidden="true" tabindex="-1"></a><span class="co"># Check unique levels of AwardInstrument</span></span>
+<span id="cb39-639"><a href="#cb39-639" aria-hidden="true" tabindex="-1"></a>unique_levels <span class="ot">&lt;-</span> <span class="fu">unique</span>(NSF_Grant_Award_Instrument<span class="sc">$</span>AwardInstrument)</span>
 <span id="cb39-640"><a href="#cb39-640" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-641"><a href="#cb39-641" aria-hidden="true" tabindex="-1"></a>NIH_Compare_Data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIH_Combined_Data.xlsx"</span>)</span>
-<span id="cb39-642"><a href="#cb39-642" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-643"><a href="#cb39-643" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb39-644"><a href="#cb39-644" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-645"><a href="#cb39-645" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for each institution</span></span>
-<span id="cb39-646"><a href="#cb39-646" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb39-647"><a href="#cb39-647" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"UNIVERSITY OF IDAHO"</span>)</span>
-<span id="cb39-648"><a href="#cb39-648" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-649"><a href="#cb39-649" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb39-650"><a href="#cb39-650" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"BOISE STATE UNIVERSITY"</span>)</span>
-<span id="cb39-651"><a href="#cb39-651" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-652"><a href="#cb39-652" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb39-653"><a href="#cb39-653" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"IDAHO STATE UNIVERSITY"</span>)</span>
-<span id="cb39-654"><a href="#cb39-654" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-655"><a href="#cb39-655" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the duration of grants for each institution</span></span>
-<span id="cb39-656"><a href="#cb39-656" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert "Start Date" and "End Date" columns to date objects</span></span>
-<span id="cb39-657"><a href="#cb39-657" aria-hidden="true" tabindex="-1"></a><span class="co">#UI</span></span>
-<span id="cb39-658"><a href="#cb39-658" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-659"><a href="#cb39-659" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data<span class="sc">%&gt;%</span></span>
-<span id="cb39-660"><a href="#cb39-660" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb39-661"><a href="#cb39-661" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb39-662"><a href="#cb39-662" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-663"><a href="#cb39-663" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb39-664"><a href="#cb39-664" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb39-665"><a href="#cb39-665" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb39-641"><a href="#cb39-641" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust my_colors_4 to match the number of unique levels</span></span>
+<span id="cb39-642"><a href="#cb39-642" aria-hidden="true" tabindex="-1"></a>my_colors_4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"navyblue"</span>, <span class="st">"darkgreen"</span>, <span class="st">"darkorange"</span>, <span class="st">"darkred"</span>)  <span class="co"># or any other color palette you prefer</span></span>
+<span id="cb39-643"><a href="#cb39-643" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-644"><a href="#cb39-644" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot with adjusted colors</span></span>
+<span id="cb39-645"><a href="#cb39-645" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NSF_Grant_Award_Instrument, <span class="fu">aes</span>(<span class="at">x =</span> Organization, <span class="at">y =</span> count, <span class="at">fill =</span> AwardInstrument)) <span class="sc">+</span></span>
+<span id="cb39-646"><a href="#cb39-646" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb39-647"><a href="#cb39-647" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of Counts of Action Type by Institution"</span>) <span class="sc">+</span></span>
+<span id="cb39-648"><a href="#cb39-648" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb39-649"><a href="#cb39-649" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Active Grants"</span>) <span class="sc">+</span></span>
+<span id="cb39-650"><a href="#cb39-650" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors_4) <span class="sc">+</span>  <span class="co"># Add this line to set custom colors</span></span>
+<span id="cb39-651"><a href="#cb39-651" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb39-652"><a href="#cb39-652" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb39-653"><a href="#cb39-653" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb39-654"><a href="#cb39-654" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb39-655"><a href="#cb39-655" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
+<span id="cb39-656"><a href="#cb39-656" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-657"><a href="#cb39-657" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-658"><a href="#cb39-658" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-659"><a href="#cb39-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-660"><a href="#cb39-660" aria-hidden="true" tabindex="-1"></a>**NIH**</span>
+<span id="cb39-661"><a href="#cb39-661" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-664"><a href="#cb39-664" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb39-665"><a href="#cb39-665" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NIH - Grant Duration</span></span>
 <span id="cb39-666"><a href="#cb39-666" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-667"><a href="#cb39-667" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb39-668"><a href="#cb39-668" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
-<span id="cb39-669"><a href="#cb39-669" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-670"><a href="#cb39-670" aria-hidden="true" tabindex="-1"></a><span class="co"># BSU - no quiere funcionar no tengo la menor idea pq</span></span>
-<span id="cb39-671"><a href="#cb39-671" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb39-672"><a href="#cb39-672" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb39-673"><a href="#cb39-673" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb39-674"><a href="#cb39-674" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-675"><a href="#cb39-675" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb39-676"><a href="#cb39-676" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb39-677"><a href="#cb39-677" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb39-678"><a href="#cb39-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-679"><a href="#cb39-679" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data  <span class="sc">%&gt;%</span></span>
-<span id="cb39-680"><a href="#cb39-680" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
-<span id="cb39-681"><a href="#cb39-681" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-682"><a href="#cb39-682" aria-hidden="true" tabindex="-1"></a><span class="co"># ISU</span></span>
-<span id="cb39-683"><a href="#cb39-683" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data<span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb39-684"><a href="#cb39-684" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb39-685"><a href="#cb39-685" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb39-667"><a href="#cb39-667" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb39-668"><a href="#cb39-668" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-669"><a href="#cb39-669" aria-hidden="true" tabindex="-1"></a>NIH_Compare_Data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIH_Combined_Data.xlsx"</span>)</span>
+<span id="cb39-670"><a href="#cb39-670" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-671"><a href="#cb39-671" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb39-672"><a href="#cb39-672" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-673"><a href="#cb39-673" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for each institution</span></span>
+<span id="cb39-674"><a href="#cb39-674" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb39-675"><a href="#cb39-675" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"UNIVERSITY OF IDAHO"</span>)</span>
+<span id="cb39-676"><a href="#cb39-676" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-677"><a href="#cb39-677" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb39-678"><a href="#cb39-678" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"BOISE STATE UNIVERSITY"</span>)</span>
+<span id="cb39-679"><a href="#cb39-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-680"><a href="#cb39-680" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb39-681"><a href="#cb39-681" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"IDAHO STATE UNIVERSITY"</span>)</span>
+<span id="cb39-682"><a href="#cb39-682" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-683"><a href="#cb39-683" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the duration of grants for each institution</span></span>
+<span id="cb39-684"><a href="#cb39-684" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert "Start Date" and "End Date" columns to date objects</span></span>
+<span id="cb39-685"><a href="#cb39-685" aria-hidden="true" tabindex="-1"></a><span class="co">#UI</span></span>
 <span id="cb39-686"><a href="#cb39-686" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-687"><a href="#cb39-687" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb39-688"><a href="#cb39-688" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb39-689"><a href="#cb39-689" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb39-687"><a href="#cb39-687" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data<span class="sc">%&gt;%</span></span>
+<span id="cb39-688"><a href="#cb39-688" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb39-689"><a href="#cb39-689" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
 <span id="cb39-690"><a href="#cb39-690" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-691"><a href="#cb39-691" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb39-692"><a href="#cb39-692" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
-<span id="cb39-693"><a href="#cb39-693" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-694"><a href="#cb39-694" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
-<span id="cb39-695"><a href="#cb39-695" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-696"><a href="#cb39-696" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb39-691"><a href="#cb39-691" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb39-692"><a href="#cb39-692" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-693"><a href="#cb39-693" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb39-694"><a href="#cb39-694" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-695"><a href="#cb39-695" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-696"><a href="#cb39-696" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
 <span id="cb39-697"><a href="#cb39-697" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-698"><a href="#cb39-698" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming UI_data contains the grant duration information for one institution</span></span>
-<span id="cb39-699"><a href="#cb39-699" aria-hidden="true" tabindex="-1"></a><span class="co"># and other_datasets contain the grant duration information for the other institutions</span></span>
-<span id="cb39-700"><a href="#cb39-700" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-701"><a href="#cb39-701" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine datasets</span></span>
-<span id="cb39-702"><a href="#cb39-702" aria-hidden="true" tabindex="-1"></a>combined_data_NIH <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(UI_NIH_data, BSU_NIH_data, ISU_NIH_data)</span>
-<span id="cb39-703"><a href="#cb39-703" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-704"><a href="#cb39-704" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
-<span id="cb39-705"><a href="#cb39-705" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-706"><a href="#cb39-706" aria-hidden="true" tabindex="-1"></a>my_colors_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BOISE STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"IDAHO STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"UNIVERSITY OF IDAHO"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
-<span id="cb39-707"><a href="#cb39-707" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-708"><a href="#cb39-708" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
-<span id="cb39-709"><a href="#cb39-709" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb39-710"><a href="#cb39-710" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-711"><a href="#cb39-711" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data_NIH, <span class="fu">aes</span>(<span class="at">x =</span> OrganizationName, <span class="at">y =</span> grant_duration_years, <span class="at">fill =</span> OrganizationName)) <span class="sc">+</span></span>
-<span id="cb39-712"><a href="#cb39-712" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb39-713"><a href="#cb39-713" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Grant Duration by Organization"</span>) <span class="sc">+</span></span>
-<span id="cb39-714"><a href="#cb39-714" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb39-715"><a href="#cb39-715" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grant Duration (Years)"</span>) <span class="sc">+</span></span>
-<span id="cb39-716"><a href="#cb39-716" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors_3) <span class="sc">+</span>  <span class="co"># Apply custom colors</span></span>
-<span id="cb39-717"><a href="#cb39-717" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb39-718"><a href="#cb39-718" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
-<span id="cb39-719"><a href="#cb39-719" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
-<span id="cb39-720"><a href="#cb39-720" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
-<span id="cb39-721"><a href="#cb39-721" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))  <span class="co"># Adjust size of plot title</span></span>
-<span id="cb39-722"><a href="#cb39-722" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-698"><a href="#cb39-698" aria-hidden="true" tabindex="-1"></a><span class="co"># BSU - no quiere funcionar no tengo la menor idea pq</span></span>
+<span id="cb39-699"><a href="#cb39-699" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-700"><a href="#cb39-700" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb39-701"><a href="#cb39-701" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb39-702"><a href="#cb39-702" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-703"><a href="#cb39-703" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb39-704"><a href="#cb39-704" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-705"><a href="#cb39-705" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb39-706"><a href="#cb39-706" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-707"><a href="#cb39-707" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data  <span class="sc">%&gt;%</span></span>
+<span id="cb39-708"><a href="#cb39-708" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb39-709"><a href="#cb39-709" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-710"><a href="#cb39-710" aria-hidden="true" tabindex="-1"></a><span class="co"># ISU</span></span>
+<span id="cb39-711"><a href="#cb39-711" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data<span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-712"><a href="#cb39-712" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb39-713"><a href="#cb39-713" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb39-714"><a href="#cb39-714" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-715"><a href="#cb39-715" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb39-716"><a href="#cb39-716" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-717"><a href="#cb39-717" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb39-718"><a href="#cb39-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-719"><a href="#cb39-719" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb39-720"><a href="#cb39-720" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb39-721"><a href="#cb39-721" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-722"><a href="#cb39-722" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
 <span id="cb39-723"><a href="#cb39-723" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-726"><a href="#cb39-726" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb39-727"><a href="#cb39-727" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NIH - AWARD MONEY - CALCULATED THE AVERAGE INSTEAD THE TOTAL AMMOUNT</span></span>
-<span id="cb39-728"><a href="#cb39-728" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb39-729"><a href="#cb39-729" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb39-730"><a href="#cb39-730" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-731"><a href="#cb39-731" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total award money for each institution, removing NA values in TotalCost</span></span>
-<span id="cb39-732"><a href="#cb39-732" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-733"><a href="#cb39-733" aria-hidden="true" tabindex="-1"></a>NIH_total_award_money <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb39-734"><a href="#cb39-734" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(OrganizationName) <span class="sc">%&gt;%</span></span>
-<span id="cb39-735"><a href="#cb39-735" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">NIH_total_award_money =</span> <span class="fu">sum</span>(TotalCost, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb39-736"><a href="#cb39-736" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-737"><a href="#cb39-737" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
+<span id="cb39-724"><a href="#cb39-724" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb39-725"><a href="#cb39-725" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-726"><a href="#cb39-726" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming UI_data contains the grant duration information for one institution</span></span>
+<span id="cb39-727"><a href="#cb39-727" aria-hidden="true" tabindex="-1"></a><span class="co"># and other_datasets contain the grant duration information for the other institutions</span></span>
+<span id="cb39-728"><a href="#cb39-728" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-729"><a href="#cb39-729" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine datasets</span></span>
+<span id="cb39-730"><a href="#cb39-730" aria-hidden="true" tabindex="-1"></a>combined_data_NIH <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(UI_NIH_data, BSU_NIH_data, ISU_NIH_data)</span>
+<span id="cb39-731"><a href="#cb39-731" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-732"><a href="#cb39-732" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
+<span id="cb39-733"><a href="#cb39-733" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-734"><a href="#cb39-734" aria-hidden="true" tabindex="-1"></a>my_colors_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BOISE STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"IDAHO STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"UNIVERSITY OF IDAHO"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
+<span id="cb39-735"><a href="#cb39-735" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-736"><a href="#cb39-736" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
+<span id="cb39-737"><a href="#cb39-737" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb39-738"><a href="#cb39-738" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-739"><a href="#cb39-739" aria-hidden="true" tabindex="-1"></a>my_colors_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BOISE STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"IDAHO STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"UNIVERSITY OF IDAHO"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
-<span id="cb39-740"><a href="#cb39-740" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-741"><a href="#cb39-741" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb39-742"><a href="#cb39-742" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-743"><a href="#cb39-743" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NIH_total_award_money, <span class="fu">aes</span>(<span class="at">x =</span> OrganizationName, <span class="at">y =</span> NIH_total_award_money)) <span class="sc">+</span></span>
-<span id="cb39-744"><a href="#cb39-744" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">fill =</span> my_colors_3)  <span class="sc">+</span></span>
-<span id="cb39-745"><a href="#cb39-745" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Total of Award Money from NIH Grants"</span>) <span class="sc">+</span></span>
-<span id="cb39-746"><a href="#cb39-746" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb39-747"><a href="#cb39-747" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Total Award Money"</span>) <span class="sc">+</span></span>
-<span id="cb39-748"><a href="#cb39-748" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb39-749"><a href="#cb39-749" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
-<span id="cb39-750"><a href="#cb39-750" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
-<span id="cb39-751"><a href="#cb39-751" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
-<span id="cb39-752"><a href="#cb39-752" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>)) <span class="sc">+</span>  <span class="co"># Adjust size of plot title</span></span>
-<span id="cb39-753"><a href="#cb39-753" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">number_format</span>(<span class="at">scale =</span> <span class="fl">1e-6</span>, <span class="at">suffix =</span> <span class="st">"M"</span>))</span>
-<span id="cb39-754"><a href="#cb39-754" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb39-755"><a href="#cb39-755" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-756"><a href="#cb39-756" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONLUSIONS/SUMMARY</span></span>
+<span id="cb39-739"><a href="#cb39-739" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data_NIH, <span class="fu">aes</span>(<span class="at">x =</span> OrganizationName, <span class="at">y =</span> grant_duration_years, <span class="at">fill =</span> OrganizationName)) <span class="sc">+</span></span>
+<span id="cb39-740"><a href="#cb39-740" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb39-741"><a href="#cb39-741" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Grant Duration by Organization"</span>) <span class="sc">+</span></span>
+<span id="cb39-742"><a href="#cb39-742" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb39-743"><a href="#cb39-743" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grant Duration (Years)"</span>) <span class="sc">+</span></span>
+<span id="cb39-744"><a href="#cb39-744" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors_3) <span class="sc">+</span>  <span class="co"># Apply custom colors</span></span>
+<span id="cb39-745"><a href="#cb39-745" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb39-746"><a href="#cb39-746" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
+<span id="cb39-747"><a href="#cb39-747" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
+<span id="cb39-748"><a href="#cb39-748" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
+<span id="cb39-749"><a href="#cb39-749" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))  <span class="co"># Adjust size of plot title</span></span>
+<span id="cb39-750"><a href="#cb39-750" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-751"><a href="#cb39-751" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-754"><a href="#cb39-754" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb39-755"><a href="#cb39-755" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NIH - AWARD MONEY - CALCULATED THE AVERAGE INSTEAD THE TOTAL AMMOUNT</span></span>
+<span id="cb39-756"><a href="#cb39-756" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb39-757"><a href="#cb39-757" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb39-758"><a href="#cb39-758" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-759"><a href="#cb39-759" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total award money for each institution, removing NA values in TotalCost</span></span>
+<span id="cb39-760"><a href="#cb39-760" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-761"><a href="#cb39-761" aria-hidden="true" tabindex="-1"></a>NIH_total_award_money <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb39-762"><a href="#cb39-762" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(OrganizationName) <span class="sc">%&gt;%</span></span>
+<span id="cb39-763"><a href="#cb39-763" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">NIH_total_award_money =</span> <span class="fu">sum</span>(TotalCost, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb39-764"><a href="#cb39-764" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-765"><a href="#cb39-765" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
+<span id="cb39-766"><a href="#cb39-766" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-767"><a href="#cb39-767" aria-hidden="true" tabindex="-1"></a>my_colors_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BOISE STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"IDAHO STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"UNIVERSITY OF IDAHO"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
+<span id="cb39-768"><a href="#cb39-768" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-769"><a href="#cb39-769" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb39-770"><a href="#cb39-770" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-771"><a href="#cb39-771" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NIH_total_award_money, <span class="fu">aes</span>(<span class="at">x =</span> OrganizationName, <span class="at">y =</span> NIH_total_award_money)) <span class="sc">+</span></span>
+<span id="cb39-772"><a href="#cb39-772" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">fill =</span> my_colors_3)  <span class="sc">+</span></span>
+<span id="cb39-773"><a href="#cb39-773" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Total of Award Money from NIH Grants"</span>) <span class="sc">+</span></span>
+<span id="cb39-774"><a href="#cb39-774" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb39-775"><a href="#cb39-775" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Total Award Money"</span>) <span class="sc">+</span></span>
+<span id="cb39-776"><a href="#cb39-776" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb39-777"><a href="#cb39-777" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
+<span id="cb39-778"><a href="#cb39-778" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
+<span id="cb39-779"><a href="#cb39-779" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
+<span id="cb39-780"><a href="#cb39-780" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>)) <span class="sc">+</span>  <span class="co"># Adjust size of plot title</span></span>
+<span id="cb39-781"><a href="#cb39-781" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">number_format</span>(<span class="at">scale =</span> <span class="fl">1e-6</span>, <span class="at">suffix =</span> <span class="st">"M"</span>))</span>
+<span id="cb39-782"><a href="#cb39-782" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb39-783"><a href="#cb39-783" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-784"><a href="#cb39-784" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONLUSIONS/SUMMARY</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

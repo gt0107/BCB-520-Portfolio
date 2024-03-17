@@ -583,7 +583,35 @@ ggplot(NSF_total_award_money, aes(x = Organization, y = NSF_total_award_money)) 
 ```
 
 ```{r}
-# COMPARISON BETWEEEN NIH - Award Notice - End date
+# COMPARISON BETWEEEN NSF - Grant Status
+library(dplyr)
+library(ggplot2)
+
+# Calculate total grant action count for each institution
+NSF_Grant_Award_Instrument <- NSF_Compare_Data %>%
+  group_by(Organization, AwardInstrument) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  ungroup()
+
+# Check unique levels of AwardInstrument
+unique_levels <- unique(NSF_Grant_Award_Instrument$AwardInstrument)
+
+# Adjust my_colors_4 to match the number of unique levels
+my_colors_4 <- c("navyblue", "darkgreen", "darkorange", "darkred")  # or any other color palette you prefer
+
+# Plot with adjusted colors
+ggplot(NSF_Grant_Award_Instrument, aes(x = Organization, y = count, fill = AwardInstrument)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Number of Counts of Action Type by Institution") +
+  xlab("") +
+  ylab("Number of Active Grants") +
+  scale_fill_manual(values = my_colors_4) +  # Add this line to set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  
+        axis.text.y = element_text(size = 12),  
+        legend.text = element_text(size = 12),  
+        plot.title = element_text(hjust = 0.5, size = 14))
+
 
 ```
 
