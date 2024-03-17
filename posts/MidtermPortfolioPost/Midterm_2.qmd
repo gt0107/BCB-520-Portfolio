@@ -134,6 +134,71 @@ Provide a visualization that shows our active awards from each sponsor. I need t
 
 What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
 
+```{r}
+#DOE
+
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Read the Excel file
+DOEawardsUI_Dates <- read_xlsx("DOEawards.xlsx")
+
+filtered_data_UI_DOE <- DOEawardsUI_Dates %>%
+  filter(Institution == 'Regents of the University of Idaho')
+
+
+#USDA
+
+USDAawardsUI_Dates <- read.csv("USDAtoUI.csv")
+
+# Assuming the start date column is named "Start_Date"
+five_years_ago <- Sys.Date() - years(5)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_5y_USDA <- USDAawardsUI_Dates %>%
+  filter(Award.Date >= five_years_ago)
+
+# Assuming the start date column is named "Start_Date"
+ten_years_ago <- Sys.Date() - years(10)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_10y_USDA <- USDAawardsUI_Dates %>%
+  filter(Award.Date >= ten_years_ago)
+
+#NSF
+
+NSFawardsUI_Dates_5 <- read_xls("5YR_UI_NSF.xls")
+
+# Assuming the start date column is named "Start_Date"
+five_years_ago <- Sys.Date() - years(5)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_5y_NSF <- NSFawardsUI_Dates_5 %>%
+  filter(StartDate >= five_years_ago)
+
+NSFawardsUI_Dates_10 <- read_xls("10YR_UI_NSF.xls")
+
+# Assuming the start date column is named "Start_Date"
+ten_years_ago <- Sys.Date() - years(10)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_10y_NSF <- NSFawardsUI_Dates_10 %>%
+  filter(StartDate >= ten_years_ago)
+
+#NIH
+
+NIHawardsUI_Dates <- read_xlsx("10YR_UI_NIH.xlsx")
+
+#Assuming the start date column is named "Start_Date"
+five_years_ago <- Sys.Date() - years(5)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_5y_NIH <- NIHawardsUI_Dates %>%
+  filter(`Budget Start Date` >= five_years_ago)
+
+```
+
 
 ## QUESTION 3
 
