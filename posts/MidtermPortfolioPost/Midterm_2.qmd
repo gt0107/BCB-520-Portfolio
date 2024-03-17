@@ -583,41 +583,14 @@ ggplot(NSF_total_award_money, aes(x = Organization, y = NSF_total_award_money)) 
 ```
 
 ```{r}
-# COMPARISON BETWEEEN NSF - Grant Status
-library(dplyr)
-library(ggplot2)
+# COMPARISON BETWEEEN NIH - Award Notice - End date
 
-# Calculate total grant action count for each institution
-NSF_Grant_Award_Instrument <- NSF_Compare_Data %>%
-  group_by(Organization, AwardInstrument) %>%
-  summarise(count = n(), .groups = "drop") %>%
-  ungroup()
-
-library(ggplot2)
-
-# Assuming DOE_Grant_Action is your summarized data frame with counts of Action Type by Institution
-
-# Define custom colors
-my_colors_2 <- c("navyblue", "darkorange", "darkgreen", "darkred")  # Add or change colors as needed
-
-# Plot with custom colors
-ggplot(NSF_Grant_Award_Instrument, aes(x = Organization, y = count, fill = AwardInstrument)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  ggtitle("Number of Counts of Action Type by Institution") +
-  xlab("") +
-  ylab("Number of Active Grants") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  
-        axis.text.y = element_text(size = 12),  
-        legend.text = element_text(size = 12),  
-        plot.title = element_text(hjust = 0.5, size = 14)) +
-  scale_fill_manual(values = my_colors_2)  # Apply custom colors
 ```
 
 **NIH**
 
 ```{r}
-# COMPARISON BETWEEEN NSF - Grant Duration
+# COMPARISON BETWEEEN NIH - Grant Duration
 
 library(readxl)
 
@@ -704,5 +677,34 @@ ggplot(combined_data_NIH, aes(x = OrganizationName, y = grant_duration_years, fi
         plot.title = element_text(hjust = 0.5, size = 14))  # Adjust size of plot title
 ```
 
+```{r}
+# COMPARISON BETWEEEN NIH - AWARD MONEY - CALCULATED THE AVERAGE INSTEAD THE TOTAL AMMOUNT
+library(dplyr)
+library(ggplot2)
+
+# Calculate total award money for each institution, removing NA values in TotalCost
+
+NIH_total_award_money <- NIH_Compare_Data %>%
+  group_by(OrganizationName) %>%
+  summarise(NIH_total_award_money = sum(TotalCost, na.rm = TRUE))
+
+# Colors
+
+my_colors_3 <- c("BOISE STATE UNIVERSITY" = "orange", "IDAHO STATE UNIVERSITY" = "black", "UNIVERSITY OF IDAHO" = "gold")
+
+library(ggplot2)
+
+ggplot(NIH_total_award_money, aes(x = OrganizationName, y = NIH_total_award_money)) +
+  geom_bar(stat = "identity", position = "dodge", fill = my_colors_3)  +
+  ggtitle("Total of Award Money from NIH Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
 
 ## CONLUSIONS/SUMMARY
