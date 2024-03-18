@@ -134,41 +134,58 @@ Provide a visualization that shows our active awards from each sponsor. I need t
 library(readxl)
 library(dplyr)
 library(ggplot2)
-library(ggstance)
-# Read data from each Excel file
-awards_data_sponsor1 <- read_excel("DOEawards.xlsx")
-awards_data_sponsor3 <- read_excel("NSFUI_2.xlsx")
-awards_data_sponsor4 <- read_excel("NIHUI_2.xlsx")
 
-# Rename columns to ensure consistency
-awards_data_sponsor1 <- rename(awards_data_sponsor1, StartDate = "Start Date", EndDate = "End Date", Amount = "Amount Awarded to Date", PIName = "PI")
-awards_data_sponsor3 <- rename(awards_data_sponsor3, StartDate = "StartDate", EndDate = "EndDate", Amount = "AwardedAmountToDate", PIName = "PrincipalInvestigator")
-awards_data_sponsor4 <- rename(awards_data_sponsor4, StartDate = "Budget Start Date", EndDate = "Budget End Date", Amount = "Total Cost", PIName = "Contact PI / Project Leader")
+Q1_Data <- read_xlsx("Q1_Compilled_Data.xlsx")
 
-# Add a new column indicating the source of funding
-awards_data_sponsor1 <- mutate(awards_data_sponsor1, Source = "DOE")
-awards_data_sponsor3 <- mutate(awards_data_sponsor3, Source = "NSF")
-awards_data_sponsor4 <- mutate(awards_data_sponsor4, Source = "NIH")
+# Convert StartDate and EndDate to Date objects
+Q1_Data$StartDate <- as.Date(Q1_Data$StartDate, format = "%m/%d/%Y")
+Q1_Data$EndDate <- as.Date(Q1_Data$EndDate, format = "%m/%d/%Y")
 
-# Convert Amount column to numeric type
-awards_data_sponsor1 <- mutate(awards_data_sponsor1, Amount = as.numeric(Amount))
-awards_data_sponsor3 <- mutate(awards_data_sponsor3, Amount = as.numeric(Amount))
-awards_data_sponsor4 <- mutate(awards_data_sponsor4, Amount = as.numeric(Amount))
-
-# Combine the data
-awards_data <- bind_rows(
-  sponsor1 = awards_data_sponsor1,
-  sponsor3 = awards_data_sponsor3,
-  sponsor4 = awards_data_sponsor4
-)  # Close bind_rows() function call
-
-# Filter for active awards
-current_date <- Sys.Date()
-active_awards <- awards_data %>%
-  filter(EndDate >= current_date)
+# Filter out rows with NA values in StartDate or EndDate
+Q1_Data <- Q1_Data[complete.cases(Q1_Data$StartDate, Q1_Data$EndDate), ]
 
 # Create the Gantt chart
+# Create the Gantt chart
+ggplot(Q1_Data, aes(y = Sponsor, x = StartDate, xend = EndDate, yend = Sponsor)) +
+  geom_segment(size = 10, color = "black") +  # Use linewidth instead of size
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y", limits = c(as.Date("2021-01-01"), as.Date("2029-01-01"))) +
+  labs(title = "Active Awards Timeline",
+       x = "Timeline",
+       y = "Sponsor") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
 ```
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+
+Q1_Data <- read_xlsx("Q1_Compilled_Data.xlsx")
+
+# Convert StartDate and EndDate to Date objects
+Q1_Data$StartDate <- as.Date(Q1_Data$StartDate, format = "%m/%d/%Y")
+Q1_Data$EndDate <- as.Date(Q1_Data$EndDate, format = "%m/%d/%Y")
+
+# Filter out rows with NA values in StartDate or EndDate
+Q1_Data <- Q1_Data[complete.cases(Q1_Data$StartDate, Q1_Data$EndDate), ]
+
+ggplot(Q1_Data, aes(y = Sponsor, x = StartDate, xend = EndDate, color = Sponsor)) +
+  geom_segment(aes(yend = Sponsor), size = 6) +  # Specify yend aesthetic
+  geom_text(aes(x = StartDate, y = Sponsor, label = PI), vjust = -0.5, size = 3) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  labs(title = "Active Awards Timeline",
+       x = "Timeline",
+       y = "Sponsor",
+       color = "Sponsor") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+
+
+```
+
+
 ## QUESTION 2
 
 What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
