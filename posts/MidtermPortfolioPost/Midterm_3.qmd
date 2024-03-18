@@ -1,0 +1,842 @@
+---
+title: "BCB 520 - Midterm Portfolio Post"
+subtitle: "In Progress"
+author: "Geraline Trossi-Torres"
+date: "2024-03-18"
+categories: [Midterm, DataViz, Visualization]
+image: Profile4.jpg
+code-fold: true
+code-tools: true
+description: "In Progress"
+---
+
+
+## THE DATA - UNIVERSITY OF IDAHO
+
+Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.
+
+
+### Department of Agriculture (NIFA)
+
+```{r, message=FALSE}
+suppressPackageStartupMessages(library(readxl))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(knitr)
+
+USDAUI  <- read.csv("USDAtoUI.csv")
+knitr::kable(head(USDAUI))
+```
+
+```{r}
+library(dplyr)
+
+# Assuming 'Date' is the column containing the grant date information
+start_date <- as.Date("2021-01-01")
+end_date <- as.Date("2024-03-15")
+
+UIgrants_recent_grantsUSDA <- USDAUI %>% 
+  filter(Award.Date >= start_date & Award.Date <= end_date) %>%
+  arrange(desc(Award.Date))
+```
+
+```{r}
+library(dplyr)
+
+start_date <- as.Date("2024-01-01")
+end_date <- as.Date("2024-12-31")
+
+UIgrants_2024_grantsUSDA <- UIgrants_recent_grantsUSDA %>% 
+  filter(Award.Date >= start_date & Award.Date <= end_date) %>%
+  summarise(UIgrants_2024_grantsUSDA = n())
+```
+### Department of Energy (DOE)
+
+```{r, message=FALSE}
+suppressPackageStartupMessages(library(readxl))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(readxl)
+DOEawardsUI <- read_xlsx("DOEawards.xlsx", .name_repair = "minimal")
+```
+
+```{r}
+library(readxl)
+library(dplyr)
+
+DOEawardsUI <- read_xlsx("DOEawards.xlsx")
+
+DOEUI_General <- DOEawardsUI %>% 
+  dplyr::filter(Institution == 'Regents of the University of Idaho')
+
+DOEUI_New_Awards <- DOEUI_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEUI_New_Awards))
+library(tidyverse)
+
+library(readr)
+DOEawardsUI <- suppressMessages(read_xlsx("DOEawards.xlsx"))
+```
+
+
+### National Institutes of Health (NIH)
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+
+NIHUIAwardsActive <- read_xlsx("NIHUI_2.xlsx")
+
+NIHUI_New_Awards_Specific <- NIHUIAwardsActive %>%
+  select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
+
+knitr::kable(head(NIHUI_New_Awards_Specific))
+
+```
+
+
+### National Science Foundation (NSF)
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+library(knitr) # Ensure knitr is explicitly loaded for kable()
+
+# Reading the dataset from an Excel file
+NSFUIAwardsActive <- read_xlsx("NSFUI_2.xlsx")
+
+# Selecting specific columns, ensure there are no leading or trailing spaces in column names
+NSFUI_New_Awards_Specific <- NSFUIAwardsActive %>%
+  select(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)
+
+# Displaying the first few rows in a table format
+knitr::kable(head(NSFUI_New_Awards_Specific))
+
+```
+
+
+## QUESTION 1
+
+Provide a visualization that shows our active awards from each sponsor. I need to see their start date and end date, the amount of the award, and the name of the Principal Investigator. I’m really interested in seeing how far into the future our current portfolio will exist. Are there a bunch of awards about to expire? Are there a bunch that just got funded and will be active for a while? Does this vary across sponsors?
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(ggstance)
+# Read data from each Excel file
+awards_data_sponsor1 <- read_excel("DOEawards.xlsx")
+awards_data_sponsor3 <- read_excel("NSFUI_2.xlsx")
+awards_data_sponsor4 <- read_excel("NIHUI_2.xlsx")
+
+# Rename columns to ensure consistency
+awards_data_sponsor1 <- rename(awards_data_sponsor1, StartDate = "Start Date", EndDate = "End Date", Amount = "Amount Awarded to Date", PIName = "PI")
+awards_data_sponsor3 <- rename(awards_data_sponsor3, StartDate = "StartDate", EndDate = "EndDate", Amount = "AwardedAmountToDate", PIName = "PrincipalInvestigator")
+awards_data_sponsor4 <- rename(awards_data_sponsor4, StartDate = "Budget Start Date", EndDate = "Budget End Date", Amount = "Total Cost", PIName = "Contact PI / Project Leader")
+
+# Add a new column indicating the source of funding
+awards_data_sponsor1 <- mutate(awards_data_sponsor1, Source = "DOE")
+awards_data_sponsor3 <- mutate(awards_data_sponsor3, Source = "NSF")
+awards_data_sponsor4 <- mutate(awards_data_sponsor4, Source = "NIH")
+
+# Convert Amount column to numeric type
+awards_data_sponsor1 <- mutate(awards_data_sponsor1, Amount = as.numeric(Amount))
+awards_data_sponsor3 <- mutate(awards_data_sponsor3, Amount = as.numeric(Amount))
+awards_data_sponsor4 <- mutate(awards_data_sponsor4, Amount = as.numeric(Amount))
+
+# Combine the data
+awards_data <- bind_rows(
+  sponsor1 = awards_data_sponsor1,
+  sponsor3 = awards_data_sponsor3,
+  sponsor4 = awards_data_sponsor4
+)  # Close bind_rows() function call
+
+# Filter for active awards
+current_date <- Sys.Date()
+active_awards <- awards_data %>%
+  filter(EndDate >= current_date)
+
+# Create the Gantt chart
+```
+## QUESTION 2
+
+What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
+
+```{r}
+#DOE
+
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Read the Excel file
+DOEawardsUI_Dates <- read_xlsx("DOEawards.xlsx")
+
+filtered_data_UI_DOE <- DOEawardsUI_Dates %>%
+  filter(Institution == 'Regents of the University of Idaho')
+
+
+#USDA
+
+USDAawardsUI_Dates <- read.csv("USDAtoUI.csv")
+
+# Assuming the start date column is named "Start_Date"
+five_years_ago <- Sys.Date() - years(5)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_5y_USDA <- USDAawardsUI_Dates %>%
+  filter(Award.Date >= five_years_ago)
+
+# Assuming the start date column is named "Start_Date"
+ten_years_ago <- Sys.Date() - years(10)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_10y_USDA <- USDAawardsUI_Dates %>%
+  filter(Award.Date >= ten_years_ago)
+
+#NSF
+
+NSFawardsUI_Dates_5 <- read_xls("5YR_UI_NSF.xls")
+
+# Assuming the start date column is named "Start_Date"
+five_years_ago <- Sys.Date() - years(5)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_5y_NSF <- NSFawardsUI_Dates_5 %>%
+  filter(StartDate >= five_years_ago)
+
+NSFawardsUI_Dates_10 <- read_xls("10YR_UI_NSF.xls")
+
+# Assuming the start date column is named "Start_Date"
+ten_years_ago <- Sys.Date() - years(10)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_10y_NSF <- NSFawardsUI_Dates_10 %>%
+  filter(StartDate >= ten_years_ago)
+
+#NIH
+
+NIHawardsUI_Dates <- read_xlsx("10YR_UI_NIH.xlsx")
+
+#Assuming the start date column is named "Start_Date"
+five_years_ago <- Sys.Date() - years(5)  # Calculate the date 5 years ago
+
+# Filter the data to include only awards that started 5 years ago or later
+filtered_data_UI_5y_NIH <- NIHawardsUI_Dates %>%
+  filter(`Budget Start Date` >= five_years_ago)
+
+```
+
+
+## QUESTION 3
+
+How is UI performing with these sponsors when compared to the following peer institutions?
+
+### Boise State University
+
+**Department of Agriculture (NIFA)**
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(knitr)
+
+BSUUSDA  <- read.csv("USDABSU.csv")
+knitr::kable(head(BSUUSDA))
+```
+
+**Department of Energy**
+```{r}
+library(readxl)
+library(dplyr)
+
+DOEawardsBSU <- read_xlsx("DOEawards.xlsx")
+
+DOEBSU_General <- DOEawardsBSU %>% 
+  dplyr::filter(Institution == 'Boise State University')
+
+DOEBSU_New_Awards <- DOEBSU_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEBSU_New_Awards))
+library(tidyverse)
+```
+
+**National Institutes of Health (NIH)**
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+
+NIHBSUAwardsActive <- read_xlsx("NIHBSU_2.xlsx")
+
+NIHBSU_New_Awards_Specific <- NIHBSUAwardsActive %>%
+  select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
+
+knitr::kable(head(NIHBSU_New_Awards_Specific))
+
+```
+
+**National Science Foundation (NSF)**
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+library(knitr) # Ensure knitr is explicitly loaded for kable()
+
+# Reading the dataset from an Excel file
+NSFBSUAwardsActive <- read_xlsx("NSFBSU_2.xlsx")
+
+# Selecting specific columns, ensure there are no leading or trailing spaces in column names
+NSFBSU_New_Awards_Specific <- NSFBSUAwardsActive %>%
+  select(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)
+
+# Displaying the first few rows in a table format
+knitr::kable(head(NSFBSU_New_Awards_Specific))
+
+```
+
+### Idaho State University
+
+**Department of Energy**
+```{r}
+library(readxl)
+library(dplyr)
+
+DOEaward <- read_xlsx("DOEawards.xlsx")
+
+DOEIDAHOSATTE_General <- DOEaward %>% 
+  dplyr::filter(Institution == 'Idaho State University')
+
+DOEDAHOSATTE_New_Awards <- DOEIDAHOSATTE_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEDAHOSATTE_New_Awards))
+library(tidyverse)
+```
+
+**Department of Agriculture (NIFA)**
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(knitr)
+
+ISUUSDA  <- read.csv("USDAISU.csv")
+knitr::kable(head(ISUUSDA))
+```
+
+**National Institutes of Health (NIH)**
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+
+NIHISUAwardsActive <- read_xlsx("NIHISU_2.xlsx")
+
+NIHISU_New_Awards_Specific <- NIHISUAwardsActive %>%
+  select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
+
+knitr::kable(head(NIHISU_New_Awards_Specific))
+
+```
+
+**National Science Foundation (NSF)**
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+library(knitr) # Ensure knitr is explicitly loaded for kable()
+
+# Reading the dataset from an Excel file
+NSFISUAwardsActive <- read_xlsx("NSFISU_2.xlsx")
+
+# Selecting specific columns, ensure there are no leading or trailing spaces in column names
+NSFISU_New_Awards_Specific <- NSFISUAwardsActive %>%
+  select(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)
+
+# Displaying the first few rows in a table format
+knitr::kable(head(NSFISU_New_Awards_Specific))
+
+```
+
+Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.
+
+
+**USDA**
+
+```{R}
+# COMPARISON BETWEEEN USDA - AWARD MONEY
+
+library(readxl)
+
+USDA_Compare_Data <- read_xlsx("USDA_Combined_Data_Recent_Awards.xlsx")
+
+library(dplyr)
+library(ggplot2)
+
+library(dplyr)
+
+# Calculate total award money for each institution
+USDA_total_award_money <- USDA_Compare_Data %>%
+  group_by(Grantee_Name) %>%
+  summarise(USDA_total_award_money = sum(Award_Dollars))
+
+library(ggplot2)
+
+ggplot(USDA_total_award_money, aes(x = Grantee_Name, y = USDA_total_award_money)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  ggtitle("Total of Award Money from USDA Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text.y = element_text(size = 12),
+        plot.title = element_text(hjust = 0.5)) +  # Corrected position of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+
+```
+
+**DOE**
+
+```{r}
+# COMPARISON BETWEEEN DOE - Grant Duration
+
+library(readxl)
+
+DOE_Compare_Data <- read_xlsx("DOEawards_Combined_Data.xlsx")
+
+library(dplyr)
+
+# Assuming 'start_date' and 'end_date' are columns containing the start and end dates of the grants,
+# and 'institution' is a column indicating the institution for each grant
+
+# Filter the data for each institution
+UI_data <- DOE_Compare_Data %>%
+  filter(Institution == "Regents of the University of Idaho")
+
+BSU_data <- DOE_Compare_Data %>%
+  filter(Institution == "Boise State University")
+
+ISU_data <- DOE_Compare_Data %>%
+  filter(Institution == "Idaho State University")
+
+# Calculate the duration of grants for each institution
+# Convert "Start Date" and "End Date" columns to date objects
+UI_data <- UI_data %>%
+  mutate(`Start Date` = as.Date(`Start Date`, format = "%m/%d/%Y"),
+         `End Date` = as.Date(`End Date`, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+UI_data <- UI_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+UI_data <- UI_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# BSU
+BSU_data <- BSU_data %>%
+  mutate(`Start Date` = as.Date(`Start Date`, format = "%m/%d/%Y"),
+         `End Date` = as.Date(`End Date`, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+BSU_data <- BSU_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+BSU_data <- BSU_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# ISU
+ISU_data <- ISU_data %>%
+  mutate(`Start Date` = as.Date(`Start Date`, format = "%m/%d/%Y"),
+         `End Date` = as.Date(`End Date`, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+ISU_data <- ISU_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+ISU_data <- ISU_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# Visualization
+
+library(dplyr)
+
+# Assuming UI_data contains the grant duration information for one institution
+# and other_datasets contain the grant duration information for the other institutions
+
+# Combine datasets
+combined_data <- bind_rows(UI_data, BSU_data, ISU_data)
+
+# Colors
+
+my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
+
+# Plotting grant duration as a bar graph
+# Plotting grant duration as a bar graph
+library(ggplot2)
+
+ggplot(combined_data, aes(x = Institution, y = grant_duration_years, fill = Institution)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Grant Duration by Institution") +
+  xlab("") +
+  ylab("Grant Duration (Years)") +
+  scale_fill_manual(values = my_colors) +  # Apply custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14))  # Adjust size of plot title
+
+```
+
+```{r}
+# COMPARISON BETWEEEN DOE - AWARD MONEY
+library(dplyr)
+library(ggplot2)
+
+# Calculate total award money for each institution
+DOE_total_award_money <- DOE_Compare_Data %>%
+  group_by(Institution) %>%
+  summarise(DOE_total_award_money = sum(`Amount Awarded to Date`))
+
+# Colors
+my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
+
+library(ggplot2)
+
+ggplot(DOE_total_award_money, aes(x = Institution, y = DOE_total_award_money)) +
+  geom_bar(stat = "identity", position = "dodge", fill = my_colors)  +
+  ggtitle("Total of Award Money from USDA Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
+
+```{r}
+# COMPARISON BETWEEEN DOE - Grant Status
+library(dplyr)
+library(ggplot2)
+
+# Calculate total grant action count for each institution
+DOE_Grant_Action <- DOE_Compare_Data %>%
+  group_by(Institution, `Action Type`) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  ungroup()
+
+library(ggplot2)
+
+# Assuming DOE_Grant_Action is your summarized data frame with counts of Action Type by Institution
+
+ggplot(DOE_Grant_Action, aes(x = Institution, y = count, fill = `Action Type`)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Number of Counts of Action Type by Institution") +
+  xlab("") +
+  ylab("Number of Active Grants") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14))
+```
+
+**NSF**
+
+```{r}
+# COMPARISON BETWEEEN NSF - Grant Duration
+
+library(readxl)
+
+NSF_Compare_Data <- read_xlsx("NSF_Combined_Data.xlsx")
+
+library(dplyr)
+
+# Filter the data for each institution
+UI_NSF_data <- NSF_Compare_Data %>%
+  filter(Organization == "Regents of the University of Idaho")
+
+BSU_NSF_data <- NSF_Compare_Data %>%
+  filter(Organization == "Boise State University")
+
+ISU_NSF_data <- NSF_Compare_Data %>%
+  filter(Organization == "Idaho State University")
+
+# Calculate the duration of grants for each institution
+# Convert "Start Date" and "End Date" columns to date objects
+#UI
+
+UI_NSF_data <- UI_NSF_data %>%
+  mutate(`Start Date` = as.Date(StartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(EndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+UI_NSF_data <- UI_NSF_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+UI_NSF_data <- UI_NSF_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# BSU
+BSU_NSF_data  <- BSU_NSF_data %>%
+  mutate(`Start Date` = as.Date(StartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(EndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+BSU_NSF_data  <- BSU_NSF_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+BSU_NSF_data  <- BSU_NSF_data  %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# ISU
+ISU_NSF_data<- ISU_NSF_data %>%
+  mutate(`Start Date` = as.Date(StartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(EndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+ISU_NSF_data <- ISU_NSF_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+ISU_NSF_data <- ISU_NSF_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# Visualization
+
+library(dplyr)
+
+# Assuming UI_data contains the grant duration information for one institution
+# and other_datasets contain the grant duration information for the other institutions
+
+# Combine datasets
+combined_data_NSF <- bind_rows(UI_NSF_data, BSU_NSF_data, ISU_NSF_data)
+
+# Colors
+
+my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
+
+# Plotting grant duration as a bar graph
+library(ggplot2)
+
+ggplot(combined_data_NSF, aes(x = Organization, y = grant_duration_years, fill = Organization)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Grant Duration by Organization") +
+  xlab("") +
+  ylab("Grant Duration (Years)") +
+  scale_fill_manual(values = my_colors) +  # Apply custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14))  # Adjust size of plot title
+```
+
+```{r}
+# COMPARISON BETWEEEN NSF - AWARD MONEY - NO APARECE LA DATA
+library(dplyr)
+library(ggplot2)
+
+# Convert AwardedAmountToDate column to numeric
+NSF_Compare_Data$AwardedAmountToDate <- as.numeric(gsub("\\$", "", NSF_Compare_Data$AwardedAmountToDate))
+
+# Calculate total award money for each institution
+NSF_total_award_money <- NSF_Compare_Data %>%
+  group_by(Organization) %>%
+  summarise(NSF_total_award_money = sum(AwardedAmountToDate, na.rm = TRUE))
+
+# Calculate total award money for each institution
+NSF_total_award_money <- NSF_Compare_Data %>%
+  group_by(Organization) %>%
+  summarise(NSF_total_award_money = sum(AwardedAmountToDate))
+
+# Colors
+my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
+
+library(ggplot2)
+
+ggplot(NSF_total_award_money, aes(x = Organization, y = NSF_total_award_money)) +
+  geom_bar(stat = "identity", position = "dodge", fill = my_colors)  +
+  ggtitle("Total of Award Money from NSF Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
+
+```{r}
+# COMPARISON BETWEEEN NSF - Grant Status
+library(dplyr)
+library(ggplot2)
+
+# Calculate total grant action count for each institution
+NSF_Grant_Award_Instrument <- NSF_Compare_Data %>%
+  group_by(Organization, AwardInstrument) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  ungroup()
+
+# Check unique levels of AwardInstrument
+unique_levels <- unique(NSF_Grant_Award_Instrument$AwardInstrument)
+
+# Adjust my_colors_4 to match the number of unique levels
+my_colors_4 <- c("navyblue", "darkgreen", "darkorange", "darkred")  # or any other color palette you prefer
+
+# Plot with adjusted colors
+ggplot(NSF_Grant_Award_Instrument, aes(x = Organization, y = count, fill = AwardInstrument)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Number of Counts of Action Type by Institution") +
+  xlab("") +
+  ylab("Number of Active Grants") +
+  scale_fill_manual(values = my_colors_4) +  # Add this line to set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  
+        axis.text.y = element_text(size = 12),  
+        legend.text = element_text(size = 12),  
+        plot.title = element_text(hjust = 0.5, size = 14))
+
+
+```
+
+**NIH**
+
+```{r}
+# COMPARISON BETWEEEN NIH - Grant Duration
+
+library(readxl)
+
+NIH_Compare_Data <- read_xlsx("NIH_Combined_Data.xlsx")
+
+library(dplyr)
+
+# Filter the data for each institution
+UI_NIH_data <- NIH_Compare_Data %>%
+  filter(OrganizationName == "UNIVERSITY OF IDAHO")
+
+BSU_NIH_data <- NIH_Compare_Data %>%
+  filter(OrganizationName == "BOISE STATE UNIVERSITY")
+
+ISU_NIH_data <- NIH_Compare_Data %>%
+  filter(OrganizationName == "IDAHO STATE UNIVERSITY")
+
+# Calculate the duration of grants for each institution
+# Convert "Start Date" and "End Date" columns to date objects
+#UI
+
+UI_NIH_data <- UI_NIH_data%>%
+  mutate(`Start Date` = as.Date(ProjectStartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(ProjectEndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+UI_NIH_data <- UI_NIH_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+UI_NIH_data <- UI_NIH_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# BSU - no quiere funcionar no tengo la menor idea pq
+BSU_NIH_data  <- BSU_NIH_data %>%
+  mutate(`Start Date` = as.Date(ProjectStartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(ProjectEndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+BSU_NIH_data  <- BSU_NIH_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+BSU_NIH_data  <- BSU_NIH_data  %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# ISU
+ISU_NIH_data<- ISU_NIH_data %>%
+  mutate(`Start Date` = as.Date(ProjectStartDate, format = "%m/%d/%Y"),
+         `End Date` = as.Date(ProjectEndDate, format = "%m/%d/%Y"))
+
+# Assuming 'grant_duration' is in days
+ISU_NIH_data <- ISU_NIH_data %>%
+  mutate(grant_duration = `End Date` - `Start Date`)
+
+ISU_NIH_data <- ISU_NIH_data %>%
+  mutate(grant_duration_years = as.numeric(grant_duration) / 365.25)
+
+# Visualization
+
+library(dplyr)
+
+# Assuming UI_data contains the grant duration information for one institution
+# and other_datasets contain the grant duration information for the other institutions
+
+# Combine datasets
+combined_data_NIH <- bind_rows(UI_NIH_data, BSU_NIH_data, ISU_NIH_data)
+
+# Colors
+
+my_colors_3 <- c("BOISE STATE UNIVERSITY" = "orange", "IDAHO STATE UNIVERSITY" = "black", "UNIVERSITY OF IDAHO" = "gold")
+
+# Plotting grant duration as a bar graph
+library(ggplot2)
+
+ggplot(combined_data_NIH, aes(x = OrganizationName, y = grant_duration_years, fill = OrganizationName)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Grant Duration by Organization") +
+  xlab("") +
+  ylab("Grant Duration (Years)") +
+  scale_fill_manual(values = my_colors_3) +  # Apply custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14))  # Adjust size of plot title
+```
+
+```{r}
+# COMPARISON BETWEEEN NIH - AWARD MONEY - CALCULATED THE AVERAGE INSTEAD THE TOTAL AMMOUNT
+library(dplyr)
+library(ggplot2)
+
+# Calculate total award money for each institution, removing NA values in TotalCost
+
+NIH_total_award_money <- NIH_Compare_Data %>%
+  group_by(OrganizationName) %>%
+  summarise(NIH_total_award_money = sum(TotalCost, na.rm = TRUE))
+
+# Colors
+
+my_colors_3 <- c("BOISE STATE UNIVERSITY" = "orange", "IDAHO STATE UNIVERSITY" = "black", "UNIVERSITY OF IDAHO" = "gold")
+
+library(ggplot2)
+
+ggplot(NIH_total_award_money, aes(x = OrganizationName, y = NIH_total_award_money)) +
+  geom_bar(stat = "identity", position = "dodge", fill = my_colors_3)  +
+  ggtitle("Total of Award Money from NIH Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
+
+## CONLUSIONS/SUMMARY
