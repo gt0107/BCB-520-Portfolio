@@ -130,6 +130,45 @@ knitr::kable(head(NSFUI_New_Awards_Specific))
 
 Provide a visualization that shows our active awards from each sponsor. I need to see their start date and end date, the amount of the award, and the name of the Principal Investigator. I’m really interested in seeing how far into the future our current portfolio will exist. Are there a bunch of awards about to expire? Are there a bunch that just got funded and will be active for a while? Does this vary across sponsors?
 
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(ggstance)
+# Read data from each Excel file
+awards_data_sponsor1 <- read_excel("DOEawards.xlsx")
+awards_data_sponsor3 <- read_excel("NSFUI_2.xlsx")
+awards_data_sponsor4 <- read_excel("NIHUI_2.xlsx")
+
+# Rename columns to ensure consistency
+awards_data_sponsor1 <- rename(awards_data_sponsor1, StartDate = "Start Date", EndDate = "End Date", Amount = "Amount Awarded to Date", PIName = "PI")
+awards_data_sponsor3 <- rename(awards_data_sponsor3, StartDate = "StartDate", EndDate = "EndDate", Amount = "AwardedAmountToDate", PIName = "PrincipalInvestigator")
+awards_data_sponsor4 <- rename(awards_data_sponsor4, StartDate = "Budget Start Date", EndDate = "Budget End Date", Amount = "Total Cost", PIName = "Contact PI / Project Leader")
+
+# Add a new column indicating the source of funding
+awards_data_sponsor1 <- mutate(awards_data_sponsor1, Source = "DOE")
+awards_data_sponsor3 <- mutate(awards_data_sponsor3, Source = "NSF")
+awards_data_sponsor4 <- mutate(awards_data_sponsor4, Source = "NIH")
+
+# Convert Amount column to numeric type
+awards_data_sponsor1 <- mutate(awards_data_sponsor1, Amount = as.numeric(Amount))
+awards_data_sponsor3 <- mutate(awards_data_sponsor3, Amount = as.numeric(Amount))
+awards_data_sponsor4 <- mutate(awards_data_sponsor4, Amount = as.numeric(Amount))
+
+# Combine the data
+awards_data <- bind_rows(
+  sponsor1 = awards_data_sponsor1,
+  sponsor3 = awards_data_sponsor3,
+  sponsor4 = awards_data_sponsor4
+)  # Close bind_rows() function call
+
+# Filter for active awards
+current_date <- Sys.Date()
+active_awards <- awards_data %>%
+  filter(EndDate >= current_date)
+
+# Create the Gantt chart
+```
 ## QUESTION 2
 
 What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
