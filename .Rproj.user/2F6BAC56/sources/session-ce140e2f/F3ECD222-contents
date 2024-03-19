@@ -211,6 +211,32 @@ ggplot(data, aes(x = reorder(PI, total_amount), y = percentage, fill = Sponsor))
         legend.title = element_text(size = 16))  # Increase legend title size
 ```
 
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+# Read the Excel file
+Q1_NIH <- read_xlsx("Q1_NIH.xlsx")
+
+# View the data related to Amount and PI columns
+data <- Q1_NIH[, c("Amount", "PI")]
+head(data)
+
+# Define the extended y-axis limits
+extended_y_limits <- c(0, 10000000)  # For example, extend the y-axis from 0 to 10,000,000 (10 million)
+
+# Create a violin plot with extended y-axis
+ggplot(data, aes(x = PI, y = Amount)) +
+  geom_violin() +
+  ylim(extended_y_limits) +  # Set the y-axis limits
+  labs(title = "Distribution of Amount Awarded to Principal Investigators",
+       x = "Principal Investigator",
+       y = "Amount Awarded") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
 
 ## QUESTION 2
 
