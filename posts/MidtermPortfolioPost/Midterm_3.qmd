@@ -12,7 +12,7 @@ description: "In Progress"
 
 ## OVERVIEW
 
-##PREAMBLE
+## PREAMBLE
 
 ## THE DATA - UNIVERSITY OF IDAHO
 
@@ -177,29 +177,38 @@ ggplot(Q1_Data, aes(y = Sponsor, x = StartDate, xend = EndDate, yend = Sponsor))
 library(readxl)
 library(dplyr)
 library(ggplot2)
+library(tidyr)
 
-Q1_Data <- read_xlsx("Q1_Compilled_Data.xlsx")
+# Read the Excel file
+Q1_Data <- read_xlsx("Q1_Compilled_Data_3.xlsx")
 
-# Convert StartDate and EndDate to Date objects
-Q1_Data$StartDate <- as.Date(Q1_Data$StartDate, format = "%m/%d/%Y")
-Q1_Data$EndDate <- as.Date(Q1_Data$EndDate, format = "%m/%d/%Y")
+# Remove commas and dollar signs from the 'Amount' column and convert to numeric
+Q1_Data$Amount <- as.numeric(gsub("[,$]", "", Q1_Data$Amount))
 
-# Filter out rows with NA values in StartDate or EndDate
-Q1_Data <- Q1_Data[complete.cases(Q1_Data$StartDate, Q1_Data$EndDate), ]
+# Assuming your data frame has columns 'PI', 'Amount', and 'Sponsor'
+# Perform necessary data manipulation
+data <- Q1_Data %>%
+  group_by(PI, Sponsor) %>%
+  summarise(total_amount = sum(Amount, na.rm = TRUE)) %>%
+  ungroup() %>%
+  group_by(PI) %>%
+  mutate(total_amount = sum(total_amount)) %>%
+  ungroup() %>%
+  mutate(percentage = total_amount / sum(total_amount))
 
-ggplot(Q1_Data, aes(y = Sponsor, x = StartDate, xend = EndDate, color = Sponsor)) +
-  geom_segment(aes(yend = Sponsor), size = 6) +  # Specify yend aesthetic
-  geom_text(aes(x = StartDate, y = Sponsor, label = PI), vjust = -0.5, size = 3) +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-  labs(title = "Active Awards Timeline",
-       x = "Timeline",
-       y = "Sponsor",
-       color = "Sponsor") +
-  theme_minimal() +
-  theme(legend.position = "bottom")
-
-
-
+# Create stacked bar plot using ggplot2
+ggplot(data, aes(x = reorder(PI, total_amount), y = percentage, fill = Sponsor)) +
+  geom_bar(stat = "identity") +
+  labs(x = "PI Names", y = "Percentage") +
+  scale_fill_brewer(palette = "Set3") +  # Choose color palette
+  theme_minimal() +  # Optional: apply a minimal theme
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        plot.title = element_text(size = 20),  # Increase title size
+        axis.title.x = element_text(size = 16),  # Increase x-axis label size
+        axis.title.y = element_text(size = 16),  # Increase y-axis label size
+        axis.text = element_text(size = 14),  # Increase axis tick label size
+        legend.text = element_text(size = 14),  # Increase legend text size
+        legend.title = element_text(size = 16))  # Increase legend title size
 ```
 
 
