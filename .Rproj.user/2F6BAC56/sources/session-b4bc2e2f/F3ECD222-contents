@@ -49,10 +49,10 @@ suppressPackageStartupMessages(library(tidyverse))
 
 ```{r, message=FALSE, warning=FALSE}
 library(readxl)
-DOEawardsUI <- read_xlsx("DOEawards.xlsx", .name_repair = "minimal")
-
-library(readxl)
 library(dplyr)
+library(tidyverse)
+
+DOEawardsUI <- read_xlsx("DOEawards.xlsx", .name_repair = "minimal")
 
 DOEawardsUI <- read_xlsx("DOEawards.xlsx")
 
@@ -63,7 +63,6 @@ DOEUI_New_Awards <- DOEUI_General %>%
   select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
 
 knitr::kable(head(DOEUI_New_Awards))
-library(tidyverse)
 
 library(readr)
 DOEawardsUI <- suppressMessages(read_xlsx("DOEawards.xlsx"))
@@ -85,9 +84,7 @@ library(knitr)
 
 USDAUI  <- read.csv("USDAtoUI.csv")
 knitr::kable(head(USDAUI))
-```
 
-```{r}
 library(dplyr)
 
 # Assuming 'Date' is the column containing the grant date information
@@ -97,9 +94,7 @@ end_date <- as.Date("2024-03-15")
 UIgrants_recent_grantsUSDA <- USDAUI %>% 
   filter(Award.Date >= start_date & Award.Date <= end_date) %>%
   arrange(desc(Award.Date))
-```
 
-```{r}
 library(dplyr)
 
 start_date <- as.Date("2024-01-01")
@@ -357,6 +352,10 @@ NSFISU_New_Awards_Specific <- NSFISUAwardsActive %>%
 knitr::kable(head(NSFISU_New_Awards_Specific,4))
 ```
 
+#### Data Comparison of Awarded Money
+
+The following data presents how much money is coming to these institutions, and can provide insights into UI's competitiveness and standing within its peer group.
+
 **USDA**
 
 ```{R}
@@ -390,6 +389,141 @@ ggplot(USDA_total_award_money, aes(x = Grantee_Name, y = USDA_total_award_money)
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 
 ```
+
+**Figure 1:**
+
+**DOE**
+```{r}
+# COMPARISON BETWEEEN DOE - AWARD MONEY
+library(dplyr)
+library(ggplot2)
+library(readxl)
+
+DOE_Compare_Data <- read_xlsx("DOEawards_Combined_Data.xlsx")
+
+# Calculate total award money for each institution
+DOE_total_award_money <- DOE_Compare_Data %>%
+  group_by(Institution) %>%
+  summarise(DOE_total_award_money = sum(`Amount Awarded to Date`))
+
+# Colors
+my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
+
+library(ggplot2)
+
+ggplot(DOE_total_award_money, aes(x = Institution, y = DOE_total_award_money)) +
+  geom_bar(stat = "identity", position = "dodge", fill = my_colors)  +
+  ggtitle("Total of Award Money from USDA Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
+
+**Figure 2:**
+
+**NSF**
+
+```{r}
+# COMPARISON BETWEEEN NSF - AWARD MONEY - NO APARECE LA DATA
+library(dplyr)
+library(ggplot2)
+library(readxl)
+
+NSF_Compare_Data <- read_xlsx("NSF_Combined_Data.xlsx")
+
+library(dplyr)
+
+# Filter the data for each institution
+UI_NSF_data <- NSF_Compare_Data %>%
+  filter(Organization == "Regents of the University of Idaho")
+
+BSU_NSF_data <- NSF_Compare_Data %>%
+  filter(Organization == "Boise State University")
+
+ISU_NSF_data <- NSF_Compare_Data %>%
+  filter(Organization == "Idaho State University")
+
+# Calculate the duration of grants for each institution
+# Convert "Start Date" and "End Date" columns to date objects
+#UI
+
+# Convert AwardedAmountToDate column to numeric
+NSF_Compare_Data$AwardedAmountToDate <- as.numeric(gsub("\\$", "", NSF_Compare_Data$AwardedAmountToDate))
+
+# Calculate total award money for each institution
+NSF_total_award_money <- NSF_Compare_Data %>%
+  group_by(Organization) %>%
+  summarise(NSF_total_award_money = sum(AwardedAmountToDate, na.rm = TRUE))
+
+# Calculate total award money for each institution
+NSF_total_award_money <- NSF_Compare_Data %>%
+  group_by(Organization) %>%
+  summarise(NSF_total_award_money = sum(AwardedAmountToDate))
+
+# Colors
+my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
+
+library(ggplot2)
+
+ggplot(NSF_total_award_money, aes(x = Organization, y = NSF_total_award_money)) +
+  geom_bar(stat = "identity", position = "dodge", fill = my_colors)  +
+  ggtitle("Total of Award Money from NSF Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
+
+**Figure 3:**
+
+**NIH**
+
+```{r}
+# COMPARISON BETWEEEN NIH - AWARD MONEY - CALCULATED THE AVERAGE INSTEAD THE TOTAL AMMOUNT
+library(dplyr)
+library(ggplot2)
+
+library(readxl)
+
+NIH_Compare_Data <- read_xlsx("NIH_Combined_Data.xlsx")
+
+# Calculate total award money for each institution, removing NA values in TotalCost
+
+NIH_total_award_money <- NIH_Compare_Data %>%
+  group_by(OrganizationName) %>%
+  summarise(NIH_total_award_money = sum(TotalCost, na.rm = TRUE))
+
+# Colors
+
+my_colors_3 <- c("BOISE STATE UNIVERSITY" = "orange", "IDAHO STATE UNIVERSITY" = "black", "UNIVERSITY OF IDAHO" = "gold")
+
+library(ggplot2)
+
+ggplot(NIH_total_award_money, aes(x = OrganizationName, y = NIH_total_award_money)) +
+  geom_bar(stat = "identity", position = "dodge", fill = my_colors_3)  +
+  ggtitle("Total of Award Money from NIH Grants") +
+  xlab("") +
+  ylab("Total Award Money") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
+        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
+        legend.text = element_text(size = 12),  # Adjust size of legend text
+        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
+  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+```
+
+**Figure 4:**
+
+#### Data Comparison of Grant Duration
 
 **DOE**
 
@@ -484,60 +618,7 @@ ggplot(combined_data, aes(x = Institution, y = grant_duration_years, fill = Inst
 
 ```
 
-```{r}
-# COMPARISON BETWEEEN DOE - AWARD MONEY
-library(dplyr)
-library(ggplot2)
-
-# Calculate total award money for each institution
-DOE_total_award_money <- DOE_Compare_Data %>%
-  group_by(Institution) %>%
-  summarise(DOE_total_award_money = sum(`Amount Awarded to Date`))
-
-# Colors
-my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
-
-library(ggplot2)
-
-ggplot(DOE_total_award_money, aes(x = Institution, y = DOE_total_award_money)) +
-  geom_bar(stat = "identity", position = "dodge", fill = my_colors)  +
-  ggtitle("Total of Award Money from USDA Grants") +
-  xlab("") +
-  ylab("Total Award Money") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
-        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
-        legend.text = element_text(size = 12),  # Adjust size of legend text
-        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
-  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
-```
-
-```{r}
-# COMPARISON BETWEEEN DOE - Grant Status
-library(dplyr)
-library(ggplot2)
-
-# Calculate total grant action count for each institution
-DOE_Grant_Action <- DOE_Compare_Data %>%
-  group_by(Institution, `Action Type`) %>%
-  summarise(count = n(), .groups = "drop") %>%
-  ungroup()
-
-library(ggplot2)
-
-# Assuming DOE_Grant_Action is your summarized data frame with counts of Action Type by Institution
-
-ggplot(DOE_Grant_Action, aes(x = Institution, y = count, fill = `Action Type`)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  ggtitle("Number of Counts of Action Type by Institution") +
-  xlab("") +
-  ylab("Number of Active Grants") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
-        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
-        legend.text = element_text(size = 12),  # Adjust size of legend text
-        plot.title = element_text(hjust = 0.5, size = 14))
-```
+**Figure 5:**
 
 **NSF**
 
@@ -629,74 +710,7 @@ ggplot(combined_data_NSF, aes(x = Organization, y = grant_duration_years, fill =
         plot.title = element_text(hjust = 0.5, size = 14))  # Adjust size of plot title
 ```
 
-```{r}
-# COMPARISON BETWEEEN NSF - AWARD MONEY - NO APARECE LA DATA
-library(dplyr)
-library(ggplot2)
-
-# Convert AwardedAmountToDate column to numeric
-NSF_Compare_Data$AwardedAmountToDate <- as.numeric(gsub("\\$", "", NSF_Compare_Data$AwardedAmountToDate))
-
-# Calculate total award money for each institution
-NSF_total_award_money <- NSF_Compare_Data %>%
-  group_by(Organization) %>%
-  summarise(NSF_total_award_money = sum(AwardedAmountToDate, na.rm = TRUE))
-
-# Calculate total award money for each institution
-NSF_total_award_money <- NSF_Compare_Data %>%
-  group_by(Organization) %>%
-  summarise(NSF_total_award_money = sum(AwardedAmountToDate))
-
-# Colors
-my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
-
-library(ggplot2)
-
-ggplot(NSF_total_award_money, aes(x = Organization, y = NSF_total_award_money)) +
-  geom_bar(stat = "identity", position = "dodge", fill = my_colors)  +
-  ggtitle("Total of Award Money from NSF Grants") +
-  xlab("") +
-  ylab("Total Award Money") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
-        axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
-        legend.text = element_text(size = 12),  # Adjust size of legend text
-        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
-  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
-```
-
-```{r}
-# COMPARISON BETWEEEN NSF - Grant Status
-library(dplyr)
-library(ggplot2)
-
-# Calculate total grant action count for each institution
-NSF_Grant_Award_Instrument <- NSF_Compare_Data %>%
-  group_by(Organization, AwardInstrument) %>%
-  summarise(count = n(), .groups = "drop") %>%
-  ungroup()
-
-# Check unique levels of AwardInstrument
-unique_levels <- unique(NSF_Grant_Award_Instrument$AwardInstrument)
-
-# Adjust my_colors_4 to match the number of unique levels
-my_colors_4 <- c("navyblue", "darkgreen", "darkorange", "darkred")  # or any other color palette you prefer
-
-# Plot with adjusted colors
-ggplot(NSF_Grant_Award_Instrument, aes(x = Organization, y = count, fill = AwardInstrument)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  ggtitle("Number of Counts of Action Type by Institution") +
-  xlab("") +
-  ylab("Number of Active Grants") +
-  scale_fill_manual(values = my_colors_4) +  # Add this line to set custom colors
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  
-        axis.text.y = element_text(size = 12),  
-        legend.text = element_text(size = 12),  
-        plot.title = element_text(hjust = 0.5, size = 14))
-
-
-```
+**Figure 6:**
 
 **NIH**
 
@@ -788,34 +802,76 @@ ggplot(combined_data_NIH, aes(x = OrganizationName, y = grant_duration_years, fi
         plot.title = element_text(hjust = 0.5, size = 14))  # Adjust size of plot title
 ```
 
+**Figure 7:**
+
+### Data Comparison of Grant Status
+
+**DOE**
+
 ```{r}
-# COMPARISON BETWEEEN NIH - AWARD MONEY - CALCULATED THE AVERAGE INSTEAD THE TOTAL AMMOUNT
+# COMPARISON BETWEEEN DOE - Grant Status
 library(dplyr)
 library(ggplot2)
 
-# Calculate total award money for each institution, removing NA values in TotalCost
-
-NIH_total_award_money <- NIH_Compare_Data %>%
-  group_by(OrganizationName) %>%
-  summarise(NIH_total_award_money = sum(TotalCost, na.rm = TRUE))
-
-# Colors
-
-my_colors_3 <- c("BOISE STATE UNIVERSITY" = "orange", "IDAHO STATE UNIVERSITY" = "black", "UNIVERSITY OF IDAHO" = "gold")
+# Calculate total grant action count for each institution
+DOE_Grant_Action <- DOE_Compare_Data %>%
+  group_by(Institution, `Action Type`) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  ungroup()
 
 library(ggplot2)
 
-ggplot(NIH_total_award_money, aes(x = OrganizationName, y = NIH_total_award_money)) +
-  geom_bar(stat = "identity", position = "dodge", fill = my_colors_3)  +
-  ggtitle("Total of Award Money from NIH Grants") +
+# Assuming DOE_Grant_Action is your summarized data frame with counts of Action Type by Institution
+
+ggplot(DOE_Grant_Action, aes(x = Institution, y = count, fill = `Action Type`)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Number of Counts of Action Type by Institution") +
   xlab("") +
-  ylab("Total Award Money") +
+  ylab("Number of Active Grants") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  # Adjust size of x-axis labels
         axis.text.y = element_text(size = 12),  # Adjust size of y-axis labels
         legend.text = element_text(size = 12),  # Adjust size of legend text
-        plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
-  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
+        plot.title = element_text(hjust = 0.5, size = 14))
 ```
+
+**Figure 8:**
+
+**NSF**
+
+```{r}
+# COMPARISON BETWEEEN NSF - Grant Status
+library(dplyr)
+library(ggplot2)
+
+# Calculate total grant action count for each institution
+NSF_Grant_Award_Instrument <- NSF_Compare_Data %>%
+  group_by(Organization, AwardInstrument) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  ungroup()
+
+# Check unique levels of AwardInstrument
+unique_levels <- unique(NSF_Grant_Award_Instrument$AwardInstrument)
+
+# Adjust my_colors_4 to match the number of unique levels
+my_colors_4 <- c("navyblue", "darkgreen", "darkorange", "darkred")  # or any other color palette you prefer
+
+# Plot with adjusted colors
+ggplot(NSF_Grant_Award_Instrument, aes(x = Organization, y = count, fill = AwardInstrument)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Number of Counts of Action Type by Institution") +
+  xlab("") +
+  ylab("Number of Active Grants") +
+  scale_fill_manual(values = my_colors_4) +  # Add this line to set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),  
+        axis.text.y = element_text(size = 12),  
+        legend.text = element_text(size = 12),  
+        plot.title = element_text(hjust = 0.5, size = 14))
+```
+
+**Figure 9:**
+
+
 
 ## CONLUSIONS/SUMMARY
