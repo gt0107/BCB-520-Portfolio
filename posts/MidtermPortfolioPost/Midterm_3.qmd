@@ -38,7 +38,8 @@ Each of these data sets will provide information in how much money is entering U
 Some of these data sets are long and extensive and it was shorten, for your benefit to be able to visualize how the data table looks like. (Link will be provided in where you can search, where the original data set can be obtained)
 :::
 
-1. **DOE Awards Data (DOEawards.xlsx):** This dataset contains information about awards provided by the Department of Energy (DOE).
+#### DOE Awards Data (DOEawards.xlsx)
+This dataset contains information about awards provided by the Department of Energy (DOE).
 
 ```{r, message=FALSE}
 suppressPackageStartupMessages(library(readxl))
@@ -70,7 +71,8 @@ library(readr)
 DOEawardsUI <- suppressMessages(read_xlsx("DOEawards.xlsx"))
 ```
 
-2. **USDA to UI Awards Data (USDAtoUI.csv):** This dataset includes awards data related to the University of Idaho (UI) received from the U.S. Department of Agriculture (USDA).
+#### USDA to UI Awards Data (USDAtoUI.csv): 
+This dataset includes awards data related to the University of Idaho (UI) received from the U.S. Department of Agriculture (USDA).
 
 ```{r, message=FALSE}
 suppressPackageStartupMessages(library(readxl))
@@ -110,7 +112,8 @@ UIgrants_2024_grantsUSDA <- UIgrants_recent_grantsUSDA %>%
   summarise(UIgrants_2024_grantsUSDA = n())
 ```
 
-3. **NSF UI Awards Data (NSFUI_2.xlsx):** This dataset consists of awards data from the National Science Foundation (NSF) received by the University of Idaho (UI).
+#### NSF UI Awards Data (NSFUI_2.xlsx)
+This dataset consists of awards data from the National Science Foundation (NSF) received by the University of Idaho (UI).
 
 ```{R}
 library(readxl)
@@ -130,7 +133,8 @@ knitr::kable(head(NSFUI_New_Awards_Specific))
 
 ```
 
-4. **NIH UI Awards Data (NIHUI_2.xlsx):** This dataset contains information about awards received by the University of Idaho (UI) from the National Institutes of Health (NIH).
+#### NIH UI Awards Data (NIHUI_2.xlsx)
+This dataset contains information about awards received by the University of Idaho (UI) from the National Institutes of Health (NIH).
 
 ```{R}
 library(readxl)
@@ -148,7 +152,9 @@ knitr::kable(head(NIHUI_New_Awards_Specific))
 
 ## DATA VISUALIZATION AND ANALYSIS
 
-## QUESTION 1
+The following questions is going to help us visualize UI's longevity and distribution of the university's portfolio of current and past awards. It will helps us identify if there are awards that are nearing their expiration.Also, will be doing a comparison with UI between two peer institutions: Boise State University and Idaho State University. This will help us understand UI's performance in securing federal funding, and how those it measures up against to the other institutions within the same region. 
+
+### QUESTION 1
 
 Provide a visualization that shows our active awards from each sponsor. I need to see their start date and end date, the amount of the award, and the name of the Principal Investigator. I’m really interested in seeing how far into the future our current portfolio will exist. Are there a bunch of awards about to expire? Are there a bunch that just got funded and will be active for a while? Does this vary across sponsors?
 
@@ -243,7 +249,7 @@ ggplot(data, aes(x = PI, y = Amount)) +
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 ```
 
-## QUESTION 2
+### QUESTION 2
 
 What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
 
@@ -313,7 +319,7 @@ filtered_data_UI_5y_NIH <- NIHawardsUI_Dates %>%
 ```
 
 
-## QUESTION 3
+### QUESTION 3
 
 How is UI performing with these sponsors when compared to the following peer institutions?
 
