@@ -10,21 +10,16 @@ code-tools: true
 description: "In Progress"
 ---
 
-## OVERVIEW
+## PURPOSE
 
-## PREAMBLE
+In this blog post, you will get more insight into how much federal funding is awarded at the University of Idaho (UI) by the following federal agencies: the Department of Energy (DOE), the US Department of Agriculture (NIFA), the National Institute of Health (NIH), and National Science Foundation (NSF). These agencies provide funding to different types/ areas of research (agriculture, engineering, biology, computer science, physics, social science, etc.), and we want to determine how much money is going into these types of research. We also are looking at the timeline trend of how much funding is awarded at UI compared to previous years and if there's any positive or negative impact. We can also see the longevity of the funding, like how long that funding is available. We also did a comparison between institutions in how much funding is awarded across institutions, we compared UI with  Boise State University and Idaho State University. This information will provide a general understanding of where UI stands and how it competes with other institutions in acquiring federal funding from those agencies. By the end of this blog post, you will understand the distribution of awarded federal funding across these agencies.
 
-## THE DATA - UNIVERSITY OF IDAHO
+## DATA
+The data was acquired by the database of each of these federal agencies, the data is open for the public and you can obtain information of currently active/past research projects by institution and principal investigator (PI).
 
-Write a summary of the data sources you have used. Include a Data Dictionary table that fully describes each individual data source used. You may supplement the data supplied to you with additional sources if you like, but this is not required.
-
-### Summary of Data Sources
- 1. DOE Awards Data (DOEawards.xlsx): This dataset contains information about awards provided by the Department of Energy (DOE).
- 2.	USDA to UI Awards Data (USDAtoUI.csv): This dataset includes awards data related to the University of Idaho (UI) received from the U.S. Department of Agriculture (USDA).
- 3.	NSF UI Awards Data (NSFUI_2.xlsx): This dataset consists of awards data from the National Science Foundation (NSF) received by the University of Idaho (UI).
- 4.	NIH UI Awards Data (NIHUI_2.xlsx): This dataset contains information about awards received by the University of Idaho (UI) from the National Institutes of Health (NIH).
- 
 ### Data Dictionary
+
+This data dictionary provides an overview of the variables that was used in each individual dataset, along with their descriptions and data types. This will give us more understanding of the structure of the data that was selected and will facilitate in the analysis and the interpretation of how UI stands in means of funding from each individual federal agency.
  
 ```{r}
 library(readxl)
@@ -32,6 +27,27 @@ DataDictionary <- read_xlsx("Data Dictionary.xlsx")
 
 knitr::kable(head(DataDictionary ))
 ```
+
+### Summary of Data Sources
+
+Each of these data sets will provide information in how much money is entering UI. This provide insight, where these funds is being used, like these awarded funding are used to support the activities that are conducted to support the research project, which this is also includes the funding for faculty salaries, graduate student stipends, equipment purchases, and other research-related expenses. This will also help the UI administration to have an overall general idea how these resources are being used and how is benefiting the institution.
+
+::: callout-note
+## NOTE
+
+Some of these data sets are long and extensive and it was shorten, for your benefit to be able to visualize how the data table looks like. (Link will be provided in where you can search, where the original data set can be obtained)
+:::
+
+1. **DOE Awards Data (DOEawards.xlsx):** This dataset contains information about awards provided by the Department of Energy (DOE).
+
+
+2. **USDA to UI Awards Data (USDAtoUI.csv):** This dataset includes awards data related to the University of Idaho (UI) received from the U.S. Department of Agriculture (USDA).
+
+
+3. **NSF UI Awards Data (NSFUI_2.xlsx):** This dataset consists of awards data from the National Science Foundation (NSF) received by the University of Idaho (UI).
+
+4. **NIH UI Awards Data (NIHUI_2.xlsx):** This dataset contains information about awards received by the University of Idaho (UI) from the National Institutes of Health (NIH).
+
 
 ### Department of Agriculture (NIFA)
 
