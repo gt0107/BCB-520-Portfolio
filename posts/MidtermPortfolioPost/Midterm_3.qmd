@@ -40,16 +40,37 @@ Some of these data sets are long and extensive and it was shorten, for your bene
 
 1. **DOE Awards Data (DOEawards.xlsx):** This dataset contains information about awards provided by the Department of Energy (DOE).
 
+```{r, message=FALSE}
+suppressPackageStartupMessages(library(readxl))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(readxl)
+DOEawardsUI <- read_xlsx("DOEawards.xlsx", .name_repair = "minimal")
+```
+
+```{r}
+library(readxl)
+library(dplyr)
+
+DOEawardsUI <- read_xlsx("DOEawards.xlsx")
+
+DOEUI_General <- DOEawardsUI %>% 
+  dplyr::filter(Institution == 'Regents of the University of Idaho')
+
+DOEUI_New_Awards <- DOEUI_General %>%
+  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
+
+knitr::kable(head(DOEUI_New_Awards))
+library(tidyverse)
+
+library(readr)
+DOEawardsUI <- suppressMessages(read_xlsx("DOEawards.xlsx"))
+```
 
 2. **USDA to UI Awards Data (USDAtoUI.csv):** This dataset includes awards data related to the University of Idaho (UI) received from the U.S. Department of Agriculture (USDA).
-
-
-3. **NSF UI Awards Data (NSFUI_2.xlsx):** This dataset consists of awards data from the National Science Foundation (NSF) received by the University of Idaho (UI).
-
-4. **NIH UI Awards Data (NIHUI_2.xlsx):** This dataset contains information about awards received by the University of Idaho (UI) from the National Institutes of Health (NIH).
-
-
-### Department of Agriculture (NIFA)
 
 ```{r, message=FALSE}
 suppressPackageStartupMessages(library(readxl))
@@ -88,57 +109,8 @@ UIgrants_2024_grantsUSDA <- UIgrants_recent_grantsUSDA %>%
   filter(Award.Date >= start_date & Award.Date <= end_date) %>%
   summarise(UIgrants_2024_grantsUSDA = n())
 ```
-### Department of Energy (DOE)
 
-```{r, message=FALSE}
-suppressPackageStartupMessages(library(readxl))
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(tidyverse))
-```
-
-```{r, message=FALSE, warning=FALSE}
-library(readxl)
-DOEawardsUI <- read_xlsx("DOEawards.xlsx", .name_repair = "minimal")
-```
-
-```{r}
-library(readxl)
-library(dplyr)
-
-DOEawardsUI <- read_xlsx("DOEawards.xlsx")
-
-DOEUI_General <- DOEawardsUI %>% 
-  dplyr::filter(Institution == 'Regents of the University of Idaho')
-
-DOEUI_New_Awards <- DOEUI_General %>%
-  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
-
-knitr::kable(head(DOEUI_New_Awards))
-library(tidyverse)
-
-library(readr)
-DOEawardsUI <- suppressMessages(read_xlsx("DOEawards.xlsx"))
-```
-
-
-### National Institutes of Health (NIH)
-
-```{R}
-library(readxl)
-library(dplyr)
-library(tidyverse)
-
-NIHUIAwardsActive <- read_xlsx("NIHUI_2.xlsx")
-
-NIHUI_New_Awards_Specific <- NIHUIAwardsActive %>%
-  select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
-
-knitr::kable(head(NIHUI_New_Awards_Specific))
-
-```
-
-
-### National Science Foundation (NSF)
+3. **NSF UI Awards Data (NSFUI_2.xlsx):** This dataset consists of awards data from the National Science Foundation (NSF) received by the University of Idaho (UI).
 
 ```{R}
 library(readxl)
@@ -158,6 +130,23 @@ knitr::kable(head(NSFUI_New_Awards_Specific))
 
 ```
 
+4. **NIH UI Awards Data (NIHUI_2.xlsx):** This dataset contains information about awards received by the University of Idaho (UI) from the National Institutes of Health (NIH).
+
+```{R}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+
+NIHUIAwardsActive <- read_xlsx("NIHUI_2.xlsx")
+
+NIHUI_New_Awards_Specific <- NIHUIAwardsActive %>%
+  select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
+
+knitr::kable(head(NIHUI_New_Awards_Specific))
+
+```
+
+## DATA VISUALIZATION AND ANALYSIS
 
 ## QUESTION 1
 
