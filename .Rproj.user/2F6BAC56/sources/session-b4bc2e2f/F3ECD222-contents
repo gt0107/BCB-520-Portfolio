@@ -35,7 +35,7 @@ Each of these data sets will provide information in how much money is entering U
 ::: callout-note
 ## NOTE
 
-Some of these data sets are long and extensive and it was shorten, for your benefit to be able to visualize how the data table looks like. (Link will be provided in where you can search, where the original data set can be obtained)
+Some of these data sets are long and extensive and it was shorten, for your benefit to be able to visualize how the data table looks like.
 :::
 
 #### DOE Awards Data (DOEawards.xlsx)
@@ -50,9 +50,7 @@ suppressPackageStartupMessages(library(tidyverse))
 ```{r, message=FALSE, warning=FALSE}
 library(readxl)
 DOEawardsUI <- read_xlsx("DOEawards.xlsx", .name_repair = "minimal")
-```
 
-```{r}
 library(readxl)
 library(dplyr)
 
@@ -184,71 +182,6 @@ ggplot(Q1_Data, aes(y = Sponsor, x = StartDate, xend = EndDate, yend = Sponsor))
   theme(legend.position = "bottom")
 ```
 
-```{r}
-library(readxl)
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-
-# Read the Excel file
-Q1_Data <- read_xlsx("Q1_Compilled_Data_3.xlsx")
-
-# Remove commas and dollar signs from the 'Amount' column and convert to numeric
-Q1_Data$Amount <- as.numeric(gsub("[,$]", "", Q1_Data$Amount))
-
-# Assuming your data frame has columns 'PI', 'Amount', and 'Sponsor'
-# Perform necessary data manipulation
-data <- Q1_Data %>%
-  group_by(PI, Sponsor) %>%
-  summarise(total_amount = sum(Amount, na.rm = TRUE)) %>%
-  ungroup() %>%
-  group_by(PI) %>%
-  mutate(total_amount = sum(total_amount)) %>%
-  ungroup() %>%
-  mutate(percentage = total_amount / sum(total_amount))
-
-# Create stacked bar plot using ggplot2
-ggplot(data, aes(x = reorder(PI, total_amount), y = percentage, fill = Sponsor)) +
-  geom_bar(stat = "identity") +
-  labs(x = "PI Names", y = "Percentage") +
-  scale_fill_brewer(palette = "Set3") +  # Choose color palette
-  theme_minimal() +  # Optional: apply a minimal theme
-  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
-        plot.title = element_text(size = 20),  # Increase title size
-        axis.title.x = element_text(size = 16),  # Increase x-axis label size
-        axis.title.y = element_text(size = 16),  # Increase y-axis label size
-        axis.text = element_text(size = 14),  # Increase axis tick label size
-        legend.text = element_text(size = 14),  # Increase legend text size
-        legend.title = element_text(size = 16))  # Increase legend title size
-```
-
-```{r}
-library(readxl)
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-
-# Read the Excel file
-Q1_NIH <- read_xlsx("Q1_NIH.xlsx")
-
-# View the data related to Amount and PI columns
-data <- Q1_NIH[, c("Amount", "PI")]
-head(data)
-
-# Define the extended y-axis limits
-extended_y_limits <- c(0, 10000000)  # For example, extend the y-axis from 0 to 10,000,000 (10 million)
-
-# Create a violin plot with extended y-axis
-ggplot(data, aes(x = PI, y = Amount)) +
-  geom_violin() +
-  ylim(extended_y_limits) +  # Set the y-axis limits
-  labs(title = "Distribution of Amount Awarded to Principal Investigators",
-       x = "Principal Investigator",
-       y = "Amount Awarded") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
-```
-
 ### QUESTION 2
 
 What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
@@ -265,7 +198,6 @@ DOEawardsUI_Dates <- read_xlsx("DOEawards.xlsx")
 
 filtered_data_UI_DOE <- DOEawardsUI_Dates %>%
   filter(Institution == 'Regents of the University of Idaho')
-
 
 #USDA
 
@@ -284,46 +216,19 @@ ten_years_ago <- Sys.Date() - years(10)  # Calculate the date 5 years ago
 # Filter the data to include only awards that started 5 years ago or later
 filtered_data_UI_10y_USDA <- USDAawardsUI_Dates %>%
   filter(Award.Date >= ten_years_ago)
-
-#NSF
-
-NSFawardsUI_Dates_5 <- read_xls("5YR_UI_NSF.xls")
-
-# Assuming the start date column is named "Start_Date"
-five_years_ago <- Sys.Date() - years(5)  # Calculate the date 5 years ago
-
-# Filter the data to include only awards that started 5 years ago or later
-filtered_data_UI_5y_NSF <- NSFawardsUI_Dates_5 %>%
-  filter(StartDate >= five_years_ago)
-
-NSFawardsUI_Dates_10 <- read_xls("10YR_UI_NSF.xls")
-
-# Assuming the start date column is named "Start_Date"
-ten_years_ago <- Sys.Date() - years(10)  # Calculate the date 5 years ago
-
-# Filter the data to include only awards that started 5 years ago or later
-filtered_data_UI_10y_NSF <- NSFawardsUI_Dates_10 %>%
-  filter(StartDate >= ten_years_ago)
-
-#NIH
-
-NIHawardsUI_Dates <- read_xlsx("10YR_UI_NIH.xlsx")
-
-#Assuming the start date column is named "Start_Date"
-five_years_ago <- Sys.Date() - years(5)  # Calculate the date 5 years ago
-
-# Filter the data to include only awards that started 5 years ago or later
-filtered_data_UI_5y_NIH <- NIHawardsUI_Dates %>%
-  filter(`Budget Start Date` >= five_years_ago)
-
 ```
-
 
 ### QUESTION 3
 
 How is UI performing with these sponsors when compared to the following peer institutions?
 
-### Boise State University
+::: callout-note
+## NOTE
+
+The following data sets are from the institutions of Boise State University and Idaho State University, the data set from University of Idaho is already been presented at the beginning of the blog post. Also, these data sets are long and extensive and it was shorten, for your benefit to be able to visualize how the data table looks like.
+:::
+
+#### Boise State University
 
 **Department of Agriculture (NIFA)**
 
@@ -333,7 +238,7 @@ library(readxl)
 library(knitr)
 
 BSUUSDA  <- read.csv("USDABSU.csv")
-knitr::kable(head(BSUUSDA))
+knitr::kable(head(BSUUSDA,4))
 ```
 
 **Department of Energy**
@@ -349,7 +254,7 @@ DOEBSU_General <- DOEawardsBSU %>%
 DOEBSU_New_Awards <- DOEBSU_General %>%
   select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
 
-knitr::kable(head(DOEBSU_New_Awards))
+knitr::kable(head(DOEBSU_New_Awards,4))
 library(tidyverse)
 ```
 
@@ -365,8 +270,7 @@ NIHBSUAwardsActive <- read_xlsx("NIHBSU_2.xlsx")
 NIHBSU_New_Awards_Specific <- NIHBSUAwardsActive %>%
   select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
 
-knitr::kable(head(NIHBSU_New_Awards_Specific))
-
+knitr::kable(head(NIHBSU_New_Awards_Specific,4))
 ```
 
 **National Science Foundation (NSF)**
@@ -385,16 +289,16 @@ NSFBSU_New_Awards_Specific <- NSFBSUAwardsActive %>%
   select(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)
 
 # Displaying the first few rows in a table format
-knitr::kable(head(NSFBSU_New_Awards_Specific))
-
+knitr::kable(head(NSFBSU_New_Awards_Specific,4))
 ```
 
-### Idaho State University
+#### Idaho State University
 
 **Department of Energy**
 ```{r}
 library(readxl)
 library(dplyr)
+library(tidyverse)
 
 DOEaward <- read_xlsx("DOEawards.xlsx")
 
@@ -404,8 +308,8 @@ DOEIDAHOSATTE_General <- DOEaward %>%
 DOEDAHOSATTE_New_Awards <- DOEIDAHOSATTE_General %>%
   select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
 
-knitr::kable(head(DOEDAHOSATTE_New_Awards))
-library(tidyverse)
+knitr::kable(head(DOEDAHOSATTE_New_Awards,4))
+
 ```
 
 **Department of Agriculture (NIFA)**
@@ -416,7 +320,7 @@ library(readxl)
 library(knitr)
 
 ISUUSDA  <- read.csv("USDAISU.csv")
-knitr::kable(head(ISUUSDA))
+knitr::kable(head(ISUUSDA,4))
 ```
 
 **National Institutes of Health (NIH)**
@@ -431,8 +335,7 @@ NIHISUAwardsActive <- read_xlsx("NIHISU_2.xlsx")
 NIHISU_New_Awards_Specific <- NIHISUAwardsActive %>%
   select('Project Title', 'Administering IC', 'Award Notice Date', `Opportunity Number`, `Project Number`, `Project Start Date`, `Project End Date`, `Budget Start Date`, `Budget End Date`, 'Total Cost', 'Total Cost (Sub Projects)', 'Funding IC(s)', 'Direct Cost IC', 'InDirect Cost IC', 'Total Cost IC')
 
-knitr::kable(head(NIHISU_New_Awards_Specific))
-
+knitr::kable(head(NIHISU_New_Awards_Specific,4))
 ```
 
 **National Science Foundation (NSF)**
@@ -451,12 +354,8 @@ NSFISU_New_Awards_Specific <- NSFISUAwardsActive %>%
   select(Title, NSFOrganization, StartDate, LastAmendmentDate, EndDate, AwardedAmountToDate)
 
 # Displaying the first few rows in a table format
-knitr::kable(head(NSFISU_New_Awards_Specific))
-
+knitr::kable(head(NSFISU_New_Awards_Specific,4))
 ```
-
-Note that “performing” can mean a variety of different things. You must choose your metrics of performance and justify them.
-
 
 **USDA**
 
