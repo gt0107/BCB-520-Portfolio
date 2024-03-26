@@ -41,16 +41,14 @@ Some of these data sets are long and extensive and it was shorten, for your bene
 #### DOE Awards Data (DOEawards.xlsx)
 This dataset contains information about awards provided by the Department of Energy (DOE).
 
-```{r, message=FALSE}
-suppressPackageStartupMessages(library(readxl))
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(tidyverse))
-```
-
-```{r, message=FALSE, warning=FALSE}
+```{r, include=FALSE}
 library(readxl)
 library(dplyr)
 library(tidyverse)
+```
+
+```{r, message=FALSE, warning=FALSE}
+
 
 DOEawardsUI <- read_xlsx("DOEawards.xlsx", .name_repair = "minimal")
 
