@@ -10,7 +10,7 @@ code-tools: true
 description: "In Progress"
 ---
 
-## PURPOSE
+## PREAMBLE
 
 In this blog post, you will get more insight into how much federal funding is awarded at the University of Idaho (UI) by the following federal agencies: the Department of Energy (DOE), the US Department of Agriculture (NIFA), the National Institute of Health (NIH), and National Science Foundation (NSF). These agencies provide funding to different types/ areas of research (agriculture, engineering, biology, computer science, physics, social science, etc.), and we want to determine how much money is going into these types of research. We also are looking at the timeline trend of how much funding is awarded at UI compared to previous years and if there's any positive or negative impact. We can also see the longevity of the funding, like how long that funding is available. We also did a comparison between institutions in how much funding is awarded across institutions, we compared UI with  Boise State University and Idaho State University. This information will provide a general understanding of where UI stands and how it competes with other institutions in acquiring federal funding from those agencies. By the end of this blog post, you will understand the distribution of awarded federal funding across these agencies.
 
@@ -145,12 +145,15 @@ knitr::kable(head(NIHUI_New_Awards_Specific))
 
 ## DATA VISUALIZATION AND ANALYSIS
 
-The following questions is going to help us visualize UI's longevity and distribution of the university's portfolio of current and past awards. It will helps us identify if there are awards that are nearing their expiration.Also, will be doing a comparison with UI between two peer institutions: Boise State University and Idaho State University. This will help us understand UI's performance in securing federal funding, and how those it measures up against to the other institutions within the same region. 
+The following visualizations is going to help us visualize UI's longevity and distribution of the university's portfolio of current and past awards. It will helps us identify if there are awards that are nearing their expiration.Also, will be doing a comparison with UI between two peer institutions: Boise State University and Idaho State University. This will help us understand UI's performance in securing federal funding, and how those it measures up against to the other institutions within the same region. 
 
-### QUESTION 1
+### University of Idaho - Current and Future Portfolio
 
-Provide a visualization that shows our active awards from each sponsor. I need to see their start date and end date, the amount of the award, and the name of the Principal Investigator. I’m really interested in seeing how far into the future our current portfolio will exist. Are there a bunch of awards about to expire? Are there a bunch that just got funded and will be active for a while? Does this vary across sponsors?
+I am creating visualization that will displays the active awards from each sponsor, including their start and end dates, the amount of the award, and the name of the Principal Investigator. This will provide insights of the longevity of the University of Idaho current portfolio of awards. This will also help us identify what awards are near expiration, and which one ones has a longer duration, and to identify if any of these patterns may differ across federal agencies. Ultimately, these visualizations will provide an aid to have an understanding of the sustainability of UIs funding from different federal agencies.
 
+In our first visualization (**Figure 1**), its a general overview of the longevity of our current active awards. By, looking at this Timeline chart, we can easily point out that our **NSF** awards has the longest longevity (meaning we will have funding until 2028). Looking at **NIH** and **DOE** awards timeline their awards are ending in the year 2024, that is something to keep in mind and following up with the PIs that have those funding to see if they applied for new grants.
+
+*USDA data was not added in this timeline chart beacuase it didnt provide an end date of their current active awards, so for this time of grant will be analyzed and visualized differently*
 ```{r}
 library(readxl)
 library(dplyr)
@@ -176,7 +179,104 @@ ggplot(Q1_Data, aes(y = Sponsor, x = StartDate, xend = EndDate, yend = Sponsor))
   theme_minimal() +
   theme(legend.position = "bottom")
 ```
+**Figure 1: Active Awards at UI** This Gantt  Chart provides information of the longevity of the current awards that are at UI.
 
+```{r}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Read the data
+Q1_Data_PI <- read_xlsx("Q1_Compilled_Data.xlsx")
+
+# Filter the data for DOE sponsor
+Q1_PI_DOE <- Q1_Data_PI %>%
+  filter(Sponsor == "DOE")
+
+# Convert StartDate and EndDate to Date objects
+Q1_PI_DOE$StartDate <- as.Date(Q1_PI_DOE$StartDate, format = "%m/%d/%Y")
+Q1_PI_DOE$EndDate <- as.Date(Q1_PI_DOE$EndDate, format = "%m/%d/%Y")
+
+# Filter out rows with NA values in StartDate or EndDate
+Q1_PI_DOE <- Q1_PI_DOE[complete.cases(Q1_PI_DOE$StartDate, Q1_PI_DOE$EndDate), ]
+
+# Create the Gantt chart
+ggplot(Q1_PI_DOE, aes(y = PI, x = StartDate, xend = EndDate, yend = PI)) +
+  geom_segment(size = 5, color = "darkgrey") +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  labs(title = "Active Awards Timeline by PI",
+       x = "Timeline",
+       y = "Principal Investigator") +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5))  # Set horizontal justification to center
+```
+
+```{r}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Read the data
+Q1_Data_PI <- read_xlsx("Q1_Compilled_Data.xlsx")
+
+# Filter the data for DOE sponsor
+Q1_PI_NIH <- Q1_Data_PI %>%
+  filter(Sponsor == "NIH")
+
+# Convert StartDate and EndDate to Date objects
+Q1_PI_NIH$StartDate <- as.Date(Q1_PI_NIH$StartDate, format = "%m/%d/%Y")
+Q1_PI_NIH$EndDate <- as.Date(Q1_PI_NIH$EndDate, format = "%m/%d/%Y")
+
+# Filter out rows with NA values in StartDate or EndDate
+Q1_PI_NIH <- Q1_PI_NIH[complete.cases(Q1_PI_NIH$StartDate, Q1_PI_NIH$EndDate), ]
+
+# Create the Gantt chart
+ggplot(Q1_PI_NIH, aes(y = PI, x = StartDate, xend = EndDate, yend = PI)) +
+  geom_segment(size = 5, color = "black") +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  labs(title = "Active Awards Timeline by PI",
+       x = "Timeline",
+       y = "Principal Investigator") +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5))  # Set horizontal justification to center
+```
+
+```{r}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Read the data
+Q1_Data_PI <- read_xlsx("Q1_Compilled_Data.xlsx")
+
+# Filter the data for DOE sponsor
+Q1_PI_NSF <- Q1_Data_PI %>%
+  filter(Sponsor == "NSF")
+
+# Convert StartDate and EndDate to Date objects
+Q1_PI_NSF$StartDate <- as.Date(Q1_PI_NSF$StartDate, format = "%m/%d/%Y")
+Q1_PI_NSF$EndDate <- as.Date(Q1_PI_NSF$EndDate, format = "%m/%d/%Y")
+
+# Filter out rows with NA values in StartDate or EndDate
+Q1_PI_NSF <- Q1_PI_NSF[complete.cases(Q1_PI_NSF$StartDate, Q1_PI_NSF$EndDate), ]
+
+# Create the Gantt chart with adjusted y-axis labels
+ggplot(Q1_PI_NSF, aes(y = PI, x = StartDate, xend = EndDate, yend = PI)) +
+  geom_segment(size = 5, color = "gold") +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  labs(title = "Active Awards Timeline by PI",
+       x = "Timeline",
+       y = "Principal Investigator") +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5),
+        axis.text.y = element_text(size = 6))  # Reduce the size of y-axis labels
+```
 ### QUESTION 2
 
 What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
@@ -212,6 +312,51 @@ ten_years_ago <- Sys.Date() - years(10)  # Calculate the date 5 years ago
 filtered_data_UI_10y_USDA <- USDAawardsUI_Dates %>%
   filter(Award.Date >= ten_years_ago)
 ```
+
+```{r}
+library(dplyr)
+library(readxl)
+library(lubridate)
+
+# Read the Excel file
+NIHawardsUI_Dates <- read_xlsx("UI_NIH_ALL_YR.xlsx")
+
+filtered_data_UI_NIH <- NIHawardsUI_Dates %>%
+  filter('Organization Name' == 'UNIVERSITY OF IDAHO')
+
+# Define the date format
+NIHawardsUI_Dates$`Project Start Date` <- mdy(NIHawardsUI_Dates$`Project Start Date`)
+
+# Calculate the date 10 years ago
+Ten_years_ago <- Sys.Date() - years(10)
+
+# Filter the data to include only awards that started 10 years ago or later
+filtered_data_UI_10y_NIH <- NIHawardsUI_Dates %>%
+  filter(`Project Start Date` >= Ten_years_ago)
+
+filtered_data_UI_10y_NIH_UI <- filtered_data_UI_10y_NIH %>%
+  filter(`Organization Name` == 'UNIVERSITY OF IDAHO')
+```
+
+```{r}
+library(dplyr)
+library(readxl)
+library(lubridate)
+
+# Read the Excel file
+NSHawardsUI_Dates <- read_xlsx("NSF_ALL_YR.xlsx")
+
+# Define the date format
+NSHawardsUI_Dates$StartDate <- mdy(NSHawardsUI_Dates$StartDate)
+
+# Calculate the date 10 years ago
+Ten_years_ago <- Sys.Date() - years(10)
+
+# Filter the data to include only awards that started 10 years ago or later
+filtered_data_UI_10y_NSF <- NSHawardsUI_Dates %>%
+  filter(StartDate >= Ten_years_ago)
+```
+
 
 ### QUESTION 3
 
