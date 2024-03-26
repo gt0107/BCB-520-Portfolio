@@ -289,20 +289,23 @@ ggplot(Q1_PI_NSF, aes(y = PI, x = StartDate, xend = EndDate, yend = PI)) +
 library(ggplot2)
 library(scales)  # For formatting labels
 
+# Read the data
+Q1_Data_Amount <- read_xlsx("Q1_Compilled_Data_4.xlsx")
+
 # Convert Amount to numeric
-Q1_Data$Amount <- as.numeric(Q1_Data$Amount)
+Q1_Data_Amount$Amount <- as.numeric(Q1_Data_Amount$Amount)
 
 # Check if there are any non-numeric values in Amount
-non_numeric <- Q1_Data[!is.na(as.numeric(Q1_Data$Amount)), ]
+non_numeric <- Q1_Data_Amount[!is.na(as.numeric(Q1_Data_Amount$Amount)), ]
 
 # Check the structure of the Amount variable
-str(Q1_Data$Amount)
+str(Q1_Data_Amount$Amount)
 
 # Define colors for each sponsor
-sponsor_colors <- c("DOE" = "darkgray", "NSF" = "gold", "NIH" = "black")
+sponsor_colors <- c("DOE" = "darkgray", "NSF" = "gold", "NIH" = "black", "USDA" = "lightgray")
 
 # Create the bar plot with colors assigned to each sponsor
-ggplot(Q1_Data, aes(x = Sponsor, y = Amount, fill = Sponsor)) +
+ggplot(Q1_Data_Amount, aes(x = Sponsor, y = Amount, fill = Sponsor)) +
   geom_bar(stat = "summary", fun = "sum") +
   labs(title = "Total Amount by Sponsor",
        x = "Sponsor",
@@ -317,6 +320,7 @@ ggplot(Q1_Data, aes(x = Sponsor, y = Amount, fill = Sponsor)) +
 
   
 ```{r}
+library(ggplot2)
 # Convert Amount to numeric
 Q1_Data$Amount <- as.numeric(Q1_Data$Amount)
 
@@ -335,10 +339,12 @@ ggplot(Q1_Data, aes(x = PI, y = Amount, fill = Sponsor)) +
         plot.title = element_text(hjust = 0.5)) +  # Adjust title alignment
   scale_fill_manual(values = sponsor_colors)  # Use manually defined colors for each sponsor
 ```
+**Figure 6:**
 
-### QUESTION 2
 
-What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
+### University of Idaho - Past Portfolio (5 to 10 Years)
+
+The purpose of this question is to analyze the proportional representation of new awards to the organization (UI) from different funding sources over the past 5 to 10 years. By examining this data, the goal is to identify any trends that may indicate positive or negative developments in terms of the organization's funding sources. This analysis can reveal whether certain funding sources are becoming more or less significant contributors to the organization's overall portfolio of awards over time. Trends that show an increase in awards from particular sources might be considered encouraging, indicating growing support from those sources, while trends showing a decrease might be considered discouraging and could prompt further investigation into potential reasons behind such shifts in funding patterns.
 
 ```{r}
 #DOE
