@@ -179,7 +179,11 @@ ggplot(Q1_Data, aes(y = Sponsor, x = StartDate, xend = EndDate, yend = Sponsor))
   theme_minimal() +
   theme(legend.position = "bottom")
 ```
-**Figure 1: Active Awards at UI** This Gantt  Chart provides information of the longevity of the current awards that are at UI.
+**Figure 1:** Active Awards at UI. This Gantt  Chart provides information of the longevity of the current awards that are at UI.
+
+The previous visualization (**Figure 1**) was just an overview of the longevity of the current awards that are at UI. The following visualizations, we can see the active awards by sponsor and Principal Investigator (PI). By looking at these visualization we can determine the longevity of their active awards and compare/contrast between sponsors. By looking at these three visualizations (**Figure 1**, **Figure 2**, **Figure 3**), at a glance we can observe that we have more active awards in NSF compared to NIH and DOE, and these NSF awards has a longer end date by 2028, but still we some awards that ends in between 2024/2025 (like for the DOE and NIH awards).
+
+By looking at these visualizations, we can say that for the sponsor **DOE**, we have only **4 current PIs** that have active awards (their expiration date is in late 2024). Which comes to a concern, because why PIs are not applying for awards at DOE, it is something to look into. Like, look for information what the DOE asks to apply for their awards, and also talk to those current PIs at UI, to have their perspective and how can we exppand the universiy's portfolio this specific sponsor. For the **NIH and NSF** awards, we have an active flow of awards, but still we have to look into those awards that are to be expired, and what are the plans from those current PIs.
 
 ```{r}
 library(ggplot2)
@@ -212,6 +216,7 @@ ggplot(Q1_PI_DOE, aes(y = PI, x = StartDate, xend = EndDate, yend = PI)) +
   theme(legend.position = "bottom",
         plot.title = element_text(hjust = 0.5))  # Set horizontal justification to center
 ```
+**Figure 2:** Active Award by PI (DOE). This Gantt  Chart provides information of the longevity of the current awards that are at UI by PI for DOE.
 
 ```{r}
 library(ggplot2)
@@ -244,6 +249,7 @@ ggplot(Q1_PI_NIH, aes(y = PI, x = StartDate, xend = EndDate, yend = PI)) +
   theme(legend.position = "bottom",
         plot.title = element_text(hjust = 0.5))  # Set horizontal justification to center
 ```
+**Figure 3:**Active Award by PI (NIH). This Gantt  Chart provides information of the longevity of the current awards that are at UI by PI for NIH.
 
 ```{r}
 library(ggplot2)
@@ -277,6 +283,59 @@ ggplot(Q1_PI_NSF, aes(y = PI, x = StartDate, xend = EndDate, yend = PI)) +
         plot.title = element_text(hjust = 0.5),
         axis.text.y = element_text(size = 6))  # Reduce the size of y-axis labels
 ```
+**Figure 4**Active Award by PI (NSF). This Gantt  Chart provides information of the longevity of the current awards that are at UI by PI for NSF.
+
+```{r}
+library(ggplot2)
+library(scales)  # For formatting labels
+
+# Convert Amount to numeric
+Q1_Data$Amount <- as.numeric(Q1_Data$Amount)
+
+# Check if there are any non-numeric values in Amount
+non_numeric <- Q1_Data[!is.na(as.numeric(Q1_Data$Amount)), ]
+
+# Check the structure of the Amount variable
+str(Q1_Data$Amount)
+
+# Define colors for each sponsor
+sponsor_colors <- c("DOE" = "darkgray", "NSF" = "gold", "NIH" = "black")
+
+# Create the bar plot with colors assigned to each sponsor
+ggplot(Q1_Data, aes(x = Sponsor, y = Amount, fill = Sponsor)) +
+  geom_bar(stat = "summary", fun = "sum") +
+  labs(title = "Total Amount by Sponsor",
+       x = "Sponsor",
+       y = "Total Amount (Millions)") +
+  scale_y_continuous(labels = scales::unit_format(unit = "M")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5)) +  # Adjust title alignment
+  scale_fill_manual(values = sponsor_colors)  # Use manually defined colors for each sponsor
+```
+**Figure 5:**
+
+  
+```{r}
+# Convert Amount to numeric
+Q1_Data$Amount <- as.numeric(Q1_Data$Amount)
+
+# Define colors for each sponsor
+sponsor_colors <- c("DOE" = "darkgray", "NSF" = "gold", "NIH" = "black")
+
+# Create the bar plot with PI on the x-axis and filled bars by Sponsor
+ggplot(Q1_Data, aes(x = PI, y = Amount, fill = Sponsor)) +
+  geom_bar(stat = "summary", fun = "sum") +
+  labs(title = "Total Amount by PI and Sponsor",
+       x = "Principal Investigator",
+       y = "Total Amount (Millions)") +
+  scale_y_continuous(labels = scales::unit_format(unit = "M")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8),  # Adjust font size
+        plot.title = element_text(hjust = 0.5)) +  # Adjust title alignment
+  scale_fill_manual(values = sponsor_colors)  # Use manually defined colors for each sponsor
+```
+
 ### QUESTION 2
 
 What is the proportional representation of new awards to the UI from these various sources over the past 5 to 10 years? Are there any trends that are encouraging or discouraging?
