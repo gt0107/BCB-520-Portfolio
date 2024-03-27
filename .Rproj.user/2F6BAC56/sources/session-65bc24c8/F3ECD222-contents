@@ -20,9 +20,17 @@ The data was acquired by the database of each of these federal agencies, the dat
 ### Data Dictionary
 
 This data dictionary provides an overview of the variables that was used in each individual dataset, along with their descriptions and data types. This will give us more understanding of the structure of the data that was selected and will facilitate in the analysis and the interpretation of how UI stands in means of funding from each individual federal agency.
- 
-```{r}
+
+```{r, include=FALSE}
 library(readxl)
+library(dplyr)
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(ggplot2)
+```
+
+```{r}
 DataDictionary <- read_xlsx("Data Dictionary.xlsx")
 
 knitr::kable(head(DataDictionary ))
@@ -40,13 +48,6 @@ Some of these data sets are long and extensive and it was shorten, for your bene
 
 #### DOE Awards Data (DOEawards.xlsx)
 This dataset contains information about awards provided by the Department of Energy (DOE).
-
-```{r, include=FALSE}
-library(readxl)
-library(dplyr)
-library(tidyverse)
-library(lubridate)
-```
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -668,7 +669,7 @@ ggplot(all_amount_sum, aes(x = Start_Date, y = Total_Amount / 1e6, color = Spons
 
 ### Comparison Between Peers Institutions
 
-How is UI performing with these sponsors when compared to the following peer institutions?
+We already saw how UI is performing with these sponsors, but now lest compare with the following peer institutions: Boise State University and Idaho State University. The aim for the following visualizations is to understand how UIs performance in securing awards, conducting research, and acquiring funding measures up against similar institutions in the region or within the same academic field.
 
 ::: callout-note
 ## NOTE
@@ -676,24 +677,17 @@ How is UI performing with these sponsors when compared to the following peer ins
 The following data sets are from the institutions of Boise State University and Idaho State University, the data set from University of Idaho is already been presented at the beginning of the blog post. Also, these data sets are long and extensive and it was shorten, for your benefit to be able to visualize how the data table looks like.
 :::
 
-#### Boise State University
+#### Boise State University - Data Sources
 
 **Department of Agriculture (NIFA)**
 
 ```{r}
-library(tidyverse)
-library(readxl)
-library(knitr)
-
 BSUUSDA  <- read.csv("USDABSU.csv")
 knitr::kable(head(BSUUSDA,4))
 ```
 
 **Department of Energy**
 ```{r}
-library(readxl)
-library(dplyr)
-
 DOEawardsBSU <- read_xlsx("DOEawards.xlsx")
 
 DOEBSU_General <- DOEawardsBSU %>% 
@@ -703,16 +697,11 @@ DOEBSU_New_Awards <- DOEBSU_General %>%
   select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)
 
 knitr::kable(head(DOEBSU_New_Awards,4))
-library(tidyverse)
 ```
 
 **National Institutes of Health (NIH)**
 
 ```{R}
-library(readxl)
-library(dplyr)
-library(tidyverse)
-
 NIHBSUAwardsActive <- read_xlsx("NIHBSU_2.xlsx")
 
 NIHBSU_New_Awards_Specific <- NIHBSUAwardsActive %>%
@@ -724,11 +713,6 @@ knitr::kable(head(NIHBSU_New_Awards_Specific,4))
 **National Science Foundation (NSF)**
 
 ```{R}
-library(readxl)
-library(dplyr)
-library(tidyverse)
-library(knitr) # Ensure knitr is explicitly loaded for kable()
-
 # Reading the dataset from an Excel file
 NSFBSUAwardsActive <- read_xlsx("NSFBSU_2.xlsx")
 
@@ -740,14 +724,10 @@ NSFBSU_New_Awards_Specific <- NSFBSUAwardsActive %>%
 knitr::kable(head(NSFBSU_New_Awards_Specific,4))
 ```
 
-#### Idaho State University
+#### Idaho State University - Data Sources
 
 **Department of Energy**
 ```{r}
-library(readxl)
-library(dplyr)
-library(tidyverse)
-
 DOEaward <- read_xlsx("DOEawards.xlsx")
 
 DOEIDAHOSATTE_General <- DOEaward %>% 
@@ -763,10 +743,6 @@ knitr::kable(head(DOEDAHOSATTE_New_Awards,4))
 **Department of Agriculture (NIFA)**
 
 ```{r}
-library(tidyverse)
-library(readxl)
-library(knitr)
-
 ISUUSDA  <- read.csv("USDAISU.csv")
 knitr::kable(head(ISUUSDA,4))
 ```
@@ -774,10 +750,6 @@ knitr::kable(head(ISUUSDA,4))
 **National Institutes of Health (NIH)**
 
 ```{R}
-library(readxl)
-library(dplyr)
-library(tidyverse)
-
 NIHISUAwardsActive <- read_xlsx("NIHISU_2.xlsx")
 
 NIHISU_New_Awards_Specific <- NIHISUAwardsActive %>%
@@ -789,11 +761,6 @@ knitr::kable(head(NIHISU_New_Awards_Specific,4))
 **National Science Foundation (NSF)**
 
 ```{R}
-library(readxl)
-library(dplyr)
-library(tidyverse)
-library(knitr) # Ensure knitr is explicitly loaded for kable()
-
 # Reading the dataset from an Excel file
 NSFISUAwardsActive <- read_xlsx("NSFISU_2.xlsx")
 
@@ -807,31 +774,29 @@ knitr::kable(head(NSFISU_New_Awards_Specific,4))
 
 #### Data Comparison of Awarded Money
 
-The following data presents how much money is coming to these institutions, and can provide insights into UI's competitiveness and standing within its peer group.
-
-**USDA**
+The following visualizations will show us how much awarded money is coming to these institutions, and will provide insights into UI's competitiveness and standing within its peer group.
 
 ```{R}
 # COMPARISON BETWEEEN USDA - AWARD MONEY
 
-library(readxl)
-
 USDA_Compare_Data <- read_xlsx("USDA_Combined_Data_Recent_Awards.xlsx")
 
-library(dplyr)
-library(ggplot2)
+# Define a vector of old names and a new name
+old_names <- c("SAES - UNIVERSITY OF IDAHO", "FRST - UNIVERSITY OF IDAHO-FORESTRY SCHOOL")
+new_name <- "UNIVERSITY OF IDAHO"
 
-library(dplyr)
+# Use mutate with ifelse and %in% to change multiple old names to the new name
+USDA_Compare_Data <- mutate(USDA_Compare_Data, Grantee_Name = ifelse(Grantee_Name %in% old_names, new_name, Grantee_Name))
 
 # Calculate total award money for each institution
 USDA_total_award_money <- USDA_Compare_Data %>%
   group_by(Grantee_Name) %>%
   summarise(USDA_total_award_money = sum(Award_Dollars))
 
-library(ggplot2)
+my_colors_6 <- c("BOISE STATE UNIVERSITY" = "orange", "UNIVERSITY OF IDAHO" = "gold")
 
 ggplot(USDA_total_award_money, aes(x = Grantee_Name, y = USDA_total_award_money)) +
-  geom_bar(stat = "identity", fill = "blue") +
+  geom_bar(stat = "identity", fill = my_colors_6) +
   ggtitle("Total of Award Money from USDA Grants") +
   xlab("") +
   ylab("Total Award Money") +
@@ -842,15 +807,10 @@ ggplot(USDA_total_award_money, aes(x = Grantee_Name, y = USDA_total_award_money)
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 
 ```
+**Figure 9:** USDA
 
-**Figure 1:**
-
-**DOE**
 ```{r}
 # COMPARISON BETWEEEN DOE - AWARD MONEY
-library(dplyr)
-library(ggplot2)
-library(readxl)
 
 DOE_Compare_Data <- read_xlsx("DOEawards_Combined_Data.xlsx")
 
@@ -862,11 +822,10 @@ DOE_total_award_money <- DOE_Compare_Data %>%
 # Colors
 my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
 
-library(ggplot2)
 
 ggplot(DOE_total_award_money, aes(x = Institution, y = DOE_total_award_money)) +
   geom_bar(stat = "identity", position = "dodge", fill = my_colors)  +
-  ggtitle("Total of Award Money from USDA Grants") +
+  ggtitle("Total of Award Money from DOE Grants") +
   xlab("") +
   ylab("Total Award Money") +
   theme_minimal() +
@@ -876,20 +835,12 @@ ggplot(DOE_total_award_money, aes(x = Institution, y = DOE_total_award_money)) +
         plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 ```
-
-**Figure 2:**
-
-**NSF**
+**Figure 10:**DOE
 
 ```{r}
 # COMPARISON BETWEEEN NSF - AWARD MONEY - NO APARECE LA DATA
-library(dplyr)
-library(ggplot2)
-library(readxl)
 
 NSF_Compare_Data <- read_xlsx("NSF_Combined_Data.xlsx")
-
-library(dplyr)
 
 # Filter the data for each institution
 UI_NSF_data <- NSF_Compare_Data %>%
@@ -901,12 +852,12 @@ BSU_NSF_data <- NSF_Compare_Data %>%
 ISU_NSF_data <- NSF_Compare_Data %>%
   filter(Organization == "Idaho State University")
 
-# Calculate the duration of grants for each institution
-# Convert "Start Date" and "End Date" columns to date objects
-#UI
-
 # Convert AwardedAmountToDate column to numeric
 NSF_Compare_Data$AwardedAmountToDate <- as.numeric(gsub("\\$", "", NSF_Compare_Data$AwardedAmountToDate))
+
+# Remove dollar signs ($) and commas (,) from numeric columns
+UI_NSF_data <- UI_NSF_data %>%
+  mutate(AwardedAmountToDate = as.numeric(gsub("[\\$,]", "", AwardedAmountToDate)))
 
 # Calculate total award money for each institution
 NSF_total_award_money <- NSF_Compare_Data %>%
@@ -921,8 +872,6 @@ NSF_total_award_money <- NSF_Compare_Data %>%
 # Colors
 my_colors <- c("Boise State University" = "orange", "Idaho State University" = "black", "Regents of the University of Idaho" = "gold")
 
-library(ggplot2)
-
 ggplot(NSF_total_award_money, aes(x = Organization, y = NSF_total_award_money)) +
   geom_bar(stat = "identity", position = "dodge", fill = my_colors)  +
   ggtitle("Total of Award Money from NSF Grants") +
@@ -935,17 +884,10 @@ ggplot(NSF_total_award_money, aes(x = Organization, y = NSF_total_award_money)) 
         plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 ```
-
-**Figure 3:**
-
-**NIH**
+**Figure 11:**NSF
 
 ```{r}
 # COMPARISON BETWEEEN NIH - AWARD MONEY - CALCULATED THE AVERAGE INSTEAD THE TOTAL AMMOUNT
-library(dplyr)
-library(ggplot2)
-
-library(readxl)
 
 NIH_Compare_Data <- read_xlsx("NIH_Combined_Data.xlsx")
 
@@ -959,8 +901,6 @@ NIH_total_award_money <- NIH_Compare_Data %>%
 
 my_colors_3 <- c("BOISE STATE UNIVERSITY" = "orange", "IDAHO STATE UNIVERSITY" = "black", "UNIVERSITY OF IDAHO" = "gold")
 
-library(ggplot2)
-
 ggplot(NIH_total_award_money, aes(x = OrganizationName, y = NIH_total_award_money)) +
   geom_bar(stat = "identity", position = "dodge", fill = my_colors_3)  +
   ggtitle("Total of Award Money from NIH Grants") +
@@ -973,8 +913,7 @@ ggplot(NIH_total_award_money, aes(x = OrganizationName, y = NIH_total_award_mone
         plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 ```
-
-**Figure 4:**
+**Figure 4:**NIH
 
 #### Data Comparison of Grant Duration
 
@@ -1324,7 +1263,5 @@ ggplot(NSF_Grant_Award_Instrument, aes(x = Organization, y = count, fill = Award
 ```
 
 **Figure 9:**
-
-
 
 ## CONLUSIONS/SUMMARY
