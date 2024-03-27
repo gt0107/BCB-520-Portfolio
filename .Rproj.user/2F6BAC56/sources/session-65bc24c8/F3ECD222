@@ -3,7 +3,7 @@
     "path": "D:/University of Idaho/Spring 2024/BCB 520/BCB-520-Portfolio/posts/MidtermPortfolioPost/Midterm_3.qmd",
     "project_path": "posts/MidtermPortfolioPost/Midterm_3.qmd",
     "type": "quarto_markdown",
-    "hash": "2943293867",
+    "hash": "3041552804",
     "contents": "",
     "dirty": false,
     "created": 1710818863293.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "44,15",
-        "scrollLine": "37"
+        "cursorPosition": "668,41",
+        "scrollLine": "652"
     },
     "folds": "",
-    "lastKnownWriteTime": 1711486542,
+    "lastKnownWriteTime": 1711560832,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1711486540297,
+    "last_content_update": 1711560830660,
     "read_only": false,
     "read_only_alternatives": []
 }
