@@ -2598,7 +2598,9 @@ NOTE
 </section>
 <section id="data-comparison-of-grant-status" class="level3">
 <h3 class="anchored" data-anchor-id="data-comparison-of-grant-status">Data Comparison of Grant Status</h3>
-<p><strong>DOE</strong></p>
+<p>For the last visualizations, I mentioned in the previous section, there’s different types of awarded grants. The following graphs will give us and understanding what type of grants (current active grants) are coming to UI compared to our peer institution.</p>
+<p><em>The only available data for this type of analysis is from the sponsors DOE and NSF</em></p>
+<p>In our first visualization (<strong>Figure 16</strong>),</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -2631,8 +2633,7 @@ NOTE
 <p><img src="Midterm_3_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 8:</strong></p>
-<p><strong>NSF</strong></p>
+<p><strong>Figure 16:</strong> Type of Grant for current active awards for DOE.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -2669,7 +2670,7 @@ NOTE
 <p><img src="Midterm_3_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Figure 9:</strong></p>
+<p><strong>Figure 17:</strong> Type of Grant for current active awards for NSF.</p>
 </section>
 </section>
 <section id="conlusionssummary" class="level2">
@@ -3883,314 +3884,314 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb60-964"><a href="#cb60-964" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-965"><a href="#cb60-965" aria-hidden="true" tabindex="-1"></a>In our first visualization (**Figure 13**), its the duration of the current active awards for the sponsor DOE. By, looking at these bar chart, we can easily point out that our **DOE** awards ends in 4 years compared to Boise State University that ends in 5 years. This means that during that year gap, UI have to look for renewing awards or to apply for new awards. For the **NSF** award (**Figure 14**) Idaho State University has the longest duration of their current active awards for 10 years, and University of Idaho comes second. We are coming in par with the Idaho State University, also to clarify some of these awarded grants, depending of the type of grant can go for longer than 5 years. For the **NIH** award (**Figure 15**) University of Idaho, is at the top for the the longest duration of their current active awards for the NIH, over 20 years. Like I mentioned before some of these grants can go longer than 5 years.</span>
 <span id="cb60-966"><a href="#cb60-966" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-967"><a href="#cb60-967" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-967"><a href="#cb60-967" aria-hidden="true" tabindex="-1"></a>*USDA data was not added for this data visualization because it didn't provide an end date of their current active awards*</span>
 <span id="cb60-968"><a href="#cb60-968" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-969"><a href="#cb60-969" aria-hidden="true" tabindex="-1"></a>*USDA data was not added for this data visualization because it didn't provide an end date of their current active awards*</span>
-<span id="cb60-970"><a href="#cb60-970" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-973"><a href="#cb60-973" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb60-974"><a href="#cb60-974" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN DOE - Grant Duration</span></span>
+<span id="cb60-971"><a href="#cb60-971" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-972"><a href="#cb60-972" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN DOE - Grant Duration</span></span>
+<span id="cb60-973"><a href="#cb60-973" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-974"><a href="#cb60-974" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb60-975"><a href="#cb60-975" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-976"><a href="#cb60-976" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb60-976"><a href="#cb60-976" aria-hidden="true" tabindex="-1"></a>DOE_Compare_Data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards_Combined_Data.xlsx"</span>)</span>
 <span id="cb60-977"><a href="#cb60-977" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-978"><a href="#cb60-978" aria-hidden="true" tabindex="-1"></a>DOE_Compare_Data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"DOEawards_Combined_Data.xlsx"</span>)</span>
+<span id="cb60-978"><a href="#cb60-978" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb60-979"><a href="#cb60-979" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-980"><a href="#cb60-980" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb60-981"><a href="#cb60-981" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-982"><a href="#cb60-982" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'start_date' and 'end_date' are columns containing the start and end dates of the grants,</span></span>
-<span id="cb60-983"><a href="#cb60-983" aria-hidden="true" tabindex="-1"></a><span class="co"># and 'institution' is a column indicating the institution for each grant</span></span>
-<span id="cb60-984"><a href="#cb60-984" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-985"><a href="#cb60-985" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for each institution</span></span>
-<span id="cb60-986"><a href="#cb60-986" aria-hidden="true" tabindex="-1"></a>UI_data <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-987"><a href="#cb60-987" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">"Regents of the University of Idaho"</span>)</span>
-<span id="cb60-988"><a href="#cb60-988" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-989"><a href="#cb60-989" aria-hidden="true" tabindex="-1"></a>BSU_data <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-990"><a href="#cb60-990" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">"Boise State University"</span>)</span>
-<span id="cb60-991"><a href="#cb60-991" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-992"><a href="#cb60-992" aria-hidden="true" tabindex="-1"></a>ISU_data <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-993"><a href="#cb60-993" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">"Idaho State University"</span>)</span>
-<span id="cb60-994"><a href="#cb60-994" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-995"><a href="#cb60-995" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the duration of grants for each institution</span></span>
-<span id="cb60-996"><a href="#cb60-996" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert "Start Date" and "End Date" columns to date objects</span></span>
-<span id="cb60-997"><a href="#cb60-997" aria-hidden="true" tabindex="-1"></a>UI_data <span class="ot">&lt;-</span> UI_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-998"><a href="#cb60-998" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb60-999"><a href="#cb60-999" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb60-1000"><a href="#cb60-1000" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1001"><a href="#cb60-1001" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb60-1002"><a href="#cb60-1002" aria-hidden="true" tabindex="-1"></a>UI_data <span class="ot">&lt;-</span> UI_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1003"><a href="#cb60-1003" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb60-1004"><a href="#cb60-1004" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1005"><a href="#cb60-1005" aria-hidden="true" tabindex="-1"></a>UI_data <span class="ot">&lt;-</span> UI_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1006"><a href="#cb60-1006" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
-<span id="cb60-1007"><a href="#cb60-1007" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1008"><a href="#cb60-1008" aria-hidden="true" tabindex="-1"></a><span class="co"># BSU</span></span>
-<span id="cb60-1009"><a href="#cb60-1009" aria-hidden="true" tabindex="-1"></a>BSU_data <span class="ot">&lt;-</span> BSU_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1010"><a href="#cb60-1010" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb60-1011"><a href="#cb60-1011" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb60-1012"><a href="#cb60-1012" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1013"><a href="#cb60-1013" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb60-1014"><a href="#cb60-1014" aria-hidden="true" tabindex="-1"></a>BSU_data <span class="ot">&lt;-</span> BSU_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1015"><a href="#cb60-1015" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb60-1016"><a href="#cb60-1016" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1017"><a href="#cb60-1017" aria-hidden="true" tabindex="-1"></a>BSU_data <span class="ot">&lt;-</span> BSU_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1018"><a href="#cb60-1018" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
-<span id="cb60-1019"><a href="#cb60-1019" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1020"><a href="#cb60-1020" aria-hidden="true" tabindex="-1"></a><span class="co"># ISU</span></span>
-<span id="cb60-1021"><a href="#cb60-1021" aria-hidden="true" tabindex="-1"></a>ISU_data <span class="ot">&lt;-</span> ISU_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1022"><a href="#cb60-1022" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb60-1023"><a href="#cb60-1023" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb60-1024"><a href="#cb60-1024" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1025"><a href="#cb60-1025" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb60-1026"><a href="#cb60-1026" aria-hidden="true" tabindex="-1"></a>ISU_data <span class="ot">&lt;-</span> ISU_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1027"><a href="#cb60-1027" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb60-1028"><a href="#cb60-1028" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1029"><a href="#cb60-1029" aria-hidden="true" tabindex="-1"></a>ISU_data <span class="ot">&lt;-</span> ISU_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1030"><a href="#cb60-1030" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-980"><a href="#cb60-980" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'start_date' and 'end_date' are columns containing the start and end dates of the grants,</span></span>
+<span id="cb60-981"><a href="#cb60-981" aria-hidden="true" tabindex="-1"></a><span class="co"># and 'institution' is a column indicating the institution for each grant</span></span>
+<span id="cb60-982"><a href="#cb60-982" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-983"><a href="#cb60-983" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for each institution</span></span>
+<span id="cb60-984"><a href="#cb60-984" aria-hidden="true" tabindex="-1"></a>UI_data <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-985"><a href="#cb60-985" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">"Regents of the University of Idaho"</span>)</span>
+<span id="cb60-986"><a href="#cb60-986" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-987"><a href="#cb60-987" aria-hidden="true" tabindex="-1"></a>BSU_data <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-988"><a href="#cb60-988" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">"Boise State University"</span>)</span>
+<span id="cb60-989"><a href="#cb60-989" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-990"><a href="#cb60-990" aria-hidden="true" tabindex="-1"></a>ISU_data <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-991"><a href="#cb60-991" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Institution <span class="sc">==</span> <span class="st">"Idaho State University"</span>)</span>
+<span id="cb60-992"><a href="#cb60-992" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-993"><a href="#cb60-993" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the duration of grants for each institution</span></span>
+<span id="cb60-994"><a href="#cb60-994" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert "Start Date" and "End Date" columns to date objects</span></span>
+<span id="cb60-995"><a href="#cb60-995" aria-hidden="true" tabindex="-1"></a>UI_data <span class="ot">&lt;-</span> UI_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-996"><a href="#cb60-996" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb60-997"><a href="#cb60-997" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb60-998"><a href="#cb60-998" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-999"><a href="#cb60-999" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb60-1000"><a href="#cb60-1000" aria-hidden="true" tabindex="-1"></a>UI_data <span class="ot">&lt;-</span> UI_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1001"><a href="#cb60-1001" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb60-1002"><a href="#cb60-1002" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1003"><a href="#cb60-1003" aria-hidden="true" tabindex="-1"></a>UI_data <span class="ot">&lt;-</span> UI_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1004"><a href="#cb60-1004" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1005"><a href="#cb60-1005" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1006"><a href="#cb60-1006" aria-hidden="true" tabindex="-1"></a><span class="co"># BSU</span></span>
+<span id="cb60-1007"><a href="#cb60-1007" aria-hidden="true" tabindex="-1"></a>BSU_data <span class="ot">&lt;-</span> BSU_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1008"><a href="#cb60-1008" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb60-1009"><a href="#cb60-1009" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb60-1010"><a href="#cb60-1010" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1011"><a href="#cb60-1011" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb60-1012"><a href="#cb60-1012" aria-hidden="true" tabindex="-1"></a>BSU_data <span class="ot">&lt;-</span> BSU_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1013"><a href="#cb60-1013" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb60-1014"><a href="#cb60-1014" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1015"><a href="#cb60-1015" aria-hidden="true" tabindex="-1"></a>BSU_data <span class="ot">&lt;-</span> BSU_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1016"><a href="#cb60-1016" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1017"><a href="#cb60-1017" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1018"><a href="#cb60-1018" aria-hidden="true" tabindex="-1"></a><span class="co"># ISU</span></span>
+<span id="cb60-1019"><a href="#cb60-1019" aria-hidden="true" tabindex="-1"></a>ISU_data <span class="ot">&lt;-</span> ISU_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1020"><a href="#cb60-1020" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb60-1021"><a href="#cb60-1021" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">End Date</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb60-1022"><a href="#cb60-1022" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1023"><a href="#cb60-1023" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb60-1024"><a href="#cb60-1024" aria-hidden="true" tabindex="-1"></a>ISU_data <span class="ot">&lt;-</span> ISU_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1025"><a href="#cb60-1025" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb60-1026"><a href="#cb60-1026" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1027"><a href="#cb60-1027" aria-hidden="true" tabindex="-1"></a>ISU_data <span class="ot">&lt;-</span> ISU_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1028"><a href="#cb60-1028" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1029"><a href="#cb60-1029" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1030"><a href="#cb60-1030" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
 <span id="cb60-1031"><a href="#cb60-1031" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1032"><a href="#cb60-1032" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb60-1032"><a href="#cb60-1032" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb60-1033"><a href="#cb60-1033" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1034"><a href="#cb60-1034" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb60-1035"><a href="#cb60-1035" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1036"><a href="#cb60-1036" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming UI_data contains the grant duration information for one institution</span></span>
-<span id="cb60-1037"><a href="#cb60-1037" aria-hidden="true" tabindex="-1"></a><span class="co"># and other_datasets contain the grant duration information for the other institutions</span></span>
-<span id="cb60-1038"><a href="#cb60-1038" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1039"><a href="#cb60-1039" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine datasets</span></span>
-<span id="cb60-1040"><a href="#cb60-1040" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(UI_data, BSU_data, ISU_data)</span>
+<span id="cb60-1034"><a href="#cb60-1034" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming UI_data contains the grant duration information for one institution</span></span>
+<span id="cb60-1035"><a href="#cb60-1035" aria-hidden="true" tabindex="-1"></a><span class="co"># and other_datasets contain the grant duration information for the other institutions</span></span>
+<span id="cb60-1036"><a href="#cb60-1036" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1037"><a href="#cb60-1037" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine datasets</span></span>
+<span id="cb60-1038"><a href="#cb60-1038" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(UI_data, BSU_data, ISU_data)</span>
+<span id="cb60-1039"><a href="#cb60-1039" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1040"><a href="#cb60-1040" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
 <span id="cb60-1041"><a href="#cb60-1041" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1042"><a href="#cb60-1042" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
+<span id="cb60-1042"><a href="#cb60-1042" aria-hidden="true" tabindex="-1"></a>my_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Boise State University"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"Idaho State University"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Regents of the University of Idaho"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
 <span id="cb60-1043"><a href="#cb60-1043" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1044"><a href="#cb60-1044" aria-hidden="true" tabindex="-1"></a>my_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Boise State University"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"Idaho State University"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Regents of the University of Idaho"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
-<span id="cb60-1045"><a href="#cb60-1045" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1046"><a href="#cb60-1046" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
-<span id="cb60-1047"><a href="#cb60-1047" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
-<span id="cb60-1048"><a href="#cb60-1048" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb60-1049"><a href="#cb60-1049" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1050"><a href="#cb60-1050" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Institution, <span class="at">y =</span> grant_duration_years)) <span class="sc">+</span></span>
-<span id="cb60-1051"><a href="#cb60-1051" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">fill =</span> <span class="fu">c</span>(my_colors[combined_data<span class="sc">$</span>Institution])) <span class="sc">+</span>  </span>
-<span id="cb60-1052"><a href="#cb60-1052" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Grant Duration by Institution"</span>) <span class="sc">+</span></span>
-<span id="cb60-1053"><a href="#cb60-1053" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb60-1054"><a href="#cb60-1054" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grant Duration (Years)"</span>) <span class="sc">+</span></span>
-<span id="cb60-1055"><a href="#cb60-1055" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb60-1056"><a href="#cb60-1056" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  </span>
-<span id="cb60-1057"><a href="#cb60-1057" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
-<span id="cb60-1058"><a href="#cb60-1058" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))  </span>
-<span id="cb60-1059"><a href="#cb60-1059" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb60-1060"><a href="#cb60-1060" aria-hidden="true" tabindex="-1"></a>**Figure 13:** Grant Duration by Institution (DOE). This Bar  Chart provides information of the duration of the current active awards by Institution for DOE.</span>
-<span id="cb60-1061"><a href="#cb60-1061" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1064"><a href="#cb60-1064" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb60-1065"><a href="#cb60-1065" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NSF - Grant Duration</span></span>
+<span id="cb60-1044"><a href="#cb60-1044" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
+<span id="cb60-1045"><a href="#cb60-1045" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
+<span id="cb60-1046"><a href="#cb60-1046" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb60-1047"><a href="#cb60-1047" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1048"><a href="#cb60-1048" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data, <span class="fu">aes</span>(<span class="at">x =</span> Institution, <span class="at">y =</span> grant_duration_years)) <span class="sc">+</span></span>
+<span id="cb60-1049"><a href="#cb60-1049" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">fill =</span> <span class="fu">c</span>(my_colors[combined_data<span class="sc">$</span>Institution])) <span class="sc">+</span>  </span>
+<span id="cb60-1050"><a href="#cb60-1050" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Grant Duration by Institution"</span>) <span class="sc">+</span></span>
+<span id="cb60-1051"><a href="#cb60-1051" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb60-1052"><a href="#cb60-1052" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grant Duration (Years)"</span>) <span class="sc">+</span></span>
+<span id="cb60-1053"><a href="#cb60-1053" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb60-1054"><a href="#cb60-1054" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb60-1055"><a href="#cb60-1055" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb60-1056"><a href="#cb60-1056" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))  </span>
+<span id="cb60-1057"><a href="#cb60-1057" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-1058"><a href="#cb60-1058" aria-hidden="true" tabindex="-1"></a>**Figure 13:** Grant Duration by Institution (DOE). This Bar  Chart provides information of the duration of the current active awards by Institution for DOE.</span>
+<span id="cb60-1059"><a href="#cb60-1059" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1062"><a href="#cb60-1062" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-1063"><a href="#cb60-1063" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NSF - Grant Duration</span></span>
+<span id="cb60-1064"><a href="#cb60-1064" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1065"><a href="#cb60-1065" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb60-1066"><a href="#cb60-1066" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1067"><a href="#cb60-1067" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb60-1067"><a href="#cb60-1067" aria-hidden="true" tabindex="-1"></a>NSF_Compare_Data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NSF_Combined_Data.xlsx"</span>)</span>
 <span id="cb60-1068"><a href="#cb60-1068" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1069"><a href="#cb60-1069" aria-hidden="true" tabindex="-1"></a>NSF_Compare_Data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NSF_Combined_Data.xlsx"</span>)</span>
+<span id="cb60-1069"><a href="#cb60-1069" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb60-1070"><a href="#cb60-1070" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1071"><a href="#cb60-1071" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb60-1072"><a href="#cb60-1072" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1073"><a href="#cb60-1073" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for each institution</span></span>
-<span id="cb60-1074"><a href="#cb60-1074" aria-hidden="true" tabindex="-1"></a>UI_NSF_data <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1075"><a href="#cb60-1075" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Organization <span class="sc">==</span> <span class="st">"Regents of the University of Idaho"</span>)</span>
-<span id="cb60-1076"><a href="#cb60-1076" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1077"><a href="#cb60-1077" aria-hidden="true" tabindex="-1"></a>BSU_NSF_data <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1078"><a href="#cb60-1078" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Organization <span class="sc">==</span> <span class="st">"Boise State University"</span>)</span>
-<span id="cb60-1079"><a href="#cb60-1079" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1080"><a href="#cb60-1080" aria-hidden="true" tabindex="-1"></a>ISU_NSF_data <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1081"><a href="#cb60-1081" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Organization <span class="sc">==</span> <span class="st">"Idaho State University"</span>)</span>
-<span id="cb60-1082"><a href="#cb60-1082" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1083"><a href="#cb60-1083" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the duration of grants for each institution</span></span>
-<span id="cb60-1084"><a href="#cb60-1084" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert "Start Date" and "End Date" columns to date objects</span></span>
-<span id="cb60-1085"><a href="#cb60-1085" aria-hidden="true" tabindex="-1"></a><span class="co">#UI</span></span>
-<span id="cb60-1086"><a href="#cb60-1086" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1087"><a href="#cb60-1087" aria-hidden="true" tabindex="-1"></a>UI_NSF_data <span class="ot">&lt;-</span> UI_NSF_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1088"><a href="#cb60-1088" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(StartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb60-1089"><a href="#cb60-1089" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(EndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb60-1090"><a href="#cb60-1090" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1091"><a href="#cb60-1091" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb60-1092"><a href="#cb60-1092" aria-hidden="true" tabindex="-1"></a>UI_NSF_data <span class="ot">&lt;-</span> UI_NSF_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1093"><a href="#cb60-1093" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb60-1094"><a href="#cb60-1094" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1095"><a href="#cb60-1095" aria-hidden="true" tabindex="-1"></a>UI_NSF_data <span class="ot">&lt;-</span> UI_NSF_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1096"><a href="#cb60-1096" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
-<span id="cb60-1097"><a href="#cb60-1097" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1098"><a href="#cb60-1098" aria-hidden="true" tabindex="-1"></a><span class="co"># BSU</span></span>
-<span id="cb60-1099"><a href="#cb60-1099" aria-hidden="true" tabindex="-1"></a>BSU_NSF_data  <span class="ot">&lt;-</span> BSU_NSF_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1100"><a href="#cb60-1100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(StartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb60-1101"><a href="#cb60-1101" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(EndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb60-1102"><a href="#cb60-1102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1103"><a href="#cb60-1103" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb60-1104"><a href="#cb60-1104" aria-hidden="true" tabindex="-1"></a>BSU_NSF_data  <span class="ot">&lt;-</span> BSU_NSF_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1105"><a href="#cb60-1105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb60-1106"><a href="#cb60-1106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1107"><a href="#cb60-1107" aria-hidden="true" tabindex="-1"></a>BSU_NSF_data  <span class="ot">&lt;-</span> BSU_NSF_data  <span class="sc">%&gt;%</span></span>
-<span id="cb60-1108"><a href="#cb60-1108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
-<span id="cb60-1109"><a href="#cb60-1109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1110"><a href="#cb60-1110" aria-hidden="true" tabindex="-1"></a><span class="co"># ISU</span></span>
-<span id="cb60-1111"><a href="#cb60-1111" aria-hidden="true" tabindex="-1"></a>ISU_NSF_data<span class="ot">&lt;-</span> ISU_NSF_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1112"><a href="#cb60-1112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(StartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb60-1113"><a href="#cb60-1113" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(EndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb60-1114"><a href="#cb60-1114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1115"><a href="#cb60-1115" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb60-1116"><a href="#cb60-1116" aria-hidden="true" tabindex="-1"></a>ISU_NSF_data <span class="ot">&lt;-</span> ISU_NSF_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1117"><a href="#cb60-1117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb60-1118"><a href="#cb60-1118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1119"><a href="#cb60-1119" aria-hidden="true" tabindex="-1"></a>ISU_NSF_data <span class="ot">&lt;-</span> ISU_NSF_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1120"><a href="#cb60-1120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1071"><a href="#cb60-1071" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for each institution</span></span>
+<span id="cb60-1072"><a href="#cb60-1072" aria-hidden="true" tabindex="-1"></a>UI_NSF_data <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1073"><a href="#cb60-1073" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Organization <span class="sc">==</span> <span class="st">"Regents of the University of Idaho"</span>)</span>
+<span id="cb60-1074"><a href="#cb60-1074" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1075"><a href="#cb60-1075" aria-hidden="true" tabindex="-1"></a>BSU_NSF_data <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1076"><a href="#cb60-1076" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Organization <span class="sc">==</span> <span class="st">"Boise State University"</span>)</span>
+<span id="cb60-1077"><a href="#cb60-1077" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1078"><a href="#cb60-1078" aria-hidden="true" tabindex="-1"></a>ISU_NSF_data <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1079"><a href="#cb60-1079" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Organization <span class="sc">==</span> <span class="st">"Idaho State University"</span>)</span>
+<span id="cb60-1080"><a href="#cb60-1080" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1081"><a href="#cb60-1081" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the duration of grants for each institution</span></span>
+<span id="cb60-1082"><a href="#cb60-1082" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert "Start Date" and "End Date" columns to date objects</span></span>
+<span id="cb60-1083"><a href="#cb60-1083" aria-hidden="true" tabindex="-1"></a><span class="co">#UI</span></span>
+<span id="cb60-1084"><a href="#cb60-1084" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1085"><a href="#cb60-1085" aria-hidden="true" tabindex="-1"></a>UI_NSF_data <span class="ot">&lt;-</span> UI_NSF_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1086"><a href="#cb60-1086" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(StartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb60-1087"><a href="#cb60-1087" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(EndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb60-1088"><a href="#cb60-1088" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1089"><a href="#cb60-1089" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb60-1090"><a href="#cb60-1090" aria-hidden="true" tabindex="-1"></a>UI_NSF_data <span class="ot">&lt;-</span> UI_NSF_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1091"><a href="#cb60-1091" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb60-1092"><a href="#cb60-1092" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1093"><a href="#cb60-1093" aria-hidden="true" tabindex="-1"></a>UI_NSF_data <span class="ot">&lt;-</span> UI_NSF_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1094"><a href="#cb60-1094" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1095"><a href="#cb60-1095" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1096"><a href="#cb60-1096" aria-hidden="true" tabindex="-1"></a><span class="co"># BSU</span></span>
+<span id="cb60-1097"><a href="#cb60-1097" aria-hidden="true" tabindex="-1"></a>BSU_NSF_data  <span class="ot">&lt;-</span> BSU_NSF_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1098"><a href="#cb60-1098" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(StartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb60-1099"><a href="#cb60-1099" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(EndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb60-1100"><a href="#cb60-1100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1101"><a href="#cb60-1101" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb60-1102"><a href="#cb60-1102" aria-hidden="true" tabindex="-1"></a>BSU_NSF_data  <span class="ot">&lt;-</span> BSU_NSF_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1103"><a href="#cb60-1103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb60-1104"><a href="#cb60-1104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1105"><a href="#cb60-1105" aria-hidden="true" tabindex="-1"></a>BSU_NSF_data  <span class="ot">&lt;-</span> BSU_NSF_data  <span class="sc">%&gt;%</span></span>
+<span id="cb60-1106"><a href="#cb60-1106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1107"><a href="#cb60-1107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1108"><a href="#cb60-1108" aria-hidden="true" tabindex="-1"></a><span class="co"># ISU</span></span>
+<span id="cb60-1109"><a href="#cb60-1109" aria-hidden="true" tabindex="-1"></a>ISU_NSF_data<span class="ot">&lt;-</span> ISU_NSF_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1110"><a href="#cb60-1110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(StartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb60-1111"><a href="#cb60-1111" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(EndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb60-1112"><a href="#cb60-1112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1113"><a href="#cb60-1113" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb60-1114"><a href="#cb60-1114" aria-hidden="true" tabindex="-1"></a>ISU_NSF_data <span class="ot">&lt;-</span> ISU_NSF_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1115"><a href="#cb60-1115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb60-1116"><a href="#cb60-1116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1117"><a href="#cb60-1117" aria-hidden="true" tabindex="-1"></a>ISU_NSF_data <span class="ot">&lt;-</span> ISU_NSF_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1118"><a href="#cb60-1118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1119"><a href="#cb60-1119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1120"><a href="#cb60-1120" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
 <span id="cb60-1121"><a href="#cb60-1121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1122"><a href="#cb60-1122" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb60-1122"><a href="#cb60-1122" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb60-1123"><a href="#cb60-1123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1124"><a href="#cb60-1124" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb60-1125"><a href="#cb60-1125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1126"><a href="#cb60-1126" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming UI_data contains the grant duration information for one institution</span></span>
-<span id="cb60-1127"><a href="#cb60-1127" aria-hidden="true" tabindex="-1"></a><span class="co"># and other_datasets contain the grant duration information for the other institutions</span></span>
-<span id="cb60-1128"><a href="#cb60-1128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1129"><a href="#cb60-1129" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine datasets</span></span>
-<span id="cb60-1130"><a href="#cb60-1130" aria-hidden="true" tabindex="-1"></a>combined_data_NSF <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(UI_NSF_data, BSU_NSF_data, ISU_NSF_data)</span>
+<span id="cb60-1124"><a href="#cb60-1124" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming UI_data contains the grant duration information for one institution</span></span>
+<span id="cb60-1125"><a href="#cb60-1125" aria-hidden="true" tabindex="-1"></a><span class="co"># and other_datasets contain the grant duration information for the other institutions</span></span>
+<span id="cb60-1126"><a href="#cb60-1126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1127"><a href="#cb60-1127" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine datasets</span></span>
+<span id="cb60-1128"><a href="#cb60-1128" aria-hidden="true" tabindex="-1"></a>combined_data_NSF <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(UI_NSF_data, BSU_NSF_data, ISU_NSF_data)</span>
+<span id="cb60-1129"><a href="#cb60-1129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1130"><a href="#cb60-1130" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
 <span id="cb60-1131"><a href="#cb60-1131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1132"><a href="#cb60-1132" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
+<span id="cb60-1132"><a href="#cb60-1132" aria-hidden="true" tabindex="-1"></a>my_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Boise State University"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"Idaho State University"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Regents of the University of Idaho"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
 <span id="cb60-1133"><a href="#cb60-1133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1134"><a href="#cb60-1134" aria-hidden="true" tabindex="-1"></a>my_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Boise State University"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"Idaho State University"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Regents of the University of Idaho"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
-<span id="cb60-1135"><a href="#cb60-1135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1136"><a href="#cb60-1136" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
-<span id="cb60-1137"><a href="#cb60-1137" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb60-1138"><a href="#cb60-1138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1139"><a href="#cb60-1139" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data_NSF, <span class="fu">aes</span>(<span class="at">x =</span> Organization, <span class="at">y =</span> grant_duration_years)) <span class="sc">+</span></span>
-<span id="cb60-1140"><a href="#cb60-1140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">fill =</span> <span class="fu">c</span>(my_colors[combined_data_NSF<span class="sc">$</span>Organization])) <span class="sc">+</span></span>
-<span id="cb60-1141"><a href="#cb60-1141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Grant Duration by Organization"</span>) <span class="sc">+</span></span>
-<span id="cb60-1142"><a href="#cb60-1142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb60-1143"><a href="#cb60-1143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grant Duration (Years)"</span>) <span class="sc">+</span></span>
-<span id="cb60-1144"><a href="#cb60-1144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors) <span class="sc">+</span>  <span class="co"># Apply custom colors</span></span>
-<span id="cb60-1145"><a href="#cb60-1145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb60-1146"><a href="#cb60-1146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
-<span id="cb60-1147"><a href="#cb60-1147" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
-<span id="cb60-1148"><a href="#cb60-1148" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
-<span id="cb60-1149"><a href="#cb60-1149" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))  <span class="co"># Adjust size of plot title</span></span>
-<span id="cb60-1150"><a href="#cb60-1150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-1134"><a href="#cb60-1134" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
+<span id="cb60-1135"><a href="#cb60-1135" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb60-1136"><a href="#cb60-1136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1137"><a href="#cb60-1137" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data_NSF, <span class="fu">aes</span>(<span class="at">x =</span> Organization, <span class="at">y =</span> grant_duration_years)) <span class="sc">+</span></span>
+<span id="cb60-1138"><a href="#cb60-1138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">fill =</span> <span class="fu">c</span>(my_colors[combined_data_NSF<span class="sc">$</span>Organization])) <span class="sc">+</span></span>
+<span id="cb60-1139"><a href="#cb60-1139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Grant Duration by Organization"</span>) <span class="sc">+</span></span>
+<span id="cb60-1140"><a href="#cb60-1140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb60-1141"><a href="#cb60-1141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grant Duration (Years)"</span>) <span class="sc">+</span></span>
+<span id="cb60-1142"><a href="#cb60-1142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors) <span class="sc">+</span>  <span class="co"># Apply custom colors</span></span>
+<span id="cb60-1143"><a href="#cb60-1143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb60-1144"><a href="#cb60-1144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
+<span id="cb60-1145"><a href="#cb60-1145" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
+<span id="cb60-1146"><a href="#cb60-1146" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
+<span id="cb60-1147"><a href="#cb60-1147" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))  <span class="co"># Adjust size of plot title</span></span>
+<span id="cb60-1148"><a href="#cb60-1148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-1149"><a href="#cb60-1149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1150"><a href="#cb60-1150" aria-hidden="true" tabindex="-1"></a>**Figure 14:**Grant Duration by Institution (NSF). This Bar  Chart provides information of the duration of the current active awards by Institution for NSF.</span>
 <span id="cb60-1151"><a href="#cb60-1151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1152"><a href="#cb60-1152" aria-hidden="true" tabindex="-1"></a>**Figure 14:**Grant Duration by Institution (NSF). This Bar  Chart provides information of the duration of the current active awards by Institution for NSF.</span>
-<span id="cb60-1153"><a href="#cb60-1153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1156"><a href="#cb60-1156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb60-1157"><a href="#cb60-1157" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NIH - Grant Duration</span></span>
-<span id="cb60-1158"><a href="#cb60-1158" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb60-1159"><a href="#cb60-1159" aria-hidden="true" tabindex="-1"></a>NIH_Compare_Data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIH_Combined_Data.xlsx"</span>)</span>
+<span id="cb60-1154"><a href="#cb60-1154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-1155"><a href="#cb60-1155" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NIH - Grant Duration</span></span>
+<span id="cb60-1156"><a href="#cb60-1156" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb60-1157"><a href="#cb60-1157" aria-hidden="true" tabindex="-1"></a>NIH_Compare_Data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"NIH_Combined_Data.xlsx"</span>)</span>
+<span id="cb60-1158"><a href="#cb60-1158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1159"><a href="#cb60-1159" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb60-1160"><a href="#cb60-1160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1161"><a href="#cb60-1161" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb60-1162"><a href="#cb60-1162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1163"><a href="#cb60-1163" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for each institution</span></span>
-<span id="cb60-1164"><a href="#cb60-1164" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1165"><a href="#cb60-1165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"UNIVERSITY OF IDAHO"</span>)</span>
-<span id="cb60-1166"><a href="#cb60-1166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1167"><a href="#cb60-1167" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1168"><a href="#cb60-1168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"BOISE STATE UNIVERSITY"</span>)</span>
-<span id="cb60-1169"><a href="#cb60-1169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1170"><a href="#cb60-1170" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1171"><a href="#cb60-1171" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"IDAHO STATE UNIVERSITY"</span>)</span>
-<span id="cb60-1172"><a href="#cb60-1172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1173"><a href="#cb60-1173" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the duration of grants for each institution</span></span>
-<span id="cb60-1174"><a href="#cb60-1174" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert "Start Date" and "End Date" columns to date objects</span></span>
-<span id="cb60-1175"><a href="#cb60-1175" aria-hidden="true" tabindex="-1"></a><span class="co">#UI</span></span>
-<span id="cb60-1176"><a href="#cb60-1176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1177"><a href="#cb60-1177" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data<span class="sc">%&gt;%</span></span>
-<span id="cb60-1178"><a href="#cb60-1178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb60-1179"><a href="#cb60-1179" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb60-1180"><a href="#cb60-1180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1181"><a href="#cb60-1181" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb60-1182"><a href="#cb60-1182" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1183"><a href="#cb60-1183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb60-1184"><a href="#cb60-1184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1185"><a href="#cb60-1185" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1186"><a href="#cb60-1186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
-<span id="cb60-1187"><a href="#cb60-1187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1188"><a href="#cb60-1188" aria-hidden="true" tabindex="-1"></a><span class="co"># BSU - no quiere funcionar no tengo la menor idea pq</span></span>
-<span id="cb60-1189"><a href="#cb60-1189" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1190"><a href="#cb60-1190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb60-1191"><a href="#cb60-1191" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb60-1192"><a href="#cb60-1192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1193"><a href="#cb60-1193" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb60-1194"><a href="#cb60-1194" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1195"><a href="#cb60-1195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb60-1196"><a href="#cb60-1196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1197"><a href="#cb60-1197" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data  <span class="sc">%&gt;%</span></span>
-<span id="cb60-1198"><a href="#cb60-1198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
-<span id="cb60-1199"><a href="#cb60-1199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1200"><a href="#cb60-1200" aria-hidden="true" tabindex="-1"></a><span class="co"># ISU</span></span>
-<span id="cb60-1201"><a href="#cb60-1201" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data<span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1202"><a href="#cb60-1202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb60-1203"><a href="#cb60-1203" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
-<span id="cb60-1204"><a href="#cb60-1204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1205"><a href="#cb60-1205" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
-<span id="cb60-1206"><a href="#cb60-1206" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1207"><a href="#cb60-1207" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
-<span id="cb60-1208"><a href="#cb60-1208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1209"><a href="#cb60-1209" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1210"><a href="#cb60-1210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1161"><a href="#cb60-1161" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data for each institution</span></span>
+<span id="cb60-1162"><a href="#cb60-1162" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1163"><a href="#cb60-1163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"UNIVERSITY OF IDAHO"</span>)</span>
+<span id="cb60-1164"><a href="#cb60-1164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1165"><a href="#cb60-1165" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1166"><a href="#cb60-1166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"BOISE STATE UNIVERSITY"</span>)</span>
+<span id="cb60-1167"><a href="#cb60-1167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1168"><a href="#cb60-1168" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> NIH_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1169"><a href="#cb60-1169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(OrganizationName <span class="sc">==</span> <span class="st">"IDAHO STATE UNIVERSITY"</span>)</span>
+<span id="cb60-1170"><a href="#cb60-1170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1171"><a href="#cb60-1171" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the duration of grants for each institution</span></span>
+<span id="cb60-1172"><a href="#cb60-1172" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert "Start Date" and "End Date" columns to date objects</span></span>
+<span id="cb60-1173"><a href="#cb60-1173" aria-hidden="true" tabindex="-1"></a><span class="co">#UI</span></span>
+<span id="cb60-1174"><a href="#cb60-1174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1175"><a href="#cb60-1175" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data<span class="sc">%&gt;%</span></span>
+<span id="cb60-1176"><a href="#cb60-1176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb60-1177"><a href="#cb60-1177" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb60-1178"><a href="#cb60-1178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1179"><a href="#cb60-1179" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb60-1180"><a href="#cb60-1180" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1181"><a href="#cb60-1181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb60-1182"><a href="#cb60-1182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1183"><a href="#cb60-1183" aria-hidden="true" tabindex="-1"></a>UI_NIH_data <span class="ot">&lt;-</span> UI_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1184"><a href="#cb60-1184" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1185"><a href="#cb60-1185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1186"><a href="#cb60-1186" aria-hidden="true" tabindex="-1"></a><span class="co"># BSU - no quiere funcionar no tengo la menor idea pq</span></span>
+<span id="cb60-1187"><a href="#cb60-1187" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1188"><a href="#cb60-1188" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb60-1189"><a href="#cb60-1189" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb60-1190"><a href="#cb60-1190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1191"><a href="#cb60-1191" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb60-1192"><a href="#cb60-1192" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1193"><a href="#cb60-1193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb60-1194"><a href="#cb60-1194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1195"><a href="#cb60-1195" aria-hidden="true" tabindex="-1"></a>BSU_NIH_data  <span class="ot">&lt;-</span> BSU_NIH_data  <span class="sc">%&gt;%</span></span>
+<span id="cb60-1196"><a href="#cb60-1196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1197"><a href="#cb60-1197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1198"><a href="#cb60-1198" aria-hidden="true" tabindex="-1"></a><span class="co"># ISU</span></span>
+<span id="cb60-1199"><a href="#cb60-1199" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data<span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1200"><a href="#cb60-1200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Start Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectStartDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb60-1201"><a href="#cb60-1201" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(ProjectEndDate, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb60-1202"><a href="#cb60-1202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1203"><a href="#cb60-1203" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'grant_duration' is in days</span></span>
+<span id="cb60-1204"><a href="#cb60-1204" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1205"><a href="#cb60-1205" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration =</span> <span class="st">`</span><span class="at">End Date</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">Start Date</span><span class="st">`</span>)</span>
+<span id="cb60-1206"><a href="#cb60-1206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1207"><a href="#cb60-1207" aria-hidden="true" tabindex="-1"></a>ISU_NIH_data <span class="ot">&lt;-</span> ISU_NIH_data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1208"><a href="#cb60-1208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grant_duration_years =</span> <span class="fu">as.numeric</span>(grant_duration) <span class="sc">/</span> <span class="fl">365.25</span>)</span>
+<span id="cb60-1209"><a href="#cb60-1209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1210"><a href="#cb60-1210" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
 <span id="cb60-1211"><a href="#cb60-1211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1212"><a href="#cb60-1212" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb60-1212"><a href="#cb60-1212" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb60-1213"><a href="#cb60-1213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1214"><a href="#cb60-1214" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb60-1215"><a href="#cb60-1215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1216"><a href="#cb60-1216" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming UI_data contains the grant duration information for one institution</span></span>
-<span id="cb60-1217"><a href="#cb60-1217" aria-hidden="true" tabindex="-1"></a><span class="co"># and other_datasets contain the grant duration information for the other institutions</span></span>
-<span id="cb60-1218"><a href="#cb60-1218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1219"><a href="#cb60-1219" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine datasets</span></span>
-<span id="cb60-1220"><a href="#cb60-1220" aria-hidden="true" tabindex="-1"></a>combined_data_NIH <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(UI_NIH_data, BSU_NIH_data, ISU_NIH_data)</span>
+<span id="cb60-1214"><a href="#cb60-1214" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming UI_data contains the grant duration information for one institution</span></span>
+<span id="cb60-1215"><a href="#cb60-1215" aria-hidden="true" tabindex="-1"></a><span class="co"># and other_datasets contain the grant duration information for the other institutions</span></span>
+<span id="cb60-1216"><a href="#cb60-1216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1217"><a href="#cb60-1217" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine datasets</span></span>
+<span id="cb60-1218"><a href="#cb60-1218" aria-hidden="true" tabindex="-1"></a>combined_data_NIH <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(UI_NIH_data, BSU_NIH_data, ISU_NIH_data)</span>
+<span id="cb60-1219"><a href="#cb60-1219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1220"><a href="#cb60-1220" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
 <span id="cb60-1221"><a href="#cb60-1221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1222"><a href="#cb60-1222" aria-hidden="true" tabindex="-1"></a><span class="co"># Colors</span></span>
+<span id="cb60-1222"><a href="#cb60-1222" aria-hidden="true" tabindex="-1"></a>my_colors_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BOISE STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"IDAHO STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"UNIVERSITY OF IDAHO"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
 <span id="cb60-1223"><a href="#cb60-1223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1224"><a href="#cb60-1224" aria-hidden="true" tabindex="-1"></a>my_colors_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BOISE STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"IDAHO STATE UNIVERSITY"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"UNIVERSITY OF IDAHO"</span> <span class="ot">=</span> <span class="st">"gold"</span>)</span>
-<span id="cb60-1225"><a href="#cb60-1225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1226"><a href="#cb60-1226" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
-<span id="cb60-1227"><a href="#cb60-1227" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb60-1228"><a href="#cb60-1228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1229"><a href="#cb60-1229" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data_NIH, <span class="fu">aes</span>(<span class="at">x =</span> OrganizationName, <span class="at">y =</span> grant_duration_years, <span class="at">fill =</span> OrganizationName)) <span class="sc">+</span></span>
-<span id="cb60-1230"><a href="#cb60-1230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">fill =</span> my_colors_3[combined_data_NIH<span class="sc">$</span>OrganizationName]) <span class="sc">+</span></span>
-<span id="cb60-1231"><a href="#cb60-1231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Grant Duration by Organization"</span>) <span class="sc">+</span></span>
-<span id="cb60-1232"><a href="#cb60-1232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb60-1233"><a href="#cb60-1233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grant Duration (Years)"</span>) <span class="sc">+</span></span>
-<span id="cb60-1234"><a href="#cb60-1234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors_3) <span class="sc">+</span>  <span class="co"># Apply custom colors</span></span>
-<span id="cb60-1235"><a href="#cb60-1235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb60-1236"><a href="#cb60-1236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
-<span id="cb60-1237"><a href="#cb60-1237" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
-<span id="cb60-1238"><a href="#cb60-1238" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
-<span id="cb60-1239"><a href="#cb60-1239" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))  <span class="co"># Adjust size of plot title</span></span>
+<span id="cb60-1224"><a href="#cb60-1224" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting grant duration as a bar graph</span></span>
+<span id="cb60-1225"><a href="#cb60-1225" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb60-1226"><a href="#cb60-1226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1227"><a href="#cb60-1227" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(combined_data_NIH, <span class="fu">aes</span>(<span class="at">x =</span> OrganizationName, <span class="at">y =</span> grant_duration_years, <span class="at">fill =</span> OrganizationName)) <span class="sc">+</span></span>
+<span id="cb60-1228"><a href="#cb60-1228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">fill =</span> my_colors_3[combined_data_NIH<span class="sc">$</span>OrganizationName]) <span class="sc">+</span></span>
+<span id="cb60-1229"><a href="#cb60-1229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Grant Duration by Organization"</span>) <span class="sc">+</span></span>
+<span id="cb60-1230"><a href="#cb60-1230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb60-1231"><a href="#cb60-1231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grant Duration (Years)"</span>) <span class="sc">+</span></span>
+<span id="cb60-1232"><a href="#cb60-1232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors_3) <span class="sc">+</span>  <span class="co"># Apply custom colors</span></span>
+<span id="cb60-1233"><a href="#cb60-1233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb60-1234"><a href="#cb60-1234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
+<span id="cb60-1235"><a href="#cb60-1235" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
+<span id="cb60-1236"><a href="#cb60-1236" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
+<span id="cb60-1237"><a href="#cb60-1237" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))  <span class="co"># Adjust size of plot title</span></span>
+<span id="cb60-1238"><a href="#cb60-1238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1239"><a href="#cb60-1239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb60-1240"><a href="#cb60-1240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1241"><a href="#cb60-1241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-1241"><a href="#cb60-1241" aria-hidden="true" tabindex="-1"></a>**Figure 15:**Grant Duration by Institution (NIH). This Bar  Chart provides information of the duration of the current active awards by Institution for NIH.</span>
 <span id="cb60-1242"><a href="#cb60-1242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1243"><a href="#cb60-1243" aria-hidden="true" tabindex="-1"></a>**Figure 15:**Grant Duration by Institution (NIH). This Bar  Chart provides information of the duration of the current active awards by Institution for NIH.</span>
+<span id="cb60-1243"><a href="#cb60-1243" aria-hidden="true" tabindex="-1"></a>By looking at these visualizations, we can say that for the sponsor **DOE**, is the only one that we the grant duration is less compared with the other sponsors by institution. Which comes to a concern, like how we can expand our portfolio in regards of acquiring more awards from DOE. For **NIH and NSF** awards, we have an active flow of awards, and some of these awards are going to be active for the formidable future. </span>
 <span id="cb60-1244"><a href="#cb60-1244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1245"><a href="#cb60-1245" aria-hidden="true" tabindex="-1"></a>By looking at these visualizations, we can say that for the sponsor **DOE**, is the only one that we the grant duration is less compared with the other sponsors by institution. Which comes to a concern, like how we can expand our portfolio in regards of acquiring more awards from DOE. For **NIH and NSF** awards, we have an active flow of awards, and some of these awards are going to be active for the formidable future. </span>
+<span id="cb60-1245"><a href="#cb60-1245" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data Comparison of Grant Status</span></span>
 <span id="cb60-1246"><a href="#cb60-1246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1247"><a href="#cb60-1247" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data Comparison of Grant Status</span></span>
+<span id="cb60-1247"><a href="#cb60-1247" aria-hidden="true" tabindex="-1"></a>For the last visualizations, I mentioned in the previous section, there's different types of awarded grants. The following graphs will give us and understanding what type of grants (current active grants) are coming to UI compared to our peer institution.</span>
 <span id="cb60-1248"><a href="#cb60-1248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1249"><a href="#cb60-1249" aria-hidden="true" tabindex="-1"></a>**DOE**</span>
+<span id="cb60-1249"><a href="#cb60-1249" aria-hidden="true" tabindex="-1"></a>*The only available data for this type of analysis is from the sponsors DOE and NSF*</span>
 <span id="cb60-1250"><a href="#cb60-1250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1253"><a href="#cb60-1253" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb60-1254"><a href="#cb60-1254" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN DOE - Grant Status</span></span>
-<span id="cb60-1255"><a href="#cb60-1255" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb60-1256"><a href="#cb60-1256" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb60-1257"><a href="#cb60-1257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1258"><a href="#cb60-1258" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total grant action count for each institution</span></span>
-<span id="cb60-1259"><a href="#cb60-1259" aria-hidden="true" tabindex="-1"></a>DOE_Grant_Action <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1260"><a href="#cb60-1260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Institution, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb60-1261"><a href="#cb60-1261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb60-1262"><a href="#cb60-1262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb60-1263"><a href="#cb60-1263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1264"><a href="#cb60-1264" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb60-1251"><a href="#cb60-1251" aria-hidden="true" tabindex="-1"></a>In our first visualization (**Figure 16**),</span>
+<span id="cb60-1252"><a href="#cb60-1252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1255"><a href="#cb60-1255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-1256"><a href="#cb60-1256" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN DOE - Grant Status</span></span>
+<span id="cb60-1257"><a href="#cb60-1257" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb60-1258"><a href="#cb60-1258" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb60-1259"><a href="#cb60-1259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1260"><a href="#cb60-1260" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total grant action count for each institution</span></span>
+<span id="cb60-1261"><a href="#cb60-1261" aria-hidden="true" tabindex="-1"></a>DOE_Grant_Action <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1262"><a href="#cb60-1262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Institution, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-1263"><a href="#cb60-1263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-1264"><a href="#cb60-1264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb60-1265"><a href="#cb60-1265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1266"><a href="#cb60-1266" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming DOE_Grant_Action is your summarized data frame with counts of Action Type by Institution</span></span>
+<span id="cb60-1266"><a href="#cb60-1266" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb60-1267"><a href="#cb60-1267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1268"><a href="#cb60-1268" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(DOE_Grant_Action, <span class="fu">aes</span>(<span class="at">x =</span> Institution, <span class="at">y =</span> count, <span class="at">fill =</span> <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb60-1269"><a href="#cb60-1269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb60-1270"><a href="#cb60-1270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of Counts of Action Type by Institution"</span>) <span class="sc">+</span></span>
-<span id="cb60-1271"><a href="#cb60-1271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb60-1272"><a href="#cb60-1272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Active Grants"</span>) <span class="sc">+</span></span>
-<span id="cb60-1273"><a href="#cb60-1273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb60-1274"><a href="#cb60-1274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
-<span id="cb60-1275"><a href="#cb60-1275" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
-<span id="cb60-1276"><a href="#cb60-1276" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
-<span id="cb60-1277"><a href="#cb60-1277" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
-<span id="cb60-1278"><a href="#cb60-1278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb60-1279"><a href="#cb60-1279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1280"><a href="#cb60-1280" aria-hidden="true" tabindex="-1"></a>**Figure 8:**</span>
+<span id="cb60-1268"><a href="#cb60-1268" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming DOE_Grant_Action is your summarized data frame with counts of Action Type by Institution</span></span>
+<span id="cb60-1269"><a href="#cb60-1269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1270"><a href="#cb60-1270" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(DOE_Grant_Action, <span class="fu">aes</span>(<span class="at">x =</span> Institution, <span class="at">y =</span> count, <span class="at">fill =</span> <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb60-1271"><a href="#cb60-1271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb60-1272"><a href="#cb60-1272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of Counts of Action Type by Institution"</span>) <span class="sc">+</span></span>
+<span id="cb60-1273"><a href="#cb60-1273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb60-1274"><a href="#cb60-1274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Active Grants"</span>) <span class="sc">+</span></span>
+<span id="cb60-1275"><a href="#cb60-1275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb60-1276"><a href="#cb60-1276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
+<span id="cb60-1277"><a href="#cb60-1277" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
+<span id="cb60-1278"><a href="#cb60-1278" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
+<span id="cb60-1279"><a href="#cb60-1279" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
+<span id="cb60-1280"><a href="#cb60-1280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb60-1281"><a href="#cb60-1281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1282"><a href="#cb60-1282" aria-hidden="true" tabindex="-1"></a>**NSF**</span>
+<span id="cb60-1282"><a href="#cb60-1282" aria-hidden="true" tabindex="-1"></a>**Figure 16:** Type of Grant for current active awards for DOE.</span>
 <span id="cb60-1283"><a href="#cb60-1283" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-1286"><a href="#cb60-1286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb60-1287"><a href="#cb60-1287" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NSF - Grant Status</span></span>
@@ -4223,7 +4224,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb60-1314"><a href="#cb60-1314" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
 <span id="cb60-1315"><a href="#cb60-1315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb60-1316"><a href="#cb60-1316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1317"><a href="#cb60-1317" aria-hidden="true" tabindex="-1"></a>**Figure 9:**</span>
+<span id="cb60-1317"><a href="#cb60-1317" aria-hidden="true" tabindex="-1"></a>**Figure 17:** Type of Grant for current active awards for NSF.</span>
 <span id="cb60-1318"><a href="#cb60-1318" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-1319"><a href="#cb60-1319" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONLUSIONS/SUMMARY</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
