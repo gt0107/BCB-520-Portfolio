@@ -1,0 +1,15 @@
+"0","DOEawardsBSU <- read_xlsx(""DOEawards.xlsx"")"
+"2","New names:"
+"0","DOEBSU_General <- DOEawardsBSU %>% "
+"0","  dplyr::filter(Institution == 'Boise State University')"
+"0",""
+"0","DOEBSU_New_Awards <- DOEBSU_General %>%"
+"0","  select(Title, Institution, PI, Status, `Action Type`, `Program Office`, `Start Date`, `End Date`, `Most Recent Award Date`, `Amount Awarded to Date`)"
+"0",""
+"0","knitr::kable(head(DOEBSU_New_Awards,4))"
+"2","Registered S3 methods overwritten by 'htmltools':
+  method               from         
+  print.html           tools:rstudio
+  print.shiny.tag      tools:rstudio
+  print.shiny.tag.list tools:rstudio
+"
