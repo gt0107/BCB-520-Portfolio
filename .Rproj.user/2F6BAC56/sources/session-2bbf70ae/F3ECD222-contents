@@ -916,8 +916,6 @@ The following visualizations will show us how the duration of the awarded grants
 
 In our first visualization (**Figure 13**), its the duration of the current active awards for the sponsor DOE. By, looking at these bar chart, we can easily point out that our **DOE** awards ends in 4 years compared to Boise State University that ends in 5 years. This means that during that year gap, UI have to look for renewing awards or to apply for new awards. For the **NSF** award (**Figure 14**) Idaho State University has the longest duration of their current active awards for 10 years, and University of Idaho comes second. We are coming in par with the Idaho State University, also to clarify some of these awarded grants, depending of the type of grant can go for longer than 5 years. For the **NIH** award (**Figure 15**) University of Idaho, is at the top for the the longest duration of their current active awards for the NIH, over 20 years. Like I mentioned before some of these grants can go longer than 5 years.
 
-
-
 *USDA data was not added for this data visualization because it didn't provide an end date of their current active awards*
 
 ```{r}
@@ -1191,6 +1189,10 @@ ggplot(combined_data_NIH, aes(x = OrganizationName, y = grant_duration_years, fi
 By looking at these visualizations, we can say that for the sponsor **DOE**, is the only one that we the grant duration is less compared with the other sponsors by institution. Which comes to a concern, like how we can expand our portfolio in regards of acquiring more awards from DOE. For **NIH and NSF** awards, we have an active flow of awards, and some of these awards are going to be active for the formidable future. 
 
 ### Data Comparison of Grant Status
+
+The following visualizations will show us how the duration of the awarded grants of these institutions, and will provide insights into UI's competitiveness and standing within its peer group. These visualization are for the current active awards from each sponsor.
+
+In our first visualization (**Figure 13**), its the duration of the current active awards for the sponsor DOE. By, looking at these bar chart, we can easily point out that our **DOE** awards ends in 4 years compared to Boise State University that ends in 5 years. This means that during that year gap, UI have to look for renewing awards or to apply for new awards. For the **NSF** award (**Figure 14**) Idaho State University has the longest duration of their current active awards for 10 years, and University of Idaho comes second. We are coming in par with the Idaho State University, also to clarify some of these awarded grants, depending of the type of grant can go for longer than 5 years. For the **NIH** award (**Figure 15**) University of Idaho, is at the top for the the longest duration of their current active awards for the NIH, over 20 years. Like I mentioned before some of these grants can go longer than 5 years.
 
 **DOE**
 
