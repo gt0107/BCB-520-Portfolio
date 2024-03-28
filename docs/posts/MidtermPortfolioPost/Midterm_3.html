@@ -2600,7 +2600,9 @@ NOTE
 <h3 class="anchored" data-anchor-id="data-comparison-of-grant-status">Data Comparison of Grant Status</h3>
 <p>For the last visualizations, I mentioned in the previous section, there’s different types of awarded grants. The following graphs will give us and understanding what type of grants (current active grants) are coming to UI compared to our peer institution.</p>
 <p><em>The only available data for this type of analysis is from the sponsors DOE and NSF</em></p>
-<p>In our first visualization (<strong>Figure 16</strong>),</p>
+<p>In our first visualization (<strong>Figure 16</strong>), we are looking at the type of grants that these institutions have in <strong>DOE</strong>. We have two types of grants which are: new and renewal, for our current active we have 3 that are new and 1 renewal. This a type of data to keep in mind, to see how many grants are coming that are new, or if we have that are renewal. But, looking ar this Boise State University has more in new and renewal for DOE sponsor.</p>
+<p><em>It is not surprising that UI is under performing in acquiring grants from this sponsor. We have seen that from previous visualizations</em></p>
+<p><strong>Figure 17</strong> we are looking at the type of grants that these institutions have in <strong>NSF</strong>. In contrast to DOE sponsor, we have more types of grants in NSF, which are the following: continuing grant, cooperative agreement, fellowship award, and standard grant. I mentioned before (Grant duration section) that some grants have a longer duration, and that’s because it depends on the type of grant it has (that also applies how much money is being awarded). In general as a whole, Boise State University has more active current awards compared to University of Idaho, so the number of types of grants are going to be different then University of Idaho. So, we are going to focus on University of Idaho, that highest type of grant that we current have is the standard grant followed by continuing grants. The one that is under performing is Fellowship award, and that is because most of these awards are awarded to graduate students. Looking at this we can see that not a lot of graduate students at UI are applying to fellowships in NSF, which is something that can be changed, giving the proper guidance.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -2671,6 +2673,7 @@ NOTE
 </div>
 </div>
 <p><strong>Figure 17:</strong> Type of Grant for current active awards for NSF.</p>
+<p>By looking at these visualizations, we can have an understanding of the types of grants that we have at UI for our current awards. I think to expand UIs portfolio is to provide information and workshops for graduate students to have the opportunity to apply for fellowship awards, which will help them to further continue on their research projects.</p>
 </section>
 </section>
 <section id="conlusionssummary" class="level2">
@@ -4162,71 +4165,77 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb60-1248"><a href="#cb60-1248" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-1249"><a href="#cb60-1249" aria-hidden="true" tabindex="-1"></a>*The only available data for this type of analysis is from the sponsors DOE and NSF*</span>
 <span id="cb60-1250"><a href="#cb60-1250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1251"><a href="#cb60-1251" aria-hidden="true" tabindex="-1"></a>In our first visualization (**Figure 16**),</span>
+<span id="cb60-1251"><a href="#cb60-1251" aria-hidden="true" tabindex="-1"></a>In our first visualization (**Figure 16**), we are looking at the type of grants that these institutions have in **DOE**. We have two types of grants which are: new and renewal, for our current active we have 3 that are new and 1 renewal. This a type of data to keep in mind, to see how many grants are coming that are new, or if we have that are renewal. But, looking ar this Boise State University has more in new and renewal for DOE sponsor.</span>
 <span id="cb60-1252"><a href="#cb60-1252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1255"><a href="#cb60-1255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb60-1256"><a href="#cb60-1256" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN DOE - Grant Status</span></span>
-<span id="cb60-1257"><a href="#cb60-1257" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb60-1258"><a href="#cb60-1258" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb60-1259"><a href="#cb60-1259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1260"><a href="#cb60-1260" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total grant action count for each institution</span></span>
-<span id="cb60-1261"><a href="#cb60-1261" aria-hidden="true" tabindex="-1"></a>DOE_Grant_Action <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1262"><a href="#cb60-1262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Institution, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb60-1263"><a href="#cb60-1263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb60-1264"><a href="#cb60-1264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb60-1265"><a href="#cb60-1265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1266"><a href="#cb60-1266" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb60-1267"><a href="#cb60-1267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1268"><a href="#cb60-1268" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming DOE_Grant_Action is your summarized data frame with counts of Action Type by Institution</span></span>
+<span id="cb60-1253"><a href="#cb60-1253" aria-hidden="true" tabindex="-1"></a>*It is not surprising that UI is under performing in acquiring grants from this sponsor. We have seen that from previous visualizations*</span>
+<span id="cb60-1254"><a href="#cb60-1254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1255"><a href="#cb60-1255" aria-hidden="true" tabindex="-1"></a>**Figure 17** we are looking at the type of grants that these institutions have in **NSF**. In contrast to DOE sponsor, we have more types of grants in NSF, which are the following: continuing grant, cooperative agreement, fellowship award, and standard grant. I mentioned before (Grant duration section) that some grants have a longer duration, and that's because it depends on the type of grant it has (that also applies how much money is being awarded). In general as a whole, Boise State University has more active current awards compared to University of Idaho, so the number of types of grants are going to be different then University of Idaho. So, we are going to focus on University of Idaho, that highest type of grant that we current have is the standard grant followed by continuing grants. The one that is under performing is Fellowship award, and that is because most of these awards are awarded to graduate students. Looking at this we can see that not a lot of graduate students at UI are applying to fellowships in NSF, which is something that can be changed, giving the proper guidance.</span>
+<span id="cb60-1256"><a href="#cb60-1256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1259"><a href="#cb60-1259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-1260"><a href="#cb60-1260" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN DOE - Grant Status</span></span>
+<span id="cb60-1261"><a href="#cb60-1261" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb60-1262"><a href="#cb60-1262" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb60-1263"><a href="#cb60-1263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1264"><a href="#cb60-1264" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total grant action count for each institution</span></span>
+<span id="cb60-1265"><a href="#cb60-1265" aria-hidden="true" tabindex="-1"></a>DOE_Grant_Action <span class="ot">&lt;-</span> DOE_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1266"><a href="#cb60-1266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Institution, <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-1267"><a href="#cb60-1267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-1268"><a href="#cb60-1268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb60-1269"><a href="#cb60-1269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1270"><a href="#cb60-1270" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(DOE_Grant_Action, <span class="fu">aes</span>(<span class="at">x =</span> Institution, <span class="at">y =</span> count, <span class="at">fill =</span> <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb60-1271"><a href="#cb60-1271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb60-1272"><a href="#cb60-1272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of Counts of Action Type by Institution"</span>) <span class="sc">+</span></span>
-<span id="cb60-1273"><a href="#cb60-1273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb60-1274"><a href="#cb60-1274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Active Grants"</span>) <span class="sc">+</span></span>
-<span id="cb60-1275"><a href="#cb60-1275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb60-1276"><a href="#cb60-1276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
-<span id="cb60-1277"><a href="#cb60-1277" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
-<span id="cb60-1278"><a href="#cb60-1278" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
-<span id="cb60-1279"><a href="#cb60-1279" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
-<span id="cb60-1280"><a href="#cb60-1280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb60-1281"><a href="#cb60-1281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1282"><a href="#cb60-1282" aria-hidden="true" tabindex="-1"></a>**Figure 16:** Type of Grant for current active awards for DOE.</span>
-<span id="cb60-1283"><a href="#cb60-1283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1286"><a href="#cb60-1286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb60-1287"><a href="#cb60-1287" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NSF - Grant Status</span></span>
-<span id="cb60-1288"><a href="#cb60-1288" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb60-1289"><a href="#cb60-1289" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb60-1290"><a href="#cb60-1290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1291"><a href="#cb60-1291" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total grant action count for each institution</span></span>
-<span id="cb60-1292"><a href="#cb60-1292" aria-hidden="true" tabindex="-1"></a>NSF_Grant_Award_Instrument <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
-<span id="cb60-1293"><a href="#cb60-1293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Organization, AwardInstrument) <span class="sc">%&gt;%</span></span>
-<span id="cb60-1294"><a href="#cb60-1294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb60-1295"><a href="#cb60-1295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb60-1296"><a href="#cb60-1296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1297"><a href="#cb60-1297" aria-hidden="true" tabindex="-1"></a><span class="co"># Check unique levels of AwardInstrument</span></span>
-<span id="cb60-1298"><a href="#cb60-1298" aria-hidden="true" tabindex="-1"></a>unique_levels <span class="ot">&lt;-</span> <span class="fu">unique</span>(NSF_Grant_Award_Instrument<span class="sc">$</span>AwardInstrument)</span>
-<span id="cb60-1299"><a href="#cb60-1299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1300"><a href="#cb60-1300" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust my_colors_4 to match the number of unique levels</span></span>
-<span id="cb60-1301"><a href="#cb60-1301" aria-hidden="true" tabindex="-1"></a>my_colors_4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"navyblue"</span>, <span class="st">"darkgreen"</span>, <span class="st">"darkorange"</span>, <span class="st">"darkred"</span>)  <span class="co"># or any other color palette you prefer</span></span>
-<span id="cb60-1302"><a href="#cb60-1302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1303"><a href="#cb60-1303" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot with adjusted colors</span></span>
-<span id="cb60-1304"><a href="#cb60-1304" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NSF_Grant_Award_Instrument, <span class="fu">aes</span>(<span class="at">x =</span> Organization, <span class="at">y =</span> count, <span class="at">fill =</span> AwardInstrument)) <span class="sc">+</span></span>
-<span id="cb60-1305"><a href="#cb60-1305" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb60-1306"><a href="#cb60-1306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of Counts of Action Type by Institution"</span>) <span class="sc">+</span></span>
-<span id="cb60-1307"><a href="#cb60-1307" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb60-1308"><a href="#cb60-1308" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Active Grants"</span>) <span class="sc">+</span></span>
-<span id="cb60-1309"><a href="#cb60-1309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors_4) <span class="sc">+</span>  <span class="co"># Add this line to set custom colors</span></span>
-<span id="cb60-1310"><a href="#cb60-1310" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb60-1311"><a href="#cb60-1311" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  </span>
-<span id="cb60-1312"><a href="#cb60-1312" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
-<span id="cb60-1313"><a href="#cb60-1313" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
-<span id="cb60-1314"><a href="#cb60-1314" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
-<span id="cb60-1315"><a href="#cb60-1315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb60-1316"><a href="#cb60-1316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1317"><a href="#cb60-1317" aria-hidden="true" tabindex="-1"></a>**Figure 17:** Type of Grant for current active awards for NSF.</span>
-<span id="cb60-1318"><a href="#cb60-1318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-1319"><a href="#cb60-1319" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONLUSIONS/SUMMARY</span></span>
+<span id="cb60-1270"><a href="#cb60-1270" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb60-1271"><a href="#cb60-1271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1272"><a href="#cb60-1272" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming DOE_Grant_Action is your summarized data frame with counts of Action Type by Institution</span></span>
+<span id="cb60-1273"><a href="#cb60-1273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1274"><a href="#cb60-1274" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(DOE_Grant_Action, <span class="fu">aes</span>(<span class="at">x =</span> Institution, <span class="at">y =</span> count, <span class="at">fill =</span> <span class="st">`</span><span class="at">Action Type</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb60-1275"><a href="#cb60-1275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb60-1276"><a href="#cb60-1276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of Counts of Action Type by Institution"</span>) <span class="sc">+</span></span>
+<span id="cb60-1277"><a href="#cb60-1277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb60-1278"><a href="#cb60-1278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Active Grants"</span>) <span class="sc">+</span></span>
+<span id="cb60-1279"><a href="#cb60-1279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb60-1280"><a href="#cb60-1280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of x-axis labels</span></span>
+<span id="cb60-1281"><a href="#cb60-1281" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of y-axis labels</span></span>
+<span id="cb60-1282"><a href="#cb60-1282" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Adjust size of legend text</span></span>
+<span id="cb60-1283"><a href="#cb60-1283" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
+<span id="cb60-1284"><a href="#cb60-1284" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-1285"><a href="#cb60-1285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1286"><a href="#cb60-1286" aria-hidden="true" tabindex="-1"></a>**Figure 16:** Type of Grant for current active awards for DOE.</span>
+<span id="cb60-1287"><a href="#cb60-1287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1290"><a href="#cb60-1290" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb60-1291"><a href="#cb60-1291" aria-hidden="true" tabindex="-1"></a><span class="co"># COMPARISON BETWEEEN NSF - Grant Status</span></span>
+<span id="cb60-1292"><a href="#cb60-1292" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb60-1293"><a href="#cb60-1293" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb60-1294"><a href="#cb60-1294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1295"><a href="#cb60-1295" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total grant action count for each institution</span></span>
+<span id="cb60-1296"><a href="#cb60-1296" aria-hidden="true" tabindex="-1"></a>NSF_Grant_Award_Instrument <span class="ot">&lt;-</span> NSF_Compare_Data <span class="sc">%&gt;%</span></span>
+<span id="cb60-1297"><a href="#cb60-1297" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Organization, AwardInstrument) <span class="sc">%&gt;%</span></span>
+<span id="cb60-1298"><a href="#cb60-1298" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-1299"><a href="#cb60-1299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb60-1300"><a href="#cb60-1300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1301"><a href="#cb60-1301" aria-hidden="true" tabindex="-1"></a><span class="co"># Check unique levels of AwardInstrument</span></span>
+<span id="cb60-1302"><a href="#cb60-1302" aria-hidden="true" tabindex="-1"></a>unique_levels <span class="ot">&lt;-</span> <span class="fu">unique</span>(NSF_Grant_Award_Instrument<span class="sc">$</span>AwardInstrument)</span>
+<span id="cb60-1303"><a href="#cb60-1303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1304"><a href="#cb60-1304" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust my_colors_4 to match the number of unique levels</span></span>
+<span id="cb60-1305"><a href="#cb60-1305" aria-hidden="true" tabindex="-1"></a>my_colors_4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"navyblue"</span>, <span class="st">"darkgreen"</span>, <span class="st">"darkorange"</span>, <span class="st">"darkred"</span>)  <span class="co"># or any other color palette you prefer</span></span>
+<span id="cb60-1306"><a href="#cb60-1306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1307"><a href="#cb60-1307" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot with adjusted colors</span></span>
+<span id="cb60-1308"><a href="#cb60-1308" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NSF_Grant_Award_Instrument, <span class="fu">aes</span>(<span class="at">x =</span> Organization, <span class="at">y =</span> count, <span class="at">fill =</span> AwardInstrument)) <span class="sc">+</span></span>
+<span id="cb60-1309"><a href="#cb60-1309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb60-1310"><a href="#cb60-1310" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Number of Counts of Action Type by Institution"</span>) <span class="sc">+</span></span>
+<span id="cb60-1311"><a href="#cb60-1311" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb60-1312"><a href="#cb60-1312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Active Grants"</span>) <span class="sc">+</span></span>
+<span id="cb60-1313"><a href="#cb60-1313" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_colors_4) <span class="sc">+</span>  <span class="co"># Add this line to set custom colors</span></span>
+<span id="cb60-1314"><a href="#cb60-1314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb60-1315"><a href="#cb60-1315" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb60-1316"><a href="#cb60-1316" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb60-1317"><a href="#cb60-1317" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  </span>
+<span id="cb60-1318"><a href="#cb60-1318" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>))</span>
+<span id="cb60-1319"><a href="#cb60-1319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb60-1320"><a href="#cb60-1320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1321"><a href="#cb60-1321" aria-hidden="true" tabindex="-1"></a>**Figure 17:** Type of Grant for current active awards for NSF.</span>
+<span id="cb60-1322"><a href="#cb60-1322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1323"><a href="#cb60-1323" aria-hidden="true" tabindex="-1"></a>By looking at these visualizations, we can have an understanding of the types of grants that we have at UI for our current awards. I think to expand UIs portfolio is to provide information and workshops for graduate students to have the opportunity to apply for fellowship awards, which will help them to further continue on their research projects.</span>
+<span id="cb60-1324"><a href="#cb60-1324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-1325"><a href="#cb60-1325" aria-hidden="true" tabindex="-1"></a><span class="fu">## CONLUSIONS/SUMMARY</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

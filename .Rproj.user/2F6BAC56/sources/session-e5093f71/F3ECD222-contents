@@ -1194,7 +1194,11 @@ For the last visualizations, I mentioned in the previous section, there's differ
 
 *The only available data for this type of analysis is from the sponsors DOE and NSF*
 
-In our first visualization (**Figure 16**),
+In our first visualization (**Figure 16**), we are looking at the type of grants that these institutions have in **DOE**. We have two types of grants which are: new and renewal, for our current active we have 3 that are new and 1 renewal. This a type of data to keep in mind, to see how many grants are coming that are new, or if we have that are renewal. But, looking ar this Boise State University has more in new and renewal for DOE sponsor.
+
+*It is not surprising that UI is under performing in acquiring grants from this sponsor. We have seen that from previous visualizations*
+
+**Figure 17** we are looking at the type of grants that these institutions have in **NSF**. In contrast to DOE sponsor, we have more types of grants in NSF, which are the following: continuing grant, cooperative agreement, fellowship award, and standard grant. I mentioned before (Grant duration section) that some grants have a longer duration, and that's because it depends on the type of grant it has (that also applies how much money is being awarded). In general as a whole, Boise State University has more active current awards compared to University of Idaho, so the number of types of grants are going to be different then University of Idaho. So, we are going to focus on University of Idaho, that highest type of grant that we current have is the standard grant followed by continuing grants. The one that is under performing is Fellowship award, and that is because most of these awards are awarded to graduate students. Looking at this we can see that not a lot of graduate students at UI are applying to fellowships in NSF, which is something that can be changed, giving the proper guidance.
 
 ```{r}
 # COMPARISON BETWEEEN DOE - Grant Status
@@ -1257,5 +1261,7 @@ ggplot(NSF_Grant_Award_Instrument, aes(x = Organization, y = count, fill = Award
 ```
 
 **Figure 17:** Type of Grant for current active awards for NSF.
+
+By looking at these visualizations, we can have an understanding of the types of grants that we have at UI for our current awards. I think to expand UIs portfolio is to provide information and workshops for graduate students to have the opportunity to apply for fellowship awards, which will help them to further continue on their research projects.
 
 ## CONLUSIONS/SUMMARY
