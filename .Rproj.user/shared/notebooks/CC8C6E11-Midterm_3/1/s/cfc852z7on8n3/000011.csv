@@ -147,7 +147,7 @@ Attaching package: ‘scales’
 "0","# Plot the timeline with overlapping lines, adjusted x-axis labels, individual colors, and centralized title"
 "0","ggplot(all_amount_sum, aes(x = Start_Date, y = Total_Amount / 1e6, color = Sponsor, group = Sponsor)) +"
 "0","  geom_line(size = 1) +"
-"0","  labs(title = ""Awards Timeline by Sponsor"","
+"0","  labs(title = ""Awards Timeline by Sponsor - Total Amount"","
 "0","       x = ""Start Date"","
 "0","       y = ""Total Amount (Millions)"") +"
 "0","  scale_x_date(date_breaks = ""1 year"", date_labels = ""%Y"", expand = c(0, 0)) +"
@@ -157,3 +157,5 @@ Attaching package: ‘scales’
 "0","  theme("
 "0","    plot.title = element_text(hjust = 0.5)"
 "0","  )"
+"2","Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+Please use `linewidth` instead."

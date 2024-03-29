@@ -2,7 +2,7 @@
 title: "BCB 520 - Midterm Portfolio Post"
 subtitle: "In Progress"
 author: "Geraline Trossi-Torres"
-date: "2024-03-18"
+date: "2024-03-29"
 categories: [Midterm, DataViz, Visualization]
 image: Profile4.jpg
 code-fold: true
@@ -183,7 +183,7 @@ ggplot(Q1_Data, aes(y = Sponsor, x = StartDate, xend = EndDate, yend = Sponsor))
 
 The previous visualization (**Figure 1**) was just an overview of the longevity of the current awards that are at UI. The following visualizations, we can see the active awards by sponsor and Principal Investigator (PI). By looking at these visualization we can determine the longevity of their active awards and compare/contrast between sponsors. By looking at these three visualizations (**Figure 1**, **Figure 2**, **Figure 3**), at a glance we can observe that we have more active awards in NSF compared to NIH and DOE, and these NSF awards has a longer end date by 2028, but still we some awards that ends in between 2024/2025 (like for the DOE and NIH awards).
 
-By looking at these visualizations, we can say that for the sponsor **DOE**, we have only **4 current PIs** that have active awards (their expiration date is in late 2024). Which comes to a concern, because why PIs are not applying for awards at DOE, it is something to look into. Like, look for information what the DOE asks to apply for their awards, and also talk to those current PIs at UI, to have their perspective and how can we exppand the universiy's portfolio this specific sponsor. For the **NIH and NSF** awards, we have an active flow of awards, but still we have to look into those awards that are to be expired, and what are the plans from those current PIs.
+By looking at these visualizations, we can say that for the sponsor **DOE**, we have only **4 current PIs** that have active awards (their expiration date is in late 2024). Which comes to a concern, because why PIs are not applying for awards at DOE, it is something to look into. Like, look for information what the DOE asks to apply for their awards, and also talk to those current PIs at UI, to have their perspective and how can we expand the university's portfolio this specific sponsor. For the **NIH and NSF** awards, we have an active flow of awards, but still we have to look into those awards that are to be expired, and what are the plans from those current PIs.
 
 ```{r}
 library(ggplot2)
@@ -285,6 +285,8 @@ ggplot(Q1_PI_NSF, aes(y = PI, x = StartDate, xend = EndDate, yend = PI)) +
 ```
 **Figure 4**Active Award by PI (NSF). This Gantt  Chart provides information of the longevity of the current awards that are at UI by PI for NSF.
 
+For the following visualizations, is going to show the total of award money of each of the sponsors. On **Figure 3** we have a bar chart representing each of the sponsors and in the y axis we have the total of award money in millions. By looking at this graph we can say that **NSF** has the highest amount of award of our current active awards, and the least amount of awarded money is from the **DOE**, which is to be expected because we don't have many active award from them. 
+
 ```{r}
 library(ggplot2)
 library(scales)  # For formatting labels
@@ -316,8 +318,9 @@ ggplot(Q1_Data_Amount, aes(x = Sponsor, y = Amount, fill = Sponsor)) +
         plot.title = element_text(hjust = 0.5)) +  # Adjust title alignment
   scale_fill_manual(values = sponsor_colors)  # Use manually defined colors for each sponsor
 ```
-**Figure 5:**
+**Figure 5:** Total Amount of Award in Curent Active Award from each Sponsor
 
+**Figure 6** is going to show the total of award money of each of the sponsors by each PI at UI. In this bar chart representing each of the sponsors, in the y axis we have the total of award money in millions, and in the x axis are the PIs that currently have funding from those sponsor. This will provide information how much funding is awarded to each PI for their research project. Knowing this type of information, you will now if that lab has funding to purchase materials, equipment, stipend for graduate/undergraduate for conducting research in their lab and also provide salary for their research technician or post-docs. The highest funding that we have is from **NSF** from a specific PI, and the following is **NIH**, for **USDA** the data is not presented, because in their data set doesn't provide the list of the PIs.
   
 ```{r}
 # Convert Amount to numeric
@@ -338,14 +341,13 @@ ggplot(Q1_Data, aes(x = PI, y = Amount, fill = Sponsor)) +
         plot.title = element_text(hjust = 0.5)) +  # Adjust title alignment
   scale_fill_manual(values = sponsor_colors)  # Use manually defined colors for each sponsor
 ```
-**Figure 6:**
+**Figure 6:**Total Amount of Award in Current Active Award from each Sponsor by PIs
 
+### University of Idaho - Past Portfolio (10 Years)
 
-### University of Idaho - Past Portfolio (5 to 10 Years)
+We already saw the current/future portfolio of UI, now lets see how was the performance of UI from the past 10 years. The reason that I am doing these specific visualization is to have a representation of new awards over the past 10 years. By doing this, we can identify trends that may lead to positive and/or negative developments in terms of UIs funding sponsors.By observing these trends, if we have an increasing of awards indicates a positive support from those sponsors, while if we have decrease of awards indicates a negative support from those sponsors, and we have to look more in detail why is there that decline and find solutions to improve in achieving acquiring awards from those sponsors.
 
-We already saw the current/future portfolio of UI, now lets see how was the performance of UI from the past 5 to 10 years. The reason that I am doing these specific visualization is to have a representation of new awards over the past 5 to 10 years. By doing this, we can identify trends that may lead to positive and/or negative developments in terms of UIs funding sponsors.By observing these trends, if we have an increasing of awards indicates a positive support from those sponsors, while if we have decrease of awards indicates a negative support from those sponsors, and we have to look more in detail why is there that decline and find solutions to improve in achieving acquiring awards from those sponsors.
-
-In our first visualization (**Figure 7**), its a general overview of the longevity of our current active awards. By, looking at this Timeline chart, we can easily point out that our **NSF** awards has the longest longevity (meaning we will have funding until 2028). Looking at **NIH** and **DOE** awards timeline their awards are ending in the year 2024, that is something to keep in mind and following up with the PIs that have those funding to see if they applied for new grants.
+In our first visualization (**Figure 7**), we can see the performance of UI for the past 10 years. This will provide an understanding of how UI performed in the past compared to our current standing. By looking at the graph we can say that the sponsor **USDA** has had the highest number of awards compared from the other sponsors, but looking at **Figure 8** we can see that the **USDA** doesn't bring the highest total amount of awarded money in that case is **NSF** across the past 10 years. Meaning we may have a lot of grants coming from USDA but the awarded money is not the same as a grant from NSF. Now focusing on **FIGURE 8**, like I mention NSF is the highest in the total amount that is being award but across these 10 years there's has been like an up and down, especially in 2019 and 2022 has the highest funding compared to the following years.  
 
 ```{r}
 # Read the Excel file
@@ -509,7 +511,7 @@ ggplot(all_award_counts, aes(x = Start_Date, color = Sponsor, group = Sponsor)) 
     plot.title = element_text(hjust = 0.5)
   )
 ```
-**Figure 7:**
+**Figure 7:** Performance of UI from the past 10 years on total amount of awards
 
 ```{r}
 # Read the Excel file
@@ -648,7 +650,7 @@ library(scales)
 # Plot the timeline with overlapping lines, adjusted x-axis labels, individual colors, and centralized title
 ggplot(all_amount_sum, aes(x = Start_Date, y = Total_Amount / 1e6, color = Sponsor, group = Sponsor)) +
   geom_line(size = 1) +
-  labs(title = "Awards Timeline by Sponsor",
+  labs(title = "Awards Timeline by Sponsor - Total Amount",
        x = "Start Date",
        y = "Total Amount (Millions)") +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y", expand = c(0, 0)) +
@@ -659,7 +661,7 @@ ggplot(all_amount_sum, aes(x = Start_Date, y = Total_Amount / 1e6, color = Spons
     plot.title = element_text(hjust = 0.5)
   )
 ```
-**Figure 8:**
+**Figure 8:**Performance of UI from the past 10 years of total of amount money awarded
 
 
 ### Comparison Between Peers Institutions
@@ -769,7 +771,9 @@ knitr::kable(head(NSFISU_New_Awards_Specific,4))
 
 #### Data Comparison of Awarded Money
 
-The following visualizations will show us how much awarded money is coming to these institutions, and will provide insights into UI's competitiveness and standing within its peer group.
+The following visualizations will show us how much is awarded money is coming to these institutions, and will provide insights into UI's competitiveness and standing within its peer group.
+
+In our first visualization (**Figure 9**) we are looking at the total of awarded money of current active awards from the **USDA**, and UI's excelling compared to Boise State University. There's no data of Idaho State University,because they don't have current active awards with them. This indicates that UI's is on top in the game in regards of obtaining funds from the USDA. On **Figure 10** we have for the sponsor **DOE** in contrast of what we saw in the previous graph, UI is under performing and Boise State is excelling in obtaining funds. Which is something that we need to take into consideration and look for more information, why is UI not performing well in securing funds from DOE. **Figure 11**. In our last visualization (**Figure 11**), we have the sponsor **NIH**, in which UI is performing well comparing to its peers. Looking at these data we can determine in the areas the UI is excelling and under performing, and we can make the necessary adjustments to keep excelling in the academic field.
 
 ```{R}
 # COMPARISON BETWEEEN USDA - AWARD MONEY
@@ -802,7 +806,7 @@ ggplot(USDA_total_award_money, aes(x = Grantee_Name, y = USDA_total_award_money)
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 
 ```
-**Figure 9:** USDA
+**Figure 9:** Total of Award Money from USDA Grants
 
 ```{r}
 # COMPARISON BETWEEEN DOE - AWARD MONEY
@@ -830,7 +834,7 @@ ggplot(DOE_total_award_money, aes(x = Institution, y = DOE_total_award_money)) +
         plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 ```
-**Figure 10:**DOE
+**Figure 10:**Total of Award Money from DOE Grants
 
 ```{r}
 # COMPARISON BETWEEEN NSF - AWARD MONEY - NO APARECE LA DATA
@@ -879,7 +883,7 @@ ggplot(NSF_total_award_money, aes(x = Organization, y = NSF_total_award_money)) 
         plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 ```
-**Figure 11:**NSF
+**Figure 11:**Total of Award Money from NSF Grants
 
 ```{r}
 # COMPARISON BETWEEEN NIH - AWARD MONEY - CALCULATED THE AVERAGE INSTEAD THE TOTAL AMMOUNT
@@ -908,7 +912,7 @@ ggplot(NIH_total_award_money, aes(x = OrganizationName, y = NIH_total_award_mone
         plot.title = element_text(hjust = 0.5, size = 14)) +  # Adjust size of plot title
   scale_y_continuous(labels = scales::number_format(scale = 1e-6, suffix = "M"))
 ```
-**Figure 12:**NIH
+**Figure 12:**Total of Award Money from NIH Grants
 
 #### Data Comparison of Grant Duration
 
