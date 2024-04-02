@@ -775,6 +775,8 @@ The following visualizations will show us how much is awarded money is coming to
 
 In our first visualization (**Figure 9**) we are looking at the total of awarded money of current active awards from the **USDA**, and UI's excelling compared to Boise State University. There's no data of Idaho State University,because they don't have current active awards with them. This indicates that UI's is on top in the game in regards of obtaining funds from the USDA. On **Figure 10** we have for the sponsor **DOE** in contrast of what we saw in the previous graph, UI is under performing and Boise State is excelling in obtaining funds. Which is something that we need to take into consideration and look for more information, why is UI not performing well in securing funds from DOE. **Figure 11**. In our last visualization (**Figure 11**), we have the sponsor **NIH**, in which UI is performing well comparing to its peers. Looking at these data we can determine in the areas the UI is excelling and under performing, and we can make the necessary adjustments to keep excelling in the academic field.
 
+*Idaho State University doesn't have currently active USDA award that is why is not added in the following visualization*
+
 ```{R}
 # COMPARISON BETWEEEN USDA - AWARD MONEY
 
@@ -1269,3 +1271,5 @@ ggplot(NSF_Grant_Award_Instrument, aes(x = Organization, y = count, fill = Award
 By looking at these visualizations, we can have an understanding of the types of grants that we have at UI for our current awards. I think to expand UIs portfolio is to provide information and workshops for graduate students to have the opportunity to apply for fellowship awards, which will help them to further continue on their research projects.
 
 ## CONLUSIONS/SUMMARY
+
+Looking back at all the previous visualizations, we got a better understanding in how much federal funding is awarded at the University of Idaho (UI) by the following federal agencies: the Department of Energy (DOE), the US Department of Agriculture (NIFA), the National Institute of Health (NIH), and National Science Foundation (NSF). UI excelled in some of them in securing funding in USDA, NIH and NSF grants, the only one that we need to looked into is DOE. We have only 4 currently PIs that have funding through them. It is important for the administration to gain more information, how UI can obtain more funding from DOE. The other thing we have to keep in mind is the current projects that are about to expire in 2024, and if there's plan for renewal or writing for a new grant. Overall, University of Idaho is a academic institution that have grants coming to the university and is increasing in research projects that are on par with other institutions.
