@@ -706,11 +706,3 @@ plot(
 
 ```
 
-```{r}
-# Check which vertex names in the edge list are not listed in the vertex data frame
-invalid_vertices <- setdiff(unique(c(relations3$from, relations3$to)), people$name)
-
-# Print out the invalid vertices
-print(invalid_vertices)
-
-```
