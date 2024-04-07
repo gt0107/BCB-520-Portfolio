@@ -613,3 +613,104 @@ Improve the network above by:
 2.  Coloring the nodes according to Department.
 3.  Adujsting the labels to improve readability.
 4. Find the best layout you can for this garbage.  What a nightmare.
+
+
+## IMPROVED NETWORK
+
+```{r}
+
+library(dplyr)
+
+BCB<-people%>%
+  filter(BCB520 == "TRUE")%>%
+  select(name, BCB520)
+
+edgelist<- combn(BCB$name, 2)
+edgelist_df <- as.data.frame(t(edgelist))
+colnames(edgelist_df) <- c("from", "to")
+edgelist_df$BCB520<-"TRUE"
+edgelist_df$Advisor<-"FALSE"
+
+relations$BCB520 <- "FALSE"
+
+relations3<-rbind(relations, edgelist_df)
+
+g <- graph_from_data_frame(relations3, directed=FALSE, vertices=people)
+
+
+plot(g,  layout = layout_with_fr)
+
+```
+
+```{r}
+library(igraph)
+library(igraph)
+
+# Assuming you already have 'people' and 'relations' data frames
+
+# Color Palette
+palette <- c("blue", "red")
+
+# Create the graph
+g <- graph_from_data_frame(relations3, directed = FALSE, vertices = people)
+
+# Define edge colors based on attributes
+edge_colors <- ifelse(E(g)$BCB520 == "TRUE", palette[1], ifelse(E(g)$Advisor == "TRUE", palette[2], "black"))
+
+# Plot the graph with customized edge colors
+plot(
+  g,
+  layout = layout_nicely,
+  edge.color = edge_colors,
+  vertex.label.color = "black",
+  vertex.size = 10,
+  vertex.label.cex = 0.8,
+  edge.arrow.size = 0.5
+)
+```
+
+
+```{r}
+library(igraph)
+
+# Assuming you already have 'people' and 'relations' data frames
+
+# Color Palette
+palette <- c("blue", "red")
+
+# Create the graph
+g <- graph_from_data_frame(relations3, directed = FALSE, vertices = people)
+
+# Get unique departments
+departments <- unique(people$department)
+
+# Define colors for each department
+department_colors <- rainbow(length(departments))
+
+# Map department colors to vertices
+V(g)$color <- department_colors[match(people$department, departments)]
+
+# Define edge colors based on attributes
+edge_colors <- ifelse(E(g)$BCB520 == "TRUE", palette[1], ifelse(E(g)$Advisor == "TRUE", palette[2], "black"))
+
+# Plot the graph with customized edge colors
+plot(
+  g,
+  layout = layout_nicely,
+  edge.color = edge_colors,
+  vertex.label.color = "black",
+  vertex.size = 10,
+  vertex.label.cex = 0.8,
+  edge.arrow.size = 0.5
+)
+
+```
+
+```{r}
+# Check which vertex names in the edge list are not listed in the vertex data frame
+invalid_vertices <- setdiff(unique(c(relations3$from, relations3$to)), people$name)
+
+# Print out the invalid vertices
+print(invalid_vertices)
+
+```
