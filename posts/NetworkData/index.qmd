@@ -766,21 +766,17 @@ edge_colors <- ifelse(E(g)$BCB520 == "TRUE", palette[1], ifelse(E(g)$Advisor == 
 # Plot the graph with customized edge colors and improved labels
 plot(
   g,
-  layout = layout_nicely,
+  layout = layout_with_fr(g),  # Fruchterman-Reingold layout
   edge.color = edge_colors,
   vertex.label.color = "black",
   vertex.size = 10,
   vertex.label.cex = 0.8,
   edge.arrow.size = 0.5,
-  vertex.label.dist = 0.5,  # Adjust label distance from vertices
-  vertex.label.family = "sans",  # Font family for labels
-  vertex.label.font = 2,  # Font style for labels (bold)
-  vertex.label.degree = 0,  # Rotate labels to be horizontal
-  vertex.label.cex = 0.8,  # Adjust label size
-  vertex.label.color = "black"  # Label color
+  vertex.label.dist = 0.5,
+  vertex.label.family = "sans",
+  vertex.label.font = 2,
+  vertex.label.degree = 0,
+  vertex.label.cex = 0.8,
+  vertex.label.color = "black"
 )
-
-
-
-
 ```
