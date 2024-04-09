@@ -766,7 +766,7 @@ edge_colors <- ifelse(E(g)$BCB520 == "TRUE", palette[1], ifelse(E(g)$Advisor == 
 # Plot the graph with customized edge colors and improved labels
 plot(
   g,
-  layout = layout_with_fr(g),  # Fruchterman-Reingold layout
+  layout = layout_with_kk(g),  # Kamada-Kawai layout
   edge.color = edge_colors,
   vertex.label.color = "black",
   vertex.size = 10,
@@ -779,4 +779,5 @@ plot(
   vertex.label.cex = 0.8,
   vertex.label.color = "black"
 )
+
 ```
