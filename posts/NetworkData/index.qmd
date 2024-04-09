@@ -741,3 +741,46 @@ plot(
 )
 
 ```
+
+```{r}
+# Assuming you already have 'people' and 'relations' data frames
+
+# Color Palette
+palette <- c("blue", "red")
+
+# Create the graph
+g <- graph_from_data_frame(relations3, directed = FALSE, vertices = people)
+
+# Get unique departments
+departments <- unique(people$department)
+
+# Define colors for each department
+department_colors <- rainbow(length(departments))
+
+# Map department colors to vertices
+V(g)$color <- department_colors[match(people$department, departments)]
+
+# Define edge colors based on attributes
+edge_colors <- ifelse(E(g)$BCB520 == "TRUE", palette[1], ifelse(E(g)$Advisor == "TRUE", palette[2], "black"))
+
+# Plot the graph with customized edge colors and improved labels
+plot(
+  g,
+  layout = layout_nicely,
+  edge.color = edge_colors,
+  vertex.label.color = "black",
+  vertex.size = 10,
+  vertex.label.cex = 0.8,
+  edge.arrow.size = 0.5,
+  vertex.label.dist = 0.5,  # Adjust label distance from vertices
+  vertex.label.family = "sans",  # Font family for labels
+  vertex.label.font = 2,  # Font style for labels (bold)
+  vertex.label.degree = 0,  # Rotate labels to be horizontal
+  vertex.label.cex = 0.8,  # Adjust label size
+  vertex.label.color = "black"  # Label color
+)
+
+
+
+
+```
