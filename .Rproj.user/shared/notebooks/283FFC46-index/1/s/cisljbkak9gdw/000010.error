@@ -1,1 +1,0 @@
-{"frames":[],"message":"Error in graph_from_data_frame(relations3, directed = FALSE, vertices = people) : \n  could not find function \"graph_from_data_frame\"\n"}
