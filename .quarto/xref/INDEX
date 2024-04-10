@@ -46,5 +46,8 @@
   },
   "posts/NetworkData/index.qmd": {
     "index.html": "b6329d4d"
+  },
+  "posts/NetworkObservable/index.qmd": {
+    "index.html": "ce763705"
   }
 }
