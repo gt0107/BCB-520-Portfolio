@@ -1278,7 +1278,7 @@ Looking back at all the previous visualizations, we got a better understanding i
 
 ##IMPROVED VISUALIZATIONS
 
-### NSF Active Awards by PI
+### Question #1: NSF Active Awards by PI
 
 ```{r}
 library(ggplot2)
@@ -1320,4 +1320,43 @@ ggplot(Q1_PI_NSF, aes(y = PI, x = StartDate, xend = EndDate)) +
   theme(legend.position = "none",  # Remove the legend
         plot.title = element_text(hjust = 0.5),
         axis.text.y = element_text(size = 6))  # Reduce the size of y-axis label
+```
+
+### Amount of Current Active Awards in UI
+```{r}
+library(ggplot2)
+library(scales)  # For formatting labels
+
+# Read the data
+Q1_Data_Amount_2 <- read_xlsx("Q1_Compilled_Data_4.xlsx")
+
+# Make a copy of the Amount column
+Q1_Data_Amount_2$Original_Amount <- Q1_Data_Amount_2$Amount
+
+# Remove dollar signs from the Amount column
+Q1_Data_Amount_2$Amount <- gsub("\\$", ",", Q1_Data_Amount_2$Amount)
+
+# Convert the Amount column to numeric
+Q1_Data_Amount_2$Amount <- as.numeric(Q1_Data_Amount_2$Amount)
+
+# Check for NA values in the Amount column
+any(is.na(Q1_Data_Amount_2$Amount))
+
+# Check the structure of the Amount variable
+str(Q1_Data_Amount_2$Amount)
+
+# Define colors for each sponsor
+sponsor_colors <- c("DOE" = "darkgray", "NSF" = "gold", "NIH" = "black", "USDA" = "lightgray")
+
+# Create the bar plot with colors assigned to each sponsor
+ggplot(Q1_Data_Amount, aes(x = Sponsor, y = Amount, fill = Sponsor)) +
+  geom_bar(stat = "summary", fun = "sum") +
+  labs(title = "Total Amount by Sponsor",
+       x = "Sponsor",
+       y = "Total Amount (Millions)") +
+  scale_y_continuous(labels = scales::unit_format(unit = "M")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5)) +  # Adjust title alignment
+  scale_fill_manual(values = sponsor_colors)  # Use manually defined colors for each sponsor
 ```
