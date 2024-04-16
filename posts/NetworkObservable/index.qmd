@@ -180,40 +180,6 @@ Change the `graph3` object so that it contains eight nodes called "Life Sciences
 ### My try in doing this...
 
 ```{ojs}
-graph1 = ({
-  nodes: [
-    {id: "a"},
-    {id: "b"},
-    {id: "c"}
-  ],
-  links: []
-})
-
-
-graph2 = ({
-  nodes: [
-    {id: "a"},
-    {id: "b"},
-    {id: "c"}
-  ],
-  links: [
-    {source: "a", target: "b"},
-    {source: "b", target: "c"},
-    {source: "c", target: "a"}
-  ]
-})
-
-
-graph3 = ({
-  nodes: [
-    {id: "a"},
-    {id: "b"}
-  ],
-  links: [
-    {source: "a", target: "b"}
-  ]
-})
-
 graph4 = ({
   nodes: [
     {id: "Life Sciences"},
@@ -409,9 +375,6 @@ function ForceGraph({
 import {howto} from "@d3/example-components"
 
 import {Swatches} from "@d3/color-legend"
-
-
-
 ```
 
 ## TASK 2
@@ -442,9 +405,6 @@ json <- paste0( nodes_json, links_json)
 
 # write JSON object to file
 write(json, file = "network_graph2.json")
-
-
-
 ```
 
 Oh god.... now go back and point the stuff to the stuff...
