@@ -27,7 +27,7 @@ The preamble of that document summarizes things nicely:
 >
 > OJS works in any Quarto document (plain markdown as well as Jupyter and Knitr documents). Just include your code in an {ojs} executable code block.
 
-## EXAMPLE 1: BASIC FORCE DIRECTED GRAPH
+## EXAMPLE 1: BASIC FORCE DIRECTED GRAPH - Me trying to get something 
 
 I'm going to start by trying to replicate [this observable notebook](https://observablehq.com/@d3/modifying-a-force-directed-graph):
 
@@ -43,19 +43,26 @@ viewof graph = {
   <label style="margin-right: 1em; display: inline-flex; align-items: center;">
     <input type="radio" name="radio" value="3" style="margin-right: 0.5em;"> Graph 3
   </label>
+  <label style="margin-right: 1em; display: inline-flex; align-items: center;">
+    <input type="radio" name="radio" value="4" style="margin-right: 0.5em;"> Graph 4
+  </label>
 </form>`;
-  const graphs = {1: graph1, 2: graph2, 3: graph3};
+  
+  const graphs = {1: graph1, 2: graph2, 3: graph3, 4: graph4};
   const timeout = setInterval(() => {
-    form.value = graphs[form.radio.value = (+form.radio.value) % 3 + 1];
+    form.value = graphs[form.radio.value = (+form.radio.value) % 4 + 1];
     form.dispatchEvent(new CustomEvent("input"));
   }, 2000);
+  
   form.onchange = () => form.dispatchEvent(new CustomEvent("input")); // Safari
   form.oninput = event => { 
     if (event.isTrusted) clearInterval(timeout), form.onchange = null;
     form.value = graphs[form.radio.value];
   };
+  
   form.value = graphs[form.radio.value];
   invalidation.then(() => clearInterval(timeout));
+  
   return form;
 }
 
@@ -129,56 +136,6 @@ update = chart2.update(graph)
 
 ```
 
-The code chunk below shows us how Dr. Bostock creates the basic architecture of an [EDGE LIST]{.red} called `links` along with NODE LABELS called `nodes`. Have a close look at the structure. He is setting this up in a heirarchy very similar to a JSON file, which we will examine in **EXAMPLE 2**.
-
-```{ojs}
-graph1 = ({
-  nodes: [
-    {id: "a"},
-    {id: "b"},
-    {id: "c"}
-  ],
-  links: []
-})
-
-
-graph2 = ({
-  nodes: [
-    {id: "a"},
-    {id: "b"},
-    {id: "c"}
-  ],
-  links: [
-    {source: "a", target: "b"},
-    {source: "b", target: "c"},
-    {source: "c", target: "a"}
-  ]
-})
-
-
-graph3 = ({
-  nodes: [
-    {id: "a"},
-    {id: "b"}
-  ],
-  links: [
-    {source: "a", target: "b"}
-  ]
-})
-
-
-color = d3.scaleOrdinal(d3.schemeTableau10)
-
-height = 400
-
-```
-
-## TASK 1
-
-Change the `graph3` object so that it contains eight nodes called "Life Sciences", "Physical Sciences", "Heidi", "Robyn", "Konrad", "Geraline", "Lucas", and "Yaotian". Change the `links` object to reflect our shared understanding of those links.
-
-### My try in doing this...
-
 ```{ojs}
 {
   const graph4 = ({
@@ -212,6 +169,11 @@ Change the `graph3` object so that it contains eight nodes called "Life Sciences
   // Code for rendering the graph using graph4, color, height
 }
 ```
+## TASK 1
+
+Change the `graph3` object so that it contains eight nodes called "Life Sciences", "Physical Sciences", "Heidi", "Robyn", "Konrad", "Geraline", "Lucas", and "Yaotian". Change the `links` object to reflect our shared understanding of those links.
+
+
 ## EXAMPLE 2: INTERACTIVE FORCE DIRECTED GRAPH
 
 I honestly cannot believe this works! I mean... Hey! Look at this cool interactive network!
