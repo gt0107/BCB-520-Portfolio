@@ -177,6 +177,71 @@ height = 400
 
 Change the `graph3` object so that it contains eight nodes called "Life Sciences", "Physical Sciences", "Heidi", "Robyn", "Konrad", "Geraline", "Lucas", and "Yaotian". Change the `links` object to reflect our shared understanding of those links.
 
+### My try in doing this...
+
+```{ojs}
+graph1 = ({
+  nodes: [
+    {id: "a"},
+    {id: "b"},
+    {id: "c"}
+  ],
+  links: []
+})
+
+
+graph2 = ({
+  nodes: [
+    {id: "a"},
+    {id: "b"},
+    {id: "c"}
+  ],
+  links: [
+    {source: "a", target: "b"},
+    {source: "b", target: "c"},
+    {source: "c", target: "a"}
+  ]
+})
+
+
+graph3 = ({
+  nodes: [
+    {id: "a"},
+    {id: "b"}
+  ],
+  links: [
+    {source: "a", target: "b"}
+  ]
+})
+
+graph4 = ({
+  nodes: [
+    {id: "Life Sciences"},
+    {id: "Physical Sciences"},
+    {id: "Heidi"},
+    {id: "Robyn"},
+    {id: "Konrad"},
+    {id: "Geraline"},
+    {id: "Lucas"},
+    {id: "Yaotian"}
+  ],
+  links: [
+    {source: "Life Sciences", target: "Physical Sciences"},
+    {source: "Life Sciences", target: "Heidi"},
+    {source: "Physical Sciences", target: "Robyn"},
+    {source: "Physical Sciences", target: "Konrad"},
+    {source: "Heidi", target: "Geraline"},
+    {source: "Heidi", target: "Lucas"},
+    {source: "Robyn", target: "Yaotian"},
+    {source: "Lucas", target: "Yaotian"}
+  ]
+})
+
+color = d3.scaleOrdinal(d3.schemeTableau10)
+
+height = 400
+```
+
 ## EXAMPLE 2: INTERACTIVE FORCE DIRECTED GRAPH
 
 I honestly cannot believe this works! I mean... Hey! Look at this cool interactive network!
