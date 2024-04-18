@@ -12,7 +12,6 @@ image: "Wendigojson.png"
 description: "Cool!"
 code-fold: true
 code-tools: true
-
 ---
 
 # OBSERVABLE IN QUARTO
@@ -30,6 +29,68 @@ The preamble of that document summarizes things nicely:
 ## EXAMPLE 1: BASIC FORCE DIRECTED GRAPH - Me trying to get something 
 
 I'm going to start by trying to replicate [this observable notebook](https://observablehq.com/@d3/modifying-a-force-directed-graph):
+
+```{ojs}
+graph1 = ({
+  nodes: [
+    {id: "a"},
+    {id: "b"},
+    {id: "c"}
+  ],
+  links: []
+})
+
+
+graph2 = ({
+  nodes: [
+    {id: "a"},
+    {id: "b"},
+    {id: "c"}
+  ],
+  links: [
+    {source: "a", target: "b"},
+    {source: "b", target: "c"},
+    {source: "c", target: "a"}
+  ]
+})
+
+
+graph3 = ({
+  nodes: [
+    {id: "a"},
+    {id: "b"}
+  ],
+  links: [
+    {source: "a", target: "b"}
+  ]
+})
+```
+
+```{ojs}
+graph4 = {
+  nodes: [
+    {id: "Life Sciences"},
+    {id: "Physical Sciences"},
+    {id: "Heidi"},
+    {id: "Robyn"},
+    {id: "Konrad"},
+    {id: "Geraline"},
+    {id: "Lucas"},
+    {id: "Yaotian"}
+  ],
+  links: [
+    {source: "Life Sciences", target: "Physical Sciences"},
+    {source: "Life Sciences", target: "Heidi"},
+    {source: "Physical Sciences", target: "Robyn"},
+    {source: "Physical Sciences", target: "Konrad"},
+    {source: "Heidi", target: "Geraline"},
+    {source: "Heidi", target: "Lucas"},
+    {source: "Robyn", target: "Yaotian"},
+    {source: "Lucas", target: "Yaotian"}
+  ]
+};
+
+```
 
 ```{ojs}
 viewof graph = {
@@ -136,39 +197,6 @@ update = chart2.update(graph)
 
 ```
 
-```{ojs}
-{
-  const graph4 = ({
-    nodes: [
-      {id: "Life Sciences"},
-      {id: "Physical Sciences"},
-      {id: "Heidi"},
-      {id: "Robyn"},
-      {id: "Konrad"},
-      {id: "Geraline"},
-      {id: "Lucas"},
-      {id: "Yaotian"}
-    ],
-    links: [
-      {source: "Life Sciences", target: "Physical Sciences"},
-      {source: "Life Sciences", target: "Heidi"},
-      {source: "Physical Sciences", target: "Robyn"},
-      {source: "Physical Sciences", target: "Konrad"},
-      {source: "Heidi", target: "Geraline"},
-      {source: "Heidi", target: "Lucas"},
-      {source: "Robyn", target: "Yaotian"},
-      {source: "Lucas", target: "Yaotian"}
-    ]
-  })
-}
-
-{
-  const color = d3.scaleOrdinal(d3.schemeTableau10)
-  const height = 400
-  
-  // Code for rendering the graph using graph4, color, height
-}
-```
 ## TASK 1
 
 Change the `graph3` object so that it contains eight nodes called "Life Sciences", "Physical Sciences", "Heidi", "Robyn", "Konrad", "Geraline", "Lucas", and "Yaotian". Change the `links` object to reflect our shared understanding of those links.
