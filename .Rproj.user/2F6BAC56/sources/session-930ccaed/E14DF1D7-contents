@@ -25,6 +25,24 @@ In class I bet Ronald that he would end up creating some kind of map based visua
 
 The data I obtained were from the [Malaria Atlas](https://data.malariaatlas.org/trends?year=2020&metricGroup=Malaria&geographicLevel=admin0&metricSubcategory=Pf&metricType=rate&metricName=incidence). I downloaded a csv for 10 years of data for all the countries the had on file.
 
+```{r, include=FALSE}
+library(readxl)
+library(dplyr)
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(ggplot2)
+library(readxl)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(gganimate)
+library(transformr)
+library(magick)
+library(gifski)
+library(sf)
+library(maps)
+```
+
 ```{r}
 library(tidyverse)
 library(readxl)
