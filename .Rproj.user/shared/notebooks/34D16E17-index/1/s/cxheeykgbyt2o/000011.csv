@@ -1,8 +1,0 @@
-"0","library(tidyverse)"
-"2","Warning: package ‘ggplot2’ was built under R version 4.3.3"
-"2","Error: package or namespace load failed for ‘tidyverse’:
- .onAttach failed in attachNamespace() for 'tidyverse', details:
-  call: value[[3L]](cond)
-  error: Package ‘ggplot2’ version 3.4.4 cannot be unloaded:
- Error in unloadNamespace(package) : namespace ‘ggplot2’ is imported by ‘patchwork’ so cannot be unloaded
-"
