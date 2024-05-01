@@ -1,0 +1,228 @@
+---
+title: "BCB 520 - FINAL PROJECT"
+subtitle: "Let's get into RainFall Data in Puerto Rico"
+format:
+  html:
+    toc: false
+    echo: true
+author: "Geraline Tross-Torres"
+date: "2024-04-28"
+categories: [Portfolio, DataViz, Assignment]
+image: "RainFall.png"
+description: "How much Rainfall did Puerto Rico had in the last 15 years"
+code-fold: true
+code-tools: true
+
+---
+
+## OVERVIEW
+
+This assignment provides you the opportunity to synthesize all of the concepts we've covered in the course to date. The basic framework is that you will create a COMPLETE data visualization BLOG post that is suitable as a showcase component of your Data Science Portfolio. The point is to [SHOW]{.red} people your skills.
+
+## STRUCTURE
+
+The basic formatting guidelines for this assignment are:
+
+1.  Include `code fold` or `code tools` options (or both) that allow users to view and copy your code while maintaining overall readability of your post.
+2.  Suppress all output and warnings that might distract from your visualizations and writing.
+3.  Properly title your assignment. The main title should be **"BCB 520 - Final Project"**, and the subtitle should be a descriptive title related to your question or topic.
+4.  Include author, date, categories, and a description in your YAML header.
+5.  Write clear, complete sentences for a target audience with some scientific background but little training in your specific discipline.
+6.  Include references if appropriate and use hyperlinks to external sources of data, inspiration, or examples.
+7.  Use the header hierarchy and create a sensible document outline with white space. Format for readability! Use **bold** and *italic* fonts to emphasize things! Use [color]{.red} by customizing your `.css` file!
+
+**In addition to the above formatting guidelines, your portfolio post must contain the following sections:**
+
+### Preamble
+
+Write a brief paragraph describing the primary question or purpose of the post. Ideally, the concept should be challenging enough that it requires at least two visualizations that use different idioms (ie. don't just make two scatterplots with different variables). The concept should also be challenging enough that it captures the interest of the reader (i.e. a plot of height and weight that shows they are correlated is trivial and not appropriate). The best approach is to explore a topic or question in which YOU are very interested.
+
+### Data
+
+```{r}
+library(ggplot2)
+library(sf)
+library(tigris)
+library(dplyr)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(dplyr)
+library(rnaturalearthhires)
+library(plotly)
+library(readxl)
+library(dplyr)
+```
+
+Write a summary of the data sources you will use. Include a `Data Dictionary` table that fully describes each individual data file used. You may use your own research data or publicly available data from any source you like (with attribution). There aren't any minimum or maximum data set size requirements, other than you need something big enough to be interesting and not so big that we don't have a supercomputer capable of creating your visualization.
+
+**NEW REQUIREMENT: Your assignment must feature one of the two new data types we have considered since the midterm: NETWORK DATA or SPATIAL DATA.**
+
+### Visualizations
+
+Create your visualizations and include text that explains any steps or design choices. Be sure to include clearly labeled axes and a concise but complete figure caption for each visualization. Make deliberate choices for color palettes, point marks, line types, etc. Demonstrate that you understand the concepts we have covered!
+
+```{r}
+# Get the spatial data for countries
+countries <- ne_countries(scale = "medium", returnclass = "sf")
+
+# Filter the dataset to extract Puerto Rico
+puerto_rico <- subset(countries, admin == "Puerto Rico")
+
+# Plot Puerto Rico's geometry
+ggplot() +
+  geom_sf(data = puerto_rico) +
+  theme_void()
+```
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(viridis)
+library (plotly)
+
+# Read the data
+rainfallprwide <- read_excel('geraline_data_mm.xlsx')
+
+stations <- rainfallprwide %>%
+  select(STATION, LATITUDE, LONGITUDE, NAME)%>%
+  unique()
+
+g <- list(
+  scope = 'north america',
+  center = list(lat = 18.2208, lon = -66.5901),  # Centered on Puerto Rico
+  projection = list(type = 'mercator'),
+  showland = TRUE,
+  landcolor = "rgb(220, 220, 220)",  # Light gray
+  subunitcolor = "rgb(200, 200, 200)",  # Light gray
+  countrycolor = "rgb(200, 200, 200)",  # Light gray
+  countrywidth = 0.5,
+  subunitwidth = 0.5
+)
+
+ plot_geo(stations, lat = ~LATITUDE, lon = ~LONGITUDE) %>%
+  add_markers(
+    text = ~NAME,
+    symbol = I("circle"),
+    size = I(10),
+    hoverinfo = "text"
+  ) %>%
+  layout(
+    title = 'Rainfall in Puerto Rico Stations',
+    geo = g
+  )
+
+```
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(maps)
+
+# Get the map data for Puerto Rico
+map_data <- map_data("world", region = "Puerto Rico")
+
+# Create the base map with ggplot2
+base_map <- ggplot() +
+  geom_polygon(data = map_data, aes(x = long, y = lat, group = group), fill = "lightgray", color = "black") +
+  coord_map() +
+  ggtitle("Map of Puerto Rico")
+
+# Convert the base map to a Plotly object
+plotly_map <- ggplotly(base_map)
+
+# Assuming 'stations' is your data frame and it has columns 'LATITUDE', 'LONGITUDE', and 'NAME'
+# Add station markers to the Plotly map
+plotly_map <- plotly_map %>%
+  add_markers(
+    data = stations,
+    x = ~LONGITUDE,
+    y = ~LATITUDE,
+    text = ~NAME,
+    marker = list(
+      symbol = "circle",  # Change the symbol to square
+      color = "navy",     # Change the color to blue
+      size = 10           # Change the size to 10
+    ),
+    hoverinfo = "text"
+  ) 
+
+# Display the map
+print(plotly_map)
+```
+
+```{r}
+library(tidyverse)
+library(readxl)
+
+# Read the data
+rainfallprwide <- read_excel('geraline_data_mm.xlsx')
+
+# Create the stations data frame and filter for month 1
+stations_rain <- rainfallprwide %>%
+  filter(MONTH == 1) %>%
+  select(STATION, LATITUDE, LONGITUDE, NAME, MONTH, "2009") %>%
+  unique()
+
+# Convert the base map to a Plotly object
+plotly_map <- ggplotly(base_map)
+
+# Assuming 'stations_rain' is your data frame and it has columns 'LATITUDE', 'LONGITUDE', 'NAME', and '2009'
+# Add station markers to the Plotly map with size based on rainfall in 2009
+plotly_map <- plotly_map %>%
+  add_markers(
+    data = stations_rain,
+    x = ~LONGITUDE,
+    y = ~LATITUDE,
+    text = ~NAME,
+    marker = list(
+      symbol = "circle",       # Change the symbol to square
+      color = "navy",          # Change the color to blue
+      size = ~`2009`           # Size based on rainfall in 2009
+    ),
+    hoverinfo = "text"
+  ) 
+
+# Display the map
+print(plotly_map)
+
+#do the squareroot for the sizes for the circles for the rainfall
+
+```
+
+
+```{r}
+library(dplyr)
+
+# Read the data
+rainfallprwide <- read_excel('geraline_data_mm.xlsx')
+
+# Extract years from column names
+years <- as.character(2009:2023)
+
+# Convert the numeric columns to numeric type
+rainfallprwide[,-(1:5)] <- lapply(rainfallprwide[,-(1:5)], as.numeric)
+
+# Calculate total rainfall for each station for each year individually
+station_year_total_rainfall <- rainfallprwide %>%
+  group_by(STATION, LATITUDE, LONGITUDE, NAME) %>%
+  summarise(across(all_of(years), ~sum(.x, na.rm = TRUE), .names = "Total_Rainfall_{.col}"))
+
+```
+
+### Conclusions or Summary
+
+Answer your research question. Draw a conclusion or inference related to your topic. Summarize your results. What new questions have emerged as a result of your visualizations? What interesting next steps have emerged?
+
+## RUBRIC
+
+I will evaluate the following for your portfolio post:
+
+**1. Clarity of writing (15%):** Complete, clear sentences. Good Grammar. Understandable to target audience. Logical flow of ideas.
+
+**2. Adherence to format (10%):** Did you follow directions?
+
+**3. Topic suitability (15%):** Is the topic interesting? Are the visualizations challenging and interesting enough to showcase your skills?
+
+**4. Viz Execution (40%):** Are the visualizations effective? Do they adhere to the principles of effectiveness? Are choices for idiom, marks, channels, etc made deliberately and well justified?
+
+**5. Creativity (20%):** Did you push your boundaries and learn new techniques? Is the overall post compelling and interesting? Are the visualizations inspiring, creative, unique, and generally impressive? If I were recruiting a new data scientist (and I often am), would this portfolio post impress me, or would it damage your candidacy during review?
