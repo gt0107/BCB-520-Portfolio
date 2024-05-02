@@ -17,8 +17,6 @@ code-tools: true
 
 ## Preamble
 
-Write a brief paragraph describing the primary question or purpose of the post. Ideally, the concept should be challenging enough that it requires at least two visualizations that use different idioms (ie. don't just make two scatterplots with different variables). The concept should also be challenging enough that it captures the interest of the reader (i.e. a plot of height and weight that shows they are correlated is trivial and not appropriate). The best approach is to explore a topic or question in which YOU are very interested.
-
 ## Data
 
 ```{r, include=FALSE}
@@ -257,5 +255,3 @@ subplot(plot_list, nrows = 5)
 ```
 
 ### Conclusions or Summary
-
-Answer your research question. Draw a conclusion or inference related to your topic. Summarize your results. What new questions have emerged as a result of your visualizations? What interesting next steps have emerged?
