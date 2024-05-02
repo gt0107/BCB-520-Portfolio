@@ -15,31 +15,13 @@ code-tools: true
 
 ---
 
-## OVERVIEW
-
-This assignment provides you the opportunity to synthesize all of the concepts we've covered in the course to date. The basic framework is that you will create a COMPLETE data visualization BLOG post that is suitable as a showcase component of your Data Science Portfolio. The point is to [SHOW]{.red} people your skills.
-
-## STRUCTURE
-
-The basic formatting guidelines for this assignment are:
-
-1.  Include `code fold` or `code tools` options (or both) that allow users to view and copy your code while maintaining overall readability of your post.
-2.  Suppress all output and warnings that might distract from your visualizations and writing.
-3.  Properly title your assignment. The main title should be **"BCB 520 - Final Project"**, and the subtitle should be a descriptive title related to your question or topic.
-4.  Include author, date, categories, and a description in your YAML header.
-5.  Write clear, complete sentences for a target audience with some scientific background but little training in your specific discipline.
-6.  Include references if appropriate and use hyperlinks to external sources of data, inspiration, or examples.
-7.  Use the header hierarchy and create a sensible document outline with white space. Format for readability! Use **bold** and *italic* fonts to emphasize things! Use [color]{.red} by customizing your `.css` file!
-
-**In addition to the above formatting guidelines, your portfolio post must contain the following sections:**
-
-### Preamble
+## Preamble
 
 Write a brief paragraph describing the primary question or purpose of the post. Ideally, the concept should be challenging enough that it requires at least two visualizations that use different idioms (ie. don't just make two scatterplots with different variables). The concept should also be challenging enough that it captures the interest of the reader (i.e. a plot of height and weight that shows they are correlated is trivial and not appropriate). The best approach is to explore a topic or question in which YOU are very interested.
 
-### Data
+## Data
 
-```{r}
+```{r, include=FALSE}
 library(ggplot2)
 library(sf)
 library(tigris)
@@ -51,16 +33,47 @@ library(rnaturalearthhires)
 library(plotly)
 library(readxl)
 library(dplyr)
+library (knitr)
+library(plotly)
+library(maps)
+library(tidyverse)
 ```
 
-Write a summary of the data sources you will use. Include a `Data Dictionary` table that fully describes each individual data file used. You may use your own research data or publicly available data from any source you like (with attribution). There aren't any minimum or maximum data set size requirements, other than you need something big enough to be interesting and not so big that we don't have a supercomputer capable of creating your visualization.
+The data set was acquired by the database of **National Centers for Environmental Information - National Oceanic and Atmospheric Administration (NOAA)**. https://www.ncei.noaa.gov/access/search/data-search/daily-summaries
 
-**NEW REQUIREMENT: Your assignment must feature one of the two new data types we have considered since the midterm: NETWORK DATA or SPATIAL DATA.**
+### Data Table
 
-### Visualizations
+```{r}
+DataTable <- read_xlsx("geraline_data_mm.xlsx")
+# Assuming you want to select only the first 10 columns from DataTable
+selected_columns <- DataTable[, 1:10]
 
-Create your visualizations and include text that explains any steps or design choices. Be sure to include clearly labeled axes and a concise but complete figure caption for each visualization. Make deliberate choices for color palettes, point marks, line types, etc. Demonstrate that you understand the concepts we have covered!
+# Displaying the selected columns using knitr::kable()
+knitr::kable(head(selected_columns))
 
+```
+
+```{r}
+library(dplyr)
+
+# Read the data
+rainfallprwide <- read_excel('geraline_data_mm.xlsx')
+
+# Extract years from column names
+years <- as.character(2009:2023)
+
+# Convert the numeric columns to numeric type
+rainfallprwide[,-(1:5)] <- lapply(rainfallprwide[,-(1:5)], as.numeric)
+
+# Calculate total rainfall for each station for each year individually
+station_year_total_rainfall <- rainfallprwide %>%
+  group_by(STATION, LATITUDE, LONGITUDE, NAME) %>%
+  summarise(across(all_of(years), ~sum(.x, na.rm = TRUE), .names = "Total_Rainfall_{.col}"))
+```
+
+## Visualizations
+
+### Base Map of Puerto Rico
 ```{r}
 # Get the spatial data for countries
 countries <- ne_countries(scale = "medium", returnclass = "sf")
@@ -74,12 +87,9 @@ ggplot() +
   theme_void()
 ```
 
-```{r}
-library(tidyverse)
-library(readxl)
-library(viridis)
-library (plotly)
+### Can you see Puerto Rico?
 
+```{r}
 # Read the data
 rainfallprwide <- read_excel('geraline_data_mm.xlsx')
 
@@ -107,17 +117,15 @@ g <- list(
     hoverinfo = "text"
   ) %>%
   layout(
-    title = 'Rainfall in Puerto Rico Stations',
+    title = 'NOAA Stations - Puerto Rico',
     geo = g
   )
 
 ```
 
-```{r}
-library(plotly)
-library(ggplot2)
-library(maps)
+### Combination of ggplot Base Map + Plotly
 
+```{r}
 # Get the map data for Puerto Rico
 map_data <- map_data("world", region = "Puerto Rico")
 
@@ -125,7 +133,10 @@ map_data <- map_data("world", region = "Puerto Rico")
 base_map <- ggplot() +
   geom_polygon(data = map_data, aes(x = long, y = lat, group = group), fill = "lightgray", color = "black") +
   coord_map() +
-  ggtitle("Map of Puerto Rico")
+  ggtitle("NOAA Stations - Puerto Rico") +
+  theme(plot.title = element_text(hjust = 0.5),  # Centering title
+        axis.title.x = element_text(size = 12, face = "bold", color = "black"),  # Customizing x-axis label
+        axis.title.y = element_text(size = 12, face = "bold", color = "black"))  # Customizing y-axis label
 
 # Convert the base map to a Plotly object
 plotly_map <- ggplotly(base_map)
@@ -145,14 +156,11 @@ plotly_map <- ggplotly(base_map)
     ),
     hoverinfo = "text"
   ) 
-
-
 ```
 
-```{r}
-library(tidyverse)
-library(readxl)
+### Applying Rainfall Data of 2009
 
+```{r}
 #2009
 # Read the data
 rainfallprwide <- read_excel('geraline_data_mm.xlsx')
@@ -174,8 +182,17 @@ station_year_total_rainfall <- rainfallprwide %>%
   group_by(STATION, LATITUDE, LONGITUDE, NAME) %>%
   summarise(across(all_of(years), ~sum(.x, na.rm = TRUE), .names = "Total_Rainfall_{.col}"))
 
+base_map_2 <- ggplot() +
+  geom_polygon(data = map_data, aes(x = long, y = lat, group = group), fill = "lightgray", color = "black") +
+  coord_map() +
+  ggtitle("RainFall for 2009") +
+  theme(plot.title = element_text(hjust = 0.5),  # Centering title
+        axis.title.x = element_text(size = 12, face = "bold", color = "black"),  # Customizing x-axis label
+        axis.title.y = element_text(size = 12, face = "bold", color = "black"))  # Customizing y-axis label
+
+
 # Convert the base map to a Plotly object
-plotly_map <- ggplotly(base_map)
+plotly_map <- ggplotly(base_map_2)
 
 # Assuming 'stations_rain' is your data frame and it has columns 'LATITUDE', 'LONGITUDE', 'NAME', and '2009'
 # Add station markers to the Plotly map with size based on rainfall in 2009
@@ -196,207 +213,16 @@ plotly_map <- ggplotly(base_map)
   ) 
 ```
 
-```{r}
-#2012
-# Read the data
-rainfallprwide <- read_excel('geraline_data_mm.xlsx')
-
-# Create the stations data frame and filter for month 1
-stations_rain <- rainfallprwide %>%
-  filter(MONTH == 1) %>%
-  select(STATION, LATITUDE, LONGITUDE, NAME, MONTH, "2012") %>%
-  unique()
-
-# Extract years from column names
-years <- as.character(2009:2023)
-
-# Convert the numeric columns to numeric type
-rainfallprwide[,-(1:5)] <- lapply(rainfallprwide[,-(1:5)], as.numeric)
-
-# Calculate total rainfall for each station for each year individually
-station_year_total_rainfall <- rainfallprwide %>%
-  group_by(STATION, LATITUDE, LONGITUDE, NAME) %>%
-  summarise(across(all_of(years), ~sum(.x, na.rm = TRUE), .names = "Total_Rainfall_{.col}"))
-
-# Convert the base map to a Plotly object
-plotly_map <- ggplotly(base_map)
-
-# Assuming 'stations_rain' is your data frame and it has columns 'LATITUDE', 'LONGITUDE', 'NAME', and '2009'
-# Add station markers to the Plotly map with size based on rainfall in 2009
- plotly_map %>%
-  add_markers(
-    data = station_year_total_rainfall,
-    x = ~LONGITUDE,
-    y = ~LATITUDE,
-    text = ~NAME,
-    marker = list(
-      symbol = "circle",       # Change the symbol to square
-      color = ~Total_Rainfall_2012 / 100,          # Change the color to blue
-      size = ~Total_Rainfall_2012 / 100,
-      colorscale = "Blues",
-      reversescale = TRUE              # Size based on rainfall in 2009
-    ),
-    hoverinfo = "text"
-  )
-
-```
+### Compilling 15 years of RainFall in Puerto Rico
 
 ```{r}
-#2017
-# Read the data
-rainfallprwide <- read_excel('geraline_data_mm.xlsx')
-
-# Create the stations data frame and filter for month 1
-stations_rain <- rainfallprwide %>%
-  filter(MONTH == 1) %>%
-  select(STATION, LATITUDE, LONGITUDE, NAME, MONTH, "2009") %>%
-  unique()
-
-# Extract years from column names
-years <- as.character(2009:2023)
-
-# Convert the numeric columns to numeric type
-rainfallprwide[,-(1:5)] <- lapply(rainfallprwide[,-(1:5)], as.numeric)
-
-# Calculate total rainfall for each station for each year individually
-station_year_total_rainfall <- rainfallprwide %>%
-  group_by(STATION, LATITUDE, LONGITUDE, NAME) %>%
-  summarise(across(all_of(years), ~sum(.x, na.rm = TRUE), .names = "Total_Rainfall_{.col}"))
-
-# Convert the base map to a Plotly object
-plotly_map <- ggplotly(base_map)
-
-# Assuming 'stations_rain' is your data frame and it has columns 'LATITUDE', 'LONGITUDE', 'NAME', and '2009'
-# Add station markers to the Plotly map with size based on rainfall in 2009
- plotly_map %>%
-  add_markers(
-    data = station_year_total_rainfall,
-    x = ~LONGITUDE,
-    y = ~LATITUDE,
-    text = ~NAME,
-    marker = list(
-      symbol = "circle",       # Change the symbol to square
-      color = ~Total_Rainfall_2017 / 100,          # Change the color to blue
-      size = ~Total_Rainfall_2017 / 100,
-      colorscale = "Blues",
-      reversescale = TRUE              # Size based on rainfall in 2009
-    ),
-    hoverinfo = "text"
-  )
-```
-
-```{r}
-#2019
-# Read the data
-rainfallprwide <- read_excel('geraline_data_mm.xlsx')
-
-# Create the stations data frame and filter for month 1
-stations_rain <- rainfallprwide %>%
-  filter(MONTH == 1) %>%
-  select(STATION, LATITUDE, LONGITUDE, NAME, MONTH, "2009") %>%
-  unique()
-
-# Extract years from column names
-years <- as.character(2009:2023)
-
-# Convert the numeric columns to numeric type
-rainfallprwide[,-(1:5)] <- lapply(rainfallprwide[,-(1:5)], as.numeric)
-
-# Calculate total rainfall for each station for each year individually
-station_year_total_rainfall <- rainfallprwide %>%
-  group_by(STATION, LATITUDE, LONGITUDE, NAME) %>%
-  summarise(across(all_of(years), ~sum(.x, na.rm = TRUE), .names = "Total_Rainfall_{.col}"))
-
-# Convert the base map to a Plotly object
-plotly_map <- ggplotly(base_map)
-
-# Assuming 'stations_rain' is your data frame and it has columns 'LATITUDE', 'LONGITUDE', 'NAME', and '2009'
-# Add station markers to the Plotly map with size based on rainfall in 2009
- plotly_map %>%
-  add_markers(
-    data = station_year_total_rainfall,
-    x = ~LONGITUDE,
-    y = ~LATITUDE,
-    text = ~NAME,
-    marker = list(
-      symbol = "circle",       # Change the symbol to square
-      color = ~Total_Rainfall_2019 / 100,          # Change the color to blue
-      size = ~Total_Rainfall_2019 / 100,
-      colorscale = "Blues",
-      reversescale = TRUE              # Size based on rainfall in 2009
-    ),
-    hoverinfo = "text"
-  )
-
-```
-
-
-
-```{r}
-#2022
-# Read the data
-rainfallprwide <- read_excel('geraline_data_mm.xlsx')
-
-# Create the stations data frame and filter for month 1
-stations_rain <- rainfallprwide %>%
-  filter(MONTH == 1) %>%
-  select(STATION, LATITUDE, LONGITUDE, NAME, MONTH, "2009") %>%
-  unique()
-
-# Extract years from column names
-years <- as.character(2009:2023)
-
-# Convert the numeric columns to numeric type
-rainfallprwide[,-(1:5)] <- lapply(rainfallprwide[,-(1:5)], as.numeric)
-
-# Calculate total rainfall for each station for each year individually
-station_year_total_rainfall <- rainfallprwide %>%
-  group_by(STATION, LATITUDE, LONGITUDE, NAME) %>%
-  summarise(across(all_of(years), ~sum(.x, na.rm = TRUE), .names = "Total_Rainfall_{.col}"))
-
-# Convert the base map to a Plotly object
-plotly_map <- ggplotly(base_map)
-
-# Assuming 'stations_rain' is your data frame and it has columns 'LATITUDE', 'LONGITUDE', 'NAME', and '2009'
-# Add station markers to the Plotly map with size based on rainfall in 2009
- plotly_map %>%
-  add_markers(
-    data = station_year_total_rainfall,
-    x = ~LONGITUDE,
-    y = ~LATITUDE,
-    text = ~NAME,
-    marker = list(
-      symbol = "circle",       # Change the symbol to square
-      color = ~Total_Rainfall_2022 / 100,          # Change the color to blue
-      size = ~Total_Rainfall_2022 / 100,
-      colorscale = "Blues",
-      reversescale = TRUE              # Size based on rainfall in 2009
-    ),
-    hoverinfo = "text"
-  )
-```
-
-```{r}
-library(dplyr)
-
-# Read the data
-rainfallprwide <- read_excel('geraline_data_mm.xlsx')
-
-# Extract years from column names
-years <- as.character(2009:2023)
-
-# Convert the numeric columns to numeric type
-rainfallprwide[,-(1:5)] <- lapply(rainfallprwide[,-(1:5)], as.numeric)
-
-# Calculate total rainfall for each station for each year individually
-station_year_total_rainfall <- rainfallprwide %>%
-  group_by(STATION, LATITUDE, LONGITUDE, NAME) %>%
-  summarise(across(all_of(years), ~sum(.x, na.rm = TRUE), .names = "Total_Rainfall_{.col}"))
-
-```
-
-```{r}
-library(plotly)
+base_map_3 <- ggplot() +
+  geom_polygon(data = map_data, aes(x = long, y = lat, group = group), fill = "lightgray", color = "black") +
+  coord_map() +
+  ggtitle("15 Years of RainFall in Puerto Rico") +
+  theme(plot.title = element_text(hjust = 0.5),  # Centering title
+        axis.title.x = element_text(size = 12, face = "bold", color = "black"),  # Customizing x-axis label
+        axis.title.y = element_text(size = 12, face = "bold", color = "black"))  # Customizing y-axis label
 
 # Create an empty list to store the plots
 plot_list <- list()
@@ -404,7 +230,7 @@ plot_list <- list()
 # Loop over each year
 for (year in 2009:2023) {
   # Create a map for the current year
-  plot <- ggplotly(base_map) %>%
+  plot <- ggplotly(base_map_3) %>%
     add_markers(
       data = station_year_total_rainfall,
       x = ~LONGITUDE,
@@ -426,6 +252,7 @@ for (year in 2009:2023) {
 
 # Arrange the plots in a grid
 subplot(plot_list, nrows = 5)
+
 
 ```
 
