@@ -12,6 +12,8 @@ image: "RainFall.png"
 description: "How much Rainfall did Puerto Rico had in the last 15 years"
 code-fold: true
 code-tools: true
+execute: 
+  warning: false
 
 ---
 
