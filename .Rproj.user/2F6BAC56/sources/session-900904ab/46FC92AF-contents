@@ -1,6 +1,6 @@
 ---
 title: "BCB 520 - FINAL PROJECT"
-subtitle: "Let's get into RainFall Data in Puerto Rico"
+subtitle: "Let's get into Rainfall Data of Puerto Rico"
 format:
   html:
     toc: false
@@ -156,7 +156,7 @@ plotly_map <- ggplotly(base_map)
   ) 
 ```
 
-### Applying Rainfall Data of 2009
+### Applying Rainfall Data of January 2009
 
 ```{r}
 #2009
@@ -183,7 +183,7 @@ station_year_total_rainfall <- rainfallprwide %>%
 base_map_2 <- ggplot() +
   geom_polygon(data = map_data, aes(x = long, y = lat, group = group), fill = "lightgray", color = "black") +
   coord_map() +
-  ggtitle("RainFall for 2009") +
+  ggtitle("Rainfall for January 2009") +
   theme(plot.title = element_text(hjust = 0.5),  # Centering title
         axis.title.x = element_text(size = 12, face = "bold", color = "black"),  # Customizing x-axis label
         axis.title.y = element_text(size = 12, face = "bold", color = "black"))  # Customizing y-axis label
@@ -211,7 +211,7 @@ plotly_map <- ggplotly(base_map_2)
   ) 
 ```
 
-### Compilling 15 years of RainFall in Puerto Rico
+### 15 years of Rainfall in Puerto Rico
 
 ```{r}
 base_map_3 <- ggplot() +
