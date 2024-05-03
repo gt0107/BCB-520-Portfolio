@@ -6,7 +6,7 @@ format:
     toc: false
     echo: true
 author: "Geraline Tross-Torres"
-date: "2024-04-28"
+date: "2024-05-03"
 categories: [Portfolio, DataViz, Assignment]
 image: "RainFall.png"
 description: "How much Rainfall did Puerto Rico had in the last 15 years"
@@ -91,7 +91,12 @@ station_year_total_rainfall <- rainfallprwide %>%
 
 ## Visualizations
 
+The following visualizations show how I incorporated the rainfall data into a ggplot and Plotly to make the map interactive. 
+
 ### Base Map of Puerto Rico
+
+This is just a base map of Puerto Rico. I was searching for a simple map that would help me incorporate the different NOAA stations so that I could later add the actual rainfall data. 
+
 ```{r}
 # Get the spatial data for countries
 countries <- ne_countries(scale = "medium", returnclass = "sf")
@@ -105,7 +110,21 @@ ggplot() +
   theme_void()
 ```
 
+**Figure 1:** Base Map of Puerto Rico. This is just a plot of Puerto Rico's geometry of how the island looks like
+
 ### Can you see Puerto Rico?
+
+I mentioned before that I wanted to use Plotly to have an interactive map; basically, I wanted to hover over the stations, and their names would come up and zoom in and out, but it was more complex than I thought.
+
+First, I couldn't get an interactive map with just Puerto Rico. I had to find another projection and add the latitude and longitude coordinates so the map could be centered on Puerto Rico. However, I used the **Mercator projection**, and it was hard to see Puerto Rico.
+
+**Can you zoom in and see where Puerto Rico is?**
+
+Once you are zoomed in, you can see Puerto Rico and the 26 NOAA stations. You can hover over them to see their names. I added the stations to the map due to their latitude and longitude coordinates.
+
+**Is the quality of the visualization good?**
+
+So, I have Puerto Rico and its stations, but there are too many steps just to get to the map, and the quality of the map is not good, so I had to take another approach.
 
 ```{r}
 # Read the data
@@ -140,6 +159,8 @@ g <- list(
   )
 
 ```
+
+**Figure 2:** Plotly Interaction Map of Puerto Rico. Zooming into Puerto Rico, there are 26 NOAA stations, and you can hover over them to see their names. I added the stations to the map due to their latitude and longitude coordinates.
 
 ### Combination of ggplot Base Map + Plotly
 
