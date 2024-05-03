@@ -122,10 +122,6 @@ First, I couldn't get an interactive map with just Puerto Rico. I had to find an
 
 Once you are zoomed in, you can see Puerto Rico and the 26 NOAA stations. You can hover over them to see their names. I added the stations to the map due to their latitude and longitude coordinates.
 
-**Is the quality of the visualization good?**
-
-So, I have Puerto Rico and its stations, but there are too many steps just to get to the map, and the quality of the map is not good, so I had to take another approach.
-
 ```{r}
 # Read the data
 rainfallprwide <- read_excel('geraline_data_mm.xlsx')
@@ -159,10 +155,17 @@ g <- list(
   )
 
 ```
-
 **Figure 2:** Plotly Interaction Map of Puerto Rico. Zooming into Puerto Rico, there are 26 NOAA stations, and you can hover over them to see their names. I added the stations to the map due to their latitude and longitude coordinates.
 
+**Is the quality of the visualization good?**
+
+So, I have Puerto Rico and its stations, but there are too many steps just to get to the map, and the quality of the map is not good, so I had to take another approach.
+
 ### Combination of ggplot Base Map + Plotly
+
+In the beginning, I showed you the base map of Puerto Rico from ggplot, so why not combine the base map from ggplot and apply it to Plotly? After many tries and errors, I finally got it to work.
+
+Now you can see the map more clearly and have the Plotly interaction to hover over the stations and see their names. Basically, it's a better version of visualization compared to the previous one. 
 
 ```{r}
 # Get the map data for Puerto Rico
@@ -197,7 +200,12 @@ plotly_map <- ggplotly(base_map)
   ) 
 ```
 
+**Figure 3:** Plotly Interaction Base Map of Puerto Rico. Have a crisper visualization so that you can better see the stations located around the island.
+
+
 ### Applying Rainfall Data of January 2009
+
+Now that I have a better visualization of the NOAA stations, I can apply rainfall data and see how much rain is accumulated around the stations that are located in different parts of the island. For my first intent in doing this, I only added the data of the month of January of 2009, and then see what the visualization looks like. 
 
 ```{r}
 #2009
