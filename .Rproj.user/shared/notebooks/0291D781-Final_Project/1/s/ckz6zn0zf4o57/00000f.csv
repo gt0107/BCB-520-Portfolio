@@ -1,6 +1,0 @@
-"0","DataTable <- read_xlsx(""geraline_data_mm.xlsx"")"
-"0","# Assuming you want to select only the first 10 columns from DataTable"
-"0","selected_columns <- DataTable[, 1:10]"
-"0",""
-"0","# Displaying the selected columns using knitr::kable()"
-"0","knitr::kable(head(selected_columns))"

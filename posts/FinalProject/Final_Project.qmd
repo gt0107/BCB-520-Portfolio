@@ -19,6 +19,12 @@ execute:
 
 ## Preamble
 
+Let's learn more about the rain patterns across Puerto Rico. Over the years, we had different patterns of rain, which depend on the season; for example, during hurricane and tropical seasons, we will have more rainfall than in years when there are no storms, and we can also see when we have drought season. 
+
+How can we get this information? The NOAA has stations across the island that measure the amount of rain accumulated around each station. We can display that data on a spatial map and visualize the amount of rain accumulated between stations.
+
+In this post, we look at 15 years of rainfall data. I will provide details on how I got to my final finished map visualization and what information we can obtain from it.
+
 ## Data
 
 ```{r, include=FALSE}
@@ -39,7 +45,19 @@ library(maps)
 library(tidyverse)
 ```
 
-The data set was acquired by the database of **National Centers for Environmental Information - National Oceanic and Atmospheric Administration (NOAA)**. https://www.ncei.noaa.gov/access/search/data-search/daily-summaries
+The rain data was acquired by the database of the **National Centers for Environmental Information - National Oceanic and Atmospheric Administration (NCEI - NOAA)**. https://www.ncei.noaa.gov/access/search/data-search/daily-summaries
+
+The NCEI-NOAA provides large data sets of integrated daily climate observations through time, such as rain, snow, hail, temperature, etc. The data set that I am working on is how much rain we had in different years in Puerto Rico. The following **Data Table** provides the data I used to visualize my map. I also provided a **Data Dictionary** to help you interpret the Data Table. 
+
+### Data Dictionary
+
+```{r}
+DataDic <- read_xlsx("data dic.xlsx")
+# Assuming you want to select only the first 10 columns from DataTable
+
+# Displaying the selected columns using knitr::kable()
+knitr::kable(head(DataDic))
+```
 
 ### Data Table
 
