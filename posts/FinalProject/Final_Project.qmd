@@ -202,7 +202,6 @@ plotly_map <- ggplotly(base_map)
 
 **Figure 3:** Plotly Interaction Base Map of Puerto Rico. Have a crisper visualization so that you can better see the stations located around the island.
 
-
 ### Applying Rainfall Data of January 2009
 
 Now that I have a better visualization of the NOAA stations, I can apply rainfall data and see how much rain is accumulated around the stations that are located in different parts of the island. For my first intent in doing this, I only added the data of the month of January of 2009, and then see what the visualization looks like. 
@@ -259,8 +258,13 @@ plotly_map <- ggplotly(base_map_2)
     hoverinfo = "text"
   ) 
 ```
+**Figure 4:** Rainfall for January 2009. Here's a summary of the rainfall we had in January 2009. Each station recorded a different amount of rain due to its location and topography.
+
+In this visualization, we identified the stations in shapes, such as circles. The different color schemes represent the amount of rain measured on that station; lighter blue means less rain, and darker blue means more rain; we used this color pattern to get an idea of the different patterns of rain across stations. I also used the change in the size of the circle as another channel to help visualize the amount of rain on each station and not just only have the change of color scheme. 
 
 ### 15 years of Rainfall in Puerto Rico
+
+Now that I can better visualize the NOAA stations with data on accumulated rain, I want to portray my whole data set of 15 years of Raibfall in Puerto Rico. But first, I calculated the total amount of rain each year and displayed it in my map visualization. Instead of having individual maps portraying the data, I wanted the maps adjacent to each to be easy to compare and contrast how much rain we had in the last 15 years.
 
 ```{r}
 base_map_3 <- ggplot() +
@@ -299,8 +303,16 @@ for (year in 2009:2023) {
 
 # Arrange the plots in a grid
 subplot(plot_list, nrows = 5)
-
-
 ```
+**Figure 5:** 15 Years of RainFall in Puerto Rico.Here's a summary of the rainfall we had in the last 15 years. Each station recorded a different amount of rain due to its location and topography. 
 
-### Conclusions or Summary
+As you can see, each year has different rainfall patterns, but we also need to consider the Hurricane and Tropical seasons, which change the rain pattern over the years. By looking at this data visualization, you can compare which years had more rain, storms, or a dry season. It gives you a perspective on how to perceive, in this case, the amount of rain we had in different years. Since I am still using Plotly, you can still use the interactive of zoom in and out and hover over the station's names. This last visualization upheld my expectations; even though we can add improvements in the labeling, which year each map, it is something I can improve later. I am proud that I managed to make this last visualization. 
+
+### Summary
+
+For this final project, I wanted to get out of my comfort zone and learn a new type of visualization, and I was doing Spatial Maps. I always wondered how you could portray data into a map for visualization, for example, the number of cases of diseases across different states in the U.S. or, in this case, how much rain was measured at different time periods. That was when I got the idea that I wanted to try this and see if I could make something of it. 
+
+So, as a recap, over the years, we had different patterns of rain, which depend on the season. With the NOAA's data, I portrayed that data on a spatial map of Puerto Rico and visualized the amount of rain accumulated between stations. I looked into 15 years of rainfall data, and I can say that across these past 15 years, we had different patterns of rain; in some years, we had less rain and more of a dry season, and in some years, we had more rain and looking at the history data, one can determine that there was a tropical storm or hurricane involved and that's why we got more rainfall that a "normal" year without storms. This can also help us in the sense of climate change if we have more storms or more rain patterns or if we are having more dry seasons. You can obtain much information by looking at this data; you need to know what you want. 
+
+This project was interesting to work with. There were a lot of ups and downs in getting it down, but I finally got what I wanted to portray. The data I wanted to look at has an animation visualization in which you have a time bar and change through time and, on a single map in a 3D pattern, see the changes in rainfall across time; that would have been cool to see. 
+
